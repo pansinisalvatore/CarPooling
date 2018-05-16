@@ -1,6 +1,6 @@
 package uk.co.maxcarli.carpooling;
 
-//rino è f
+//rino
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
