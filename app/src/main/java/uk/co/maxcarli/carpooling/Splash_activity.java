@@ -1,6 +1,6 @@
 package uk.co.maxcarli.carpooling;
 
-//Annarita è stupida
+//rino è fatw
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
