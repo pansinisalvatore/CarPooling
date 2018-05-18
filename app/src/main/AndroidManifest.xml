@@ -12,7 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".Splash_activity"
 
@@ -24,6 +28,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name="RegistrazioneCittadino">
 
         </activity> <!-- riferimento a una risorsa di tipo style che si chiama FullScreen -->
 

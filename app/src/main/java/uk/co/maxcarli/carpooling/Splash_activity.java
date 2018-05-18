@@ -32,7 +32,7 @@ public class Splash_activity extends Activity {
                     long elapsedTime = SystemClock.uptimeMillis()- mStartTime;
                     if (elapsedTime >= MIN_WAIT_INTERVAL && !mIsDone){
                         mIsDone= true;
-                        /*goAhead();*/
+                        goAhead();
                     }
                     break;
             }
@@ -59,7 +59,18 @@ public class Splash_activity extends Activity {
 
     private void goAhead(){
         final Intent intent = new Intent(this, LoginActivity.class);
-        while(true){
+        if(haveInternetConnection(Splash_activity.this)){
+            startActivity(intent);
+            finish();
+        }else{
+            AlertDialog.Builder miaAlert = new AlertDialog.Builder(this);
+            miaAlert.setTitle("Connessione assente");
+            miaAlert.setMessage("Devi attivare la connessione per utilizzare l'applicazione");
+            AlertDialog alert = miaAlert.create();
+            alert.show();
+        }
+
+        /*while(true){
             if(haveInternetConnection(Splash_activity.this)){
                 startActivity(intent);
                 finish();
@@ -70,7 +81,7 @@ public class Splash_activity extends Activity {
                 AlertDialog alert = miaAlert.create();
                 alert.show();
             }
-        }
+        }*/
 
     }
 

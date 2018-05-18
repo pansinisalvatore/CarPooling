@@ -4,8 +4,8 @@
     <string name="NomeCittadino">Name</string>
     <string name="CognomeCittadino">Surname</string>
     <string name="CodiceFiscaleCittadino">Fiscal Code</string>
-    <string name="EmailCittadino">Email</string>
-    <string name="PasswordCittadino">Password</string>
+    <!--<string name="EmailCittadino">Email</string>
+    <string name="PasswordCittadino">Password</string> -->
     <string name="Avanti">Next</string>
     <string name="Email"> E-mail</string>
     <string name="Password">Password</string>
