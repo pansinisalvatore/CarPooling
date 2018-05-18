@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="uk.co.maxcarli.carpooling">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -9,31 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!-- <activity android:name=".Splash_activity">
-             <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
 
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
-        </activity>-->
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity"></activity>
+
+        <activity android:name=".Splash_activity"
+
+            android:theme="@style/FullScreen"
+
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
 
-        <activity android:name=".RegistrazioneCittadino"
-            android:label="@string/Registrazione">
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        </activity> <!-- riferimento a una risorsa di tipo style che si chiama FullScreen -->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
--->
-        </activity>
     </application>
 
 </manifest>
