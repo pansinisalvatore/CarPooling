@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">CarPooling</string>
+    <string name="Registrazione">Register</string>
+    <string name="NomeCittadino">Name</string>
+    <string name="CognomeCittadino">Surname</string>
+    <string name="CodiceFiscaleCittadino">Fiscal Code</string>
+    <string name="EmailCittadino">Email</string>
+    <string name="PasswordCittadino">Password</string>
+    <string name="Avanti">Next</string>
 </resources>
