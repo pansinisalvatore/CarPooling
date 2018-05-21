@@ -31,12 +31,13 @@
         </activity>
         <activity android:name=".RegistrazioneCittadino" /> <!-- riferimento a una risorsa di tipo style che si chiama FullScreen -->
         <activity android:name=".ImieiPassaggi" android:label="@string/ImieiPassaggi">
-        <intent-filter>
+
+        </activity>
+        <activity android:name=".Principale" android:label="@string/ImieiPassaggi"><intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        </activity>
+        </intent-filter></activity>
 
     </application>
 
