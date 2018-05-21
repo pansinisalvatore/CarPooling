@@ -19,6 +19,13 @@
     <string name="Logout">Logout</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="ImpostaData">Imposta data</string>
+    <string name="ImpostaOra">Imposta ora</string>
+    <string name="Auto">Auto</string>
+    <string name="PostiDisponibili">Posti disponibili</string>
+    <string name="Domanda">Vuoi salvare questa scelta di default per ogni settimana?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
