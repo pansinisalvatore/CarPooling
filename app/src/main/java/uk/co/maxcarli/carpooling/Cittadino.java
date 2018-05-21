@@ -1,4 +1,7 @@
 package uk.co.maxcarli.carpooling;
+
+import android.app.AlertDialog;
+
 //cias
 public class Cittadino {
     private String nome;
@@ -25,7 +28,5 @@ public class Cittadino {
         return nome;
     }
 
-    public void registraCittadino(String nome, String cognome){
 
-    }
 }
