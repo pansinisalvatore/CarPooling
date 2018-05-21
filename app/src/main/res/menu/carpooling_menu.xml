@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/IlMioProfilo"
+        android:title="@string/IlMioProfilo">
+
+    </item>
+    <item android:id="@+id/imieipassaggi"
+        android:title="@string/ImieiPassaggi">
+
+    </item>
+    <item android:id="@+id/Classifica"
+        android:title="@string/VisualizzaClassifica">
+
+    </item>
+    <item android:id="@+id/Logout"
+        android:title="@string/Logout">
+
+    </item>
+
+</menu>

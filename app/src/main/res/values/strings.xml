@@ -11,4 +11,14 @@
     <string name="Password">Password</string>
     <string name="SignIn">Sign in</string>
     <string name="SignUp">Sign up</string>
+    <string name="ImieiPassaggi">My step</string>
+    <string name="BottoneOfferti">OFFERED</string>
+    <string name="BottoneRichiesti">REQUIRED</string>
+    <string name="IlMioProfilo">My profile</string>
+    <string name="VisualizzaClassifica">Show graduation</string>
+    <string name="Logout">Logout</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+
 </resources>
