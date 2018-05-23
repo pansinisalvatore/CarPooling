@@ -20,8 +20,8 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_marginBottom="200dp"
+            android:layout_height="348dp"
+            android:layout_marginBottom="180dp"
 
             android:background="@drawable/bg"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -45,7 +45,7 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
+            android:layout_height="53dp"
             android:color="@color/colore_testo"
             android:text="Passiamo un terzo della nostra vita nel traffico e un terzo a cercare parcheggio!"
             android:textAlignment="center"
@@ -63,9 +63,9 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="200dp"
-            android:layout_marginStart="200dp"
-            android:layout_marginTop="244dp"
+            android:layout_marginLeft="212dp"
+            android:layout_marginStart="212dp"
+            android:layout_marginTop="212dp"
             android:background="@drawable/button_shape_normal"
             android:backgroundTint="@color/tint_color"
             android:gravity="center"
@@ -78,9 +78,9 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="200dp"
-            android:layout_marginStart="200dp"
-            android:layout_marginTop="300dp"
+            android:layout_marginLeft="208dp"
+            android:layout_marginStart="208dp"
+            android:layout_marginTop="260dp"
 
             android:background="@drawable/button_shape_normal"
             android:backgroundTint="@color/tint_color"

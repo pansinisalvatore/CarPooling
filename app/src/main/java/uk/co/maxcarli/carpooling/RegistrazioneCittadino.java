@@ -17,6 +17,8 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+import static uk.co.maxcarli.carpooling.Database.registraCittadino;
+
 public class RegistrazioneCittadino extends AppCompatActivity {
 
     String url ="http://carpoolingsms.altervista.org/PHP/query.php";
@@ -36,11 +38,10 @@ public class RegistrazioneCittadino extends AppCompatActivity {
         EditText aux1 = (EditText) findViewById(R.id.CognomeCittadino);
         String cognome = aux1.getText().toString();
         Cittadino cittadino = new Cittadino(nome,cognome);
-        registraCittadino(nome,cognome);
-
+        registraCittadino(nome,cognome,RegistrazioneCittadino.this);
 
     }
-    public void registraCittadino(final String nome, final String cognome){
+   /* public void registraCittadino(final String nome, final String cognome){
         builder = new AlertDialog.Builder(RegistrazioneCittadino.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
 
@@ -87,7 +88,7 @@ public class RegistrazioneCittadino extends AppCompatActivity {
 
 
 
-    }
+    }*/
 
 
 

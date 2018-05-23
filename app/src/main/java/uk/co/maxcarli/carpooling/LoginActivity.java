@@ -8,10 +8,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static uk.co.maxcarli.carpooling.Database.accedi;
 
 
 public class LoginActivity extends AppCompatActivity {
+
+
 
     private EditText loginEmail;
     private EditText loginPassword;
@@ -23,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         loginEmail=findViewById(R.id.LoginEmail);
         loginPassword=findViewById(R.id.LoginPassword);
 
+
     }
 
     protected void onStart(){
@@ -32,14 +46,15 @@ public class LoginActivity extends AppCompatActivity {
     public void Login(View view) {
         String email=loginEmail.getText().toString();
         String password=loginPassword.getText().toString();
-
-
+        accedi(email,password,this);
+        finish();
     }
+
+
 
     public void ApriRegisterActivity(View view) {
         Intent Registrazione=  new Intent(this,RegistrazioneCittadino.class);
         startActivity(Registrazione);
-
     }
 
 

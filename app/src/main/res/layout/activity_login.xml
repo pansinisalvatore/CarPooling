@@ -29,8 +29,8 @@
         android:layout_marginEnd="104dp"
         android:layout_marginRight="104dp"
         android:ems="10"
-        android:inputType="textEmailAddress"
-        android:hint="@string/Email"
+        android:inputType="text"
+        android:hint="Nome"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -42,8 +42,8 @@
         android:layout_marginEnd="108dp"
         android:layout_marginRight="108dp"
         android:ems="10"
-        android:hint="@string/Password"
-        android:inputType="textPassword"
+        android:hint="Cognome"
+        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

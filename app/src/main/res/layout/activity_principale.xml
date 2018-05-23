@@ -21,7 +21,7 @@ tools:context=".Principale">
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="391dp"
-            android:layout_marginBottom="200dp"
+            android:layout_marginBottom="196dp"
 
             android:background="@drawable/bg"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -46,7 +46,7 @@ tools:context=".Principale">
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
+            android:layout_height="53dp"
             android:color="@color/colore_testo"
             android:text="Passiamo un terzo della nostra vita nel traffico e un terzo a cercare parcheggio!"
             android:textAlignment="center"
@@ -60,33 +60,33 @@ tools:context=".Principale">
             app:layout_constraintVertical_bias="0.731" />
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="64dp"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="540dp"
-            android:background="@drawable/button_shape_normal"
-            android:backgroundTint="@color/tint_color"
-            android:gravity="center"
-            android:text="Trova Passaggio"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
             android:id="@+id/button2"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="64dp"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="476dp"
+            android:layout_marginLeft="76dp"
+            android:layout_marginStart="76dp"
+            android:layout_marginTop="396dp"
 
             android:background="@drawable/button_shape_normal"
             android:backgroundTint="@color/tint_color"
             android:gravity="center"
             android:text="Offri Passaggio"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="76dp"
+            android:layout_marginStart="76dp"
+            android:layout_marginTop="444dp"
+            android:background="@drawable/button_shape_normal"
+            android:backgroundTint="@color/tint_color"
+            android:gravity="center"
+            android:text="Trova Passaggio"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
