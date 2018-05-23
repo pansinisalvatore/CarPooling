@@ -25,6 +25,7 @@
             android:label="@string/app_name"
             android:theme="@style/FullScreen">
 
+
             <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,14 +38,16 @@
         <activity
             android:name=".ImieiPassaggi"
             android:label="@string/ImieiPassaggi"></activity>
+
         <activity
             android:name=".Principale"
-            android:label="@string/ImieiPassaggi">
+            android:label="Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".OffriPassaggi"></activity>
     </application>
