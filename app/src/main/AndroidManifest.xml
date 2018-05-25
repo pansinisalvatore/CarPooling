@@ -30,6 +30,7 @@
             android:name=".ImieiPassaggi"
             android:label="@string/ImieiPassaggi"></activity>
         <activity
+
             android:name=".Principale"
             android:label="@string/ImieiPassaggi">
         <intent-filter>
