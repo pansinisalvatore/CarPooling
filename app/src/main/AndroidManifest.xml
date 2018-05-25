@@ -33,14 +33,16 @@
 
             android:name=".Principale"
             android:label="@string/ImieiPassaggi">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
 
         </activity>
-        <activity android:name=".OffriPassaggi"></activity>
+        <activity android:name=".OffriPassaggi">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -26,6 +26,16 @@
     <string name="Domanda">Vuoi salvare questa scelta di default per ogni settimana?</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="Si">Si</string>
+    <string name="No">No</string>
+    <string-array name="names">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>Altro</item>
+    </string-array>
 
 </resources>
