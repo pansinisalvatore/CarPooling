@@ -6,19 +6,6 @@
     android:layout_height="wrap_content"
     tools:context=".RegistrazioneCittadino">
 
-    <EditText
-        android:id="@+id/cognomeCittadino"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="31dp"
-        android:editable="true"
-        android:hint="@string/CognomeCittadino"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/codiceFiscale"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NomeCittadino" />
 
 
     <EditText
@@ -33,6 +20,20 @@
         app:layout_constraintBottom_toTopOf="@+id/cognomeCittadino"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/cognomeCittadino"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="31dp"
+        android:editable="true"
+        android:hint="@string/CognomeCittadino"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/codiceFiscale"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NomeCittadino" />
 
     <EditText
         android:id="@+id/residenzaCittadino"

@@ -36,10 +36,15 @@ public class RicercaIndirizzo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ricerca_indirizzo);
-        dammiPosto();
+        final Intent intent = getIntent();
+        final String nome = intent.getStringExtra("nome");
+        final String cognome = intent.getStringExtra("cognome");
+        final String codiceFiscale = intent.getStringExtra("codiceFiscale");
+        dammiPosto(nome,cognome,codiceFiscale);
+
     }
 
-    public void dammiPosto (){
+    public void dammiPosto (final String nome, final String cognome, final String codiceFiscale){
 
         final PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
@@ -56,16 +61,20 @@ public class RicercaIndirizzo extends AppCompatActivity {
             public void onPlaceSelected(Place place) {
                 // TODO: Get info about the selected place.
 
-                final String indirizzo = (String) place.getAddress();
+                final String residenza = (String) place.getAddress();
                 findViewById(R.id.buttonConferma).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        inviaIndirizzo(indirizzo);
+                        inviaIndirizzo(nome,cognome, codiceFiscale, residenza);
+                        finish();
+
+
+
                     }
                 });
 
 
-                Log.i(TAG, "Place: " + indirizzo);
+                Log.i(TAG, "Place: " + residenza);
             }
 
             @Override
@@ -87,9 +96,12 @@ public class RicercaIndirizzo extends AppCompatActivity {
 
     }
 
-    public void inviaIndirizzo(String indirizzo){
+    public void inviaIndirizzo(String nome,String cognome, String codiceFiscale, String residenza){
         final Intent intent = new Intent(this, RegistrazioneCittadino.class);
-        intent.putExtra("indirizzo",indirizzo);
+        intent.putExtra("nome",nome);
+        intent.putExtra("cognome",cognome);
+        intent.putExtra("codiceFiscale",codiceFiscale);
+        intent.putExtra("residenza",residenza);
         startActivity(intent);
     }
 

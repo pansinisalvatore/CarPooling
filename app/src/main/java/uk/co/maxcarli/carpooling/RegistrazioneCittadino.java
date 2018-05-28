@@ -21,26 +21,19 @@ public class RegistrazioneCittadino extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrazione_cittadino);
 
-        final String cittaResidenza = riceviIndirizzo();
-        EditText residenzaCittadino = (EditText) this.findViewById(R.id.residenzaCittadino);
-        residenzaCittadino.setText(cittaResidenza);
-
+        riceviCittadino();
+        /*
         findViewById(R.id.buttonAvanti).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editTextRegistrazione(cittaResidenza);
+                editTextRegistrazione(nome,cognome,codiceFiscale,residenza);
             }
         });
+        */
     }
 
 
-    public void editTextRegistrazione(String residenza) {
-        aux = (EditText) findViewById(R.id.NomeCittadino);
-        String nome = aux.getText().toString();
-        aux = (EditText) findViewById(R.id.ResidenzaCittadino);
-        String cognome = aux.getText().toString();
-        aux = (EditText) findViewById(R.id.codiceFiscale);
-        String codiceFiscale = aux.getText().toString();
+    public void editTextRegistrazione(String nome,String cognome,String codiceFiscale, String residenza) {
 
         Cittadino cittadino = new Cittadino(nome,cognome, codiceFiscale,residenza);
         registraCittadino(nome,cognome,RegistrazioneCittadino.this);
@@ -105,15 +98,43 @@ public class RegistrazioneCittadino extends AppCompatActivity {
     }
 
     public void scegliIndirizzo(View view){
+
+        aux = (EditText) this.findViewById(R.id.NomeCittadino);
+        String nome = aux.getText().toString();
+        aux = (EditText) this.findViewById(R.id.cognomeCittadino);
+        String cognome = aux.getText().toString();
+        aux = (EditText) this.findViewById(R.id.codiceFiscale);
+        final String codiceFiscale = aux.getText().toString();
+
         final Intent intent = new Intent(this,RicercaIndirizzo.class);
+
+        intent.putExtra("nome",nome);
+        intent.putExtra("cognome",cognome);
+        intent.putExtra("codiceFiscale",codiceFiscale);
+
         startActivity(intent);
+        finish();
     }
 
-    public String riceviIndirizzo(){
+    public void riceviCittadino(){
+        EditText aux;
         final Intent intent = getIntent();
-        final String indirizzo = intent.getStringExtra("indirizzo");
+        final String nome = intent.getStringExtra("nome");
+        final String cognome = intent.getStringExtra("cognome");
+        final String codiceFiscale = intent.getStringExtra("codiceFiscale");
+        final String residenza = intent.getStringExtra("residenza");
 
-        return indirizzo;
+
+
+        aux = (EditText) this.findViewById(R.id.NomeCittadino);
+        aux.setText(nome);
+        aux = (EditText) this.findViewById(R.id.cognomeCittadino);
+        aux.setText(cognome);
+        aux = (EditText) this.findViewById(R.id.codiceFiscale);
+        aux.setText(codiceFiscale);
+        aux = (EditText) this.findViewById(R.id.residenzaCittadino);
+        aux.setText(residenza);
+
     }
 
 
