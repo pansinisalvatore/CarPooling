@@ -46,10 +46,20 @@ public class LoginActivity extends AppCompatActivity {
     public void Login(View view) {
         String email=loginEmail.getText().toString();
         String password=loginPassword.getText().toString();
-        accedi(email,password,this);
-        finish();
+        if(controllo(email,loginEmail) && controllo(password,loginPassword)){
+            accedi(email,password,this);
+        }
+
+
     }
 
+    public static boolean controllo(String text, EditText campo){
+        if(text.length()==0){
+            campo.setError("Campo obbligatorio");
+            return false;
+        }
+        return true;
+    }
 
 
     public void ApriRegisterActivity(View view) {

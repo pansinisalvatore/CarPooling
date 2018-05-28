@@ -28,6 +28,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Si">Yes</string>
     <string name="No">No</string>
+    <string name="ConfermaIndirizzo">Confirm address</string>
+    <string name="AccessoNonAutorizzatoTitolo">Access not performed </string>
+    <string name="AccessoNonAutorizzatoTesto"> You have not yet been authorized by your company</string>
     <string name="Conferma">Confirm</string>
     <string-array name="names">
         <item>1</item>

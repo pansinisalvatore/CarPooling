@@ -36,6 +36,7 @@ public class RegistrazioneCittadino extends AppCompatActivity {
     public void editTextRegistrazione(String nome,String cognome,String codiceFiscale, String residenza) {
 
         Cittadino cittadino = new Cittadino(nome,cognome, codiceFiscale,residenza);
+
         registraCittadino(nome,cognome,RegistrazioneCittadino.this);
 
     }

@@ -26,7 +26,7 @@
         android:layout_marginEnd="104dp"
         android:layout_marginRight="104dp"
         android:ems="10"
-        android:inputType="text"
+        android:inputType="textEmailAddress"
         android:hint="@string/Email"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -39,7 +39,7 @@
         android:layout_marginEnd="108dp"
         android:layout_marginRight="108dp"
         android:ems="10"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:hint="@string/Password"
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -60,6 +60,7 @@
         android:backgroundTint="@color/tint_color"
         android:gravity="center"
         android:text="@string/SignIn"
+        android:onClick="Login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

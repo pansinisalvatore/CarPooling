@@ -43,8 +43,6 @@ public class Database {
                         });
                         AlertDialog alertDialog= builder.create();
                         alertDialog.show();
-
-
                     }
                 }
 
@@ -75,7 +73,7 @@ public class Database {
     }
 
 
-    public static void accedi(final String nome, final String cognome, final Context context){
+    public static void accedi(final String email, final String password, final Context context){
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, urlLogin,
 
@@ -83,10 +81,14 @@ public class Database {
                     @Override
                     public void onResponse(String response) {
 
-                        Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "response", Toast.LENGTH_SHORT).show();
                         if(response.equals("success")){
-                            getCittadinoFromDatabase(nome,cognome,context);
+                            getCittadinoFromDatabase(email,password,context);
 
+                        }else if(response.equals("not autorized")){
+                            mostraMessaggio("Non autorizzato","Non sei stato ancora autorizzato",context);
+                        }else{
+                            Toast.makeText(context, "Connection failed", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -96,7 +98,7 @@ public class Database {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(context, "Error...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Connection failed", Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
 
             }
@@ -105,8 +107,8 @@ public class Database {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map <String,String> params = new HashMap<String, String>();
-                params.put("nome", nome);
-                params.put("cognome", cognome);
+                params.put("email", email);
+                params.put("password", password);
                 return params;
             }
         };
@@ -119,8 +121,8 @@ public class Database {
     }
 
 
-    private static void getCittadinoFromDatabase(final String nome, final String cognome,final Context context){
-        String url= "http://carpoolingsms.altervista.org/PHP/getCittadino.php?nome="+nome+"&cognome="+cognome;
+    private static void getCittadinoFromDatabase(final String email, final String password,final Context context){
+        String url= "http://carpoolingsms.altervista.org/PHP/getCittadino.php?email="+email+"&password="+password;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 url,
@@ -167,6 +169,14 @@ public class Database {
         );
 
         MySingleton.getmInstance(context.getApplicationContext()).addTorequestque(stringRequest);
+    }
+
+
+    private static void mostraMessaggio(String title,String text, Context context){
+        AlertDialog.Builder builder=new AlertDialog.Builder(context);
+        builder.setTitle(title);
+        builder.setMessage(text);
+        builder.show();
     }
 
 }
