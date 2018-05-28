@@ -12,37 +12,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity"
-            android:theme="@style/FullScreen">
-
-        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/FullScreen"></activity>
         <activity
             android:name=".Splash_activity"
             android:label="@string/app_name"
             android:theme="@style/FullScreen">
+           <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
-
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> -->
         </activity>
         <activity android:name=".RegistrazioneCittadino" /> <!-- riferimento a una risorsa di tipo style che si chiama FullScreen -->
         <activity
             android:name=".ImieiPassaggi"
-            android:label="@string/ImieiPassaggi"></activity>
+            android:label="@string/ImieiPassaggi"
+            ><intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+        </activity>
         <activity
-
             android:name=".Principale"
-            android:label="@string/ImieiPassaggi">
+            android:label="@string/ImieiPassaggi"></activity>
+        <activity android:name=".OffriPassaggi" />
 
-
-        </activity>
-        <activity android:name=".OffriPassaggi">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

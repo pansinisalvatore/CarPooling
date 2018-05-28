@@ -7,41 +7,25 @@
     android:id="@+id/imieipassaggi"
     tools:context=".ImieiPassaggi">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/ConstraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <Button
-            android:id="@+id/Offerti"
-            android:layout_width="187dp"
-            android:layout_height="47dp"
-            android:layout_marginBottom="312dp"
-            android:layout_marginEnd="196dp"
-
-            android:layout_marginRight="196dp"
-            android:baselineAligned="false"
-            android:text="@string/BottoneOfferti"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <Button
-            android:id="@+id/Richiesti"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="312dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:text="@string/BottoneRichiesti"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-    </android.support.constraint.ConstraintLayout>
-
     <android.support.design.widget.NavigationView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:menu="@menu/carpooling_menu"
         android:layout_gravity="start">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/ConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.constraint.ConstraintLayout>
     </android.support.design.widget.NavigationView>
+
+
+    <include
+        layout="@layout/tabmenu"
+        android:layout_width="match_parent"
+        android:layout_height="715dp" />
+
 
 </android.support.v4.widget.DrawerLayout>
