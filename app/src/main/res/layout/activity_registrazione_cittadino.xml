@@ -3,39 +3,79 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".RegistrazioneCittadino">
 
     <EditText
-        android:id="@+id/NomeCittadino"
-        android:layout_width="379dp"
-        android:layout_height="47dp"
-        android:layout_marginBottom="448dp"
-        android:editable="true"
-        android:hint="@string/NomeCittadino"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/CognomeCittadino"
-        android:layout_width="380dp"
-        android:layout_height="47dp"
-        android:layout_marginBottom="360dp"
+        android:id="@+id/cognomeCittadino"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="31dp"
         android:editable="true"
         android:hint="@string/CognomeCittadino"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/codiceFiscale"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NomeCittadino" />
+
+
+    <EditText
+        android:id="@+id/NomeCittadino"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="21dp"
+        android:layout_marginTop="16dp"
+        android:editable="true"
+        android:hint="@string/NomeCittadino"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/cognomeCittadino"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/residenzaCittadino"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="33dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginStart="2dp"
+        android:hint="Residenza"
+        android:inputType="textPersonName"
+        android:focusableInTouchMode="false"
+        android:editable="false"
+        android:onClick="scegliIndirizzo"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAvanti"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/codiceFiscale" />
+
+    <EditText
+        android:id="@+id/codiceFiscale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="34dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginStart="2dp"
+        android:autoText="false"
+        android:editable="true"
+        android:hint="@string/CodiceFiscaleCittadino"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/ResidenzaCittadino"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cognomeCittadino" />
 
     <Button
         android:id="@+id/buttonAvanti"
-        android:onClick="editTextRegistrazione"
-        android:layout_width="178dp"
-        android:layout_height="46dp"
-        android:layout_marginBottom="260dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginRight="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/Avanti"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

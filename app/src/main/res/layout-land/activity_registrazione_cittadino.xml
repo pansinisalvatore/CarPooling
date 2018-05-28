@@ -32,7 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/CognomeCittadino"
+        android:id="@+id/ResidenzaCittadino"
         android:layout_width="305dp"
         android:layout_height="47dp"
         android:layout_marginBottom="180dp"
