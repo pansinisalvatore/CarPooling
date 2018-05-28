@@ -1,21 +1,11 @@
 package uk.co.maxcarli.carpooling;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static uk.co.maxcarli.carpooling.Database.registraCittadino;
 
@@ -23,21 +13,36 @@ public class RegistrazioneCittadino extends AppCompatActivity {
 
     String url ="http://carpoolingsms.altervista.org/PHP/query.php";
     AlertDialog.Builder builder;
+    EditText aux;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrazione_cittadino);
+
+        final String cittaResidenza = riceviIndirizzo();
+        EditText residenzaCittadino = (EditText) this.findViewById(R.id.residenzaCittadino);
+        residenzaCittadino.setText(cittaResidenza);
+
+        findViewById(R.id.buttonAvanti).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editTextRegistrazione(cittaResidenza);
+            }
+        });
     }
 
 
-    public void editTextRegistrazione(View view) {
-        EditText aux = (EditText) findViewById(R.id.NomeCittadino);
+    public void editTextRegistrazione(String residenza) {
+        aux = (EditText) findViewById(R.id.NomeCittadino);
         String nome = aux.getText().toString();
-        EditText aux1 = (EditText) findViewById(R.id.CognomeCittadino);
-        String cognome = aux1.getText().toString();
-        Cittadino cittadino = new Cittadino(nome,cognome);
+        aux = (EditText) findViewById(R.id.ResidenzaCittadino);
+        String cognome = aux.getText().toString();
+        aux = (EditText) findViewById(R.id.codiceFiscale);
+        String codiceFiscale = aux.getText().toString();
+
+        Cittadino cittadino = new Cittadino(nome,cognome, codiceFiscale,residenza);
         registraCittadino(nome,cognome,RegistrazioneCittadino.this);
 
     }
@@ -89,6 +94,27 @@ public class RegistrazioneCittadino extends AppCompatActivity {
 
 
     }*/
+
+    public boolean verificaCodiceFiscale(String codiceFiscale){
+
+        int lunghezza = codiceFiscale.length();
+        if (lunghezza < 16 || lunghezza > 16){
+            return true; //ritorna vero se è presente l'errore
+        }
+        else return false;
+    }
+
+    public void scegliIndirizzo(View view){
+        final Intent intent = new Intent(this,RicercaIndirizzo.class);
+        startActivity(intent);
+    }
+
+    public String riceviIndirizzo(){
+        final Intent intent = getIntent();
+        final String indirizzo = intent.getStringExtra("indirizzo");
+
+        return indirizzo;
+    }
 
 
 
