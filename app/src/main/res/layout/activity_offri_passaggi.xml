@@ -1,137 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".OffriPassaggi">
 
-    <Button
-        android:id="@+id/btnData"
-        android:layout_width="142dp"
-        android:layout_height="43dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/ImpostaData"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnOra"
-        android:layout_width="137dp"
-        android:layout_height="44dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginStart="36dp"
-        android:text="@string/ImpostaOra"
-        android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="73dp" />
-
     <TextView
         android:id="@+id/txtAuto"
-        android:layout_width="117dp"
-        android:layout_height="44dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="50dp"
+        android:layout_height="36dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/txtPostiDisponibili"
+        android:layout_marginTop="156dp"
         android:text="@string/Auto"
+        android:textSize="18sp"
         android:visibility="visible"
-        app:layout_constraintEnd_toStartOf="@+id/edtInserisciAuto"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnOra" />
-
-    <TextView
-        android:id="@+id/txtData"
-        android:layout_width="140dp"
-        android:layout_height="44dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="44dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/txtOra"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/btnData"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/txtOra"
-        android:layout_width="140dp"
-        android:layout_height="44dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="44dp"
-        android:layout_marginStart="8dp"
-        android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/btnOra"
-        tools:layout_editor_absoluteY="73dp" />
+        android:layout_alignLeft="@+id/txtPostiDisponibili" />
 
     <EditText
         android:id="@+id/edtInserisciAuto"
-        android:layout_width="140dp"
-        android:layout_height="44dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginRight="52dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="134dp"
+        android:layout_height="31dp"
+        android:layout_alignStart="@+id/spnPosti"
+        android:layout_alignTop="@+id/txtAuto"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/spnPosti"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtOra"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_alignLeft="@+id/spnPosti" />
 
     <TextView
         android:id="@+id/txtPostiDisponibili"
-        android:layout_width="108dp"
-        android:layout_height="44dp"
-        android:layout_marginBottom="36dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="52dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="219dp"
         android:text="@string/PostiDisponibili"
+        android:textSize="18sp"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/txtDomanda"
-        app:layout_constraintEnd_toStartOf="@+id/spnPosti"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAuto"
-        app:layout_constraintVertical_bias="1.0" />
+        android:layout_marginLeft="30dp"
+        android:layout_alignParentLeft="true" />
 
     <TextView
         android:id="@+id/txtDomanda"
         android:layout_width="298dp"
         android:layout_height="39dp"
-        android:layout_marginBottom="32dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/txtAuto"
+        android:layout_marginBottom="185dp"
         android:text="@string/Domanda"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_alignLeft="@+id/txtAuto" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="285dp"
         android:layout_height="81dp"
-        android:layout_marginBottom="68dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="48dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.976"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/txtDomanda"
+        android:layout_marginBottom="79dp"
+        android:layout_alignLeft="@+id/txtDomanda">
 
         <RadioButton
             android:id="@+id/radioButton5"
@@ -149,15 +77,61 @@
             android:text="@string/No"
             tools:layout_editor_absoluteX="216dp"
             tools:layout_editor_absoluteY="260dp" />
+
     </RadioGroup>
 
     <Spinner
         android:id="@+id/spnPosti"
         android:layout_width="140dp"
-        android:layout_height="44dp"
-        android:layout_marginBottom="36dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginRight="44dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtDomanda"
-        app:layout_constraintEnd_toEndOf="parent" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_height="32dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/txtPostiDisponibili"
+        android:layout_marginEnd="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_alignParentRight="true" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="18dp"
+        android:layout_marginEnd="26dp"
+        android:text="@string/Conferma"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="26dp" />
+
+    <EditText
+        android:id="@+id/edtData"
+        android:layout_width="239dp"
+        android:layout_height="57dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="16dp"
+        android:editable="false"
+        android:ems="10"
+        android:focusable="false"
+        android:inputType="date"
+        android:text="@string/ImpostaData"
+        android:textAlignment="center"
+        android:layout_marginLeft="57dp"
+        android:layout_alignParentLeft="true" />
+
+    <EditText
+        android:id="@+id/edtOra"
+        android:layout_width="239dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/edtData"
+        android:layout_marginTop="89dp"
+        android:editable="false"
+        android:ems="10"
+        android:focusable="false"
+        android:inputType="time"
+        android:text="@string/ImpostaOra"
+        android:textAlignment="center"
+        android:layout_alignLeft="@+id/edtData" />
+</RelativeLayout>

@@ -19,16 +19,16 @@
     <string name="Logout">Logout</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="ImpostaData">Imposta data</string>
-    <string name="ImpostaOra">Imposta ora</string>
-    <string name="Auto">Auto</string>
-    <string name="PostiDisponibili">Posti disponibili</string>
-    <string name="Domanda">Vuoi salvare questa scelta di default per ogni settimana?</string>
+    <string name="ImpostaData">Set date</string>
+    <string name="ImpostaOra">Set time</string>
+    <string name="Auto">Car</string>
+    <string name="PostiDisponibili">Places available</string>
+    <string name="Domanda">Do you want to save this default choice for each week?</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="Si">Si</string>
+    <string name="Si">Yes</string>
     <string name="No">No</string>
-    <string name="ConfermaIndirizzo">Confirm address</string>
+    <string name="Conferma">Confirm</string>
     <string-array name="names">
         <item>1</item>
         <item>2</item>
