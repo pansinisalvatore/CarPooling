@@ -18,7 +18,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import static uk.co.maxcarli.carpooling.Control.Controlli.*;
 public class Database {
 
     static String urlLogin="http://carpoolingsms.altervista.org/PHP/Login.php";
@@ -86,7 +86,7 @@ public class Database {
                             getCittadinoFromDatabase(email,password,context);
 
                         }else if(response.equals("not autorized")){
-                            mostraMessaggio("Non autorizzato","Non sei stato ancora autorizzato",context);
+                            mostraMessaggioErrore("Non autorizzato","Non sei stato ancora autorizzato",context);
                         }else{
                             Toast.makeText(context, "Connection failed", Toast.LENGTH_SHORT).show();
                         }
@@ -172,12 +172,7 @@ public class Database {
     }
 
 
-    private static void mostraMessaggio(String title,String text, Context context){
-        AlertDialog.Builder builder=new AlertDialog.Builder(context);
-        builder.setTitle(title);
-        builder.setMessage(text);
-        builder.show();
-    }
+
 
 }
 

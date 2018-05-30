@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import static uk.co.maxcarli.carpooling.Database.registraCittadino;
+import static uk.co.maxcarli.carpooling.Control.Controlli.*;
 
 public class RegistrazioneCittadino extends AppCompatActivity {
 
@@ -15,29 +16,64 @@ public class RegistrazioneCittadino extends AppCompatActivity {
     AlertDialog.Builder builder;
     EditText aux;
 
+    private String mNome;
+    private String mCognome;
+    private String mCodiceFiscale;
+    private String mResidenza;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrazione_cittadino);
 
-        riceviCittadino();
-        /*
+       riceviCittadino();
+
         findViewById(R.id.buttonAvanti).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editTextRegistrazione(nome,cognome,codiceFiscale,residenza);
+                editTextRegistrazione();
             }
         });
-        */
+
+    }
+    protected void onStart(){
+        super.onStart();
+    }
+
+    protected void onDestroy(){
+        super.onDestroy();
     }
 
 
-    public void editTextRegistrazione(String nome,String cognome,String codiceFiscale, String residenza) {
+    public void editTextRegistrazione() {
 
-        Cittadino cittadino = new Cittadino(nome,cognome, codiceFiscale,residenza);
+        aux = (EditText) this.findViewById(R.id.NomeCittadino);
+        if (controlloEditTextVuoto(aux) == true){
+            mostraMessaggioErrore("Campo obbligatorio", "Inserisci il tuo nome", RegistrazioneCittadino.this);
+        }
+        aux = (EditText) this.findViewById(R.id.cognomeCittadino);
+        if(controlloEditTextVuoto(aux) == true)
+            mostraMessaggioErrore("Campo obbligatorio", "Inserisci il tuo cognome", RegistrazioneCittadino.this);
+        aux = (EditText) this.findViewById(R.id.codiceFiscale);
+        if (controlloEditTextVuoto(aux) == true)
+            mostraMessaggioErrore("Campo obbligatorio", "Inserisci il codice fiscale", RegistrazioneCittadino.this);
+       /*
+       PRIMA DI CANCELLARE CHIEDERE A RINO! CAPITO BASTARDI?
+        else if (verificaCodiceFiscale(aux) == true)
+            mostraMessaggioErrore("Codice fiscale non valido","Il codice fiscale deve essere da 16 caratteri", RegistrazioneCittadino.this);
+*/
+        aux = (EditText) this.findViewById(R.id.residenzaCittadino);
+        if(controlloEditTextVuoto(aux) == true)
+            mostraMessaggioErrore("Campo obbligatorio", "Inserisci la tua residenza", RegistrazioneCittadino.this);
 
-        registraCittadino(nome,cognome,RegistrazioneCittadino.this);
+        String nome = mNome;
+        String cognome = mCognome;
+        String codiceFiscale = mCodiceFiscale;
+        String residenza = mResidenza;
+
+
+
 
     }
    /* public void registraCittadino(final String nome, final String cognome){
@@ -89,14 +125,7 @@ public class RegistrazioneCittadino extends AppCompatActivity {
 
     }*/
 
-    public boolean verificaCodiceFiscale(String codiceFiscale){
 
-        int lunghezza = codiceFiscale.length();
-        if (lunghezza < 16 || lunghezza > 16){
-            return true; //ritorna vero se è presente l'errore
-        }
-        else return false;
-    }
 
     public void scegliIndirizzo(View view){
 
@@ -125,6 +154,10 @@ public class RegistrazioneCittadino extends AppCompatActivity {
         final String codiceFiscale = intent.getStringExtra("codiceFiscale");
         final String residenza = intent.getStringExtra("residenza");
 
+        mNome = nome;
+        mCognome = cognome;
+        mCodiceFiscale = codiceFiscale;
+        mResidenza = residenza;
 
 
         aux = (EditText) this.findViewById(R.id.NomeCittadino);
@@ -135,6 +168,11 @@ public class RegistrazioneCittadino extends AppCompatActivity {
         aux.setText(codiceFiscale);
         aux = (EditText) this.findViewById(R.id.residenzaCittadino);
         aux.setText(residenza);
+
+
+
+
+
 
     }
 
