@@ -60,9 +60,9 @@ public class ImieiPassaggi extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch(position){
                 case 0:
-                    return new PassaggiOfferti();
-                case 1:
                     return new PassaggiRichiesti();
+                case 1:
+                    return new PassaggiOfferti();
 //
             }
             return null;
