@@ -48,31 +48,20 @@ public class RegistrazioneCittadino extends AppCompatActivity {
 
     public void editTextRegistrazione() {
 
-        aux = (EditText) this.findViewById(R.id.NomeCittadino);
-        if (controlloEditTextVuoto(aux) == true){
-            mostraMessaggioErrore("Campo obbligatorio", "Inserisci il tuo nome", RegistrazioneCittadino.this);
+        if(controlliCampi()== false) {
+
+            String nome = mNome;
+            String cognome = mCognome;
+            String codiceFiscale = mCodiceFiscale;
+            String residenza = mResidenza;
+
+            final Intent intent = new Intent(this, SceltaAzienda.class);
+
+            intent.putExtra("nome", nome);
+            intent.putExtra("cognome", cognome);
+            intent.putExtra("codiceFiscale", codiceFiscale);
+            startActivity(intent);
         }
-        aux = (EditText) this.findViewById(R.id.cognomeCittadino);
-        if(controlloEditTextVuoto(aux) == true)
-            mostraMessaggioErrore("Campo obbligatorio", "Inserisci il tuo cognome", RegistrazioneCittadino.this);
-        aux = (EditText) this.findViewById(R.id.codiceFiscale);
-        if (controlloEditTextVuoto(aux) == true)
-            mostraMessaggioErrore("Campo obbligatorio", "Inserisci il codice fiscale", RegistrazioneCittadino.this);
-       /*
-       PRIMA DI CANCELLARE CHIEDERE A RINO! CAPITO BASTARDI?
-        else if (verificaCodiceFiscale(aux) == true)
-            mostraMessaggioErrore("Codice fiscale non valido","Il codice fiscale deve essere da 16 caratteri", RegistrazioneCittadino.this);
-*/
-        aux = (EditText) this.findViewById(R.id.residenzaCittadino);
-        if(controlloEditTextVuoto(aux) == true)
-            mostraMessaggioErrore("Campo obbligatorio", "Inserisci la tua residenza", RegistrazioneCittadino.this);
-
-        String nome = mNome;
-        String cognome = mCognome;
-        String codiceFiscale = mCodiceFiscale;
-        String residenza = mResidenza;
-
-
 
 
     }
@@ -168,17 +157,36 @@ public class RegistrazioneCittadino extends AppCompatActivity {
         aux.setText(codiceFiscale);
         aux = (EditText) this.findViewById(R.id.residenzaCittadino);
         aux.setText(residenza);
-
-
-
-
-
-
     }
 
-
-
-
-
+    private boolean controlliCampi(){
+        Boolean bool = false;
+        aux = (EditText) this.findViewById(R.id.NomeCittadino);
+        if (controlloEditTextVuoto(aux) == true){
+            mostraMessaggioErrore("Campo obbligatorio", "Inserisci il tuo nome", RegistrazioneCittadino.this);
+            bool = true;
+        }
+        aux = (EditText) this.findViewById(R.id.cognomeCittadino);
+        if(controlloEditTextVuoto(aux) == true) {
+            mostraMessaggioErrore("Campo obbligatorio", "Inserisci il tuo cognome", RegistrazioneCittadino.this);
+            bool = true;
+        }
+            aux = (EditText) this.findViewById(R.id.codiceFiscale);
+        if (controlloEditTextVuoto(aux) == true) {
+            mostraMessaggioErrore("Campo obbligatorio", "Inserisci il codice fiscale", RegistrazioneCittadino.this);
+            bool = true;
+        }
+            /*
+       PRIMA DI CANCELLARE CHIEDERE A RINO! CAPITO BASTARDI?
+        else if (verificaCodiceFiscale(aux) == true)
+            mostraMessaggioErrore("Codice fiscale non valido","Il codice fiscale deve essere da 16 caratteri", RegistrazioneCittadino.this);
+*/
+        aux = (EditText) this.findViewById(R.id.residenzaCittadino);
+        if(controlloEditTextVuoto(aux) == true) {
+            mostraMessaggioErrore("Campo obbligatorio", "Inserisci la tua residenza", RegistrazioneCittadino.this);
+            bool = true;
+        }
+        return bool;
+    }
 
 }
