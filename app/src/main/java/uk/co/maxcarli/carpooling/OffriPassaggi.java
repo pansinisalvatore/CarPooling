@@ -62,7 +62,7 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
             public void onClick(View v) {
                 String auto= set_auto.getText().toString();
                 String posti= set_posti.getSelectedItem().toString();
-                OffriPassaggi(currant_date,currant_time,OffriPassaggi.this);
+                OffriPassaggi(currant_date,currant_time,auto,posti,OffriPassaggi.this);
             }
         });
 
@@ -100,7 +100,7 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
     }
 
 
-    public static void OffriPassaggi(final String date, final String time,final Context context){
+    public static void OffriPassaggi(final String date, final String time,final String car,final String place_avaiable,final Context context){
         builder = new AlertDialog.Builder(context);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, urlOffriPassaggio,
 
@@ -136,6 +136,8 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
                 Map <String,String> params = new HashMap<String, String>();
                 params.put("date",date);
                 params.put("time", time);
+                params.put("car",car);
+                params.put("place_avaible",place_avaiable);
 
                 return params;
             }
