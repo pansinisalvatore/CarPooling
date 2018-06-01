@@ -22,8 +22,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static uk.co.maxcarli.carpooling.Database.*;
@@ -37,9 +39,13 @@ import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
  */
 public class PassaggiRichiesti extends Fragment {
 
+
     String[] PassaggiRichiestiHeaders={"Viaggio","Data&Ora","Stato","Posti disponibili"};
     String[][] passaggi;
-    static final ArrayList<Passaggio> passaggiRichiesti=new ArrayList<Passaggio>();
+    List<Passaggio> passaggiRichiesti=new ArrayList<Passaggio>();
+
+    View view;
+    TableView<String[]> tb;
 
     public PassaggiRichiesti() {
         // Required empty public constructor
@@ -51,47 +57,15 @@ public class PassaggiRichiesti extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        View view=inflater.inflate(R.layout.fragment_passaggi_richiesti,null);
+        view=inflater.inflate(R.layout.fragment_passaggi_richiesti,null);
 
-        final TableView<String[]> tb=(TableView<String[]>) view.findViewById(R.id.TabellaPassaggiRichiesti);
+        tb=(TableView<String[]>) view.findViewById(R.id.TabellaPassaggiRichiesti);
 
 
         tb.setColumnCount(4);
         tb.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
 
 
-        populateData();
-
-        tb.setHeaderAdapter(new SimpleTableHeaderAdapter(getActivity(), PassaggiRichiestiHeaders));
-        tb.setDataAdapter(new SimpleTableDataAdapter(getActivity(), passaggi));
-
-
-        // Inflate the layout for this fragment
-        return view;
-
-
-    }
-
-
-    public void populateData(){
-
-        this.passaggi=new String[passaggiRichiesti.size()][4];
-        Toast.makeText(getContext(),passaggiRichiesti.size()+" ",Toast.LENGTH_SHORT).show();
-
-        for(int i=0;i<passaggiRichiesti.size();i++){
-
-            Passaggio p= passaggiRichiesti.get(i);
-
-            this.passaggi[i][0]=p.getViaggio();
-            this.passaggi[i][1]=p.getData()+" "+p.getOra();
-            this.passaggi[i][3]=p.getStatus();
-            this.passaggi[i][4]=Integer.toString(p.postiOccupati);
-
-
-        }
-    }
-
-    public static void getPassaggiRichiesti(final int idCittadino, final Context context){
         String url= "http://carpoolingsms.altervista.org/PHP/LeggiPassaggiRichiesti.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
@@ -99,7 +73,6 @@ public class PassaggiRichiesti extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
 
 
                         try {
@@ -118,14 +91,19 @@ public class PassaggiRichiesti extends Fragment {
 
                                 String status=jsonobject.getString("StatusPassaggioRichiesto");
 
+
                                 int postiOccupati=jsonobject.getInt("PostiOccupatiPassaggioRichiesto");
                                 int Idc=jsonobject.getInt("IdCittadinoPassaggiRichiesti");
+
+
+                                Log.i("Dati", viaggio+" "+data+" "+ora+" "+ status+" "+postiOccupati);
+                                passaggiRichiesti.add(new Passaggio(viaggio,data, ora, status, postiOccupati, Idc));
                                 //Toast.makeText(context, viaggio+" "+data+" "+ora+" "+status+" "+postiOccupati,Toast.LENGTH_SHORT).show();
-                                Passaggio p=new Passaggio(viaggio,data, ora, status, postiOccupati, Idc);
-                                Log.i("Dati", p.viaggio+" "+p.data+" "+p.ora+" "+p.getStatus()+" "+p.getPostiOccupati());
-                                passaggiRichiesti.add(p);
 
                             }
+                            populateData(passaggiRichiesti);
+                            tb.setHeaderAdapter(new SimpleTableHeaderAdapter(getActivity(), PassaggiRichiestiHeaders));
+                            tb.setDataAdapter(new SimpleTableDataAdapter(getActivity(), passaggi));
 
 
                         } catch (JSONException e) {
@@ -140,22 +118,51 @@ public class PassaggiRichiesti extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         if(error != null){
 
-                            Toast.makeText(context.getApplicationContext(), "Something went wrong.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Something went wrong.", Toast.LENGTH_LONG).show();
                         }
                     }
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("idCittadino", Integer.toString(idCittadino));
+                params.put("idCittadino", Integer.toString(3));
 
 
                 return params;
             }
         };
 
-        MySingleton.getmInstance(context.getApplicationContext()).addTorequestque(stringRequest);
+        MySingleton.getmInstance(getContext()).addTorequestque(stringRequest);
+
+        Toast.makeText(getContext(),passaggiRichiesti.size()+" ",Toast.LENGTH_SHORT).show();
+
+
+
+        // Inflate the layout for this fragment
+        return view;
+
 
     }
+
+
+   public void populateData(List<Passaggio> passaggiRichiesti){
+
+        this.passaggi=new String[passaggiRichiesti.size()][4];
+
+
+        for(int i=0;i<passaggiRichiesti.size();i++){
+
+            Passaggio p= passaggiRichiesti.get(i);
+
+            this.passaggi[i][0]=p.getViaggio();
+            this.passaggi[i][1]=p.getData()+" "+p.getOra();
+            this.passaggi[i][2]=p.getStatus();
+            this.passaggi[i][3]=Integer.toString(p.postiOccupati);
+
+
+        }
+    }
+
+
 
 }

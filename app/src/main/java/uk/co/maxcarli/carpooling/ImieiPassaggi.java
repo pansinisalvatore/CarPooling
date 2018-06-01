@@ -1,5 +1,7 @@
 package uk.co.maxcarli.carpooling;
 
+import android.content.Intent;
+import android.opengl.GLException;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.TabLayout;
@@ -10,6 +12,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+
+import java.util.ArrayList;
 
 public class ImieiPassaggi extends AppCompatActivity {
 
@@ -38,12 +43,18 @@ public class ImieiPassaggi extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+
+        Intent srcIntent=getIntent();
+        ArrayList<Passaggio> passaggiRichiesti=(ArrayList<Passaggio>)srcIntent.getSerializableExtra("PassaggiRichiesti");
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(mToggle.onOptionsItemSelected(item)){
-            return true;
-        }
+       switch(item.getItemId()){
+           case R.id.imieipassaggi:
+               Intent intent=new Intent(this, ImieiPassaggi.class);
+               startActivity(intent);
+               this.finish();
+       }
         return super.onOptionsItemSelected(item);
     }
 
@@ -60,6 +71,7 @@ public class ImieiPassaggi extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch(position){
                 case 0:
+
                     return new PassaggiRichiesti();
                 case 1:
                     return new PassaggiOfferti();
@@ -75,5 +87,8 @@ public class ImieiPassaggi extends AppCompatActivity {
         }
     }
 
+    public void goToMyStep(View view){
+
+    }
 
 }

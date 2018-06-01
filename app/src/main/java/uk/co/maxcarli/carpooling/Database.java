@@ -185,10 +185,11 @@ public class Database {
         MySingleton.getmInstance(context.getApplicationContext()).addTorequestque(stringRequest);
     }
 
-}
 
-    /*public static void getPassaggiRichiesti(final int idCittadino, final Context context){
+
+   /* public static void getPassaggiRichiesti(final int idCittadino, final Context context){
         String url= "http://carpoolingsms.altervista.org/PHP/LeggiPassaggiRichiesti.php";
+
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 url,
@@ -201,7 +202,7 @@ public class Database {
                         try {
 
                             JSONArray jsonarray = new JSONArray(response);
-
+                            ArrayList<Passaggio> passaggiRichiesti=new ArrayList<>();
                             for(int i=0; i < jsonarray.length(); i++) {
 
                                 JSONObject jsonobject = jsonarray.getJSONObject(i);
@@ -222,7 +223,9 @@ public class Database {
                                 passaggiRichiesti.add(p);
 
                             }
-
+                            Intent intent=new Intent(context, ImieiPassaggi.class);
+                            intent.putExtra("PassaggiRichiesti",passaggiRichiesti);
+                            context.startActivity(intent);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -252,14 +255,9 @@ public class Database {
 
         MySingleton.getmInstance(context.getApplicationContext()).addTorequestque(stringRequest);
     }
+*/
+}
 
-
-    private static void mostraMessaggio(String title,String text, Context context){
-        AlertDialog.Builder builder=new AlertDialog.Builder(context);
-        builder.setTitle(title);
-        builder.setMessage(text);
-        builder.show();
-    }*/
 
 
 

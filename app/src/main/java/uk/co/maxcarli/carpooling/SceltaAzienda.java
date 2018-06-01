@@ -31,7 +31,6 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
     AutoCompleteTextView textView=null;
     private ArrayAdapter<String> adapter;
     private String[] vettoreAzienda;
-    private String vettore[];
     List<String> responseList = new ArrayList<String>();
 
     @Override
@@ -95,6 +94,7 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
         );
 
         MySingleton.getmInstance(getApplicationContext()).addTorequestque(stringRequest);
+
 
         //Create adapter
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, responseList);

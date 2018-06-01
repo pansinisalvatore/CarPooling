@@ -45,7 +45,10 @@
         <activity
             android:name=".Principale"
             android:label="@string/ImieiPassaggi" />
-        <activity android:name=".OffriPassaggi" />
+        <activity android:name=".OffriPassaggi" >
+
+        </activity>
+
         <activity android:name=".RicercaIndirizzo" />
 
         <meta-data
