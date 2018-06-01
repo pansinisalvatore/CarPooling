@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.TimeFormatException;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -38,6 +39,12 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
     Spinner set_posti;
     static String urlOffriPassaggio ="http://carpoolingsms.altervista.org/PHP/OffriPassaggi.php";
     static AlertDialog.Builder builder;
+    Button conferma;
+    String currant_date;
+    String currant_time;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +53,19 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
         imp_ora= findViewById(R.id.edtOra);
         set_auto= findViewById(R.id.edtInserisciAuto);
         set_posti= findViewById(R.id.spnPosti);
+        conferma= findViewById(R.id.btnConfirm);
         ArrayAdapter<String> posti= new ArrayAdapter<String>(OffriPassaggi.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.names));
         posti.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         set_posti.setAdapter(posti);
+        conferma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String auto= set_auto.getText().toString();
+                String posti= set_posti.getSelectedItem().toString();
+                OffriPassaggi(currant_date,currant_time,auto,posti,OffriPassaggi.this);
+            }
+        });
+
         imp_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +87,7 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
         c.set(Calendar.YEAR,year);
         c.set(Calendar.MONTH,month);
         c.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-        String currant_date= DateFormat.getDateInstance().format(c.getTime());
+        currant_date= DateFormat.getDateInstance().format(c.getTime());
         imp_data.setText(currant_date);
     }
     @Override
@@ -78,11 +95,12 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
         Calendar c = Calendar.getInstance();
         c.set(Calendar.HOUR_OF_DAY,hourOfday);
         c.set(Calendar.MINUTE,minute);
-        imp_ora.setText("  "+hourOfday+ " : "+ minute);
+        currant_time="  "+hourOfday+ " : "+ minute;
+        imp_ora.setText(currant_time);
     }
 
 
-    public static void OffriPassaggi(final String date, final String time,final String car,final int place_avaiable,final String choise ,final Context context){
+    public static void OffriPassaggi(final String date, final String time,final String car,final String place_avaiable,final Context context){
         builder = new AlertDialog.Builder(context);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, urlOffriPassaggio,
 
@@ -120,7 +138,6 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
                 params.put("time", time);
                 params.put("car", car);
                 params.put("place_avaible", new String(String.valueOf(place_avaiable)));
-                params.put("choise", choise);
 
                 return params;
             }
