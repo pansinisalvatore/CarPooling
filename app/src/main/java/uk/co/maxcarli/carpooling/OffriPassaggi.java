@@ -60,8 +60,12 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
         conferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String auto= set_auto.getText().toString();
                 String posti= set_posti.getSelectedItem().toString();
+                Toast.makeText(OffriPassaggi.this,currant_date,Toast.LENGTH_LONG);
+                Toast.makeText(OffriPassaggi.this,currant_time,Toast.LENGTH_LONG);
+
                 OffriPassaggi(currant_date,currant_time,auto,posti,OffriPassaggi.this);
             }
         });
