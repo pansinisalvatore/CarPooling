@@ -1,136 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".OffriPassaggi">
 
-    <TextView
-        android:id="@+id/txtAuto"
-        android:layout_width="50dp"
-        android:layout_height="36dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/txtPostiDisponibili"
-        android:layout_marginTop="156dp"
-        android:text="@string/Auto"
-        android:textSize="18sp"
-        android:visibility="visible"
-        android:layout_alignLeft="@+id/txtPostiDisponibili" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="0.2">
+        <EditText
+            android:id="@+id/edtData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:ems="10"
+            android:focusable="false"
+            android:inputType="date"
+            android:text="@string/ImpostaData"
+            android:textAlignment="center" />
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/edtInserisciAuto"
-        android:layout_width="134dp"
-        android:layout_height="31dp"
-        android:layout_alignStart="@+id/spnPosti"
-        android:layout_alignTop="@+id/txtAuto"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:layout_alignLeft="@+id/spnPosti" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+        <EditText
+            android:id="@+id/edtOra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:ems="10"
+            android:focusable="false"
+            android:inputType="time"
+            android:text="@string/ImpostaOra"
+            android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/txtPostiDisponibili"
-        android:layout_width="140dp"
-        android:layout_height="40dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="219dp"
-        android:text="@string/PostiDisponibili"
-        android:textSize="18sp"
-        android:visibility="visible"
-        android:layout_marginLeft="30dp"
-        android:layout_alignParentLeft="true" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/txtDomanda"
-        android:layout_width="298dp"
-        android:layout_height="39dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/txtAuto"
-        android:layout_marginBottom="185dp"
-        android:text="@string/Domanda"
-        android:layout_alignLeft="@+id/txtAuto" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+        <TextView
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="285dp"
-        android:layout_height="81dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/txtDomanda"
-        android:layout_marginBottom="79dp"
-        android:layout_alignLeft="@+id/txtDomanda">
-
-        <RadioButton
-            android:id="@+id/radioButton5"
+            android:id="@+id/txtAuto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/Si"
-            tools:layout_editor_absoluteX="216dp"
-            tools:layout_editor_absoluteY="260dp" />
+            android:text="@string/Auto"
+            android:textSize="18sp"
+            android:visibility="visible" />
 
-        <RadioButton
-            android:id="@+id/radioButton4"
+        <EditText
+            android:id="@+id/edtInserisciAuto"
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:text="@string/No"
-            tools:layout_editor_absoluteX="216dp"
-            tools:layout_editor_absoluteY="260dp" />
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:ems="10"
+            android:inputType="textPersonName" />
 
-    </RadioGroup>
+  </LinearLayout>
 
-    <Spinner
-        android:id="@+id/spnPosti"
-        android:layout_width="140dp"
-        android:layout_height="32dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/txtPostiDisponibili"
-        android:layout_marginEnd="35dp"
-        android:layout_marginRight="35dp"
-        android:layout_alignParentRight="true" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
 
-    <Button
-        android:id="@+id/btnConfirm"
+    <TextView
+        android:id="@+id/txtPostiDisponibili"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="18dp"
-        android:layout_marginEnd="26dp"
-        android:text="@string/Conferma"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="26dp" />
+        android:layout_weight="2"
+        android:text="@string/PostiDisponibili"
+        android:textSize="18sp"
+        android:visibility="visible"
+        />
 
-    <EditText
-        android:id="@+id/edtData"
-        android:layout_width="239dp"
-        android:layout_height="57dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        <Spinner
+            android:id="@+id/spnPosti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
 
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="16dp"
-        android:editable="false"
-        android:ems="10"
-        android:focusable="false"
-        android:inputType="date"
-        android:text="@string/ImpostaData"
-        android:textAlignment="center"
-        android:layout_marginLeft="57dp"
-        android:layout_alignParentLeft="true" />
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/edtOra"
-        android:layout_width="239dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/button4"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="91dp"
-        android:editable="false"
-        android:ems="10"
-        android:focusable="false"
-        android:inputType="time"
-        android:text="@string/ImpostaOra"
-        android:textAlignment="center" />
-</RelativeLayout>
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/txtDomanda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Domanda"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=""
+                android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButton5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Si"
+                />
+
+            <RadioButton
+                android:id="@+id/radioButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/No" />
+            </LinearLayout>
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <Button
+            android:id="@+id/btnConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Conferma"
+           />
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>

@@ -21,8 +21,8 @@
     <string name="Logout">Logout</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="ImpostaData">Set date</string>
-    <string name="ImpostaOra">Set time</string>
+    <string name="ImpostaData">Date</string>
+    <string name="ImpostaOra">Time</string>
     <string name="Auto">Car</string>
     <string name="PostiDisponibili">Places available</string>
     <string name="Domanda">Do you want to save this default choice for each week?</string>
