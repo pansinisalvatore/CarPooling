@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">CarPooling</string>
+    <string name="loginString">Sign in or sign up</string>
+    <string name="NonHaiUnAccount">Do not have an account? Sign in</string>
     <string name="Registrazione">Register</string>
     <string name="NomeCittadino">Name</string>
     <string name="CognomeCittadino">Surname</string>
@@ -32,6 +34,7 @@
     <string name="AccessoNonAutorizzatoTitolo">Access not performed </string>
     <string name="AccessoNonAutorizzatoTesto"> You have not yet been authorized by your company</string>
     <string name="Conferma">Confirm</string>
+    <string name="PasswordDimenticata">Did you forget your password? </string>
     <string-array name="names">
         <item>1</item>
         <item>2</item>
