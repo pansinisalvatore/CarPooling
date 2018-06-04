@@ -35,6 +35,7 @@
     <string name="AccessoNonAutorizzatoTesto"> You have not yet been authorized by your company</string>
     <string name="Conferma">Confirm</string>
     <string name="PasswordDimenticata">Did you forget your password? </string>
+    <string name="Home">Home</string>
     <string-array name="names">
         <item>1</item>
         <item>2</item>
