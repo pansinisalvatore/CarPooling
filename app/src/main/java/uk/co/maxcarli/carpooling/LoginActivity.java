@@ -51,14 +51,17 @@ public class LoginActivity extends AppCompatActivity {
             accedi(email,password,this);
         }
 
-
     }
 
 
-
-    public void ApriRegisterActivity(View view) {
+    public void apriRegisterActivity(View view) {
         Intent Registrazione=  new Intent(this,RegistrazioneCittadino.class);
         startActivity(Registrazione);
+    }
+
+    public void passwordDimenticata(View view){
+        Intent intent = new Intent(this,RecuperaPassword.class);
+        startActivity(intent);
     }
 
 

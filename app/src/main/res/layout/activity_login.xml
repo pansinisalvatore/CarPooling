@@ -1,86 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".LoginActivity">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:background="@drawable/logo">
+    </FrameLayout>
 
-    <ImageView
-        android:id="@+id/activity_login"
-        android:layout_width="200dp"
-        android:layout_height="150dp"
-        android:layout_marginBottom="424dp"
-        android:layout_marginEnd="104dp"
-        android:layout_marginRight="104dp"
-        android:src="@drawable/logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0">
 
-    <EditText
-        android:id="@+id/LoginEmail"
-        android:layout_width="224dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="328dp"
-        android:layout_marginEnd="104dp"
-        android:layout_marginRight="104dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:hint="@string/Email"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/loginString"
+            android:gravity="center"
+            android:textSize="30dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5">
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/LoginPassword"
-        android:layout_width="222dp"
-        android:layout_height="44dp"
-        android:layout_marginBottom="248dp"
-        android:layout_marginEnd="108dp"
-        android:layout_marginRight="108dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:hint="@string/Password"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:id="@+id/RelativeLayoutEdit">
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/Password"
+            android:id="@+id/email"
+
+            android:layout_below="@+id/password">
+
+            <android.support.design.widget.TextInputEditText
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:maxLines="1" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/password"
+            android:hint="@string/Email">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:maxLines="1" />
+        </android.support.design.widget.TextInputLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5">
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_gravity="top|center"
+            android:text="@string/Conferma"
+            android:textSize="20dp"
+            android:onClick="Login"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="@string/NonHaiUnAccount"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:onClick="apriRegisterActivity"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="@string/PasswordDimenticata"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:onClick="passwordDimenticata"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+    </LinearLayout>
 
 
-    <Button
-        android:id="@+id/SignIn"
-        android:layout_width="216dp"
-        android:layout_height="57dp"
-
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="64dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="392dp"
-        android:background="@drawable/button_shape_normal"
-        android:backgroundTint="@color/tint_color"
-        android:gravity="center"
-        android:text="@string/SignIn"
-        android:onClick="Login"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/SingUp"
-        android:layout_width="216dp"
-        android:layout_height="57dp"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="64dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="472dp"
-        android:background="@drawable/button_shape_normal"
-        android:backgroundTint="@color/tint_color"
-        android:gravity="center"
-        android:onClick="ApriRegisterActivity"
-        android:text="@string/SignUp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
 
-</android.support.constraint.ConstraintLayout>
+
+</LinearLayout>
