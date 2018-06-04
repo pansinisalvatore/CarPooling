@@ -23,6 +23,7 @@
             android:name=".LoginActivity"
             android:theme="@style/FullScreen" />
         <activity
+
             android:name=".Splash_activity"
             android:label="@string/app_name"
             android:theme="@style/FullScreen">
@@ -35,15 +36,19 @@
         <activity android:name=".RegistrazioneCittadino" /> <!-- riferimento a una risorsa di tipo style che si chiama FullScreen -->
         <activity
             android:name=".ImieiPassaggi"
-            android:label="@string/ImieiPassaggi"></activity>
+            android:label="@string/ImieiPassaggi"
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".Principale"
-            android:label="@string/ImieiPassaggi" />
-        <activity android:name=".OffriPassaggi" >
+            android:label="@string/ImieiPassaggi"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".OffriPassaggi"
+            android:theme="@style/AppTheme">
 
         </activity>
 
-        <activity android:name=".RicercaIndirizzo" />
+        <activity android:name=".RicercaIndirizzo"
+            android:theme="@style/AppTheme"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -52,8 +57,10 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".SceltaAzienda" />
-        <activity android:name=".RecuperaPassword"></activity>
+        <activity android:name=".SceltaAzienda"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".RecuperaPassword"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
