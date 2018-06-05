@@ -48,9 +48,14 @@ public class RecuperaPassword extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-                        builder.setTitle(R.string.emailInviataSuccesso);
-                        if (response.equals("1"))
-                        builder.setMessage(R.string.emailInviataSuccessoTesto);
+                        if (response.equals("1")){
+                            builder.setTitle(R.string.emailInviataSuccesso);
+                            builder.setMessage(R.string.emailInviataSuccessoTesto);
+                        } else{
+                            builder.setTitle(R.string.emailInesistente);
+                            builder.setMessage(R.string.emailInesistenteTesto);
+                        }
+
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

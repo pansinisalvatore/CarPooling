@@ -39,6 +39,8 @@
     <string name="PasswordDimenticataTesto">
 Enter the email address with which you registered. We will send you a link to reset your password.</string>
     <string name="emailInviataSuccesso">Email address successfully</string>
+    <string name="emailInesistente">Invalid email!</string>
+    <string name="emailInesistenteTesto">There is no account registered with the following e-mail.</string>
     <string name="emailInviataSuccessoTesto">Select the link received in your email to reset your password.</string>
     <string-array name="names">
         <item>1</item>
