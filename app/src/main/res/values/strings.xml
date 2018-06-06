@@ -21,8 +21,8 @@
     <string name="Logout">Logout</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="ImpostaData">Set date</string>
-    <string name="ImpostaOra">Set time</string>
+    <string name="ImpostaData">Date</string>
+    <string name="ImpostaOra">Time</string>
     <string name="Auto">Car</string>
     <string name="PostiDisponibili">Places available</string>
     <string name="Domanda">Do you want to save this default choice for each week?</string>
@@ -35,6 +35,13 @@
     <string name="AccessoNonAutorizzatoTesto"> You have not yet been authorized by your company</string>
     <string name="Conferma">Confirm</string>
     <string name="PasswordDimenticata">Did you forget your password? </string>
+    <string name="Home">Home</string>
+    <string name="PasswordDimenticataTesto">
+Enter the email address with which you registered. We will send you a link to reset your password.</string>
+    <string name="emailInviataSuccesso">Email address successfully</string>
+    <string name="emailInesistente">Invalid email!</string>
+    <string name="emailInesistenteTesto">There is no account registered with the following e-mail.</string>
+    <string name="emailInviataSuccessoTesto">Select the link received in your email to reset your password.</string>
     <string-array name="names">
         <item>1</item>
         <item>2</item>

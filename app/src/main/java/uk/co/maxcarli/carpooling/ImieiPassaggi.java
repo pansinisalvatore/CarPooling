@@ -16,7 +16,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-public class ImieiPassaggi extends AppCompatActivity {
+public class ImieiPassaggi extends  AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
@@ -49,12 +49,10 @@ public class ImieiPassaggi extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-       switch(item.getItemId()){
-           case R.id.imieipassaggi:
-               Intent intent=new Intent(this, ImieiPassaggi.class);
-               startActivity(intent);
-               this.finish();
-       }
+
+        if(mToggle.onOptionsItemSelected(item)){
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
