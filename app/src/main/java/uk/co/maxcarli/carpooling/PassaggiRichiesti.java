@@ -51,6 +51,16 @@ public class PassaggiRichiesti extends Fragment {
         // Required empty public constructor
     }
 
+    public static PassaggiRichiesti newInstance(String param1, String param2) {
+        PassaggiRichiesti fragment = new PassaggiRichiesti();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

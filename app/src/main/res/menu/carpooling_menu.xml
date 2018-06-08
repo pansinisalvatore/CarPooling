@@ -7,7 +7,7 @@
 
     <item android:id="@+id/IlMioProfilo"
         android:title="@string/IlMioProfilo"
-        android:icon="@drawable/il_mio_profilo">
+        android:icon="@drawable/profilo">
 
     </item>
     <item android:id="@+id/imieipassaggi"
@@ -20,9 +20,10 @@
         android:icon="@drawable/classifica">
 
     </item>
-    <item android:id="@+id/Logout"
-        android:title="@string/Logout"
-        android:icon="@drawable/logout">
+
+    <item android:id="@+id/Notification"
+        android:title="Notifica"
+        android:icon="@drawable/notifica">
 
     </item>
 

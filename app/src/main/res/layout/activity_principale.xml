@@ -96,11 +96,11 @@
 
     </RelativeLayout>
 
-    <android.support.design.widget.NavigationView
+    <android.support.design.widget.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:menu="@menu/carpooling_menu"
         android:layout_gravity="start">
-    </android.support.design.widget.NavigationView>
+    </android.support.design.widget.BottomNavigationView>
 
 </android.support.v4.widget.DrawerLayout>
