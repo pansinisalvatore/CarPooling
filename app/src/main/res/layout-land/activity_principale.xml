@@ -26,7 +26,7 @@
             android:layout_height="391dp"
             android:layout_marginBottom="196dp"
 
-            android:background="@drawable/bg"
+            android:background="@drawable/immagine"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
