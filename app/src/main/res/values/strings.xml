@@ -14,6 +14,8 @@
     <string name="SignIn">Sign in</string>
     <string name="SignUp">Sign up</string>
     <string name="ImieiPassaggi">My step</string>
+    <string name="ClassificaAzienadale">Company Ranking</string>
+    <string name="ClassificaNazionale">National Ranking</string>
     <string name="BottoneOfferti">OFFERED</string>
     <string name="BottoneRichiesti">REQUIRED</string>
     <string name="IlMioProfilo">My profile</string>
