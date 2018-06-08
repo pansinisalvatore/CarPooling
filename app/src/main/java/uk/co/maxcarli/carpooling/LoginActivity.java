@@ -3,6 +3,7 @@ package uk.co.maxcarli.carpooling;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,15 +28,15 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-    private EditText loginEmail;
-    private EditText loginPassword;
+    private TextInputEditText loginEmail;
+    private TextInputEditText loginPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        loginEmail=findViewById(R.id.LoginEmail);
-        loginPassword=findViewById(R.id.LoginPassword);
+        loginEmail= (TextInputEditText)findViewById(R.id.emailLogin);
+        loginPassword= (TextInputEditText)findViewById(R.id.passwordLogin);
 
 
     }
