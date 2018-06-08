@@ -62,6 +62,7 @@ public class RegistrazioneCittadino extends AppCompatActivity {
             intent.putExtra("nome", nome);
             intent.putExtra("cognome", cognome);
             intent.putExtra("codiceFiscale", codiceFiscale);
+            intent.putExtra("residenza",residenza);
             startActivity(intent);
         }
 
