@@ -9,6 +9,7 @@
     <!--<string name="EmailCittadino">Email</string>
     <string name="PasswordCittadino">Password</string> -->
     <string name="Avanti">Next</string>
+    <string name="ListaUtenti">Utent List</string>
     <string name="Email"> E-mail</string>
     <string name="Password">Password</string>
     <string name="SignIn">Sign in</string>
