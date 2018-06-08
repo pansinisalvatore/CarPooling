@@ -2,6 +2,7 @@ package uk.co.maxcarli.carpooling;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +15,8 @@ public class RegistrazioneCittadino extends AppCompatActivity {
 
     String url ="http://carpoolingsms.altervista.org/PHP/query.php";
     AlertDialog.Builder builder;
-    EditText aux;
+    TextInputEditText aux;
+    EditText aux2;
 
     private String mNome;
     private String mCognome;
@@ -60,6 +62,7 @@ public class RegistrazioneCittadino extends AppCompatActivity {
             intent.putExtra("nome", nome);
             intent.putExtra("cognome", cognome);
             intent.putExtra("codiceFiscale", codiceFiscale);
+            intent.putExtra("residenza",residenza);
             startActivity(intent);
         }
 
@@ -118,11 +121,11 @@ public class RegistrazioneCittadino extends AppCompatActivity {
 
     public void scegliIndirizzo(View view){
 
-        aux = (EditText) this.findViewById(R.id.NomeCittadino);
+        aux = (TextInputEditText) this.findViewById(R.id.nomeCittadino);
         String nome = aux.getText().toString();
-        aux = (EditText) this.findViewById(R.id.cognomeCittadino);
+        aux = (TextInputEditText) this.findViewById(R.id.cognomeCittadino);
         String cognome = aux.getText().toString();
-        aux = (EditText) this.findViewById(R.id.codiceFiscale);
+        aux = (TextInputEditText) this.findViewById(R.id.codiceFiscale);
         final String codiceFiscale = aux.getText().toString();
 
         final Intent intent = new Intent(this,RicercaIndirizzo.class);
@@ -136,7 +139,6 @@ public class RegistrazioneCittadino extends AppCompatActivity {
     }
 
     public void riceviCittadino(){
-        EditText aux;
         final Intent intent = getIntent();
         final String nome = intent.getStringExtra("nome");
         final String cognome = intent.getStringExtra("cognome");
@@ -149,29 +151,29 @@ public class RegistrazioneCittadino extends AppCompatActivity {
         mResidenza = residenza;
 
 
-        aux = (EditText) this.findViewById(R.id.NomeCittadino);
+        aux = (TextInputEditText) this.findViewById(R.id.nomeCittadino);
         aux.setText(nome);
-        aux = (EditText) this.findViewById(R.id.cognomeCittadino);
+        aux = (TextInputEditText) this.findViewById(R.id.cognomeCittadino);
         aux.setText(cognome);
-        aux = (EditText) this.findViewById(R.id.codiceFiscale);
+        aux = (TextInputEditText) this.findViewById(R.id.codiceFiscale);
         aux.setText(codiceFiscale);
-        aux = (EditText) this.findViewById(R.id.residenzaCittadino);
-        aux.setText(residenza);
+        aux2 = (EditText) this.findViewById(R.id.residenzaCittadino);
+        aux2.setText(residenza);
     }
 
     private boolean controlliCampi(){
         Boolean bool = false;
-        aux = (EditText) this.findViewById(R.id.NomeCittadino);
+        aux = (TextInputEditText) this.findViewById(R.id.nomeCittadino);
         if (controlloEditTextVuoto(aux) == true){
             mostraMessaggioErrore("Campo obbligatorio", "Inserisci il tuo nome", RegistrazioneCittadino.this);
             bool = true;
         }
-        aux = (EditText) this.findViewById(R.id.cognomeCittadino);
+        aux = (TextInputEditText) this.findViewById(R.id.cognomeCittadino);
         if(controlloEditTextVuoto(aux) == true) {
             mostraMessaggioErrore("Campo obbligatorio", "Inserisci il tuo cognome", RegistrazioneCittadino.this);
             bool = true;
         }
-            aux = (EditText) this.findViewById(R.id.codiceFiscale);
+            aux = (TextInputEditText) this.findViewById(R.id.codiceFiscale);
         if (controlloEditTextVuoto(aux) == true) {
             mostraMessaggioErrore("Campo obbligatorio", "Inserisci il codice fiscale", RegistrazioneCittadino.this);
             bool = true;
@@ -181,7 +183,7 @@ public class RegistrazioneCittadino extends AppCompatActivity {
         else if (verificaCodiceFiscale(aux) == true)
             mostraMessaggioErrore("Codice fiscale non valido","Il codice fiscale deve essere da 16 caratteri", RegistrazioneCittadino.this);
 */
-        aux = (EditText) this.findViewById(R.id.residenzaCittadino);
+        aux2 = (EditText) this.findViewById(R.id.residenzaCittadino);
         if(controlloEditTextVuoto(aux) == true) {
             mostraMessaggioErrore("Campo obbligatorio", "Inserisci la tua residenza", RegistrazioneCittadino.this);
             bool = true;

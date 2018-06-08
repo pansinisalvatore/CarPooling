@@ -1,85 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".RegistrazioneCittadino">
 
-
-
-    <EditText
-        android:id="@+id/NomeCittadino"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="21dp"
-        android:layout_marginTop="16dp"
-        android:editable="true"
-        android:hint="@string/NomeCittadino"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/cognomeCittadino"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_weight="0.1">
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/cognomeCittadino"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="31dp"
-        android:editable="true"
-        android:hint="@string/CognomeCittadino"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/codiceFiscale"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NomeCittadino" />
+        android:layout_weight="0">
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/residenzaCittadino"
+
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="33dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginStart="2dp"
-        android:hint="Residenza"
-        android:inputType="textPersonName"
-        android:focusableInTouchMode="false"
-        android:editable="false"
-        android:onClick="scegliIndirizzo"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAvanti"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/codiceFiscale" />
+        android:text="@string/inserisciInfoPersonali"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:selectAllOnFocus="false"
+        android:linksClickable="false"
+        android:autoLink="all"/>
 
-    <EditText
-        android:id="@+id/codiceFiscale"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="34dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginStart="2dp"
-        android:autoText="false"
-        android:editable="true"
-        android:hint="@string/CodiceFiscaleCittadino"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/ResidenzaCittadino"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cognomeCittadino" />
+        android:layout_weight="0.1">
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/buttonAvanti"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Avanti"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_weight="0">
 
 
-</android.support.constraint.ConstraintLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/NomeCittadinoLayout"
+            android:hint="@string/NomeCittadino">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/nomeCittadino"
+                android:inputType="textPersonName"
+                android:maxLines="1" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/CognomeCittadino"
+            android:id="@+id/CognomeCittadinoLayout"
+
+            android:layout_below="@+id/NomeCittadinoLayout">
+
+            <android.support.design.widget.TextInputEditText
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cognomeCittadino"
+                android:inputType="textPersonName"
+                android:maxLines="1" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/CodiceFiscaleLayout"
+            android:hint="@string/CodiceFiscaleCittadino"
+
+            android:layout_below="@+id/CognomeCittadinoLayout">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/codiceFiscale"
+                android:inputType="textPersonName"
+                android:maxLines="1" />
+        </android.support.design.widget.TextInputLayout>
+
+        <EditText
+            android:id="@+id/residenzaCittadino"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/Residenza"
+            android:focusableInTouchMode="false"
+            android:editable="false"
+            android:onClick="scegliIndirizzo"
+            android:layout_below="@+id/CodiceFiscaleLayout">
+
+        </EditText>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2">
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/buttonAvanti"
+            android:text="@string/Conferma" />
+    </LinearLayout>
+
+
+</LinearLayout>
