@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import static uk.co.maxcarli.carpooling.Database.registraCittadino;
+
 import static uk.co.maxcarli.carpooling.Control.Controlli.*;
 
 public class RegistrazioneCittadino extends AppCompatActivity {

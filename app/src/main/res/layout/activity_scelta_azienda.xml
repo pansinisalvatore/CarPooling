@@ -2,20 +2,57 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".SceltaAzienda"
+    android:id="@+id/RelativeLayoutId"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/labelId"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
-        android:text="azienda"/>
+        android:text="@string/Azienda"/>
 
     <AutoCompleteTextView
         android:id="@+id/autocompleteId"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/labelId"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/NumeroTelefofonoCittadinoText"
+        android:hint="@string/NumeroTelefonico"
+        android:layout_below="@id/autocompleteId">
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/numeroTelefonicoCittadino"
+            android:inputType="number"
+            android:maxLines="1" />
+    </android.support.design.widget.TextInputLayout>
+
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/NumeroTelefofonoCittadinoText"
+        android:layout_alignParentLeft="true"
+        android:hint="@string/Conferma"
+        android:onClick="clickButton"
+        android:gravity="left"
+        />
+
+
+
 
 </RelativeLayout>

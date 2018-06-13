@@ -2,6 +2,8 @@ package uk.co.maxcarli.carpooling.Control;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.support.design.widget.TextInputEditText;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
 public class Controlli {
@@ -31,6 +33,35 @@ public class Controlli {
         builder.setMessage(text);
         builder.show();
     }
+
+    public static boolean controlloEditTextVuoto(TextInputEditText campo){
+        String text = campo.getText().toString();
+        if(text.length()==0){
+            campo.setError("Campo obbligatorio");
+            return true; //ritorna vero se è presente l'errore
+        }
+        return false;
+    }
+
+
+    public static boolean controlloEditTextVuoto(AutoCompleteTextView campo){
+        String text = campo.getText().toString();
+        if(text.length()==0){
+            campo.setError("Campo obbligatorio");
+            return true; //ritorna vero se è presente l'errore
+        }
+        return false;
+    }
+    public static boolean verificaNumeroTelefonico(TextInputEditText campo){
+
+        String text = campo.getText().toString();
+        int lunghezza = campo.length();
+        if (lunghezza == 10){
+            return false;
+        }
+        else return true; //ritorna vero se è presente l'errore
+    }
+
 
 
 

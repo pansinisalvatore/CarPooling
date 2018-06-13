@@ -26,7 +26,11 @@
     <string name="close">Close</string>
     <string name="ImpostaData">Date</string>
     <string name="ImpostaOra">Time</string>
+    <string name="Azienda">Company</string>
     <string name="Auto">Car</string>
+    <string name="NumeroTelefonico">Phone Number</string>
+    <string name="numeroTelefonoNonValido">Invalid telephone number</string>
+    <string name="numeroTelefonoNonValidoText">The telephone number consists of 10 digits</string>
     <string name="PostiDisponibili">Places available</string>
     <string name="Domanda">Do you want to save this default choice for each week?</string>
     <!-- TODO: Remove or change this placeholder text -->

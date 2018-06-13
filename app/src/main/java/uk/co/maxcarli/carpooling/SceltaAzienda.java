@@ -4,6 +4,7 @@ package uk.co.maxcarli.carpooling;
 import android.app.Activity;
 
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -22,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
+import static uk.co.maxcarli.carpooling.Control.Controlli.*;
 
 public class SceltaAzienda extends Activity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
 
@@ -31,6 +33,7 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
     AutoCompleteTextView textView=null;
     private ArrayAdapter<String> adapter;
     private String[] vettoreAzienda;
+    private TextInputEditText aux;
     List<String> responseList = new ArrayList<String>();
 
     @Override
@@ -108,6 +111,8 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
 
     }
 
+
+
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int position,
                                long arg3) {
@@ -144,6 +149,23 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
     protected void onDestroy() {
         super.onDestroy();
     }
+    protected void onStart(){
+        super.onStart();
+    }
+    public void clickButton(View view){
+        boolean control = false;
+        AutoCompleteTextView aux2;
+        aux = (TextInputEditText) this.findViewById(R.id.numeroTelefonicoCittadino);
+        control = controlloEditTextVuoto(aux);
+        if (verificaNumeroTelefonico(aux) == true)
+        {
+            String title = getText(R.string.numeroTelefonoNonValido).toString();
+            String text = getText(R.string.numeroTelefonoNonValidoText).toString();
+            mostraMessaggioErrore(title, text, SceltaAzienda.this);
+        }
+        aux2 = (AutoCompleteTextView) this.findViewById(R.id.autocompleteId);
+        control = controlloEditTextVuoto(aux2);
 
+    }
 
 }
