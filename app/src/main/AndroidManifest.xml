@@ -26,11 +26,7 @@
             android:name=".Splash_activity"
             android:label="@string/app_name"
             android:theme="@style/FullScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".RegistrazioneCittadino" /> <!-- riferimento a una risorsa di tipo style che si chiama FullScreen -->
         <activity
@@ -40,7 +36,9 @@
         <activity
             android:name=".Principale"
             android:label="@string/ImieiPassaggi"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme" >
+
+        </activity>
         <activity
             android:name=".OffriPassaggi"
             android:theme="@style/AppTheme" />
@@ -64,7 +62,13 @@
         <activity android:name=".ReimpostaPassword" />
         <activity android:name=".Classifica"></activity>
         <activity android:name=".ListaUtenti"></activity>
-        <activity android:name=".MappaCercaPassaggi"></activity>
+        <activity android:name=".MappaCercaPassaggi">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
