@@ -56,11 +56,15 @@ public class Controlli {
 
         String text = campo.getText().toString();
         int lunghezza = campo.length();
+        if (lunghezza == 0) return false;
         if (lunghezza == 10){
             return false;
         }
         else return true; //ritorna vero se è presente l'errore
     }
+
+
+
 
 
 

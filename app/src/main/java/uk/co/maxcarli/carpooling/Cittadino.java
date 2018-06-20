@@ -8,13 +8,19 @@ public class Cittadino {
     private String cognome;
     private String codiceFiscale;
     private String residenza;
+    private String numeroTelefono;
+    private String idAzienda;
 
-    public Cittadino(String nome, String cognome, String codiceFiscale, String residenza){
+    public Cittadino(String nome, String cognome, String codiceFiscale, String residenza, String numeroTelefono, String idAzienda){
         this.nome = nome;
         this.cognome = cognome;
         this.codiceFiscale = codiceFiscale;
         this.residenza = residenza;
+        this.numeroTelefono = numeroTelefono;
+        this.idAzienda = idAzienda;
     }
+    public Cittadino(){}
+
 
     public void setNome(String nome){
         this.nome = nome;
@@ -48,5 +54,21 @@ public class Cittadino {
 
     public void setResidenza(String residenza) {
         this.residenza = residenza;
+    }
+
+    public String getNumeroTelefono() {
+        return numeroTelefono;
+    }
+
+    public void setNumeroTelefono(String numeroTelefono) {
+        this.numeroTelefono = numeroTelefono;
+    }
+
+    public String getIdAzienda() {
+        return idAzienda;
+    }
+
+    public void setIdAzienda(String idAzienda) {
+        this.idAzienda = idAzienda;
     }
 }

@@ -6,6 +6,7 @@
     <string name="NomeCittadino">Name</string>
     <string name="CognomeCittadino">Surname</string>
     <string name="CodiceFiscaleCittadino">Fiscal Code</string>
+    <string name="completaRegistrazioneText">Enter email and password to complete registration</string>
     <!--<string name="EmailCittadino">Email</string>
     <string name="PasswordCittadino">Password</string> -->
     <string name="Avanti">Next</string>
@@ -31,6 +32,8 @@
     <string name="NumeroTelefonico">Phone Number</string>
     <string name="numeroTelefonoNonValido">Invalid telephone number</string>
     <string name="numeroTelefonoNonValidoText">The telephone number consists of 10 digits</string>
+    <string name="aziendaNonValida"> Invalid company </string>
+    <string name="aziendaNonValidaText">The company you entered does not exist</string>
     <string name="PostiDisponibili">Places available</string>
     <string name="Domanda">Do you want to save this default choice for each week?</string>
     <!-- TODO: Remove or change this placeholder text -->
