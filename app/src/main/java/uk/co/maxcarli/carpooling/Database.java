@@ -1,5 +1,6 @@
 package uk.co.maxcarli.carpooling;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -149,13 +150,14 @@ public class Database {
                                 String email = jsonobject.getString("EmailCittadino");
                                 String password = jsonobject.getString("PasswordCittadino");
 
-                                Intent intent = new Intent(context, Principale.class);
+                                Intent intent = new Intent(context, menu.class);
                                 intent.putExtra("nome", nome);
                                 intent.putExtra("cognome", cognome);
                                 intent.putExtra("residenza", residenza);
                                 intent.putExtra("email", email);
                                 intent.putExtra("password", password);
                                 context.startActivity(intent);
+                                ((Activity)context).finish();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

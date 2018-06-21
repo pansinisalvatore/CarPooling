@@ -32,7 +32,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegistrazioneCittadino" /> <!-- riferimento a una risorsa di tipo style che si chiama FullScreen -->
+        <activity android:name=".RegistrazioneCittadino" >
+
+        </activity><!-- riferimento a una risorsa di tipo style che si chiama FullScreen -->
         <activity
             android:name=".ImieiPassaggi"
             android:label="@string/ImieiPassaggi"

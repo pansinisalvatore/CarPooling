@@ -38,7 +38,10 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
 
     private GoogleMap mMap;
 
+    private int idPassaggioOfferto;
     private String indirizzoCittadino;
+    private final String data="21/3/2013" ;
+    private final String ora="21.10";
     private static final ArrayList<String> indirizzi=new ArrayList<String>();
     private static final ArrayList<String> automobilisti=new ArrayList<String>();
     private Address center;
@@ -51,6 +54,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
     }
 
 
@@ -59,12 +63,13 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
+        mMap.setOnMarkerClickListener(this);
 
         double raggio=500;
         center=getLocationFromAddress("Via Sparano 10, Bari");
         Address b=getLocationFromAddress("Via Argiro 10, Bari");
         Address c=getLocationFromAddress("Via Sagarriga Visconti 10, Bari");
-        getIndirizziPassaggiOfferti("21/3/2013","21.10",this);
+        getIndirizziPassaggiOfferti(this);
 
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(center.getLatitude(),center.getLongitude()))
@@ -128,7 +133,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
         }
     }
 
-    private void getIndirizziPassaggiOfferti(final String data, final String ora, final Context context) {
+    private void getIndirizziPassaggiOfferti( final Context context) {
         String url = "http://carpoolingsms.altervista.org/PHP/PrendiIndirizzi.php";
 
 
@@ -138,7 +143,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                     @Override
                     public void onResponse(String response) {
 
-
+                        Toast.makeText(context.getApplicationContext(),response,Toast.LENGTH_LONG).show();
                         try {
 
                             JSONArray jsonarray = new JSONArray(response);
@@ -184,6 +189,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("data", data);
                 params.put("ora", ora);
+                params.put("IdCittadino",3+"");
                 return params;
             }
         };
@@ -195,14 +201,80 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
     @Override
     public boolean onMarkerClick(Marker marker) {
 
-        String automobilista=marker.getTitle();
+        if(!marker.getTitle().equals("La tua casa")){
+
+            String indirizzo=getAddressFromLatLng(marker.getPosition());
+            //Toast.makeText(this, indirizzo, Toast.LENGTH_LONG).show();
+           prenotaPassaggio(this, indirizzo);
+
+        }
 
 
         return false;
     }
 
 
-    public void PrenotaPassaggio(){
+
+
+    public void prenotaPassaggio(final Context context, final String indirizzo){
+        String url = "http://carpoolingsms.altervista.org/PHP/ScriviPassaggioRichiesto.php";
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        if(response.equals("success")){
+
+                            Toast.makeText(context,"Scrittura riuscita",Toast.LENGTH_SHORT).show();
+
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (error != null) {
+
+                            Toast.makeText(context.getApplicationContext(), "Something went wrong.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("address", indirizzo);
+                params.put("idCittadino",3+"");
+                params.put("data",data);
+                params.put("ora",ora);
+                return params;
+            }
+        };
+
+        MySingleton.getmInstance(context.getApplicationContext()).addTorequestque(stringRequest);
+    }
+
+    public String getAddressFromLatLng(LatLng pos){
+        Geocoder coder=new Geocoder(this);
+       try{
+           List<Address> addr= coder.getFromLocation(pos.latitude,pos.longitude,5);
+           if(addr!=null){
+
+               String address=addr.get(0).getAddressLine(0);
+
+               Toast.makeText(this, address, Toast.LENGTH_LONG).show();
+               return address;
+           }
+           return null;
+
+       }catch(IOException e){
+            return null;
+       }
 
     }
 }

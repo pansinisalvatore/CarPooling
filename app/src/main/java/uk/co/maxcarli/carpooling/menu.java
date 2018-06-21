@@ -15,6 +15,8 @@ package uk.co.maxcarli.carpooling;
 public class menu extends AppCompatActivity {
 
     private ActionBar toolbar;
+    private Cittadino cittadino;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
