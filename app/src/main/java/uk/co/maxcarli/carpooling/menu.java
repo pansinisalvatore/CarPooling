@@ -11,6 +11,8 @@ package uk.co.maxcarli.carpooling;
         import android.support.v7.app.AppCompatActivity;
         import android.view.MenuItem;
 
+        import uk.co.maxcarli.carpooling.model.Cittadino;
+
 
 public class menu extends AppCompatActivity {
 

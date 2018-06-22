@@ -110,6 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:id="@+id/buttonAvanti"
+            android:onClick="clickButton"
             android:text="@string/Conferma" />
     </LinearLayout>
 

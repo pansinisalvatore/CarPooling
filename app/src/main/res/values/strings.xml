@@ -3,10 +3,14 @@
     <string name="loginString">Sign in or sign up</string>
     <string name="NonHaiUnAccount">Do not have an account? Sign in</string>
     <string name="Registrazione">Register</string>
+    <string name="passwordCorta">The password must contain between 5 and 16 characters</string>
+    <string name="formatoEmailNonValido">invalid email format</string>
     <string name="NomeCittadino">Name</string>
     <string name="CognomeCittadino">Surname</string>
     <string name="CodiceFiscaleCittadino">Fiscal Code</string>
     <string name="completaRegistrazioneText">Enter email and password to complete registration</string>
+    <string name="passwordErrata">wrong password</string>
+    <string name="passwordErrataText">Passwords do not match</string>
     <!--<string name="EmailCittadino">Email</string>
     <string name="PasswordCittadino">Password</string> -->
     <string name="Avanti">Next</string>
