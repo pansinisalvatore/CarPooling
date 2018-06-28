@@ -1,9 +1,10 @@
 package uk.co.maxcarli.carpooling.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 //cias
-public class Cittadino {
+public class Cittadino implements Serializable{
 
     public static enum TipoCittadino {Normale,MobilityManager};
 

@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 
 
+import uk.co.maxcarli.carpooling.model.Cittadino;
+
 import static uk.co.maxcarli.carpooling.Control.Controlli.*;
 
 public class RegistrazioneCittadino extends AppCompatActivity {
@@ -121,8 +123,9 @@ public class RegistrazioneCittadino extends AppCompatActivity {
 
     public void scegliIndirizzo(View view){
 
+        Cittadino cittadino = new Cittadino();
         aux = (TextInputEditText) this.findViewById(R.id.nomeCittadino);
-        String nome = aux.getText().toString();
+        cittadino.setNome(aux.getText().toString());
         aux = (TextInputEditText) this.findViewById(R.id.cognomeCittadino);
         String cognome = aux.getText().toString();
         aux = (TextInputEditText) this.findViewById(R.id.codiceFiscale);
@@ -130,9 +133,7 @@ public class RegistrazioneCittadino extends AppCompatActivity {
 
         final Intent intent = new Intent(this,RicercaIndirizzo.class);
 
-        intent.putExtra("nome",nome);
-        intent.putExtra("cognome",cognome);
-        intent.putExtra("codiceFiscale",codiceFiscale);
+       intent.putExtra("cittadino", cittadino);
 
         startActivity(intent);
         finish();
@@ -162,7 +163,7 @@ public class RegistrazioneCittadino extends AppCompatActivity {
     }
 
     private boolean controlliCampi(){
-        Boolean bool = false;
+        boolean bool = false;
         aux = (TextInputEditText) this.findViewById(R.id.nomeCittadino);
         if (controlloEditTextVuoto(aux) == true){
             mostraMessaggioErrore("Campo obbligatorio", "Inserisci il tuo nome", RegistrazioneCittadino.this);

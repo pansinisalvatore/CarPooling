@@ -26,21 +26,22 @@ import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.tasks.Task;
 
+import uk.co.maxcarli.carpooling.model.Cittadino;
+
 public class RicercaIndirizzo extends AppCompatActivity {
 
 
     static final private String TAG = "ERRORE";
-
+    private Cittadino cittadino;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ricerca_indirizzo);
         final Intent intent = getIntent();
-        final String nome = intent.getStringExtra("nome");
-        final String cognome = intent.getStringExtra("cognome");
-        final String codiceFiscale = intent.getStringExtra("codiceFiscale");
-        dammiPosto(nome,cognome,codiceFiscale);
+        cittadino=(Cittadino) intent.getSerializableExtra("cittadino");
+
+        dammiPosto(cittadino.getNome(),cittadino.getCognome(),cittadino.getCodiceFiscale());
 
     }
 
