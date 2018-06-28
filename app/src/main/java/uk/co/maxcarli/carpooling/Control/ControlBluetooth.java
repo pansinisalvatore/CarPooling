@@ -11,7 +11,7 @@ public class ControlBluetooth {
     /*
 In questo metodo verifico che il dispositivo supporti il bluethoot
  */
-    public static boolean verficaSupportoB(BluetoothAdapter mBluetoothAdapter){
+    public static boolean verificaSupportoB(BluetoothAdapter mBluetoothAdapter){
         if (mBluetoothAdapter == null) {
             // Device doesn't support Bluetooth
             return false;

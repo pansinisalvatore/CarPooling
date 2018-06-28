@@ -55,6 +55,7 @@
         <activity
             android:name=".menu"
             android:theme="@style/AppTheme">
+
             <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -74,7 +75,8 @@
         <activity android:name=".ListaUtenti" />
         <activity android:name=".MappaCercaPassaggi" />
         <activity android:name=".completaRegistrazione" />
-        <activity android:name=".Bluethoot.avviaTraking"
+        <activity
+            android:name=".Bluethoot.avviaTraking"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -82,10 +84,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-
-        <activity android:name=".Bluethoot.ClientConnect"></activity>
+        <activity android:name=".Bluethoot.ClientConnect" />
+        <activity android:name=".Bluethoot.Tracking"></activity>
     </application>
 
 </manifest>

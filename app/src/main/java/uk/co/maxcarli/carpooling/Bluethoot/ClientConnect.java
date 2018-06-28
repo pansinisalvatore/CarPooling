@@ -21,7 +21,7 @@ public class ClientConnect extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_connect);
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if(verficaSupportoB(mBluetoothAdapter) == true) accendiBluetooth(mBluetoothAdapter);
+        if(verificaSupportoB(mBluetoothAdapter) == true) accendiBluetooth(mBluetoothAdapter);
         String macAddress = "vuoto";
         if(bluetoothIsActive(mBluetoothAdapter) == true) macAddress = getBluetoothMacAddress();
         Log.d("Adress",macAddress);
