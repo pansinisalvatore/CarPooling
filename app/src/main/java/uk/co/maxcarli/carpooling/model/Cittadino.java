@@ -1,12 +1,39 @@
 package uk.co.maxcarli.carpooling.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 //cias
-public class Cittadino implements Serializable{
+public class Cittadino implements Parcelable{
 
-    public static enum TipoCittadino {Normale,MobilityManager};
+
+    public int getPunteggio() {
+        return punteggio;
+    }
+
+    public void setPunteggio(int punteggio) {
+        this.punteggio = punteggio;
+    }
+
+    public interface Keys {
+        String IDCITTADINO = "idCittadino";
+        String NOME = "nome";
+        String COGNOME = "cognome";
+        String CODICEFISCALE= "codiceFiscale";
+        String RESIDENZA = "residenza";
+        String NUMEROTELEFONO = "numeroTelefono";
+        String TIPOCITTADINO = "tipoCittadino";
+        String PUNTEGGIO="punteggio";
+    }
+
+    private static final byte PRESENT=1;
+    private static final byte NOT_PRESENT=0;
+
+
+
 
     private int idCittadino;
     private String nome;
@@ -14,22 +41,39 @@ public class Cittadino implements Serializable{
     private String codiceFiscale;
     private String residenza;
     private String numeroTelefono;
-    private TipoCittadino tipoCittadino;
+    private String tipoCittadino;
+    private int punteggio;
     private Sede sede;
 
-    public final ArrayList<PassaggioOfferto> passaggiOfferti;
-    public final ArrayList<PassaggioRichiesto> passaggiRichiesti;
+    public final ArrayList<Passaggio> passaggiOfferti;
+    public final ArrayList<Passaggio> passaggiRichiesti;
 
 
     public Cittadino() {
 
         passaggiOfferti=new ArrayList<>();
         passaggiRichiesti=new ArrayList<>();
+        punteggio=0;
+        idCittadino=0;
+        nome = "";
+        cognome = "";
+        codiceFiscale = "";
+        residenza = "";
+        numeroTelefono = "";
+        tipoCittadino = "";
     }
 
-    public Cittadino(ArrayList<PassaggioOfferto> passaggiOfferti, ArrayList<PassaggioRichiesto> passaggiRichiesti){
+    public Cittadino(ArrayList<Passaggio> passaggiOfferti, ArrayList<Passaggio> passaggiRichiesti){
         this.passaggiOfferti=passaggiOfferti;
         this.passaggiRichiesti=passaggiRichiesti;
+        punteggio=0;
+        idCittadino=0;
+        nome = "";
+        cognome = "";
+        codiceFiscale = "";
+        residenza = "";
+        numeroTelefono = "";
+        tipoCittadino = "";
     }
 
 
@@ -82,11 +126,11 @@ public class Cittadino implements Serializable{
         this.numeroTelefono = numeroTelefono;
     }
 
-    public TipoCittadino getTipoCittadino() {
+    public String getTipoCittadino() {
         return tipoCittadino;
     }
 
-    public void setTipoCittadino(TipoCittadino tipoCittadino) {
+    public void setTipoCittadino(String tipoCittadino) {
         this.tipoCittadino = tipoCittadino;
     }
 
@@ -99,11 +143,88 @@ public class Cittadino implements Serializable{
     }
 
 
+    private Cittadino(Parcel in) {
+        idCittadino = in.readInt();
+        nome = in.readString();
+        cognome = in.readString();
+        codiceFiscale = in.readString();
+        residenza = in.readString();
+        numeroTelefono = in.readString();
+        tipoCittadino = in.readString();
+        if(in.readByte()==PRESENT){
+            sede = (Sede) in.readValue(Sede.class.getClassLoader());
+        }else{
+            sede = null;
+        }
+
+        punteggio=in.readInt();
+        if (in.readByte() == PRESENT) {
+            passaggiOfferti = new ArrayList<Passaggio>();
+            in.readList(passaggiOfferti, Passaggio.class.getClassLoader());
+        } else {
+            passaggiOfferti = null;
+        }
+        if (in.readByte() == PRESENT) {
+            passaggiRichiesti = new ArrayList<Passaggio>();
+            in.readList(passaggiRichiesti, Passaggio.class.getClassLoader());
+        } else {
+            passaggiRichiesti = null;
+        }
+    }
 
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(idCittadino);
+        dest.writeString(nome);
+        dest.writeString(cognome);
+        dest.writeString(codiceFiscale);
+        dest.writeString(residenza);
+        dest.writeString(numeroTelefono);
+        dest.writeString(tipoCittadino);
+        dest.writeInt(punteggio);
+
+        if(sede==null){
+            dest.writeByte(NOT_PRESENT);
+        }else {
+            dest.writeByte(PRESENT);
+            dest.writeValue(sede);
+        }
 
 
+        if (passaggiOfferti == null) {
+            dest.writeByte(NOT_PRESENT);
+        } else {
+            dest.writeByte(PRESENT);
+            dest.writeList(passaggiOfferti);
+        }
+        if (passaggiRichiesti == null) {
+            dest.writeByte(NOT_PRESENT);
+        } else {
+            dest.writeByte(PRESENT);
+            dest.writeList(passaggiRichiesti);
+        }
+    }
+
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Cittadino> CREATOR = new Parcelable.Creator<Cittadino>() {
+        @Override
+        public Cittadino createFromParcel(Parcel in) {
+            return new Cittadino(in);
+        }
+
+        @Override
+        public Cittadino[] newArray(int size) {
+            return new Cittadino[size];
+        }
+    };
 
 
 

@@ -11,6 +11,11 @@ package uk.co.maxcarli.carpooling;
         import android.support.v7.app.AppCompatActivity;
         import android.view.MenuItem;
 
+        import uk.co.maxcarli.carpooling.Fragment.ClassificaFragment;
+        import uk.co.maxcarli.carpooling.Fragment.HomeFragment;
+        import uk.co.maxcarli.carpooling.Fragment.ImieipassaggiFragment;
+        import uk.co.maxcarli.carpooling.Fragment.NotificheFragment;
+        import uk.co.maxcarli.carpooling.Fragment.ProfiloFragment;
         import uk.co.maxcarli.carpooling.model.Cittadino;
 
 

@@ -5,19 +5,20 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+
+import uk.co.maxcarli.carpooling.Fragment.DataFragment;
+import uk.co.maxcarli.carpooling.Fragment.TimeFragment;
 
 public class Filtro extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
     TextInputEditText sel_data;
