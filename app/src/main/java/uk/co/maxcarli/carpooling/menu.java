@@ -1,6 +1,7 @@
 package uk.co.maxcarli.carpooling;
 
 
+        import android.content.Intent;
         import android.os.Bundle;
         import android.support.annotation.NonNull;
         import android.support.design.widget.BottomNavigationView;
@@ -10,6 +11,7 @@ package uk.co.maxcarli.carpooling;
         import android.support.v7.app.ActionBar;
         import android.support.v7.app.AppCompatActivity;
         import android.view.MenuItem;
+        import android.widget.Toast;
 
         import uk.co.maxcarli.carpooling.Fragment.ClassificaFragment;
         import uk.co.maxcarli.carpooling.Fragment.HomeFragment;
@@ -29,15 +31,17 @@ public class menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
-
+        cittadino=(Cittadino)getIntent().getParcelableExtra(Cittadino.Keys.IDCITTADINO);
         toolbar = getSupportActionBar();
-
+        Intent srcIntent=getIntent();
+        cittadino=(Cittadino)srcIntent.getSerializableExtra("cittadino");
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         // attaching bottom sheet behaviour - hide / show on scroll
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
         layoutParams.setBehavior(new BottomNavigationBehavior());
 
+        Toast.makeText(this,cittadino.getNome(),Toast.LENGTH_SHORT).show();
         // load the store fragment by default
         toolbar.setTitle("Home");
         loadFragment(new HomeFragment());

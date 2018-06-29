@@ -1,24 +1,12 @@
 package uk.co.maxcarli.carpooling;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-
-import java.util.HashMap;
-import java.util.Map;
+import uk.co.maxcarli.carpooling.model.Cittadino;
 
 import static uk.co.maxcarli.carpooling.Database.accedi;
 import static uk.co.maxcarli.carpooling.Control.Controlli.*;
@@ -49,7 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         String email=loginEmail.getText().toString();
         String password=loginPassword.getText().toString();
         if(controlloEditTextVuoto(loginEmail) && controlloEditTextVuoto(loginPassword)){
-            accedi(email,password,this);
+            Cittadino cittadino=new Cittadino();
+            accedi(email,password,cittadino,this);
         }
 
     }

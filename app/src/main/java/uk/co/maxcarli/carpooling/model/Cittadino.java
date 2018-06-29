@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import uk.co.maxcarli.carpooling.PassaggiRichiesti;
+
 //cias
 public class Cittadino implements Parcelable{
 
@@ -154,6 +156,23 @@ public class Cittadino implements Parcelable{
         this.sede = sede;
     }
 
+
+    public void addPassaggioRichiesto(Passaggio p){
+        passaggiRichiesti.add(p);
+    }
+
+    public void addPassaggioOfferto(Passaggio p){
+        passaggiOfferti.add(p);
+    }
+
+
+    public Passaggio getPassaggioRichiesto(int i){
+        return passaggiRichiesti.get(i);
+    }
+
+    public Passaggio getPassaggioOfferto(int i){
+        return passaggiOfferti.get(i);
+    }
 
     private Cittadino(Parcel in) {
         idCittadino = in.readInt();

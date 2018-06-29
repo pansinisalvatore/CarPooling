@@ -16,6 +16,8 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import uk.co.maxcarli.carpooling.model.Passaggio;
+
 public class ImieiPassaggi extends  AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;

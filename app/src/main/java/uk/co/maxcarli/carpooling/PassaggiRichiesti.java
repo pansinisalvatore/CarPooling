@@ -22,6 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +33,7 @@ import static uk.co.maxcarli.carpooling.Database.*;
 import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
+import uk.co.maxcarli.carpooling.model.Passaggio;
 
 
 /**
@@ -60,25 +62,29 @@ public class PassaggiRichiesti extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
         view=inflater.inflate(R.layout.fragment_passaggi_richiesti,null);
+        if(savedInstanceState==null){
+            tb=(TableView<String[]>) view.findViewById(R.id.TabellaPassaggiRichiesti);
 
-        tb=(TableView<String[]>) view.findViewById(R.id.TabellaPassaggiRichiesti);
+
+            tb.setColumnCount(4);
+            tb.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
+        }
 
 
-        tb.setColumnCount(4);
-        tb.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
+
 
 
         String url= "http://carpoolingsms.altervista.org/PHP/LeggiPassaggiRichiesti.php";
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+        /*StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 url,
                 new Response.Listener<String>() {
                     @Override
@@ -93,16 +99,16 @@ public class PassaggiRichiesti extends Fragment {
 
                                 JSONObject jsonobject = jsonarray.getJSONObject(i);
 
-                                String viaggio=jsonobject.getString("TipoViaggioPassaggioRichiesto");
+                                String viaggio=jsonobject.getString("TipoViaggioPassaggiRichiesti");
 
-                                String data=jsonobject.getString("DataPassaggioRichiesto");
+                                String data=jsonobject.getString("DataPassaggiOfferti");
 
-                                String ora=jsonobject.getString("OraPassaggioRichiesto");
+                                String ora=jsonobject.getString("Ora");
 
                                 String status=jsonobject.getString("StatusPassaggioRichiesto");
 
 
-                                int postiOccupati=jsonobject.getInt("PostiOccupatiPassaggioRichiesto");
+                                int postiOccupati=jsonobject.getInt("PostiOccupati");
                                 int Idc=jsonobject.getInt("IdCittadinoPassaggiRichiesti");
 
 
@@ -140,9 +146,9 @@ public class PassaggiRichiesti extends Fragment {
 
                 return params;
             }
-        };
+        };*/
 
-        MySingleton.getmInstance(getContext()).addTorequestque(stringRequest);
+        //MySingleton.getmInstance(getContext()).addTorequestque(stringRequest);
 
         Toast.makeText(getContext(),passaggiRichiesti.size()+" ",Toast.LENGTH_SHORT).show();
 
@@ -155,7 +161,7 @@ public class PassaggiRichiesti extends Fragment {
     }
 
 
-   public void populateData(List<Passaggio> passaggiRichiesti){
+  /* public void populateData(List<Passaggio> passaggiRichiesti){
 
         this.passaggi=new String[passaggiRichiesti.size()][4];
 
@@ -171,7 +177,9 @@ public class PassaggiRichiesti extends Fragment {
 
 
         }
-    }
+    }*/
+
+
 
 
 
