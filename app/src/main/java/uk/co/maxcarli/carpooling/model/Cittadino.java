@@ -18,6 +18,14 @@ public class Cittadino implements Parcelable{
         this.punteggio = punteggio;
     }
 
+    public String getMacAddress() {
+        return macAddress;
+    }
+
+    public void setMacAddress(String macAddress) {
+        this.macAddress = macAddress;
+    }
+
     public interface Keys {
         String IDCITTADINO = "idCittadino";
         String NOME = "nome";
@@ -27,6 +35,7 @@ public class Cittadino implements Parcelable{
         String NUMEROTELEFONO = "numeroTelefono";
         String TIPOCITTADINO = "tipoCittadino";
         String PUNTEGGIO="punteggio";
+        String MACADDRESS = "macAddress";
     }
 
     private static final byte PRESENT=1;
@@ -43,6 +52,7 @@ public class Cittadino implements Parcelable{
     private String numeroTelefono;
     private String tipoCittadino;
     private int punteggio;
+    private String macAddress;
     private Sede sede;
 
     public final ArrayList<Passaggio> passaggiOfferti;
@@ -61,6 +71,7 @@ public class Cittadino implements Parcelable{
         residenza = "";
         numeroTelefono = "";
         tipoCittadino = "";
+        macAddress = "";
     }
 
     public Cittadino(ArrayList<Passaggio> passaggiOfferti, ArrayList<Passaggio> passaggiRichiesti){
@@ -74,6 +85,7 @@ public class Cittadino implements Parcelable{
         residenza = "";
         numeroTelefono = "";
         tipoCittadino = "";
+        macAddress = "";
     }
 
 
@@ -151,6 +163,7 @@ public class Cittadino implements Parcelable{
         residenza = in.readString();
         numeroTelefono = in.readString();
         tipoCittadino = in.readString();
+        macAddress=in.readString();
         if(in.readByte()==PRESENT){
             sede = (Sede) in.readValue(Sede.class.getClassLoader());
         }else{
@@ -189,7 +202,7 @@ public class Cittadino implements Parcelable{
         dest.writeString(numeroTelefono);
         dest.writeString(tipoCittadino);
         dest.writeInt(punteggio);
-
+        dest.writeString(macAddress);
         if(sede==null){
             dest.writeByte(NOT_PRESENT);
         }else {
