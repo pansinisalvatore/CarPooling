@@ -88,13 +88,10 @@ public class Database {
                     @Override
                     public void onResponse(String response) {
 
-                        Toast.makeText(context, "response", Toast.LENGTH_SHORT).show();
+
                         if (response.equals("success")) {
                             getCittadinoFromDatabase(email, password, cittadino,context);
-                            Intent intent = new Intent(context, menu.class);
-                            intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
-                            context.startActivity(intent);
-                            ((Activity)context).finish();
+
 
                         } else if (response.equals("not autorized")) {
                             Controlli.mostraMessaggioErrore(context.getString(R.string.AccessoNonAutorizzatoTitolo), context.getString(R.string.AccessoNonAutorizzatoTesto), context);
@@ -141,7 +138,9 @@ public class Database {
                     @Override
                     public void onResponse(String response) {
 
+                        if(!response.equals("Something went wrong")){
 
+                        }
                         try {
 
                             JSONArray jsonarray = new JSONArray(response);
@@ -152,7 +151,7 @@ public class Database {
                             for (int i = 0; i < jsonarray.length(); i++) {
 
                                 JSONObject jsonobject = jsonarray.getJSONObject(i);
-                                cittadino.setIdCittadino(jsonobject.getInt("IdCittdino"));
+                                cittadino.setIdCittadino(jsonobject.getInt("IdCittadino"));
                                 cittadino.setNome(jsonobject.getString("NomeCittadino"));
                                 cittadino.setCognome(jsonobject.getString("CognomeCittadino"));
                                 cittadino.setCodiceFiscale(jsonobject.getString("CodiceFiscaleCittadino"));
@@ -169,14 +168,14 @@ public class Database {
                                 cSede.setFaxSede(jsonobject.getString("FaxSede"));
                                 cSede.setEmailSede(jsonobject.getString("EmailSede"));
                                 cSede.setTelefonoSede(jsonobject.getString("TelefonoSede"));
-                                cSede.setIndirizzoSede(jsonobject.getString("IndirizzoSee"));
-
+                                cSede.setIndirizzoSede(jsonobject.getString("IndirizzoSede"));
+                                Log.d("Cittadino", cittadino.getNome());
                                 cittadino.setSede(cSede);
 
                             }
 
                             getPassaggiRichiestiFromCittadino(cittadino,context);
-                            getPassaggiOffertiFromCittadino(cittadino,context);
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -211,7 +210,7 @@ public class Database {
 
 
     public static void getPassaggiRichiestiFromCittadino(final Cittadino cittadino, final Context context){
-        String url= "http://carpoolingsms.altervista.org/PHP/LeggiPassaggiRichiestiFromCittadino.php";
+        String url= "http://carpoolingsms.altervista.org/PHP/LeggiPassaggiRichiesti.php";
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
@@ -222,42 +221,43 @@ public class Database {
 
 
 
-                        try {
+                        if(!response.equals("Something went wrong")){
+                            try {
 
-                            JSONArray jsonarray = new JSONArray(response);
+                                JSONArray jsonarray = new JSONArray(response);
 
-                            for(int i=0; i < jsonarray.length(); i++) {
+                                for(int i=0; i < jsonarray.length(); i++) {
 
-                                JSONObject jsonobject = jsonarray.getJSONObject(i);
-                                Passaggio p=new Passaggio();
-                                p.setIdPassaggiOfferti(jsonobject.getInt("IdPassaggio"));
-                                p.setData(jsonobject.getString("DataPassaggio"));
-                                p.setOra(jsonobject.getString("OraPassaggio"));
-                                p.setAuto(jsonobject.getString("AutoPassaggio"));
-                                p.setPostiDisponibili(jsonobject.getInt("PostiDisponibiliPassaggio"));
-                                p.setPostiOccupati(jsonobject.getInt("PostiOccupatiPassaggio"));
-                                p.setStatus(jsonobject.getString("Status"));
-                                p.setTipoPassaggio(jsonobject.getString("TipoPassaggio"));
-                                if(jsonobject.getInt("SettimanalePassaggio")==0){
-                                    p.setSettimanale(false);
-                                }else{
-                                    p.setSettimanale(true);
+                                    JSONObject jsonobject = jsonarray.getJSONObject(i);
+                                    Passaggio p=new Passaggio();
+                                    p.setIdPassaggiOfferti(jsonobject.getInt("IdPassaggio"));
+                                    p.setData(jsonobject.getString("DataPassaggio"));
+                                    p.setOra(jsonobject.getString("OraPassaggio"));
+                                    p.setAuto(jsonobject.getString("AutoPassaggio"));
+                                    p.setPostiDisponibili(jsonobject.getInt("PostiDisponibiliPassaggio"));
+                                    p.setPostiOccupati(jsonobject.getInt("PostiOccupatiPassaggio"));
+                                    p.setStatus(jsonobject.getString("Status"));
+                                    p.setTipoPassaggio(jsonobject.getString("TipoPassaggio"));
+                                    if(jsonobject.getInt("SettimanalePassaggio")==0){
+                                        p.setSettimanale(false);
+                                    }else{
+                                        p.setSettimanale(true);
+                                    }
+                                    cittadino.setMacAddress(jsonobject.getString("MacAddress"));
+                                    cittadino.addPassaggioRichiesto(p);
+
+                                    Log.i("Dati", p.getData());
+
                                 }
-                                cittadino.setMacAddress(jsonobject.getString("MacAddress"));
-                               cittadino.addPassaggioRichiesto(p);
-                                //Toast.makeText(context, viaggio+" "+data+" "+ora+" "+status+" "+postiOccupati,Toast.LENGTH_SHORT).show();
+                                getPassaggiOffertiFromCittadino(cittadino,context);
 
-                                Log.i("Dati", p.getData());
 
+                            } catch (JSONException e) {
+                                e.printStackTrace();
 
                             }
-
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-
                         }
+
 
                     }
                 },
@@ -266,7 +266,7 @@ public class Database {
                     public void onErrorResponse(VolleyError error) {
                         if(error != null){
 
-                            Toast.makeText(context.getApplicationContext(), "Something went wrong.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context.getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
                         }
                     }
                 }) {
@@ -294,40 +294,46 @@ public class Database {
                     @Override
                     public void onResponse(String response) {
 
+                        Toast.makeText(context, response,Toast.LENGTH_SHORT).show();
+
+                        if(!response.equals("Something went wrong")){
+                            try {
+
+                                JSONArray jsonarray = new JSONArray(response);
+
+                                for(int i=0; i < jsonarray.length(); i++) {
+
+                                    JSONObject jsonobject = jsonarray.getJSONObject(i);
+                                    Passaggio p=new Passaggio();
+                                    p.setIdPassaggiOfferti(jsonobject.getInt("IdPassaggio"));
+                                    p.setData(jsonobject.getString("DataPassaggio"));
+                                    p.setOra(jsonobject.getString("OraPassaggio"));
+                                    p.setAuto(jsonobject.getString("AutoPassaggio"));
+                                    p.setPostiDisponibili(jsonobject.getInt("PostiDisponibiliPassaggio"));
+                                    p.setPostiOccupati(jsonobject.getInt("PostiOccupatiPassaggio"));
+                                    p.setTipoPassaggio(jsonobject.getString("TipoPassaggio"));
+                                    if(jsonobject.getInt("SettimanalePassaggio")==0){
+                                        p.setSettimanale(false);
+                                    }else{
+                                        p.setSettimanale(true);
+                                    }
+
+                                    cittadino.addPassaggioOfferto(p);
+                                    //Toast.makeText(context, viaggio+" "+data+" "+ora+" "+status+" "+postiOccupati,Toast.LENGTH_SHORT).show();
+
+                                    Log.i("Dati", p.getData());
 
 
-                        try {
-
-                            JSONArray jsonarray = new JSONArray(response);
-
-                            for(int i=0; i < jsonarray.length(); i++) {
-
-                                JSONObject jsonobject = jsonarray.getJSONObject(i);
-                                Passaggio p=new Passaggio();
-                                p.setIdPassaggiOfferti(jsonobject.getInt("IdPassaggio"));
-                                p.setData(jsonobject.getString("DataPassaggio"));
-                                p.setOra(jsonobject.getString("OraPassaggio"));
-                                p.setAuto(jsonobject.getString("AutoPassaggio"));
-                                p.setPostiDisponibili(jsonobject.getInt("PostiDisponibiliPassaggio"));
-                                p.setPostiOccupati(jsonobject.getInt("PostiOccupatiPassaggio"));
-                                p.setTipoPassaggio(jsonobject.getString("TipoPassaggio"));
-                                if(jsonobject.getInt("SettimanalePassaggio")==0){
-                                    p.setSettimanale(false);
-                                }else{
-                                    p.setSettimanale(true);
                                 }
 
-                                cittadino.addPassaggioOfferto(p);
-                                //Toast.makeText(context, viaggio+" "+data+" "+ora+" "+status+" "+postiOccupati,Toast.LENGTH_SHORT).show();
-
-                                Log.i("Dati", p.getData());
-
+                            } catch (JSONException e) {
+                                e.printStackTrace();
 
                             }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-
+                            Intent intent= new Intent(context, menu.class);
+                            intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
+                            context.startActivity(intent);
+                            ((Activity)context).finish();
                         }
 
                     }
@@ -337,7 +343,7 @@ public class Database {
                     public void onErrorResponse(VolleyError error) {
                         if(error != null){
 
-                            Toast.makeText(context.getApplicationContext(), "Something went wrong.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context.getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
                         }
                     }
                 }) {

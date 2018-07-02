@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import uk.co.maxcarli.carpooling.PassaggiRichiesti;
 
@@ -192,13 +193,13 @@ public class Cittadino implements Parcelable{
         punteggio=in.readInt();
         if (in.readByte() == PRESENT) {
             passaggiOfferti = new ArrayList<Passaggio>();
-            in.readList(passaggiOfferti, Passaggio.class.getClassLoader());
+            in.readTypedList(passaggiOfferti, Passaggio.CREATOR);
         } else {
             passaggiOfferti = null;
         }
         if (in.readByte() == PRESENT) {
             passaggiRichiesti = new ArrayList<Passaggio>();
-            in.readList(passaggiRichiesti, Passaggio.class.getClassLoader());
+            in.readTypedList(passaggiRichiesti, Passaggio.CREATOR);
         } else {
             passaggiRichiesti = null;
         }

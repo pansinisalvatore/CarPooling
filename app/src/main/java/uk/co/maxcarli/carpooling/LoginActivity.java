@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     public void Login(View view) {
         String email=loginEmail.getText().toString();
         String password=loginPassword.getText().toString();
-        if(controlloEditTextVuoto(loginEmail) && controlloEditTextVuoto(loginPassword)){
+        if(!controlloEditTextVuoto(loginEmail) && !controlloEditTextVuoto(loginPassword)){
             Cittadino cittadino=new Cittadino();
             accedi(email,password,cittadino,this);
         }

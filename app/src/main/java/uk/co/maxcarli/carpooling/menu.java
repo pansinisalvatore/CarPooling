@@ -33,8 +33,6 @@ public class menu extends AppCompatActivity {
         setContentView(R.layout.menu);
         cittadino=(Cittadino)getIntent().getParcelableExtra(Cittadino.Keys.IDCITTADINO);
         toolbar = getSupportActionBar();
-        Intent srcIntent=getIntent();
-        cittadino=(Cittadino)srcIntent.getSerializableExtra("cittadino");
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         // attaching bottom sheet behaviour - hide / show on scroll
