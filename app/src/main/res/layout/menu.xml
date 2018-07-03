@@ -21,10 +21,10 @@ android:layout_height="match_parent"
     android:background="?android:attr/windowBackground"
 
 
-    app:itemIconTint="@android:color/white"
-    app:itemTextColor="@android:color/white"
-    app:itemBackground="@color/tint_color"
-    app:menu="@menu/carpooling_menu" />
+
+    app:menu="@menu/carpooling_menu">
+
+</android.support.design.widget.BottomNavigationView>
 
 
 

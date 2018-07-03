@@ -24,13 +24,11 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/FullScreen">
-
-        </activity>
+            android:theme="@style/FullScreen"></activity>
         <activity
             android:name=".Splash_activity"
             android:label="@string/app_name"
-            android:theme="@style/FullScreen"></activity>
+            android:theme="@style/FullScreen" />
         <activity android:name=".RegistrazioneCittadino" /> <!-- riferimento a una risorsa di tipo style che si chiama FullScreen -->
         <activity
             android:name=".ImieiPassaggi"
@@ -56,7 +54,13 @@
 
         <activity
             android:name=".menu"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".SceltaAzienda"
             android:theme="@style/AppTheme" />
@@ -71,16 +75,13 @@
         <activity android:name=".Filtro" />
         <activity
             android:name=".Bluethoot.avviaTraking"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity android:name=".Bluethoot.ClientConnect" />
         <activity android:name=".Bluethoot.Tracking" />
         <activity android:name=".IlMioProfilo">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
