@@ -42,7 +42,7 @@ public class menu extends AppCompatActivity {
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
         layoutParams.setBehavior(new BottomNavigationBehavior());
 
-        Toast.makeText(this,cittadino.getNome(),Toast.LENGTH_SHORT).show();
+
         // load the store fragment by default
         toolbar.setTitle("Home");
         loadFragment(new HomeFragment());
