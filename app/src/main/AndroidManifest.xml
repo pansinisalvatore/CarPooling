@@ -54,13 +54,8 @@
 
         <activity
             android:name=".menu"
-            android:theme="@style/AppTheme" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:theme="@style/AppTheme" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".SceltaAzienda"
             android:theme="@style/AppTheme" />
@@ -75,12 +70,20 @@
         <activity android:name=".Filtro" />
         <activity
             android:name=".Bluethoot.avviaTraking"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".Bluethoot.ClientConnect" />
         <activity android:name=".Bluethoot.Tracking" />
         <activity android:name=".IlMioProfilo">
 
         </activity>
+
 
     </application>
 
