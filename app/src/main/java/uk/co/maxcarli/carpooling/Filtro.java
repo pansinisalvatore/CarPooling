@@ -32,11 +32,10 @@ public class Filtro extends AppCompatActivity implements DatePickerDialog.OnDate
         setContentView(R.layout.activity_filtro);
         sel_data=  findViewById(R.id.edtselezionadata);
         sel_ora=  findViewById(R.id.edtselezionaora);
-        spnposti= findViewById(R.id.spnPosti);
+
         ricerca=findViewById(R.id.btnricerca);
         ArrayAdapter<String> posti= new ArrayAdapter<String>(Filtro.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.names));
         posti.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnposti.setAdapter(posti);
         sel_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,7 +55,7 @@ public class Filtro extends AppCompatActivity implements DatePickerDialog.OnDate
             public void onClick(View v) {
                 String data=sel_data.getText().toString();
                 String ora=sel_ora.getText().toString();
-                Intent intent= new Intent(Filtro.this,cerca_passaggio.class);
+                Intent intent= new Intent(Filtro.this,MappaCercaPassaggi.class);
                 startActivity(intent);
                 intent.putExtra("data",data);
                 intent.putExtra("ora",ora);

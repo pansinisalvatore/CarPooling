@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class Principale extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
@@ -17,8 +18,6 @@ public class Principale extends AppCompatActivity {
         setContentView(R.layout.activity_principale);
 
     }
-
-
 
 
 

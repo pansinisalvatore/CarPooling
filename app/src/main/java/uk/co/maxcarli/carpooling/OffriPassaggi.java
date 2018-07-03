@@ -29,6 +29,7 @@ import java.util.Map;
 
 import uk.co.maxcarli.carpooling.Fragment.DataFragment;
 import uk.co.maxcarli.carpooling.Fragment.TimeFragment;
+import uk.co.maxcarli.carpooling.model.Cittadino;
 
 //ciao
 public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
@@ -56,6 +57,8 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
         ArrayAdapter<String> posti= new ArrayAdapter<String>(OffriPassaggi.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.names));
         posti.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         set_posti.setAdapter(posti);
+
+
         conferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
