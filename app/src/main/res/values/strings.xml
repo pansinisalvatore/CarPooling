@@ -71,5 +71,6 @@ Enter your information to proceed with registration.</string>
         <item>6</item>
         <item>Altro</item>
     </string-array>
+    <string name="title_activity_modifica_residenza">ModificaResidenzaActivity</string>
 
 </resources>

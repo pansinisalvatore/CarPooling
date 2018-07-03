@@ -1,6 +1,7 @@
 package uk.co.maxcarli.carpooling.Fragment;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import uk.co.maxcarli.carpooling.Filtro;
 import uk.co.maxcarli.carpooling.OffriPassaggi;
 import uk.co.maxcarli.carpooling.R;
+import uk.co.maxcarli.carpooling.menu;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 
 
@@ -21,6 +23,7 @@ import uk.co.maxcarli.carpooling.model.Cittadino;
  */
 public class HomeFragment extends Fragment {
 
+    private  menu menuActivity;
     private Cittadino cittadino;
 
     public HomeFragment() {
@@ -29,7 +32,12 @@ public class HomeFragment extends Fragment {
 
 
 
-
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        if(activity instanceof menu){
+            menuActivity=(menu)activity;
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

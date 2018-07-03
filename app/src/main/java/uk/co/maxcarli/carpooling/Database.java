@@ -132,21 +132,18 @@ public class Database {
         String url = "http://carpoolingsms.altervista.org/PHP/getCittadino.php";
 
 
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-                        if(!response.equals("Something went wrong")){
-
-                        }
+                        Log.i("Dati",response);
                         try {
 
                             JSONArray jsonarray = new JSONArray(response);
 
-                            Azienda cAzienda=new Azienda();
-                            Sede cSede=new Sede();
                             int idSede=0;
                             for (int i = 0; i < jsonarray.length(); i++) {
 
@@ -159,23 +156,22 @@ public class Database {
                                 cittadino.setNumeroTelefono(jsonobject.getString("TelefonoCittadino"));
                                 cittadino.setTipoCittadino(jsonobject.getString("TipoCittadino"));
 
-                                cAzienda.setNome(jsonobject.getString("NomeAzienda"));
-                                cAzienda.setNome(jsonobject.getString("PartitaIvaAzienda"));
-                                cAzienda.setIdAzienda(jsonobject.getInt("IdAzienda"));
+                                cittadino.getSede().getAzienda().setNome(jsonobject.getString("NomeAzienda"));
+                                cittadino.getSede().getAzienda().setPartitaIva(jsonobject.getString("PartitaIvaAzienda"));
+                                cittadino.getSede().getAzienda().setIdAzienda(jsonobject.getInt("IdAzienda"));
 
-                                cSede.setIdSede(jsonobject.getInt("IdSede"));
-                                cSede.setAzienda(cAzienda);
-                                cSede.setFaxSede(jsonobject.getString("FaxSede"));
-                                cSede.setEmailSede(jsonobject.getString("EmailSede"));
-                                cSede.setTelefonoSede(jsonobject.getString("TelefonoSede"));
-                                cSede.setIndirizzoSede(jsonobject.getString("IndirizzoSede"));
-                                Log.d("Cittadino", cittadino.getNome());
-                                cittadino.setSede(cSede);
+                                cittadino.getSede().setIdSede(jsonobject.getInt("IdSede"));
+                                cittadino.getSede().setFaxSede(jsonobject.getString("FaxSede"));
+                                cittadino.getSede().setEmailSede(jsonobject.getString("EmailSede"));
+                                cittadino.getSede().setTelefonoSede(jsonobject.getString("TelefonoSede"));
+                                cittadino.getSede().setIndirizzoSede(jsonobject.getString("IndirizzoSede"));
 
                             }
 
-                            getPassaggiRichiestiFromCittadino(cittadino,context);
-
+                            Intent intent= new Intent(context, menu.class);
+                            intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
+                            context.startActivity(intent);
+                            ((Activity)context).finish();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -203,6 +199,7 @@ public class Database {
         };
 
         MySingleton.getmInstance(context.getApplicationContext()).addTorequestque(stringRequest);
+
     }
 
 
@@ -330,10 +327,7 @@ public class Database {
                                 e.printStackTrace();
 
                             }
-                            Intent intent= new Intent(context, menu.class);
-                            intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
-                            context.startActivity(intent);
-                            ((Activity)context).finish();
+
                         }
 
                     }

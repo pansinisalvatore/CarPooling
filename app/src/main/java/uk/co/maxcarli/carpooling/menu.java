@@ -52,7 +52,6 @@ public class menu extends AppCompatActivity {
 
         // load the store fragment by default
         toolbar.setTitle("Home");
-        loadFragment(new HomeFragment());
     }
 
     @SuppressLint("RestrictedApi")
@@ -91,6 +90,9 @@ public class menu extends AppCompatActivity {
                 case R.id.imieipassaggi:
                     toolbar.setTitle("I miei passaggi");
                     fragment = new ImieipassaggiFragment();
+                    Bundle bundle=new Bundle();
+                    bundle.putParcelable(Cittadino.Keys.IDCITTADINO, cittadino );
+                    fragment.setArguments(bundle);
                     loadFragment(fragment);
                     return true;
                 case R.id.Classifica:
@@ -126,5 +128,9 @@ public class menu extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(Cittadino.Keys.IDCITTADINO,cittadino);
+    }
+
+    public Cittadino getCittadino() {
+        return cittadino;
     }
 }

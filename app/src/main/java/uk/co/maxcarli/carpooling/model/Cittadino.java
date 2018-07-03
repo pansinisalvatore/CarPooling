@@ -29,6 +29,22 @@ public class Cittadino implements Parcelable{
         this.macAddress = macAddress;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public interface Keys {
         String IDCITTADINO = "idCittadino";
         String NOME = "nome";
@@ -56,6 +72,8 @@ public class Cittadino implements Parcelable{
     private String tipoCittadino;
     private int punteggio;
     private String macAddress;
+    private String email;
+    private String password;
     private Sede sede;
 
     public final ArrayList<Passaggio> passaggiOfferti;
@@ -75,6 +93,8 @@ public class Cittadino implements Parcelable{
         numeroTelefono = "";
         tipoCittadino = "";
         macAddress = "";
+        email="";
+        password="";
     }
 
     public Cittadino(ArrayList<Passaggio> passaggiOfferti, ArrayList<Passaggio> passaggiRichiesti){
@@ -89,6 +109,8 @@ public class Cittadino implements Parcelable{
         numeroTelefono = "";
         tipoCittadino = "";
         macAddress = "";
+        email="";
+        password="";
     }
 
 
@@ -158,11 +180,11 @@ public class Cittadino implements Parcelable{
     }
 
 
-    public void addPassaggioRichiesto(Passaggio p){
+    public void addPassaggioRichiesto(final Passaggio p){
         passaggiRichiesti.add(p);
     }
 
-    public void addPassaggioOfferto(Passaggio p){
+    public void addPassaggioOfferto(final Passaggio p){
         passaggiOfferti.add(p);
     }
 

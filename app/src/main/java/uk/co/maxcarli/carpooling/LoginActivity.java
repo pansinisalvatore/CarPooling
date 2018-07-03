@@ -5,8 +5,11 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
+import uk.co.maxcarli.carpooling.model.Azienda;
 import uk.co.maxcarli.carpooling.model.Cittadino;
+import uk.co.maxcarli.carpooling.model.Sede;
 
 import static uk.co.maxcarli.carpooling.Database.accedi;
 import static uk.co.maxcarli.carpooling.Control.Controlli.*;
@@ -38,7 +41,12 @@ public class LoginActivity extends AppCompatActivity {
         String password=loginPassword.getText().toString();
         if(!controlloEditTextVuoto(loginEmail) && !controlloEditTextVuoto(loginPassword)){
             Cittadino cittadino=new Cittadino();
+            Azienda cAzienda=new Azienda();
+            Sede cSede=new Sede();
+            cSede.setAzienda(cAzienda);
+            cittadino.setSede(cSede);
             accedi(email,password,cittadino,this);
+
         }
 
     }
