@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import uk.co.maxcarli.carpooling.Fragment.PassaggiOfferti;
+import uk.co.maxcarli.carpooling.Fragment.PassaggiRichiesti;
 import uk.co.maxcarli.carpooling.model.Passaggio;
 
 public class ImieiPassaggi extends  AppCompatActivity {

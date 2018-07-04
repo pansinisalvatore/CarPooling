@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.maxcarli.carpooling.PassaggiRichiesti;
+
 
 //cias
 public class Cittadino implements Parcelable{
@@ -205,6 +205,8 @@ public class Cittadino implements Parcelable{
         residenza = in.readString();
         numeroTelefono = in.readString();
         tipoCittadino = in.readString();
+        email=in.readString();
+        password=in.readString();
         punteggio=in.readInt();
         macAddress=in.readString();
         if(in.readByte()==PRESENT){
@@ -242,6 +244,8 @@ public class Cittadino implements Parcelable{
         dest.writeString(residenza);
         dest.writeString(numeroTelefono);
         dest.writeString(tipoCittadino);
+        dest.writeString(email);
+        dest.writeString(password);
         dest.writeInt(punteggio);
         dest.writeString(macAddress);
         if(sede==null){

@@ -155,6 +155,8 @@ public class Database {
                                 cittadino.setResidenza(jsonobject.getString("ResidenzaCittadino"));
                                 cittadino.setNumeroTelefono(jsonobject.getString("TelefonoCittadino"));
                                 cittadino.setTipoCittadino(jsonobject.getString("TipoCittadino"));
+                                cittadino.setEmail(jsonobject.getString("EmailCittadino"));
+                                cittadino.setPassword(jsonobject.getString("PasswordCittadino"));
 
                                 cittadino.getSede().getAzienda().setNome(jsonobject.getString("NomeAzienda"));
                                 cittadino.getSede().getAzienda().setPartitaIva(jsonobject.getString("PartitaIvaAzienda"));
@@ -165,7 +167,6 @@ public class Database {
                                 cittadino.getSede().setEmailSede(jsonobject.getString("EmailSede"));
                                 cittadino.getSede().setTelefonoSede(jsonobject.getString("TelefonoSede"));
                                 cittadino.getSede().setIndirizzoSede(jsonobject.getString("IndirizzoSede"));
-
 
                             }
 
@@ -216,8 +217,7 @@ public class Database {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
-
+                        //Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
 
                         if(!response.equals("Something went wrong")){
                             try {
@@ -236,6 +236,10 @@ public class Database {
                                     p.setPostiOccupati(jsonobject.getInt("PostiOccupatiPassaggio"));
                                     p.setStatus(jsonobject.getString("Status"));
                                     p.setTipoPassaggio(jsonobject.getString("TipoPassaggio"));
+                                    String nomeAutomobilista=jsonobject.getString("NomeCittadino");
+                                    String cognomeAutomobilista=jsonobject.getString("CognomeCittadino");
+                                    p.setAutomobilista(cognomeAutomobilista+" "+nomeAutomobilista);
+                                    p.setCellAutomobilista(jsonobject.getString("TelefonoCittadino"));
                                     if(jsonobject.getInt("SettimanalePassaggio")==0){
                                         p.setSettimanale(false);
                                     }else{
@@ -244,10 +248,8 @@ public class Database {
                                     cittadino.setMacAddress(jsonobject.getString("MacAddress"));
                                     cittadino.addPassaggioRichiesto(p);
 
-                                    Log.i("Dati", p.getData());
-
                                 }
-                                getPassaggiOffertiFromCittadino(cittadino,context);
+
 
 
                             } catch (JSONException e) {
@@ -255,7 +257,7 @@ public class Database {
 
                             }
                         }
-
+                        getPassaggiOffertiFromCittadino(cittadino,context);
 
                     }
                 },
@@ -358,6 +360,54 @@ public class Database {
 
         MySingleton.getmInstance(context.getApplicationContext()).addTorequestque(stringRequest);
     }
+
+
+    public static void updateCittadino(final Cittadino cittadino,final Context context){
+
+        String url="http://carpoolingsms.altervista.org/PHP/modificaCittadino.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,url ,
+
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Toast.makeText(context,cittadino.getNumeroTelefono(),Toast.LENGTH_SHORT).show();
+                        if (response.equals("success")) {
+                            Controlli.mostraMessaggioErrore(context.getString(R.string.TitoloAggiornamentoConfermato), context.getString(R.string.TestoAggiornamentoConfermato),context);
+
+                        } else {
+                            Controlli.mostraMessaggioErrore("Error","error", context);
+                        }
+
+                    }
+                }
+
+                , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(context, "Connection failed", Toast.LENGTH_SHORT).show();
+                error.printStackTrace();
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("telefono", cittadino.getNumeroTelefono());
+                params.put("residenza", cittadino.getResidenza());
+                params.put("IdCittadino",cittadino.getIdCittadino()+"");
+                params.put("Password",cittadino.getPassword());
+                return params;
+            }
+        };
+
+
+        MySingleton.getmInstance(context).addTorequestque(stringRequest);
+
+    }
+
 
 }
 

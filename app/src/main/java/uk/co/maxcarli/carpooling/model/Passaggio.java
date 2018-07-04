@@ -6,6 +6,22 @@ import android.os.Parcelable;
 public class Passaggio implements Parcelable{
 
 
+    public String getAutomobilista() {
+        return automobilista;
+    }
+
+    public void setAutomobilista(String automobilista) {
+        this.automobilista = automobilista;
+    }
+
+    public String getCellAutomobilista() {
+        return cellAutomobilista;
+    }
+
+    public void setCellAutomobilista(String cellAutomobilista) {
+        this.cellAutomobilista = cellAutomobilista;
+    }
+
     public interface Keys{
         String IDPASSAGGIO = "idPassaggio";
         String DATA = "data";
@@ -28,6 +44,8 @@ public class Passaggio implements Parcelable{
     private int postiDisponibili;
     private int postiOccupati;
     private String status;
+    private String automobilista;
+    private String cellAutomobilista;
 
     public Passaggio() {
         idPassaggio = 0;
@@ -39,6 +57,8 @@ public class Passaggio implements Parcelable{
         postiDisponibili = 0;
         postiOccupati = 0;
         status = "";
+        automobilista="";
+        cellAutomobilista="";
     }
 
     public int getIdPassaggiOfferti() {
@@ -123,6 +143,8 @@ public class Passaggio implements Parcelable{
         postiDisponibili = in.readInt();
         postiOccupati = in.readInt();
         status = in.readString();
+        automobilista=in.readString();
+        cellAutomobilista=in.readString();
     }
 
     @Override
@@ -141,6 +163,8 @@ public class Passaggio implements Parcelable{
         dest.writeInt(postiDisponibili);
         dest.writeInt(postiOccupati);
         dest.writeString(status);
+        dest.writeString(automobilista);
+        dest.writeString(cellAutomobilista);
     }
 
 

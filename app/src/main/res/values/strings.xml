@@ -73,4 +73,12 @@ Enter your information to proceed with registration.</string>
     </string-array>
     <string name="title_activity_modifica_residenza">ModificaResidenzaActivity</string>
 
+    <string name="viaggio">Trip</string>
+    <string name="data_e_ora">Date &amp; hour</string>
+    <string name="automobilista">Driver</string>
+    <string name="Telefono">Number phone</string>
+    <string name="Stato">Status</string>
+    <string name="TitoloAggiornamentoConfermato">Update confirmed</string>
+    <string name="TestoAggiornamentoConfermato">Your profile is updated</string>
+
 </resources>

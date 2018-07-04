@@ -11,8 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import uk.co.maxcarli.carpooling.PassaggiOfferti;
-import uk.co.maxcarli.carpooling.PassaggiRichiesti;
 import uk.co.maxcarli.carpooling.R;
 
 
