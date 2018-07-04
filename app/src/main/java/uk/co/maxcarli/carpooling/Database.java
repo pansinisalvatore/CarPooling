@@ -166,12 +166,13 @@ public class Database {
                                 cittadino.getSede().setTelefonoSede(jsonobject.getString("TelefonoSede"));
                                 cittadino.getSede().setIndirizzoSede(jsonobject.getString("IndirizzoSede"));
 
+
                             }
 
-                            Intent intent= new Intent(context, menu.class);
-                            intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
-                            context.startActivity(intent);
-                            ((Activity)context).finish();
+                            getPassaggiRichiestiFromCittadino(cittadino,context);
+
+
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -323,11 +324,15 @@ public class Database {
 
                                 }
 
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
 
                             }
-
+                            Intent intent= new Intent(context, menu.class);
+                            intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
+                            context.startActivity(intent);
+                            ((Activity)context).finish();
                         }
 
                     }

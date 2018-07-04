@@ -205,14 +205,13 @@ public class Cittadino implements Parcelable{
         residenza = in.readString();
         numeroTelefono = in.readString();
         tipoCittadino = in.readString();
+        punteggio=in.readInt();
         macAddress=in.readString();
         if(in.readByte()==PRESENT){
-            sede = (Sede) in.readValue(Sede.class.getClassLoader());
+            sede = (Sede) in.readParcelable(Sede.class.getClassLoader());
         }else{
             sede = null;
         }
-
-        punteggio=in.readInt();
         if (in.readByte() == PRESENT) {
             passaggiOfferti = new ArrayList<Passaggio>();
             in.readTypedList(passaggiOfferti, Passaggio.CREATOR);
@@ -249,7 +248,7 @@ public class Cittadino implements Parcelable{
             dest.writeByte(NOT_PRESENT);
         }else {
             dest.writeByte(PRESENT);
-            dest.writeValue(sede);
+            dest.writeParcelable(sede,0);
         }
 
 
@@ -257,13 +256,13 @@ public class Cittadino implements Parcelable{
             dest.writeByte(NOT_PRESENT);
         } else {
             dest.writeByte(PRESENT);
-            dest.writeList(passaggiOfferti);
+            dest.writeTypedList(passaggiOfferti);
         }
         if (passaggiRichiesti == null) {
             dest.writeByte(NOT_PRESENT);
         } else {
             dest.writeByte(PRESENT);
-            dest.writeList(passaggiRichiesti);
+            dest.writeTypedList(passaggiRichiesti);
         }
     }
 

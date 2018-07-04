@@ -24,6 +24,7 @@ package uk.co.maxcarli.carpooling;
         import uk.co.maxcarli.carpooling.Fragment.ImieipassaggiFragment;
         import uk.co.maxcarli.carpooling.Fragment.ProfiloFragment;
         import uk.co.maxcarli.carpooling.model.Cittadino;
+        import uk.co.maxcarli.carpooling.model.Sede;
 
 
 public class menu extends AppCompatActivity {
@@ -38,7 +39,9 @@ public class menu extends AppCompatActivity {
         setContentView(R.layout.menu);
 
         cittadino=(Cittadino)getIntent().getParcelableExtra(Cittadino.Keys.IDCITTADINO);
-
+        //Sede sede=(Sede)getIntent().getParcelableExtra(Sede.Keys.IDSEDE);
+        //cittadino.setSede(sede);
+        Toast.makeText(this,cittadino.getPassaggioRichiesto(0).getData(),Toast.LENGTH_SHORT).show();
 
         toolbar = getSupportActionBar();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -47,6 +50,7 @@ public class menu extends AppCompatActivity {
         // attaching bottom sheet behaviour - hide / show on scroll
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
         layoutParams.setBehavior(new BottomNavigationBehavior());
+
 
         removeShiftMode(navigation);
 
@@ -90,9 +94,6 @@ public class menu extends AppCompatActivity {
                 case R.id.imieipassaggi:
                     toolbar.setTitle("I miei passaggi");
                     fragment = new ImieipassaggiFragment();
-                    Bundle bundle=new Bundle();
-                    bundle.putParcelable(Cittadino.Keys.IDCITTADINO, cittadino );
-                    fragment.setArguments(bundle);
                     loadFragment(fragment);
                     return true;
                 case R.id.Classifica:

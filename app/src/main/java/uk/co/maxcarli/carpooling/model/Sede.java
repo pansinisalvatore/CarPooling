@@ -92,7 +92,7 @@ public class Sede implements Parcelable{
         emailSede = in.readString();
         faxSede = in.readString();
         if(in.readByte()==PRESENT){
-            azienda = (Azienda) in.readValue(Azienda.class.getClassLoader());
+            azienda = (Azienda) in.readParcelable(Azienda.class.getClassLoader());
         }else{
             azienda=null;
         }
@@ -115,7 +115,7 @@ public class Sede implements Parcelable{
             dest.writeByte(NOT_PRESENT);
         }else{
             dest.writeByte(PRESENT);
-            dest.writeValue(azienda);
+            dest.writeParcelable(azienda,0);
         }
 
     }
