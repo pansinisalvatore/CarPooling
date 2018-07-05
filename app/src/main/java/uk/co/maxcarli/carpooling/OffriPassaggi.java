@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -27,27 +29,48 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import uk.co.maxcarli.carpooling.Control.Controlli;
 import uk.co.maxcarli.carpooling.Fragment.DataFragment;
 import uk.co.maxcarli.carpooling.Fragment.TimeFragment;
 import uk.co.maxcarli.carpooling.model.Cittadino;
+import uk.co.maxcarli.carpooling.model.Passaggio;
 
 //ciao
 public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
+
+    private Cittadino cittadino;
+
     EditText imp_data;
     EditText imp_ora;
     EditText set_auto;
     Spinner set_posti;
-    static String urlOffriPassaggio ="http://carpoolingsms.altervista.org/PHP/OffriPassaggi.php";
-    static AlertDialog.Builder builder;
+
     Button conferma;
     String currant_date;
     String currant_time;
+    String auto;
+    int posti;
+    RadioButton buttonYes;
+    RadioButton buttonNo;
 
+    RadioGroup group;
 
+    RadioGroup groupType;
+
+    RadioButton casaLavoro;
+    RadioButton lavoroCasa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(savedInstanceState==null){
+            cittadino=(Cittadino)getIntent().getParcelableExtra(Cittadino.Keys.IDCITTADINO);
+        }else{
+            savedInstanceState.getParcelable(Cittadino.Keys.IDCITTADINO);
+        }
+
+
         setContentView(R.layout.activity_offri_passaggi);
         imp_data= findViewById(R.id.edtData);
         imp_ora= findViewById(R.id.edtOra);
@@ -58,17 +81,64 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
         posti.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         set_posti.setAdapter(posti);
 
+        buttonYes=findViewById(R.id.YesButton);
+        buttonNo=findViewById(R.id.NoButton);
+        buttonNo.setChecked(true);
+
+        casaLavoro=findViewById(R.id.Home_Work);
+        lavoroCasa=findViewById(R.id.Work_Home);
+
+        casaLavoro.setChecked(true);
 
         conferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String auto= set_auto.getText().toString();
-                String posti= set_posti.getSelectedItem().toString();
-                Toast.makeText(OffriPassaggi.this,currant_date,Toast.LENGTH_LONG);
-                Toast.makeText(OffriPassaggi.this,currant_time,Toast.LENGTH_LONG);
+                if(!Controlli.controlloEditTextVuoto(imp_data) && !Controlli.controlloEditTextVuoto(imp_ora) &&  !Controlli.controlloEditTextVuoto(set_auto)
+                         ){
+                    group=findViewById(R.id.radioGroup);
+                    groupType=findViewById(R.id.groupTypePassage);
 
-                OffriPassaggi(currant_date,currant_time,auto,posti,OffriPassaggi.this);
+
+                    String data=imp_data.getText().toString();
+                    String ora=imp_ora.getText().toString();
+                    String auto= set_auto.getText().toString();
+                    int posti= Integer.parseInt((String)set_posti.getSelectedItem());
+
+
+                    int idRisultatoSettimanale= group.getCheckedRadioButtonId();
+                    int idRisultatoTipoViaggio=groupType.getCheckedRadioButtonId();
+                    int settimanale;
+                    String tipoPassaggio;
+                    if(idRisultatoSettimanale==buttonNo.getId()){
+                        settimanale=0;
+                    }else{
+                        settimanale=1;
+                    }
+
+                    if(idRisultatoTipoViaggio==casaLavoro.getId()){
+                        tipoPassaggio=getString(R.string.casa_lavoro);
+                    }else{
+                        tipoPassaggio=getString(R.string.lavoro_casa);
+                    }
+                    Passaggio p=new Passaggio();
+                    p.setData(data);
+                    p.setOra(ora);
+                    p.setAuto(auto);
+                    p.setPostiDisponibili(posti);
+                    p.setAutomobilista(cittadino.getCognome()+" "+cittadino.getNome());
+                    p.setCellAutomobilista(cittadino.getNumeroTelefono());
+                    p.setSettimanale(settimanale);
+                    p.setTipoPassaggio(tipoPassaggio);
+
+                    cittadino.addPassaggioOfferto(p);
+                    Database.OffriPassaggi(p, cittadino,OffriPassaggi.this);
+                }
+
+
+
+
+
             }
         });
 
@@ -86,6 +156,8 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
                 timepicker.show(getFragmentManager(),"timepicker");
             }
         });
+
+
     }
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
@@ -95,6 +167,7 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
         c.set(Calendar.DAY_OF_MONTH,dayOfMonth);
         currant_date= DateFormat.getDateInstance().format(c.getTime());
         imp_data.setText(currant_date);
+
     }
     @Override
     public void onTimeSet(TimePicker timePicker, int hourOfday, int minute) {
@@ -106,54 +179,6 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
     }
 
 
-    public static void OffriPassaggi(final String date, final String time,final String car,final String place_avaiable,final Context context){
-        builder = new AlertDialog.Builder(context);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, urlOffriPassaggio,
 
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        builder.setTitle("Server Response");
-                        builder.setMessage("Response"+ response);
-                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                        AlertDialog alertDialog= builder.create();
-                        alertDialog.show();
-                    }
-                }
-
-                , new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(context, "Error...", Toast.LENGTH_SHORT).show();
-                error.printStackTrace();
-
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map <String,String> params = new HashMap<String, String>();
-                params.put("date",date);
-                params.put("time", time);
-                params.put("car",car);
-                params.put("place_avaible",place_avaiable);
-
-                return params;
-            }
-        };
-
-
-        MySingleton.getmInstance(context).addTorequestque(stringRequest);
-
-
-
-    }
 
 }

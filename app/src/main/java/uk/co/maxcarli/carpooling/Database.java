@@ -240,11 +240,8 @@ public class Database {
                                     String cognomeAutomobilista=jsonobject.getString("CognomeCittadino");
                                     p.setAutomobilista(cognomeAutomobilista+" "+nomeAutomobilista);
                                     p.setCellAutomobilista(jsonobject.getString("TelefonoCittadino"));
-                                    if(jsonobject.getInt("SettimanalePassaggio")==0){
-                                        p.setSettimanale(false);
-                                    }else{
-                                        p.setSettimanale(true);
-                                    }
+                                    p.setSettimanale(jsonobject.getInt("SettimanalePassaggio"));
+
                                     cittadino.setMacAddress(jsonobject.getString("MacAddress"));
                                     cittadino.addPassaggioRichiesto(p);
 
@@ -312,11 +309,8 @@ public class Database {
                                     p.setPostiDisponibili(jsonobject.getInt("PostiDisponibiliPassaggio"));
                                     p.setPostiOccupati(jsonobject.getInt("PostiOccupatiPassaggio"));
                                     p.setTipoPassaggio(jsonobject.getString("TipoPassaggio"));
-                                    if(jsonobject.getInt("SettimanalePassaggio")==0){
-                                        p.setSettimanale(false);
-                                    }else{
-                                        p.setSettimanale(true);
-                                    }
+                                    p.setRichieste(jsonobject.getInt("RichiestePassaggio"));
+                                    p.setSettimanale(jsonobject.getInt("SettimanalePassaggio"));
 
                                     cittadino.addPassaggioOfferto(p);
                                     //Toast.makeText(context, viaggio+" "+data+" "+ora+" "+status+" "+postiOccupati,Toast.LENGTH_SHORT).show();
@@ -371,7 +365,7 @@ public class Database {
                     @Override
                     public void onResponse(String response) {
 
-                        Toast.makeText(context,cittadino.getNumeroTelefono(),Toast.LENGTH_SHORT).show();
+
                         if (response.equals("success")) {
                             Controlli.mostraMessaggioErrore(context.getString(R.string.TitoloAggiornamentoConfermato), context.getString(R.string.TestoAggiornamentoConfermato),context);
 
@@ -408,6 +402,57 @@ public class Database {
 
     }
 
+
+
+    public static void OffriPassaggi(final Passaggio passaggio,final Cittadino cittadino, final Context context){
+
+        String urlOffriPassaggio ="http://carpoolingsms.altervista.org/PHP/OffriPassaggi.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, urlOffriPassaggio,
+
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        if(response.equals("success")){
+                            Controlli.mostraMessaggioSuccesso(context.getString(R.string.PassaggioOffertoConfermatoTitolo), context.getString(R.string.PassaggioOffertoConfermatoTesto),context);
+                        }else{
+                            Controlli.mostraMessaggioErrore("Error","Error",context);
+                        }
+
+                    }
+                }
+
+                , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(context, "Error...", Toast.LENGTH_SHORT).show();
+                error.printStackTrace();
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map <String,String> params = new HashMap<String, String>();
+                params.put("date",passaggio.getData());
+                params.put("time", passaggio.getOra());
+                params.put("car",passaggio.getAuto());
+                params.put("type",passaggio.getTipoPassaggio());
+                params.put("idCittadino",cittadino.getIdCittadino()+"");
+                params.put("place_avaible",passaggio.getPostiDisponibili()+"");
+                params.put("settimanale",passaggio.isSettimanale()+"");
+
+                return params;
+            }
+        };
+
+
+        MySingleton.getmInstance(context).addTorequestque(stringRequest);
+
+
+
+    }
 
 }
 

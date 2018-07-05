@@ -22,6 +22,14 @@ public class Passaggio implements Parcelable{
         this.cellAutomobilista = cellAutomobilista;
     }
 
+    public int getRichieste() {
+        return richieste;
+    }
+
+    public void setRichieste(int richieste) {
+        this.richieste = richieste;
+    }
+
     public interface Keys{
         String IDPASSAGGIO = "idPassaggio";
         String DATA = "data";
@@ -39,7 +47,8 @@ public class Passaggio implements Parcelable{
     private String data;
     private String ora;
     private String tipoPassaggio;
-    private boolean settimanale;
+    private int settimanale;
+    private int richieste;
     private String auto;
     private int postiDisponibili;
     private int postiOccupati;
@@ -52,13 +61,14 @@ public class Passaggio implements Parcelable{
         data = "";
         ora = "";
         tipoPassaggio = "";
-        settimanale = false;
+        settimanale = 0;
         auto = "";
         postiDisponibili = 0;
         postiOccupati = 0;
         status = "";
         automobilista="";
         cellAutomobilista="";
+        richieste=0;
     }
 
     public int getIdPassaggiOfferti() {
@@ -85,11 +95,11 @@ public class Passaggio implements Parcelable{
         this.ora = ora;
     }
 
-    public boolean isSettimanale() {
+    public int isSettimanale() {
         return settimanale;
     }
 
-    public void setSettimanale(boolean settimanale) {
+    public void setSettimanale(int settimanale) {
         this.settimanale = settimanale;
     }
 
@@ -138,7 +148,8 @@ public class Passaggio implements Parcelable{
         data = in.readString();
         ora = in.readString();
         tipoPassaggio = in.readString();
-        settimanale = in.readByte() != 0x00;
+        settimanale = in.readInt();
+        richieste=in.readInt();
         auto = in.readString();
         postiDisponibili = in.readInt();
         postiOccupati = in.readInt();
@@ -158,7 +169,8 @@ public class Passaggio implements Parcelable{
         dest.writeString(data);
         dest.writeString(ora);
         dest.writeString(tipoPassaggio);
-        dest.writeByte((byte) (settimanale ? 0x01 : 0x00));
+        dest.writeInt(settimanale) ;
+        dest.writeInt(richieste);
         dest.writeString(auto);
         dest.writeInt(postiDisponibili);
         dest.writeInt(postiOccupati);

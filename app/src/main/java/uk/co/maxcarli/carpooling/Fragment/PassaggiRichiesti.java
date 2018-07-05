@@ -47,13 +47,14 @@ public class PassaggiRichiesti extends Fragment {
     TableView<String[]> tb;
 
     public PassaggiRichiesti() {
-        // Required empty public constructor
+
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         cittadino=menuActivity.getCittadino();
+        String v = "";
     }
 
     @Override

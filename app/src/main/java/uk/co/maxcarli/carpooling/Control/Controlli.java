@@ -2,6 +2,7 @@ package uk.co.maxcarli.carpooling.Control;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.design.widget.TextInputEditText;
 import android.util.Log;
 import android.widget.AutoCompleteTextView;
@@ -12,6 +13,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Controlli {
+
+    public static void mostraMessaggioSuccesso(String title, String msg, Context context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(title);
+        builder.setMessage(msg);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog alertDialog= builder.create();
+        alertDialog.show();
+    }
 
     public static boolean controlloEditTextVuoto(EditText campo){
         String text = campo.getText().toString();

@@ -3,17 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PassaggiOfferti"
+    tools:context=".Fragment.PassaggiOfferti"
     android:id="@+id/passaggi_offerti">
 
 
 
-        <TextView
-            android:layout_width="129dp"
-            android:layout_height="83dp"
-            android:layout_gravity="center"
-            android:text="@string/BottoneRichiesti" />
+        <de.codecrafters.tableview.TableView
 
+            android:id="@+id/TabellaPassaggiOfferti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </de.codecrafters.tableview.TableView>
 
 
 </RelativeLayout>

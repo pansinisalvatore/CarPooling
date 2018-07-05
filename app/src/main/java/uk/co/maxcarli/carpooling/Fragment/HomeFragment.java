@@ -45,13 +45,14 @@ public class HomeFragment extends Fragment {
         View root=inflater.inflate(R.layout.fragment_home, container, false);
         final Button offriPassaggio=(Button)root.findViewById(R.id.offriPassaggio);
         Button cercaPassaggio=(Button)root.findViewById(R.id.TrovaPassaggio);
-
+        cittadino=menuActivity.getCittadino();
 
         offriPassaggio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent=new Intent(getActivity(), OffriPassaggi.class);
+                intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
                 startActivity(intent);
 
             }

@@ -4,14 +4,19 @@ package uk.co.maxcarli.carpooling.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import uk.co.maxcarli.carpooling.ImieiPassaggi;
 import uk.co.maxcarli.carpooling.R;
+import uk.co.maxcarli.carpooling.menu;
 
 
 /**
@@ -19,8 +24,11 @@ import uk.co.maxcarli.carpooling.R;
  */
 public class ImieipassaggiFragment extends Fragment {
 
+    private menu menuActivity;
+
+
     private ViewPager mViewPager;
-    private ImieipassaggiFragment.SectionsPagerAdapter mSectionsPagerAdapter;
+    private SectionsPagerAdapter mSectionsPagerAdapter;
 
     public ImieipassaggiFragment() {
         // Required empty public constructor
@@ -36,12 +44,11 @@ public class ImieipassaggiFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-
 
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getActivity().getSupportFragmentManager());
@@ -55,12 +62,16 @@ public class ImieipassaggiFragment extends Fragment {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+        //tabLayout.setupWithViewPager(mViewPager);
+
         return RootView;
+
+
     }
 
 
 
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    public  class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -70,15 +81,31 @@ public class ImieipassaggiFragment extends Fragment {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
+            Fragment fragment=null;
+
             switch(position){
                 case 0:
 
-                    return new PassaggiRichiesti();
+                    fragment= new PassaggiRichiesti();
+
+                    break;
+
                 case 1:
-                    return new PassaggiOfferti();
+                    fragment=new PassaggiOfferti();
+
+
+                    break;
 //
             }
-            return null;
+            return fragment;
+        }
+
+        public void loadFragment (Fragment fragment){
+            // load fragment
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.viewPager, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
         }
 
         @Override
@@ -87,8 +114,5 @@ public class ImieipassaggiFragment extends Fragment {
             return 2;
         }
     }
-
-
-
 
 }

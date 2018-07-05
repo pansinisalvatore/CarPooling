@@ -7,6 +7,61 @@
     android:orientation="vertical"
     tools:context=".OffriPassaggi">
 
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3">
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/txtTipoPassaggio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/viaggio"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+        <RadioGroup
+            android:id="@+id/groupTypePassage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+
+                <RadioButton
+                    android:id="@+id/Home-Work"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/casa_lavoro"
+                    />
+
+                <RadioButton
+                    android:id="@+id/Work-Home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lavoro_casa" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -119,26 +174,23 @@
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+        >
 
             <RadioButton
-                android:id="@+id/radioButton5"
+                android:id="@+id/YesButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Si"
                 />
 
             <RadioButton
-                android:id="@+id/radioButton4"
+                android:id="@+id/NoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/No" />
-            </LinearLayout>
+
         </RadioGroup>
 
     </LinearLayout>

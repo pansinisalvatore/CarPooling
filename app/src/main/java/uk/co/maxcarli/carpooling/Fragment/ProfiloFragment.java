@@ -45,22 +45,25 @@ public class ProfiloFragment extends Fragment {
 
 
     public ProfiloFragment() {
-        // Required empty public constructor
+
     }
 
+
+    public void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        if(savedInstanceState!=null){
+            cittadino=savedInstanceState.getParcelable(Cittadino.Keys.IDCITTADINO);
+        }else{
+            cittadino=menuActivity.getCittadino();
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root= inflater.inflate(R.layout.fragment_profilo, container, false);
-
-        if(savedInstanceState!=null){
-            cittadino=savedInstanceState.getParcelable(Cittadino.Keys.IDCITTADINO);
-        }else{
-            cittadino=menuActivity.getCittadino();
-        }
-
 
         cognome=(TextInputEditText)root.findViewById(R.id.edtselezionacognome);
         cognome.setText(cittadino.getCognome());
