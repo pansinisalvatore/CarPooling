@@ -131,8 +131,13 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
                     p.setSettimanale(settimanale);
                     p.setTipoPassaggio(tipoPassaggio);
 
-                    cittadino.addPassaggioOfferto(p);
-                    Database.OffriPassaggi(p, cittadino,OffriPassaggi.this);
+                    if(cittadino.passaggiOfferti.contains(p)){
+                        Controlli.mostraMessaggioErrore(getString(R.string.ErrorePassaggioPresenteTitolo),getString(R.string.ErrorePassaggioPresenteTesto),OffriPassaggi.this);
+                    }else{
+                        cittadino.addPassaggioOfferto(p);
+                        Database.OffriPassaggi(p, cittadino,OffriPassaggi.this);
+                    }
+
                 }
 
 
@@ -178,7 +183,9 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
         imp_ora.setText(currant_time);
     }
 
-
-
-
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        savedInstanceState.putParcelable(Cittadino.Keys.IDCITTADINO,cittadino);
+    }
 }

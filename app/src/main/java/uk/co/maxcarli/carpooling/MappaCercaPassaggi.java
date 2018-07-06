@@ -34,11 +34,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import uk.co.maxcarli.carpooling.model.Cittadino;
+import uk.co.maxcarli.carpooling.model.Passaggio;
+
 public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
 
-    private int idPassaggioOfferto;
+    private Cittadino cittadino;
+    private Passaggio passaggio;
+
     private String indirizzoCittadino;
     private final String data="21/3/2013" ;
     private final String ora="21.10";
@@ -49,7 +54,10 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_mappa_cerca_passaggi);
+        cittadino=getIntent().getParcelableExtra(Cittadino.Keys.IDCITTADINO);
+        passaggio=getIntent().getParcelableExtra(Passaggio.Keys.IDPASSAGGIO);
 
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -66,16 +74,13 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
         mMap.setOnMarkerClickListener(this);
 
         double raggio=500;
-        center=getLocationFromAddress("Via Sparano 10, Bari");
-        Address b=getLocationFromAddress("Via Argiro 10, Bari");
-        Address c=getLocationFromAddress("Via Sagarriga Visconti 10, Bari");
+        center=getLocationFromAddress(cittadino.getResidenza());
         getIndirizziPassaggiOfferti(this);
 
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(center.getLatitude(),center.getLongitude()))
                 .title("La tua casa")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-
 
 
         mMap.addCircle(new com.google.android.gms.maps.model.CircleOptions()
@@ -153,15 +158,15 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                                 JSONObject jsonobject = jsonarray.getJSONObject(i);
 
                                 String indirizzo = jsonobject.getString("ResidenzaCittadino");
-                                indirizzi.add(indirizzo);
                                 String cognome=jsonobject.getString("CognomeCittadino");
+                                String cell=jsonobject.getString("TelefonoCittadino");
                                 String nome=jsonobject.getString("NomeCittadino");
-                                automobilisti.add(cognome+" "+nome);
-                                Address pos=getLocationFromAddress(indirizzi.get(i));
+
+                                Address pos=getLocationFromAddress(indirizzo);
                                 if(controllo(center, pos, 500)){
                                     mMap.addMarker(new MarkerOptions().
                                             position(new LatLng(pos.getLatitude(),pos.getLongitude())
-                                            ).title("Automobilista: "+automobilisti.get(i)).snippet("Clicca per prenotare").
+                                            ).title("Automobilista: "+ cognome+" "+nome).snippet("Clicca per prenotare").
                                             icon(BitmapDescriptorFactory
                                                     .defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
                                 }

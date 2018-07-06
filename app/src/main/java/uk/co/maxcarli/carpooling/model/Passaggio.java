@@ -143,6 +143,13 @@ public class Passaggio implements Parcelable{
         this.status = status;
     }
 
+
+    public boolean equals(Object o){
+        Passaggio p=(Passaggio)o;
+        return this.data.equals(p.data) && this.ora.equals(p.ora);
+    }
+
+
     protected Passaggio(Parcel in) {
         idPassaggio = in.readInt();
         data = in.readString();

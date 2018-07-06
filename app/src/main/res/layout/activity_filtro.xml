@@ -28,32 +28,30 @@
         android:orientation="horizontal">
 
         <RadioGroup
+            android:id="@+id/groupTypeTrip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/casaLavoroRicerca"
                 android:layout_width="141dp"
                 android:layout_height="69dp"
 
-
                 android:layout_weight="1"
-                android:text="Casa-lavoro"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="@string/casa_lavoro"
+             />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/LavoroCasaRicerca"
                 android:layout_width="141dp"
                 android:layout_height="69dp"
 
-                android:layout_alignTop="@+id/radioButton"
+
 
                 android:layout_weight="1"
-                android:text="Lavoro-Casa"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="@string/lavoro_casa"
+                />
         </RadioGroup>
 
 

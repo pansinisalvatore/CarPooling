@@ -62,6 +62,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(), Filtro.class);
+                intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
                 startActivity(intent);
             }
         });

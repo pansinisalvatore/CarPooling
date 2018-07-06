@@ -86,4 +86,7 @@ Enter your information to proceed with registration.</string>
     <string name="casa_lavoro">Home-Work</string>
     <string name="lavoro_casa">Work-Home</string>
 
+    <string name="ErrorePassaggioPresenteTitolo">Error insert</string>
+    <string name="ErrorePassaggioPresenteTesto">There is already a passage on this day and at this time</string>
+
 </resources>

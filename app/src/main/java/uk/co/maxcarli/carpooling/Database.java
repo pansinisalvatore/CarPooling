@@ -414,7 +414,18 @@ public class Database {
                     public void onResponse(String response) {
 
                         if(response.equals("success")){
-                            Controlli.mostraMessaggioSuccesso(context.getString(R.string.PassaggioOffertoConfermatoTitolo), context.getString(R.string.PassaggioOffertoConfermatoTesto),context);
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setTitle(context.getString(R.string.PassaggioOffertoConfermatoTitolo));
+                            builder.setMessage(context.getString(R.string.PassaggioOffertoConfermatoTesto));
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ((Activity)context).finish();
+                                }
+                            });
+                            AlertDialog alertDialog= builder.create();
+                            alertDialog.show();
                         }else{
                             Controlli.mostraMessaggioErrore("Error","Error",context);
                         }
