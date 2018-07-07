@@ -15,7 +15,7 @@
     <string name="PasswordCittadino">Password</string> -->
     <string name="Avanti">Next</string>
     <string name="ListaUtenti">Utent List</string>
-    <string name="Email"> E-mail</string>
+    <string name="Email"> E-MAIL</string>
     <string name="Password">Password</string>
     <string name="SignIn">Sign in</string>
     <string name="SignUp">Sign up</string>
@@ -25,6 +25,10 @@
     <string name="BottoneOfferti">OFFERED</string>
     <string name="BottoneRichiesti">REQUIRED</string>
     <string name="IlMioProfilo">My profile</string>
+    <string name="DettagliUtente">Details User Profile</string>
+    <string name="Nome">Name</string>
+    <string name="Cognome">Surname</string>
+    <string name="Indirizzo">Address</string>
     <string name="VisualizzaClassifica">Show graduation</string>
     <string name="Logout">Logout</string>
     <string name="open">Open</string>
@@ -71,8 +75,12 @@ Enter your information to proceed with registration.</string>
         <item>6</item>
         <item>Altro</item>
     </string-array>
+    <string name="dettagliutente">DETAILS USER PROFILE</string>
     <string name="title_activity_modifica_residenza">ModificaResidenzaActivity</string>
-
+    <string name="nome">NAME</string>
+    <string name="cognome">SURNAME</string>
+    <string name="codicefiscale">FISCAL CODE</string>
+    <string name="residenza">RESIDENCE</string>
     <string name="viaggio">Trip</string>
     <string name="data_e_ora">Date &amp; hour</string>
     <string name="automobilista">Driver</string>
