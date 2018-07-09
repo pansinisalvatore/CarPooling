@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import uk.co.maxcarli.carpooling.Control.Controlli;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 import uk.co.maxcarli.carpooling.model.Passaggio;
 
@@ -49,7 +50,8 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
     private final String ora="21.10";
     private static final ArrayList<String> indirizzi=new ArrayList<String>();
     private static final ArrayList<String> automobilisti=new ArrayList<String>();
-    private Address center;
+    private Address home;
+    private Address work;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,32 +76,40 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
         mMap.setOnMarkerClickListener(this);
 
         double raggio=500;
-        center=getLocationFromAddress(cittadino.getResidenza());
+        home=getLocationFromAddress(cittadino.getResidenza());
         getIndirizziPassaggiOfferti(this);
 
+        work=getLocationFromAddress(cittadino.getSede().getIndirizzoSede());
+
+
         mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(center.getLatitude(),center.getLongitude()))
-                .title("La tua casa")
+                .position(new LatLng(home.getLatitude(),home.getLongitude()))
+                .title(getString(R.string.la_tua_casa))
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(work.getLatitude(),work.getLongitude()))
+                .title(getString(R.string.lavoro))
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
 
         mMap.addCircle(new com.google.android.gms.maps.model.CircleOptions()
-                .center(new LatLng(center.getLatitude(),center.getLongitude()))
+                .center(new LatLng(home.getLatitude(),home.getLongitude()))
                 .radius(raggio)
         );
 
         for(int i=0;i<indirizzi.size();i++){
             Address pos=getLocationFromAddress(indirizzi.get(i));
-            if(controllo(center, pos, 500)){
+            if(controllo(home, pos, 500)){
                 mMap.addMarker(new MarkerOptions().
                         position(new LatLng(pos.getLatitude(),pos.getLongitude())
-                        ).title("Automobilista: "+automobilisti.get(i)).
+                        ).title(getString(R.string.automobilista)+": "+automobilisti.get(i)).
                         icon(BitmapDescriptorFactory
                                 .defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
             }
         }
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(center.getLatitude(),center.getLongitude()),18.0f));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(home.getLatitude(),home.getLongitude()),18.0f));
 
 
     }
@@ -147,36 +157,46 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        //Toast.makeText(context.getApplicationContext(),response,Toast.LENGTH_LONG).show();
 
-                        Toast.makeText(context.getApplicationContext(),response,Toast.LENGTH_LONG).show();
-                        try {
+                        if(!response.equals("Something went wrong")){
+                            try {
 
-                            JSONArray jsonarray = new JSONArray(response);
+                                JSONArray jsonarray = new JSONArray(response);
 
-                            for (int i = 0; i < jsonarray.length(); i++) {
+                                for (int i = 0; i < jsonarray.length(); i++) {
 
-                                JSONObject jsonobject = jsonarray.getJSONObject(i);
+                                    JSONObject jsonobject = jsonarray.getJSONObject(i);
 
-                                String indirizzo = jsonobject.getString("ResidenzaCittadino");
-                                String cognome=jsonobject.getString("CognomeCittadino");
-                                String cell=jsonobject.getString("TelefonoCittadino");
-                                String nome=jsonobject.getString("NomeCittadino");
+                                    String indirizzo = jsonobject.getString("ResidenzaCittadino");
+                                    String cognome=jsonobject.getString("CognomeCittadino");
+                                    String cell=jsonobject.getString("TelefonoCittadino");
+                                    String nome=jsonobject.getString("NomeCittadino");
+                                    int j=0;
 
-                                Address pos=getLocationFromAddress(indirizzo);
-                                if(controllo(center, pos, 500)){
-                                    mMap.addMarker(new MarkerOptions().
-                                            position(new LatLng(pos.getLatitude(),pos.getLongitude())
-                                            ).title("Automobilista: "+ cognome+" "+nome).snippet("Clicca per prenotare").
-                                            icon(BitmapDescriptorFactory
-                                                    .defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                                    Address pos=getLocationFromAddress(indirizzo);
+
+                                    if(controllo(home, pos, 500)){
+                                        j++;
+                                        mMap.addMarker(new MarkerOptions().
+                                                position(new LatLng(pos.getLatitude(),pos.getLongitude())
+                                                ).title(getString(R.string.automobilista)+": "+ cognome+" "+nome).snippet(getString(R.string.Prenotazione_passaggio)).
+                                                icon(BitmapDescriptorFactory
+                                                        .defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                                    }
+                                    /*if(j==0){
+                                        Toast.makeText(context.getApplicationContext(),getString(R.string.OfferteNonPresenti),Toast.LENGTH_LONG).show();
+                                    }*/
+
                                 }
-                                Toast.makeText(context.getApplicationContext(),indirizzo,Toast.LENGTH_LONG).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
 
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-
+                        }else{
+                            //Toast.makeText(context.getApplicationContext(),getString(R.string.OfferteNonPresenti),Toast.LENGTH_LONG).show();
                         }
+
 
                     }
                 },
@@ -192,9 +212,11 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("data", data);
-                params.put("ora", ora);
-                params.put("IdCittadino",3+"");
+                params.put("data", passaggio.getData());
+                params.put("ora", passaggio.getOra());
+                params.put("tipo",passaggio.getTipoPassaggio());
+                params.put("automobilista",passaggio.getAutomobilista());
+                params.put("sede",cittadino.getSede().getIdSede()+"");
                 return params;
             }
         };
@@ -257,6 +279,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                 params.put("idCittadino",3+"");
                 params.put("data",data);
                 params.put("ora",ora);
+                params.put("tipo",passaggio.getTipoPassaggio());
                 return params;
             }
         };
