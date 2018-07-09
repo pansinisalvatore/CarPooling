@@ -41,7 +41,7 @@ public class menu extends AppCompatActivity {
         cittadino=(Cittadino)getIntent().getParcelableExtra(Cittadino.Keys.IDCITTADINO);
         //Sede sede=(Sede)getIntent().getParcelableExtra(Sede.Keys.IDSEDE);
         //cittadino.setSede(sede);
-        Toast.makeText(this,cittadino.getPassaggioRichiesto(0).getData(),Toast.LENGTH_SHORT).show();
+
 
         toolbar = getSupportActionBar();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);

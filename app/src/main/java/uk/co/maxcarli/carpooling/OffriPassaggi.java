@@ -117,9 +117,9 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
                     }
 
                     if(idRisultatoTipoViaggio==casaLavoro.getId()){
-                        tipoPassaggio=getString(R.string.casa_lavoro);
+                        tipoPassaggio="Casa-Lavoro";
                     }else{
-                        tipoPassaggio=getString(R.string.lavoro_casa);
+                        tipoPassaggio="Lavoro-Casa";
                     }
                     Passaggio p=new Passaggio();
                     p.setData(data);
@@ -132,7 +132,7 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
                     p.setTipoPassaggio(tipoPassaggio);
 
                     if(cittadino.passaggiOfferti.contains(p)){
-                        Controlli.mostraMessaggioErrore(getString(R.string.ErrorePassaggioPresenteTitolo),getString(R.string.ErrorePassaggioPresenteTesto),OffriPassaggi.this);
+                        Controlli.mostraMessaggioErrore(getString(R.string.ErrorePassaggioRichiestoPresenteTitolo),getString(R.string.ErrorePassaggioOffertoPresenteTesto),OffriPassaggi.this);
                     }else{
                         cittadino.addPassaggioOfferto(p);
                         Database.OffriPassaggi(p, cittadino,OffriPassaggi.this);

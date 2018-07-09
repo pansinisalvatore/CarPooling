@@ -12,12 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0">
+
         <AutoCompleteTextView
+            android:id="@+id/driverSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/automobilista"
 
 
-           />
+            />
     </LinearLayout>
 
 
@@ -28,7 +31,7 @@
         android:orientation="horizontal">
 
         <RadioGroup
-            android:id="@+id/groupTypeTrip"
+            android:id="@+id/groupTypeRequest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">

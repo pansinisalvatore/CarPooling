@@ -8,17 +8,36 @@ import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import uk.co.maxcarli.carpooling.Control.Controlli;
 import uk.co.maxcarli.carpooling.Fragment.DataFragment;
@@ -26,7 +45,8 @@ import uk.co.maxcarli.carpooling.Fragment.TimeFragment;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 import uk.co.maxcarli.carpooling.model.Passaggio;
 
-public class Filtro extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
+public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener,DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
+    AutoCompleteTextView driver;
     TextInputEditText sel_data;
     TextInputEditText sel_ora;
     RadioGroup groupTypeTrip;
@@ -35,6 +55,9 @@ public class Filtro extends AppCompatActivity implements DatePickerDialog.OnDate
     Button ricerca;
     Spinner spnposti;
     Cittadino cittadino;
+
+    private ArrayAdapter<String> adapter;
+    private List<String> responseList = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +70,35 @@ public class Filtro extends AppCompatActivity implements DatePickerDialog.OnDate
             cittadino=savedInstanceState.getParcelable(Cittadino.Keys.IDCITTADINO);
         }
 
+        driver=findViewById(R.id.driverSearch);
+
+        Toast.makeText(this,driver.getText().toString(),Toast.LENGTH_LONG).show();
+
+        setAutoCompleteViewDriver();
+
+
+
+        //Create adapter
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, responseList);
+
+        driver.setThreshold(1);
+
+
+        //Set adapter to AutoCompleteTextView
+        driver.setAdapter(adapter);
+        driver.setOnItemSelectedListener(this);
+        driver.setOnItemClickListener(this);
+
+
+
         sel_data=  findViewById(R.id.edtselezionadata);
         sel_ora=  findViewById(R.id.edtselezionaora);
 
-        home_work=findViewById(R.id.casaLavoroRicerca);
+        groupTypeTrip=(RadioGroup)findViewById(R.id.groupTypeRequest);
+
+        home_work=(RadioButton)findViewById(R.id.casaLavoroRicerca);
         home_work.setChecked(true);
-        work_home=findViewById(R.id.LavoroCasaRicerca);
+        work_home=(RadioButton)findViewById(R.id.LavoroCasaRicerca);
 
         ricerca=findViewById(R.id.btnricerca);
         ArrayAdapter<String> posti= new ArrayAdapter<String>(Filtro.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.names));
@@ -77,14 +123,15 @@ public class Filtro extends AppCompatActivity implements DatePickerDialog.OnDate
                 String data;
                 String ora;
                 Passaggio p=new Passaggio();
-
+                String automobilista=driver.getText().toString();
 
                 if(!Controlli.controlloEditTextVuoto(sel_data)&& !Controlli.controlloEditTextVuoto(sel_ora)){
                     data=sel_data.getText().toString();
                     ora=sel_ora.getText().toString();
                     p.setData(data);
                     p.setOra(ora);
-                    groupTypeTrip=findViewById(R.id.groupTypePassage);
+                    p.setAutomobilista(automobilista);
+
                     if(groupTypeTrip.getCheckedRadioButtonId()==home_work.getId()){
                         p.setTipoPassaggio("Casa-Lavoro");
                     }else{
@@ -92,8 +139,11 @@ public class Filtro extends AppCompatActivity implements DatePickerDialog.OnDate
                     }
 
                     if (cittadino.passaggiRichiesti.contains(p)){
-                        Controlli.mostraMessaggioErrore(getString(R.string.ErrorePassaggioPresenteTitolo),getString(R.string.ErrorePassaggioPresenteTesto),Filtro.this);
-                    }else{
+                        Controlli.mostraMessaggioErrore(getString(R.string.ErrorePassaggioRichiestoPresenteTitolo),getString(R.string.ErrorePassaggioRichiestoPresenteTesto),Filtro.this);
+                    }else if(cittadino.passaggiOfferti.contains(p)){
+                        Controlli.mostraMessaggioErrore(getString(R.string.ErrorePassaggioRichiestoPresenteTitolo),getString(R.string.ErrorePassaggioOffertoPresenteTesto), Filtro.this);
+                    }
+                    else{
                         Intent intent= new Intent(Filtro.this,MappaCercaPassaggi.class);
 
                         intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
@@ -129,9 +179,89 @@ public class Filtro extends AppCompatActivity implements DatePickerDialog.OnDate
     }
 
 
+    public void setAutoCompleteViewDriver(){
+        String url= "http://carpoolingsms.altervista.org/PHP/getAutomobilisti.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+
+                            JSONArray jsonarray = new JSONArray(response);
+
+
+
+                            for(int i=0; i < jsonarray.length(); i++) {
+
+                                final JSONObject jsonobject = jsonarray.getJSONObject(i);
+
+
+                                String  nome = jsonobject.getString("NomeCittadino");
+                                String  cognome = jsonobject.getString("CognomeCittadino");
+                                String completa = cognome + " " + nome;
+
+                                responseList.add(completa);
+
+                            }
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if(error != null){
+
+                            Toast.makeText(getApplicationContext(), "Something went wrong.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("sede", cittadino.getSede().getIdSede()+"");
+                return params;
+            }
+        };
+
+        MySingleton.getmInstance(getApplicationContext()).addTorequestque(stringRequest);
+
+
+    }
+
+
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         savedInstanceState.putParcelable(Cittadino.Keys.IDCITTADINO,cittadino);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?>  arg0, View arg1, int arg2, long arg3) {
+
+
+        Log.d("AutocompleteContacts", "Position:"+arg2+" Month:"+arg0.getItemAtPosition(arg2));
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(
+                INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
     }
 }

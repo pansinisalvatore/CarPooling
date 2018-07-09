@@ -19,7 +19,7 @@
     <string name="Password">Password</string>
     <string name="SignIn">Sign in</string>
     <string name="SignUp">Sign up</string>
-    <string name="ImieiPassaggi">My step</string>
+    <string name="ImieiPassaggi">My ride</string>
     <string name="ClassificaAzienadale">Company Ranking</string>
     <string name="ClassificaNazionale">National Ranking</string>
     <string name="BottoneOfferti">OFFERED</string>
@@ -90,11 +90,18 @@ Enter your information to proceed with registration.</string>
     <string name="TestoAggiornamentoConfermato">Your profile is updated</string>
     <string name="PassaggioOffertoConfermatoTitolo">Passage confirmed</string>
     <string name="PassaggioOffertoConfermatoTesto">Your passage has been successfully offered </string>
+    <string name="ErrorePassaggioOffertoPresenteTesto">You have already offered a ride to this date and time</string>
+
 
     <string name="casa_lavoro">Home-Work</string>
     <string name="lavoro_casa">Work-Home</string>
 
-    <string name="ErrorePassaggioPresenteTitolo">Error insert</string>
-    <string name="ErrorePassaggioPresenteTesto">There is already a passage on this day and at this time</string>
+    <string name="la_tua_casa">Home</string>
+    <string name="lavoro">Work</string>
 
+    <string name="ErrorePassaggioRichiestoPresenteTitolo">Error insert</string>
+    <string name="ErrorePassaggioRichiestoPresenteTesto">You already have a request on this date and at this time</string>
+
+    <string name="Prenotazione_passaggio">Click to occupy</string>
+    <string name="OfferteNonPresenti">There are no offers</string>
 </resources>
