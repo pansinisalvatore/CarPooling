@@ -1,5 +1,6 @@
 package uk.co.maxcarli.carpooling;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
@@ -31,13 +32,14 @@ import java.util.Map;
 import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
+import uk.co.maxcarli.carpooling.model.Cittadino;
 
 
 public class ClassificaNazionale extends Fragment {
 
-    View class_nazionale;
-    String azienda;
-    String[] ClassificaNazionaleHeaders={"Nome","Cognome","Azienda","Punti"};
+
+    menu menuActivity;
+    String[] ClassificaNazionaleHeaders={"Posizione","Dipendente","Azienda","Punti"};
     String[][] cl_nazione;
     List<Class_Nazione> classifica_nazionale=new ArrayList<>();
     TableView<String[]> tabel;
@@ -48,11 +50,11 @@ public class ClassificaNazionale extends Fragment {
 
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        class_nazionale= inflater.inflate(R.layout.fragment_classifica_nazionale,null);
+        View class_nazionale= inflater.inflate(R.layout.fragment_classifica_nazionale,null);
         tabel=(TableView<String[]>) class_nazionale.findViewById(R.id.TabellaClassificaNazionale);
         tabel.setColumnCount(4);
         tabel.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
-
+        tabel.setHeaderAdapter(new SimpleTableHeaderAdapter(getActivity(),ClassificaNazionaleHeaders));
 
         String url= "http://carpoolingsms.altervista.org/PHP/LeggiClassificaNazionale.php";
 
@@ -66,21 +68,26 @@ public class ClassificaNazionale extends Fragment {
                         try {
 
                             JSONArray jsonarray = new JSONArray(response);
-
+                            cl_nazione=new String[jsonarray.length()][4];
                             for(int i=0; i < jsonarray.length(); i++) {
 
                                 JSONObject jsonobject = jsonarray.getJSONObject(i);
-                                String nome=jsonobject.getString("Nome");
-                                String cognome=jsonobject.getString("Cognome");
-                                azienda=jsonobject.getString("Azienda");
-                                int punti= jsonobject.getInt("Punti");
+                                String nome=jsonobject.getString("NomeCittadino");
+                                String cognome=jsonobject.getString("CognomeCittadino");
+                                String azienda=jsonobject.getString("NomeAzienda");
+                                int punti= jsonobject.getInt("Punteggio");
 
+
+                                cl_nazione[i][0]=(i+1)+"";
+                                cl_nazione[i][1]=cognome+" "+nome;
+                                cl_nazione[i][2]=azienda;
+                                cl_nazione[i][3]= punti+"";
 
                                 Log.i("Dati", " "+nome+" "+cognome+" "+azienda +" "+punti );
-                                classifica_nazionale.add(new Class_Nazione(nome,cognome,azienda,punti));
+
                             }
-                            populateData(classifica_nazionale);
-                            tabel.setHeaderAdapter(new SimpleTableHeaderAdapter(getActivity(),ClassificaNazionaleHeaders));
+
+
                             tabel.setDataAdapter(new SimpleTableDataAdapter(getActivity(), cl_nazione));
 
 
@@ -105,7 +112,7 @@ public class ClassificaNazionale extends Fragment {
 
         MySingleton.getmInstance(getContext()).addTorequestque(stringRequest);
 
-        Toast.makeText(getContext(),classifica_nazionale.size()+" ",Toast.LENGTH_SHORT).show();
+
 
 
 
@@ -134,5 +141,10 @@ public class ClassificaNazionale extends Fragment {
         }
     }
 
+    public void onAttach(Activity activity) {
+
+        super.onAttach(activity);
+        menuActivity=(menu)activity;
+    }
 
 }
