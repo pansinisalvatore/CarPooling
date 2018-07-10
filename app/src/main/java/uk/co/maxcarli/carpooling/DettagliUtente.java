@@ -52,14 +52,13 @@ public class DettagliUtente extends AppCompatActivity {
                                 JSONObject jsonobject = jsonarray.getJSONObject(i);
 
 
-                                String nome = jsonobject.getString("nome");
-                                String cognome = jsonobject.getString("cognome");
-                                String email = jsonobject.getString("email");
-                                String codice_fiscale = jsonobject.getString("codicefiscale");
-                                String residenza = jsonobject.getString("residenza");
+                                String nome = jsonobject.getString("NomeCittadino");
+                                String cognome = jsonobject.getString("CognomeCittadino");
+                                String email = jsonobject.getString("EmailCittadino");
+                                String codice_fiscale = jsonobject.getString("CodiceFiscaleCittadino");
+                                String residenza = jsonobject.getString("ResidenzaCittadino");
 
                                 nam.setText(nome);
-                                Toast.makeText(getApplicationContext(),nome,nome.length());
                                 surnam.setText(cognome);
                                 mail.setText(email);
                                 fiscal_cod.setText(codice_fiscale);
