@@ -36,11 +36,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegistrazioneCittadino" /> <!-- riferimento a una risorsa di tipo style che si chiama FullScreen -->
-        <activity
-            android:name=".ImieiPassaggi"
-            android:label="@string/ImieiPassaggi"
-            android:theme="@style/AppTheme" />
-        <activity
+
             android:name=".Principale"
             android:label="@string/ImieiPassaggi"
             android:theme="@style/AppTheme" />
@@ -68,7 +64,7 @@
             android:name=".RecuperaPassword"
             android:theme="@style/AppTheme" />
         <activity android:name=".ReimpostaPassword" />
-        <activity android:name=".Classifica" />
+
         <activity android:name=".ListaUtenti" />
         <activity android:name=".MappaCercaPassaggi" />
         <activity android:name=".completaRegistrazione" />
