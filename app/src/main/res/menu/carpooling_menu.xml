@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/MENU_1"
+        android:title="Nuovo"
+        android:icon="@drawable/logout"
+        app:showAsAction="ifRoom" />
+
     <item android:id="@+id/Home"
         android:title="@string/Home"
         android:icon="@drawable/home"/>
