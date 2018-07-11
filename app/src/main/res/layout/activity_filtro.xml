@@ -71,7 +71,7 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Selezionare la data"
+            android:hint="@string/SelezionaData"
 
 
             android:layout_below="@+id/edtselezionadata">
@@ -99,7 +99,7 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Selezionare l'ora"
+            android:hint="@string/SelezionaOra"
 
 
             android:layout_below="@+id/edtselezionadata">
@@ -126,7 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:text="Ricerca" />
+            android:text="@string/Ricerca" />
 
     </LinearLayout>
 
