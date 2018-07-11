@@ -24,15 +24,21 @@ public class DettagliUtente extends AppCompatActivity {
     TextView mail;
     TextView fiscal_cod;
     TextView residenc;
+    TextView phone_number;
+    TextView company;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        nam=findViewById(R.id.txtName);
-        surnam=findViewById(R.id.txtSurname);
-        mail=findViewById(R.id.txtAddressEmai);
-        fiscal_cod=findViewById(R.id.txtCodFiscale);
-        residenc=findViewById(R.id.txtResidence);
+        nam=findViewById(R.id.txtNome);
+        surnam=findViewById(R.id.txtCognome);
+        mail=findViewById(R.id.txtEmail);
+        fiscal_cod=findViewById(R.id.txtCF);
+        residenc=findViewById(R.id.txtIndirizzo);
+        phone_number=findViewById(R.id.txtTelefono);
+        company=findViewById(R.id.txtNomeAzienda);
         setContentView(R.layout.activity_dettagli_utente);
         String url = "http://carpoolingsms.altervista.org/PHP/DettagliUtente.php";
 
@@ -57,12 +63,16 @@ public class DettagliUtente extends AppCompatActivity {
                                 String email = jsonobject.getString("EmailCittadino");
                                 String codice_fiscale = jsonobject.getString("CodiceFiscaleCittadino");
                                 String residenza = jsonobject.getString("ResidenzaCittadino");
+                                String telefono = jsonobject.getString("TelefonoCittadino");
+                                String azienda = jsonobject.getString("AziendaCittadino");
 
                                 nam.setText(nome);
                                 surnam.setText(cognome);
                                 mail.setText(email);
                                 fiscal_cod.setText(codice_fiscale);
                                 residenc.setText(residenza);
+                                phone_number.setText(telefono);
+                                company.setText(azienda);
                             }
 
 

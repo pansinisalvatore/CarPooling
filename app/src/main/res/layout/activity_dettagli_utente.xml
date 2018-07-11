@@ -8,113 +8,241 @@
     <!-- TODO: Update blank fragment layout -->
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="3"
         android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/txtDettagliUtenti"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/dettagliutente"
-            android:textAlignment="center" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
-
-        <TextView
-            android:id="@+id/txtNome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="@string/nome" />
-
-        <TextView
-            android:id="@+id/txtName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="4" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
 
         <TextView
             android:id="@+id/txtCognome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/cognome" />
+            android:text="@string/CognomeCittadino"
+            android:textSize="18sp"
+            android:visibility="visible" />
 
-        <TextView
-            android:id="@+id/txtSurname"
-            android:layout_width="wrap_content"
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edtselezionacognome"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="4" />
+            android:inputType="text"
+            android:maxLines="1"
+            android:editable="false"
+            android:ems="13"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_weight="3"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/txtNome"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/NomeCittadino"/>
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edtselezionanome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1"
+            android:editable="false"
+            android:ems="14"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtCF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/CodiceFiscaleCittadino"
+            android:textSize="18sp"
+            android:visibility="visible" />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edtselezionaCF"
+            android:layout_width="254dp"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:ems="13"
+            android:inputType="text"
+            android:maxLines="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"></LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/txtEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/Email" />
+            android:text="@string/Email"
+            android:textSize="18sp"
+            android:visibility="visible" />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edtselezionaemail"
+            android:layout_width="296dp"
+            android:layout_height="wrap_content"
+            android:ems="13"
+            android:editable="false"
+            android:inputType="text"
+            android:maxLines="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/txtAddressEmai"
+            android:id="@+id/txtTelefono"
+            android:layout_width="86dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/NumeroTelefonico"
+            android:textSize="18sp"
+            android:visibility="visible" />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edtselezionatelefono"
+            android:layout_width="262dp"
+            android:layout_height="wrap_content"
+            android:ems="11"
+            android:inputType="text"
+            android:maxLines="1" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"></LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtNomeAzienda"
+            android:layout_width="86dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/Azienda"
+            android:textSize="18sp"
+            android:visibility="visible" />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edtselezionaAzienda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:ems="11"
+            android:inputType="text"
+            android:maxLines="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/txtIndirizzo"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:visibility="visible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="4" />
+            android:text="@string/Residenza"/>
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edtselezionaresidenza"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:editable="false"
+            android:maxLines="1"
+            android:ems="11"/>
+
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="353dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"></LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+        <Button
+            android:id="@+id/AccettaUtente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/AccettaUtente"
+            android:background="@drawable/button_shape_normal"
+            android:backgroundTint="@color/tint_color"/>
+
+
+        <Button
+            android:id="@+id/RifiutaUtente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/RifiutaUtente"
+            android:background="@drawable/button_shape_normal"
+            android:backgroundTint="@color/tint_color"/>
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
-
-        <TextView
-            android:id="@+id/txtCodFiscale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/codicefiscale" />
-
-        <TextView
-            android:id="@+id/txtCodiceFiscale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="4" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
-
-        <TextView
-            android:id="@+id/txtResidenza"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/residenza" />
-
-        <TextView
-            android:id="@+id/txtResidence"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="4" />
-    </LinearLayout>
+        android:layout_weight="5"></LinearLayout>
 
 
 </LinearLayout>
