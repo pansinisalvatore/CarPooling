@@ -24,11 +24,11 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/FullScreen"></activity>
+            android:theme="@style/FullScreen" />
         <activity
             android:name=".Splash_activity"
             android:label="@string/app_name"
-            android:theme="@style/FullScreen" >
+            android:theme="@style/FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -78,11 +78,11 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".Bluethoot.ClientConnect" />
         <activity android:name=".Bluethoot.Tracking" />
-
         <activity
             android:name=".ModificaResidenzaActivity"
             android:label="@string/title_activity_modifica_residenza"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".cambia_pass"></activity>
     </application>
 
 </manifest>

@@ -104,4 +104,7 @@ Enter your information to proceed with registration.</string>
 
     <string name="Prenotazione_passaggio">Click to occupy</string>
     <string name="OfferteNonPresenti">There are no offers</string>
+    <string name="VecchiaPass">Enter the old password</string>
+    <string name="NuovaPass">Enter the new password</string>
+    <string name="ConfermaPass">Confirm the new password</string>
 </resources>
