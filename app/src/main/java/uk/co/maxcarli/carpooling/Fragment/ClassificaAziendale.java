@@ -1,4 +1,4 @@
-package uk.co.maxcarli.carpooling;
+package uk.co.maxcarli.carpooling.Fragment;
 
 import android.app.Activity;
 import android.content.Context;
@@ -32,31 +32,40 @@ import java.util.Map;
 import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
+import uk.co.maxcarli.carpooling.MySingleton;
+import uk.co.maxcarli.carpooling.R;
+import uk.co.maxcarli.carpooling.menu;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 
 
-public class ClassificaNazionale extends Fragment {
+public class ClassificaAziendale extends Fragment {
 
 
     menu menuActivity;
-    String[] ClassificaNazionaleHeaders={"Posizione","Dipendente","Azienda","Punti"};
-    String[][] cl_nazione;
-    List<Class_Nazione> classifica_nazionale=new ArrayList<>();
-    TableView<String[]> tabel;
+    Cittadino cittadino;
+    String[] ClassificaAziendaleHeaders={"Posizione","Dipendene","Punti"};
+    String[][] cl_azienda ;
 
-    public ClassificaNazionale(){
+
+    View class_aziendale;
+    TableView<String[]> tabella;
+
+    public ClassificaAziendale(){
 
     }
 
     @Nullable
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View class_nazionale= inflater.inflate(R.layout.fragment_classifica_nazionale,null);
-        tabel=(TableView<String[]>) class_nazionale.findViewById(R.id.TabellaClassificaNazionale);
-        tabel.setColumnCount(4);
-        tabel.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
-        tabel.setHeaderAdapter(new SimpleTableHeaderAdapter(getActivity(),ClassificaNazionaleHeaders));
 
-        String url= "http://carpoolingsms.altervista.org/PHP/LeggiClassificaNazionale.php";
+       cittadino=menuActivity.getCittadino();
+       class_aziendale= inflater.inflate(R.layout.fragment_classifica_aziendale,null);
+       tabella=(TableView<String[]>)class_aziendale.findViewById(R.id.TabellaClassificaAziendale);
+       tabella.setColumnCount(3);
+       tabella.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
+        tabella.setHeaderAdapter(new SimpleTableHeaderAdapter(getActivity(),ClassificaAziendaleHeaders));
+
+        String url= "http://carpoolingsms.altervista.org/PHP/LeggiClassificaAziendale.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 url,
@@ -68,27 +77,31 @@ public class ClassificaNazionale extends Fragment {
                         try {
 
                             JSONArray jsonarray = new JSONArray(response);
-                            cl_nazione=new String[jsonarray.length()][4];
+                            cl_azienda=new String[jsonarray.length()][3];
                             for(int i=0; i < jsonarray.length(); i++) {
 
                                 JSONObject jsonobject = jsonarray.getJSONObject(i);
+
+
                                 String nome=jsonobject.getString("NomeCittadino");
                                 String cognome=jsonobject.getString("CognomeCittadino");
-                                String azienda=jsonobject.getString("NomeAzienda");
                                 int punti= jsonobject.getInt("Punteggio");
 
 
-                                cl_nazione[i][0]=(i+1)+"";
-                                cl_nazione[i][1]=cognome+" "+nome;
-                                cl_nazione[i][2]=azienda;
-                                cl_nazione[i][3]= punti+"";
 
-                                Log.i("Dati", " "+nome+" "+cognome+" "+azienda +" "+punti );
+                                cl_azienda[i][0]= (i+1)+"";
+                                cl_azienda[i][1]=cognome+" "+nome;
+                                cl_azienda[i][2]=punti+"";
+
+
+
+                                //Log.i("Dati", posizione+" "+nome+" "+cognome+" "+ punti );
+                                //Toast.makeText(context, viaggio+" "+data+" "+ora+" "+status+" "+postiOccupati,Toast.LENGTH_SHORT).show();
 
                             }
 
 
-                            tabel.setDataAdapter(new SimpleTableDataAdapter(getActivity(), cl_nazione));
+                            tabella.setDataAdapter(new SimpleTableDataAdapter(getActivity(), cl_azienda));
 
 
                         } catch (JSONException e) {
@@ -108,6 +121,14 @@ public class ClassificaNazionale extends Fragment {
                     }
                 }){
 
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Azienda", cittadino.getSede().getAzienda().getIdAzienda()+"");
+                return params;
+            }
+        //
+
+
         };
 
         MySingleton.getmInstance(getContext()).addTorequestque(stringRequest);
@@ -115,36 +136,19 @@ public class ClassificaNazionale extends Fragment {
 
 
 
-
         // Inflate the layout for this fragment
-        return class_nazionale;
+        return class_aziendale;
 
 
     }
 
 
-    public void populateData(List<Class_Nazione> passaggiRichiesti){
-
-        this.cl_nazione=new String[classifica_nazionale.size()][4];
-
-
-        for(int i=0;i<classifica_nazionale.size();i++){
-
-            Class_Nazione cl= classifica_nazionale.get(i);
-
-            this.cl_nazione[i][0]=cl.getNome();
-            this.cl_nazione[i][1]=cl.getCognome();
-            this.cl_nazione[i][2]=cl.getAzienda();
-            this.cl_nazione[i][3]= String.valueOf(cl.getPunti());
-
-
-        }
-    }
 
     public void onAttach(Activity activity) {
 
         super.onAttach(activity);
         menuActivity=(menu)activity;
     }
+
 
 }

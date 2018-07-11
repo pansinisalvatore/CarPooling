@@ -11,8 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import uk.co.maxcarli.carpooling.ClassificaAziendale;
-import uk.co.maxcarli.carpooling.ClassificaNazionale;
 import uk.co.maxcarli.carpooling.R;
 
 

@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import uk.co.maxcarli.carpooling.ImieiPassaggi;
+
 import uk.co.maxcarli.carpooling.R;
 import uk.co.maxcarli.carpooling.menu;
 
