@@ -22,7 +22,7 @@ import uk.co.maxcarli.carpooling.menu;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ImieipassaggiFragment extends Fragment {
+public class ImieipassaggiFragment extends Fragment implements TabLayout.OnTabSelectedListener{
 
     private menu menuActivity;
 
@@ -68,6 +68,24 @@ public class ImieipassaggiFragment extends Fragment {
 
 
     }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        mViewPager.setCurrentItem(tab.getPosition());
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+    }
+
+
+
 
 
 

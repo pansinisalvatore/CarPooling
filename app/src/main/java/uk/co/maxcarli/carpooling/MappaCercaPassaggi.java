@@ -184,17 +184,16 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                                                 icon(BitmapDescriptorFactory
                                                         .defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
                                     }
-                                    /*if(j==0){
+                                    if(j==0){
                                         Toast.makeText(context.getApplicationContext(),getString(R.string.OfferteNonPresenti),Toast.LENGTH_LONG).show();
-                                    }*/
-
+                                    }
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
 
                             }
                         }else{
-                            //Toast.makeText(context.getApplicationContext(),getString(R.string.OfferteNonPresenti),Toast.LENGTH_LONG).show();
+                            Toast.makeText(context.getApplicationContext(),getString(R.string.OfferteNonPresenti),Toast.LENGTH_LONG).show();
                         }
 
 
@@ -276,9 +275,9 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                 Map<String, String> params = new HashMap<String, String>();
 
                 params.put("address", indirizzo);
-                params.put("idCittadino",3+"");
-                params.put("data",data);
-                params.put("ora",ora);
+                params.put("idCittadino",cittadino.getIdCittadino()+"");
+                params.put("data",passaggio.getData());
+                params.put("ora",passaggio.getOra());
                 params.put("tipo",passaggio.getTipoPassaggio());
                 return params;
             }

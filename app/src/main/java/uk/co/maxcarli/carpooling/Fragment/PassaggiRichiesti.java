@@ -2,6 +2,7 @@ package uk.co.maxcarli.carpooling.Fragment;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -67,11 +68,23 @@ public class PassaggiRichiesti extends Fragment {
 
         tb.setColumnCount(6);
         tb.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
-        tb.setHeaderAdapter(new SimpleTableHeaderAdapter(getActivity(), PassaggiRichiestiHeaders));
+
+        SimpleTableHeaderAdapter headerAdapter=new SimpleTableHeaderAdapter(getActivity(),PassaggiRichiestiHeaders);
+
+        headerAdapter.setTextSize(15);
+
+
+        tb.setHeaderAdapter(headerAdapter);
 
         populateData(cittadino.passaggiRichiesti);
 
-        tb.setDataAdapter(new SimpleTableDataAdapter(getActivity(), passaggi));
+        SimpleTableDataAdapter dataAdapter=new SimpleTableDataAdapter(getActivity(),passaggi);
+
+
+        dataAdapter.setTextSize(10);
+
+
+        tb.setDataAdapter(dataAdapter);
 
 
 
@@ -93,7 +106,7 @@ public class PassaggiRichiesti extends Fragment {
 
             Passaggio p= passaggiRichiesti.get(i);
 
-            this.passaggi[i][0]=p.getTipoPassaggio();
+            this.passaggi[i][0]=PassaggiOfferti.controlloTipoPassagio(p.getTipoPassaggio(),getContext());
             this.passaggi[i][1]=p.getData()+" "+p.getOra();
             this.passaggi[i][2]=p.getStatus();
             this.passaggi[i][3]=p.getCellAutomobilista();
@@ -103,7 +116,9 @@ public class PassaggiRichiesti extends Fragment {
         }
     }
 
+   public static void controllaStatus(String status, Context c){
 
+   }
 
   public void onAttach(Activity activity) {
 
