@@ -14,6 +14,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import uk.co.maxcarli.carpooling.Control.Controlli;
 import uk.co.maxcarli.carpooling.Database;
 import uk.co.maxcarli.carpooling.ModificaResidenzaActivity;
@@ -141,4 +146,7 @@ public class ProfiloFragment extends Fragment {
     }
 
 
+
 }
+
+

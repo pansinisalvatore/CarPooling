@@ -136,6 +136,19 @@ public class Controlli {
             }
     }
 
+    public static int oreInMinuti(String stringaOrario){
+
+        stringaOrario = stringaOrario.replace(" ", "");
+        String stringHours = stringaOrario.substring(0,1);
+        String stringMinutes = stringaOrario.substring(3,4);
+        int oraInt = Integer.parseInt(stringHours);
+        int minInt = Integer.parseInt(stringMinutes);
+        int orarioConvertito = oraInt + minInt;
+        return orarioConvertito;
+    }
+
+
+
 
 
 
