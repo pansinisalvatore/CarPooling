@@ -1,6 +1,8 @@
 package uk.co.maxcarli.carpooling;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -38,10 +40,10 @@ import uk.co.maxcarli.carpooling.Control.Controlli;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 import uk.co.maxcarli.carpooling.model.Passaggio;
 
-public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReadyCallback {
+
 
     private GoogleMap mMap;
-
     private Cittadino cittadino;
     private Passaggio passaggio;
 
@@ -73,13 +75,12 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
-        mMap.setOnMarkerClickListener(this);
 
         double raggio=500;
-        home=getLocationFromAddress(cittadino.getResidenza());
+        home=getLocationFromAddress(cittadino.getResidenza(),this);
         getIndirizziPassaggiOfferti(this);
 
-        work=getLocationFromAddress(cittadino.getSede().getIndirizzoSede());
+        work=getLocationFromAddress(cittadino.getSede().getIndirizzoSede(),this);
 
 
         mMap.addMarker(new MarkerOptions()
@@ -98,19 +99,23 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                 .radius(raggio)
         );
 
-        for(int i=0;i<indirizzi.size();i++){
-            Address pos=getLocationFromAddress(indirizzi.get(i));
-            if(controllo(home, pos, 500)){
-                mMap.addMarker(new MarkerOptions().
-                        position(new LatLng(pos.getLatitude(),pos.getLongitude())
-                        ).title(getString(R.string.automobilista)+": "+automobilisti.get(i)).
-                        icon(BitmapDescriptorFactory
-                                .defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-            }
-        }
+
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(home.getLatitude(),home.getLongitude()),18.0f));
 
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                if(!marker.getTitle().equals(getString(R.string.la_tua_casa)) || !marker.getTitle().equals(getString(R.string.lavoro))){
+
+                    String indirizzo=getAddressFromLatLng(marker.getPosition());
+                    //Toast.makeText(this, indirizzo, Toast.LENGTH_LONG).show();
+                    prenotaPassaggio(MappaCercaPassaggi.this, indirizzo);
+
+                }
+
+            }
+        });
 
     }
 
@@ -129,9 +134,9 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
     }
 
 
-    public Address getLocationFromAddress(String strAddress){
+    public static Address getLocationFromAddress(String strAddress,Context c){
 
-        Geocoder coder = new Geocoder(this);
+        Geocoder coder = new Geocoder(c);
         List<Address> address;
 
 
@@ -157,7 +162,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //Toast.makeText(context.getApplicationContext(),response,Toast.LENGTH_LONG).show();
+                        Toast.makeText(context.getApplicationContext(),response,Toast.LENGTH_LONG).show();
 
                         if(!response.equals("Something went wrong")){
                             try {
@@ -174,7 +179,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                                     String nome=jsonobject.getString("NomeCittadino");
                                     int j=0;
 
-                                    Address pos=getLocationFromAddress(indirizzo);
+                                    Address pos=getLocationFromAddress(indirizzo,context);
 
                                     if(controllo(home, pos, 500)){
                                         j++;
@@ -224,20 +229,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
     }
 
 
-    @Override
-    public boolean onMarkerClick(Marker marker) {
 
-        if(!marker.getTitle().equals("La tua casa")){
-
-            String indirizzo=getAddressFromLatLng(marker.getPosition());
-            //Toast.makeText(this, indirizzo, Toast.LENGTH_LONG).show();
-           prenotaPassaggio(this, indirizzo);
-
-        }
-
-
-        return false;
-    }
 
 
 
@@ -246,15 +238,54 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
         String url = "http://carpoolingsms.altervista.org/PHP/ScriviPassaggioRichiesto.php";
 
 
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-                        if(response.equals("success")){
+                        Toast.makeText(context,response,Toast.LENGTH_LONG).show();
+                        if(!response.equals("Something went wrong") || !response.equals("Error query")){
 
-                            Toast.makeText(context,"Scrittura riuscita",Toast.LENGTH_SHORT).show();
+                            try {
+
+                                JSONArray jsonarray = new JSONArray(response);
+
+                                for (int i = 0; i < jsonarray.length(); i++) {
+
+                                    JSONObject jsonobject = jsonarray.getJSONObject(i);
+
+                                    int  idPassaggio = jsonobject.getInt("IdPassaggio");
+                                    String cognome = jsonobject.getString("CognomeCittadino");
+                                    String cell = jsonobject.getString("TelefonoCittadino");
+                                    String nome = jsonobject.getString("NomeCittadino");
+                                    passaggio.setAutomobilista(cognome+" "+nome);
+                                    passaggio.setCellAutomobilista(cell);
+                                    passaggio.setIdPassaggiOfferti(idPassaggio);
+
+                                }
+                            }catch(JSONException e){
+                                e.printStackTrace();
+                            }
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setTitle(R.string.PassaggioPrenotatoTitolo);
+                            builder.setMessage(R.string.PassaggioPrenotatoTesto);
+                            builder.setCancelable(false);
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    final Intent returnIntent = new Intent();
+                                    returnIntent.putExtra(Passaggio.Keys.IDPASSAGGIO,passaggio);
+                                    setResult(0,returnIntent);
+                                    finish();
+                                }
+                            });
+                            AlertDialog alertDialog= builder.create();
+                            alertDialog.show();
+
+
 
                         }
 
@@ -304,4 +335,5 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
        }
 
     }
+
 }

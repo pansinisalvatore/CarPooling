@@ -3,6 +3,7 @@ package uk.co.maxcarli.carpooling.Fragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,12 +16,15 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import de.codecrafters.tableview.TableView;
+import de.codecrafters.tableview.listeners.TableDataClickListener;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
+import uk.co.maxcarli.carpooling.MappaOffertePassaggiActivity;
 import uk.co.maxcarli.carpooling.R;
 import uk.co.maxcarli.carpooling.menu;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 import uk.co.maxcarli.carpooling.model.Passaggio;
+import uk.co.maxcarli.carpooling.model.Sede;
 
 
 public class PassaggiOfferti extends Fragment {
@@ -82,6 +86,19 @@ public class PassaggiOfferti extends Fragment {
         tb.setDataAdapter(dataAdapter);
 
         tb.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+        tb.addDataClickListener(new TableDataClickListener<String[]>() {
+            @Override
+            public void onDataClicked(int rowIndex, String[] clickedData) {
+                Intent intent=new Intent(getActivity(), MappaOffertePassaggiActivity.class);
+                intent.putExtra(Cittadino.Keys.RESIDENZA,cittadino.getResidenza());
+                intent.putExtra(Passaggio.Keys.DATA,cittadino.passaggiOfferti.get(rowIndex).getData());
+                intent.putExtra(Passaggio.Keys.ORA,cittadino.passaggiOfferti.get(rowIndex).getOra());
+                intent.putExtra(Sede.Keys.INDIRIZZO,cittadino.getSede().getIndirizzoSede());
+                intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino.getIdCittadino());
+                startActivity(intent);
+            }
+        });
 
 
         return root;

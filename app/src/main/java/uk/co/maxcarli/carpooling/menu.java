@@ -31,7 +31,7 @@ public class menu extends AppCompatActivity {
 
     private ActionBar toolbar;
     private Cittadino cittadino;
-
+    FragmentTransaction transaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,6 @@ public class menu extends AppCompatActivity {
 
         toolbar = getSupportActionBar();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         // attaching bottom sheet behaviour - hide / show on scroll
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
@@ -53,6 +52,7 @@ public class menu extends AppCompatActivity {
 
 
         removeShiftMode(navigation);
+        loadFragment(new HomeFragment());
 
         // load the store fragment by default
         toolbar.setTitle("Home");
@@ -84,31 +84,32 @@ public class menu extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment fragment;
+            Fragment fragment=null;
             switch (item.getItemId()) {
                 case R.id.Home:
                     toolbar.setTitle("Home");
                     fragment = new HomeFragment();
-                    loadFragment(fragment);
-                    return true;
+                    break;
+
                 case R.id.imieipassaggi:
                     toolbar.setTitle("I miei passaggi");
                     fragment = new ImieipassaggiFragment();
-                    loadFragment(fragment);
-                    return true;
+                    break;
+
                 case R.id.Classifica:
                     toolbar.setTitle("Classifica");
                     fragment = new ClassificaFragment();
-                    loadFragment(fragment);
-                    return true;
+                    break;
+
                 case R.id.IlMioProfilo:
                     toolbar.setTitle("Il mio profilo");
                     fragment = new ProfiloFragment();
-                    loadFragment(fragment);
-                    return true;
+                    break;
             }
 
-            return false;
+
+            return loadFragment(fragment);
+
         }
     };
 
@@ -117,12 +118,17 @@ public class menu extends AppCompatActivity {
      *
      * @param fragment
      */
-    public void loadFragment(Fragment fragment) {
+    public boolean loadFragment(Fragment fragment) {
         // load fragment
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        if(fragment!=null){
+            transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_container, fragment);
+            transaction.addToBackStack("tag");
+            transaction.commit();
+            return true;
+        }else
+            return false;
+
     }
 
     @Override
@@ -134,4 +140,11 @@ public class menu extends AppCompatActivity {
     public Cittadino getCittadino() {
         return cittadino;
     }
+
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
 }

@@ -87,7 +87,6 @@ public class DettagliUtente extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         if (error != null) {
-
                             Toast.makeText(getApplicationContext(), "Something went wrong.", Toast.LENGTH_LONG).show();
                         }
                     }

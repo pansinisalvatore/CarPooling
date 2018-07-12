@@ -33,9 +33,9 @@
         </activity>
         <activity android:name=".RegistrazioneCittadino" /> <!-- riferimento a una risorsa di tipo style che si chiama FullScreen -->
 
-            android:name=".Principale"
-            android:label="@string/ImieiPassaggi"
-            android:theme="@style/AppTheme" />
+        android:name=".Principale"
+        android:label="@string/ImieiPassaggi"
+        android:theme="@style/AppTheme" />
         <activity
             android:name=".OffriPassaggi"
             android:theme="@style/AppTheme" />
@@ -60,7 +60,6 @@
             android:name=".RecuperaPassword"
             android:theme="@style/AppTheme" />
         <activity android:name=".ReimpostaPassword" />
-
         <activity android:name=".ListaUtenti" />
         <activity android:name=".MappaCercaPassaggi" />
         <activity android:name=".completaRegistrazione" />
@@ -83,7 +82,8 @@
             android:name=".ModificaResidenzaActivity"
             android:label="@string/title_activity_modifica_residenza"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".cambia_pass"></activity>
+        <activity android:name=".cambia_pass" />
+        <activity android:name=".MappaOffertePassaggiActivity"></activity>
     </application>
 
 </manifest>

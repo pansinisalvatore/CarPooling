@@ -72,7 +72,7 @@ public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClic
 
         driver=findViewById(R.id.driverSearch);
 
-        Toast.makeText(this,driver.getText().toString(),Toast.LENGTH_LONG).show();
+
 
         setAutoCompleteViewDriver();
 
@@ -137,7 +137,6 @@ public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClic
                     }else{
                         p.setTipoPassaggio("Lavoro-Casa");
                     }
-
                     if (cittadino.passaggiRichiesti.contains(p)){
                         Controlli.mostraMessaggioErrore(getString(R.string.ErrorePassaggioRichiestoPresenteTitolo),getString(R.string.ErrorePassaggioRichiestoPresenteTesto),Filtro.this);
                     }else if(cittadino.passaggiOfferti.contains(p)){
@@ -148,7 +147,7 @@ public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClic
 
                         intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
                         intent.putExtra(Passaggio.Keys.IDPASSAGGIO,p);
-                        startActivity(intent);
+                        startActivityForResult(intent,0);
                     }
                 }
 
@@ -263,5 +262,15 @@ public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClic
         InputMethodManager imm = (InputMethodManager) getSystemService(
                 INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    }
+
+
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent databack){
+        Passaggio passaggioPrenotato=(Passaggio)databack.getParcelableExtra(Passaggio.Keys.IDPASSAGGIO);
+
+        if(passaggioPrenotato!=null){
+            cittadino.addPassaggioRichiesto(passaggioPrenotato);
+        }
     }
 }
