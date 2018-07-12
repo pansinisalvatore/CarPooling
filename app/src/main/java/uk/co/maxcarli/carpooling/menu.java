@@ -105,6 +105,12 @@ public class menu extends AppCompatActivity {
                     toolbar.setTitle("Il mio profilo");
                     fragment = new ProfiloFragment();
                     break;
+                case R.id.Tracking:
+                    toolbar.setTitle("Il mio profilo");
+                    fragment = new TrackingFragment();
+                    break;
+
+
             }
 
 

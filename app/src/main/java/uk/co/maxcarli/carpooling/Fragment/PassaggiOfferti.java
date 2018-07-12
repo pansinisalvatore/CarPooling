@@ -137,4 +137,6 @@ public class PassaggiOfferti extends Fragment {
         super.onAttach(activity);
         menuActivity=(menu)activity;
     }
+
+
 }
