@@ -12,12 +12,12 @@
 
     <item android:id="@+id/IlMioProfilo"
         android:title="@string/IlMioProfilo"
-        android:icon="@drawable/profilo">
+        android:icon="@drawable/account">
 
     </item>
     <item android:id="@+id/imieipassaggi"
         android:title="@string/ImieiPassaggi"
-        android:icon="@drawable/i_miei_passaggi">
+        android:icon="@drawable/car">
 
     </item>
     <item android:id="@+id/Classifica"
