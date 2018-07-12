@@ -215,11 +215,20 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
+                String nome="";
+                String cognome="";
+                if(!passaggio.getAutomobilista().equals("")){
+                    nome=passaggio.getAutomobilista().substring(passaggio.getAutomobilista().indexOf(" "));
+                    cognome=passaggio.getAutomobilista().substring(0,passaggio.getAutomobilista().indexOf(" "));
+                    nome.trim();
+                    cognome.trim();
+                }
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("data", passaggio.getData());
                 params.put("ora", passaggio.getOra());
                 params.put("tipo",passaggio.getTipoPassaggio());
-                params.put("automobilista",passaggio.getAutomobilista());
+                params.put("nome",nome);
+                params.put("cognome",cognome);
                 params.put("sede",cittadino.getSede().getIdSede()+"");
                 return params;
             }
@@ -263,6 +272,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                                     passaggio.setAutomobilista(cognome+" "+nome);
                                     passaggio.setCellAutomobilista(cell);
                                     passaggio.setIdPassaggiOfferti(idPassaggio);
+                                    passaggio.setStatus("Sospeso");
 
                                 }
                             }catch(JSONException e){

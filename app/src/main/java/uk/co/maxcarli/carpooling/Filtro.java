@@ -123,7 +123,10 @@ public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClic
                 String data;
                 String ora;
                 Passaggio p=new Passaggio();
+
                 String automobilista=driver.getText().toString();
+
+
 
                 if(!Controlli.controlloEditTextVuoto(sel_data)&& !Controlli.controlloEditTextVuoto(sel_ora)){
                     data=sel_data.getText().toString();
