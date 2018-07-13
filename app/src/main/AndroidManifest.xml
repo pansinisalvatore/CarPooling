@@ -40,9 +40,6 @@
         </activity>
         <activity android:name=".RegistrazioneCittadino" /> <!-- riferimento a una risorsa di tipo style che si chiama FullScreen -->
 
-        android:name=".Principale"
-        android:label="@string/ImieiPassaggi"
-        android:theme="@style/AppTheme" />
         <activity
             android:name=".OffriPassaggi"
             android:theme="@style/AppTheme">

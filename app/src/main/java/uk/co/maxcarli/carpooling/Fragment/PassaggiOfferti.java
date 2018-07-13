@@ -91,11 +91,10 @@ public class PassaggiOfferti extends Fragment {
             @Override
             public void onDataClicked(int rowIndex, String[] clickedData) {
                 Intent intent=new Intent(getActivity(), MappaOffertePassaggiActivity.class);
-                intent.putExtra(Cittadino.Keys.RESIDENZA,cittadino.getResidenza());
-                intent.putExtra(Passaggio.Keys.DATA,cittadino.passaggiOfferti.get(rowIndex).getData());
-                intent.putExtra(Passaggio.Keys.ORA,cittadino.passaggiOfferti.get(rowIndex).getOra());
-                intent.putExtra(Sede.Keys.INDIRIZZO,cittadino.getSede().getIndirizzoSede());
-                intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino.getIdCittadino());
+                intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
+
+                intent.putExtra(Passaggio.Keys.IDPASSAGGIO, cittadino.passaggiOfferti.get(rowIndex));
+
                 startActivity(intent);
             }
         });

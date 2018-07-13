@@ -146,6 +146,8 @@ public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClic
                         Controlli.mostraMessaggioErrore(getString(R.string.ErrorePassaggioRichiestoPresenteTitolo),getString(R.string.ErrorePassaggioOffertoPresenteTesto), Filtro.this);
                     }
                     else{
+
+
                         Intent intent= new Intent(Filtro.this,MappaCercaPassaggi.class);
 
                         intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);

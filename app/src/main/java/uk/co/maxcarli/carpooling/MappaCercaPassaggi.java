@@ -55,6 +55,9 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
     private Address home;
     private Address work;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -157,6 +160,8 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
         String url = "http://carpoolingsms.altervista.org/PHP/PrendiIndirizzi.php";
 
 
+
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 url,
                 new Response.Listener<String>() {
@@ -198,7 +203,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
 
                             }
                         }else{
-                            Toast.makeText(context.getApplicationContext(),getString(R.string.OfferteNonPresenti),Toast.LENGTH_LONG).show();
+                            //Toast.makeText(context.getApplicationContext(),getString(R.string.OfferteNonPresenti),Toast.LENGTH_LONG).show();
                         }
 
 
@@ -215,20 +220,21 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                String nome="";
-                String cognome="";
+
+                String nomeOfferente="";
+                String cognomeOfferente="";
                 if(!passaggio.getAutomobilista().equals("")){
-                    nome=passaggio.getAutomobilista().substring(passaggio.getAutomobilista().indexOf(" "));
-                    cognome=passaggio.getAutomobilista().substring(0,passaggio.getAutomobilista().indexOf(" "));
-                    nome.trim();
-                    cognome.trim();
+                    nomeOfferente=passaggio.getAutomobilista().substring(passaggio.getAutomobilista().indexOf(" "));
+                    cognomeOfferente=passaggio.getAutomobilista().substring(0,passaggio.getAutomobilista().indexOf(" "));
+                    nomeOfferente=nomeOfferente.trim();
+                    cognomeOfferente=cognomeOfferente.trim();
                 }
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("data", passaggio.getData());
                 params.put("ora", passaggio.getOra());
                 params.put("tipo",passaggio.getTipoPassaggio());
-                params.put("nome",nome);
-                params.put("cognome",cognome);
+                params.put("nome",nomeOfferente);
+                params.put("cognome",cognomeOfferente);
                 params.put("sede",cittadino.getSede().getIdSede()+"");
                 return params;
             }
