@@ -8,6 +8,8 @@ import android.util.Log;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -149,6 +151,19 @@ public class Controlli {
         int minInt = Integer.parseInt(stringMinutes);
         int orarioConvertito = (oraInt * 60) + minInt;
         return orarioConvertito;
+    }
+
+    public static int getOraCorrente(){
+
+        Calendar cal = Calendar.getInstance();
+        int ora = cal.get(Calendar.HOUR_OF_DAY);
+        String sOra = Integer.toString(ora);
+        Log.d("hh",sOra);
+        int minuti = cal.get(Calendar.MINUTE);
+        String sMin = Integer.toString(minuti);
+        Log.d("mm",sMin);
+        int oraCorrente = (ora * 60) + minuti;
+        return oraCorrente;
     }
 
 

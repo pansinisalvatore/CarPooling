@@ -72,9 +72,12 @@ public class TrackingFragment extends Fragment {
 
 
 
-    public void controlOfferer(List<Passaggio> passaggiOfferti, String dataCorrente){
+    public boolean controlOfferer(List<Passaggio> passaggiOfferti, String dataCorrente){
 
-        String stringaOrario = "";
+        String stringaOrario = ""; //serve solo per il log
+        String stringaOrarioC = ""; //serve solo per il log
+        String sTrovato = ""; // serve solo per il log
+        int trovato = 0;
         int orarioConvertito;
         for(int i=0;i<passaggiOfferti.size();i++){
 
@@ -83,13 +86,20 @@ public class TrackingFragment extends Fragment {
                 orarioConvertito = oreInMinuti(p.getOra());
                 stringaOrario = Integer.toString(orarioConvertito);
                 Log.d("oreInMinuti",stringaOrario);
+                stringaOrarioC = Integer.toString(getOraCorrente());
+                Log.d("OraCorrente",stringaOrarioC);
+                if(orarioConvertito > getOraCorrente() - 10 && orarioConvertito < getOraCorrente() + 30 ){
+                    trovato = 1;
+                    sTrovato = Integer.toString(trovato);
+                    Log.d("trovato",sTrovato);
+                }
 
 
 
             }
         }
-
-
+            if (trovato == 1) return true;
+        else return false;
     }
 
 
