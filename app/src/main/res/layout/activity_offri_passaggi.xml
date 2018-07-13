@@ -27,7 +27,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/viaggio"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:theme="@style/MyEditText"/>
 
 
     </LinearLayout>
@@ -42,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:theme="@style/MyEditText"
             >
 
 
@@ -50,13 +52,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/casa_lavoro"
+                    android:theme="@style/MyEditText"
                     />
 
                 <RadioButton
                     android:id="@+id/Work-Home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/lavoro_casa" />
+                    android:text="@string/lavoro_casa"
+                    android:theme="@style/MyEditText"/>
 
         </RadioGroup>
 
@@ -82,7 +86,8 @@
             android:focusable="false"
             android:inputType="date"
             android:text="@string/ImpostaData"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:theme="@style/MyEditText"/>
     </LinearLayout>
 
     <LinearLayout
@@ -98,7 +103,8 @@
             android:focusable="false"
             android:inputType="time"
             android:text="@string/ImpostaOra"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:theme="@style/MyEditText"/>
 
     </LinearLayout>
 
@@ -115,7 +121,8 @@
             android:layout_weight="1"
             android:text="@string/Auto"
             android:textSize="18sp"
-            android:visibility="visible" />
+            android:visibility="visible"
+            android:theme="@style/MyEditText"/>
 
         <EditText
             android:id="@+id/edtInserisciAuto"
@@ -123,7 +130,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:theme="@style/MyEditText"/>
 
   </LinearLayout>
 
@@ -141,13 +149,15 @@
         android:text="@string/PostiDisponibili"
         android:textSize="18sp"
         android:visibility="visible"
+        android:theme="@style/MyEditText"
         />
 
         <Spinner
             android:id="@+id/spnPosti"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            android:theme="@style/MyEditText"/>
 
     </LinearLayout>
 
@@ -162,7 +172,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Domanda"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:theme="@style/MyEditText"/>
 
 
     </LinearLayout>
@@ -176,20 +187,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-        >
+            android:theme="@style/MyEditText">
 
             <RadioButton
                 android:id="@+id/YesButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Si"
-                />
+                android:theme="@style/MyEditText"/>
 
             <RadioButton
                 android:id="@+id/NoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/No" />
+                android:text="@string/No"
+                android:theme="@style/MyEditText"/>
 
         </RadioGroup>
 
@@ -205,7 +217,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Conferma"
-           />
+            android:background="@drawable/button_shape_normal"
+            android:backgroundTint="@color/tint_color"/>
 
     </RelativeLayout>
 

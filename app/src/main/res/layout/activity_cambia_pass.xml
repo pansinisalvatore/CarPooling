@@ -6,65 +6,73 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".cambia_pass">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:layout_weight="1"></LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txtVecchiaPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/VecchiaPass"
-            android:textSize="18sp"
-            android:visibility="visible" />
 
-        <EditText
-            android:id="@+id/editTextVecchiaPass"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPassword" />
+            android:id="@+id/txtVecchiaPass"
+            android:hint="@string/VecchiaPass"
+            android:theme="@style/MyEditText">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextVecchiaPass"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+
+                android:theme="@style/MyEditText"/>
+        </android.support.design.widget.TextInputLayout>
+
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"></LinearLayout>
+        android:layout_weight="1"></LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:layout_weight="1"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/txtNuovaPass"
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/NuovaPass"
-            android:textSize="18sp"
-            android:visibility="visible" />
-        <EditText
-            android:id="@+id/editTextNuovaPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPassword" />
+            android:id="@+id/txtNuovaPassPass"
+            android:hint="@string/NuovaPass"
+            android:theme="@style/MyEditText">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextNuovaPass"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:theme="@style/MyEditText"/>
+        </android.support.design.widget.TextInputLayout>
+
+
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="3"></LinearLayout>
+        android:layout_weight="1"></LinearLayout>
 
 
 
@@ -72,33 +80,36 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:layout_weight="1"
         android:orientation="vertical">
-        <TextView
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/txtConfermaPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/ConfermaPass"
-            android:textSize="18sp"
-            android:visibility="visible" />
-        <EditText
-            android:id="@+id/editTextConfermaPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPassword" />
+            android:hint="@string/ConfermaPass"
+            android:theme="@style/MyEditText">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextConfermaPass"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:theme="@style/MyEditText"/>
+        </android.support.design.widget.TextInputLayout>
+
 
     </LinearLayout>
     <LinearLayout
         android:layout_width="353dp"
         android:layout_height="wrap_content"
-        android:layout_weight="3"></LinearLayout>
+        android:layout_weight="1"></LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:layout_weight="1"
         android:orientation="horizontal"
         android:layout_gravity="center">
         <Button

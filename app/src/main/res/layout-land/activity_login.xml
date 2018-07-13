@@ -1,74 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".LoginActivity">
 
-    <TextView
-        android:id="@+id/AppName"
-        android:layout_width="327dp"
-        android:layout_height="54dp"
-        android:layout_marginLeft="132dp"
-        android:layout_marginStart="132dp"
-        android:layout_marginTop="36dp"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="80px"
-        android:textStyle="normal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/LoginEmail"
-        android:layout_width="292dp"
-        android:layout_height="46dp"
-        android:layout_marginBottom="200dp"
-        android:layout_marginEnd="284dp"
-        android:layout_marginRight="284dp"
-        android:ems="10"
-        android:hint="@string/Email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/LoginPassword"
-        android:layout_width="292dp"
-        android:layout_height="44dp"
-        android:layout_marginBottom="132dp"
-        android:layout_marginEnd="284dp"
-        android:layout_marginRight="284dp"
-        android:ems="10"
-        android:hint="@string/Password"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/SignIn"
-        android:layout_width="216dp"
-        android:layout_height="57dp"
-        android:layout_marginBottom="48dp"
-        android:layout_marginEnd="360dp"
-        android:layout_marginRight="360dp"
-        android:onClick="Login"
-        android:text="@string/SignIn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/SingUp"
-        android:layout_width="206dp"
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
-        android:onClick="ApriRegisterActivity"
-        android:text="Sign up"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_weight="2"
+        android:background="@drawable/logo">
+    </FrameLayout>
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/loginString"
+            android:gravity="center"
+            android:textSize="30dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5">
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayoutEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/passwordLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/emailLayout"
+
+            android:hint="@string/Password"
+            android:theme="@style/MyEditText">
+
+            <android.support.design.widget.TextInputEditText
+
+                android:id="@+id/passwordLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:theme="@style/MyEditText"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/emailLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/Email"
+            android:theme="@style/MyEditText">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/emailLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:theme="@style/MyEditText"/>
+        </android.support.design.widget.TextInputLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5">
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_gravity="top|center"
+            android:text="@string/Conferma"
+            android:textSize="20dp"
+            android:onClick="Login"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="@string/NonHaiUnAccount"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:onClick="apriRegisterActivity"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="@string/PasswordDimenticata"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:onClick="passwordDimenticata"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

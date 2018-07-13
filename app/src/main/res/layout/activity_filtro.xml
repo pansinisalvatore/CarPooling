@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/automobilista"
+            android:theme="@style/MyEditText"
 
 
             />
@@ -43,13 +44,14 @@
 
                 android:layout_weight="1"
                 android:text="@string/casa_lavoro"
+                android:theme="@style/MyEditText"
              />
 
             <RadioButton
                 android:id="@+id/LavoroCasaRicerca"
                 android:layout_width="141dp"
                 android:layout_height="69dp"
-
+                android:theme="@style/MyEditText"
 
 
                 android:layout_weight="1"
@@ -72,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/SelezionaData"
-
+            android:theme="@style/MyEditText"
 
             android:layout_below="@+id/edtselezionadata">
 
@@ -82,7 +84,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:theme="@style/MyEditText"/>
         </android.support.design.widget.TextInputLayout>
 
 
@@ -100,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/SelezionaOra"
-
+            android:theme="@style/MyEditText"
 
             android:layout_below="@+id/edtselezionadata">
 
@@ -109,7 +112,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:maxLines="1"  android:id="@+id/edtselezionaora"/>
+                android:maxLines="1"
+                android:id="@+id/edtselezionaora"
+                android:theme="@style/MyEditText"/>
         </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
@@ -126,7 +131,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:text="@string/Ricerca" />
+            android:text="@string/Ricerca"
+            android:background="@drawable/button_shape_normal"
+            android:backgroundTint="@color/tint_color"/>
 
     </LinearLayout>
 

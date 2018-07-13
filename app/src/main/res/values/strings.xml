@@ -30,7 +30,7 @@
     <string name="Nome">Name</string>
     <string name="Cognome">Surname</string>
     <string name="Indirizzo">Address</string>
-    <string name="VisualizzaClassifica">Show graduation</string>
+    <string name="VisualizzaClassifica">Graduation</string>
     <string name="Logout">Logout</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
@@ -115,4 +115,5 @@ Enter your information to proceed with registration.</string>
     <string name="RifiutaUtente">Refuse</string>
     <string name="PassaggioPrenotatoTitolo">Request sent</string>
     <string name="PassaggioPrenotatoTesto">Your request has been sent to the bidder. Wait for his answer.</string>
+    <string name="Tracking">Tracking</string>
 </resources>

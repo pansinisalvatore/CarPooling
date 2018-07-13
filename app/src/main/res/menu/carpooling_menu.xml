@@ -15,6 +15,11 @@
         android:icon="@drawable/account">
 
     </item>
+    <item android:id="@+id/Tracking"
+        android:title="@string/Tracking"
+        android:icon="@drawable/tracking">
+
+    </item>
     <item android:id="@+id/imieipassaggi"
         android:title="@string/ImieiPassaggi"
         android:icon="@drawable/car">
@@ -26,11 +31,7 @@
 
     </item>
 
-    <item android:id="@+id/Tracking"
-        android:title="@string/VisualizzaClassifica"
-        android:icon="@drawable/tracking">
 
-    </item>
 
 
 </menu>

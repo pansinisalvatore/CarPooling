@@ -29,7 +29,8 @@
             android:inputType="text"
             android:maxLines="1"
             android:editable="false"
-            android:ems="13"/>
+            android:ems="13"
+            android:theme="@style/MyEditText"/>
     </LinearLayout>
 
     <LinearLayout
@@ -58,7 +59,8 @@
             android:inputType="text"
             android:maxLines="1"
             android:editable="false"
-            android:ems="14"/>
+            android:ems="14"
+            android:theme="@style/MyEditText"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -87,7 +89,8 @@
             android:editable="false"
             android:ems="13"
             android:inputType="text"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:theme="@style/MyEditText"/>
     </LinearLayout>
 
     <LinearLayout
@@ -118,7 +121,8 @@
             android:ems="13"
             android:editable="false"
             android:inputType="text"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:theme="@style/MyEditText"/>
     </LinearLayout>
 
     <LinearLayout
@@ -147,7 +151,8 @@
             android:layout_height="wrap_content"
             android:ems="11"
             android:inputType="text"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:theme="@style/MyEditText"/>
 
     </LinearLayout>
     <LinearLayout
@@ -176,7 +181,8 @@
             android:editable="false"
             android:ems="11"
             android:inputType="text"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:theme="@style/MyEditText"/>
 
     </LinearLayout>
 
@@ -206,7 +212,8 @@
             android:inputType="text"
             android:editable="false"
             android:maxLines="1"
-            android:ems="11"/>
+            android:ems="11"
+            android:theme="@style/MyEditText"/>
 
     </LinearLayout>
 
