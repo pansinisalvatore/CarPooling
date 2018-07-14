@@ -5,33 +5,63 @@
     android:layout_height="match_parent"
     tools:context=".TrackingFragment"
     android:id="@+id/TrackingFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="0.5">
-    </LinearLayout>
-
 <LinearLayout
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:weightSum="0.5">
-    <TextView
+    android:orientation="vertical">
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/avviaTrackingText"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:selectAllOnFocus="false"
-        android:linksClickable="false"
-        android:autoLink="all"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewVuota"
+            android:text=""/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/avviaTrackingText"
+            android:layout_below="@+id/textViewVuota"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:id="@+id/avviaTrackingText"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewVuota2"
+            android:layout_below="@+id/avviaTrackingText"
+            android:text=""/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewVuota2"
+            android:text="@string/personeDaPrendereText"
+            android:id="@+id/daPrendereText"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/daPrendereText"
+            />
+    </RelativeLayout>
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/dinamic"
+       android:orientation="vertical">
+
+   </RelativeLayout>
+
+
+
+
+
 
 </LinearLayout>
-
-
-
 
 </FrameLayout>

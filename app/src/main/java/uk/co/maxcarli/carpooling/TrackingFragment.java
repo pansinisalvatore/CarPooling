@@ -12,6 +12,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -51,28 +54,22 @@ public class TrackingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         String dataCorrente = getCurrentData();
-        View root = inflater.inflate(R.layout.fragment_tracking, container, false);
+        int vista = 0;
+        View rootServer = inflater.inflate(R.layout.fragment_tracking, container, false);
+
+        vista = controlOfferer(cittadino.passaggiOfferti, dataCorrente);
 
 
-        controlOfferer(cittadino.passaggiOfferti, dataCorrente);
 
-        return root;
-    }
-
-
-    public String getCurrentData(){
-
-        Date today = Calendar.getInstance().getTime();
-
-        String reportDate = DateFormat.getDateInstance().format(today.getTime());
-        Log.d("DataCurrent", reportDate);
-        return reportDate;
-
+        return rootServer;
     }
 
 
 
-    public boolean controlOfferer(List<Passaggio> passaggiOfferti, String dataCorrente){
+
+
+
+    public int controlOfferer(List<Passaggio> passaggiOfferti, String dataCorrente){
 
         String stringaOrario = ""; //serve solo per il log
         String stringaOrarioC = ""; //serve solo per il log
@@ -98,8 +95,12 @@ public class TrackingFragment extends Fragment {
 
             }
         }
-            if (trovato == 1) return true;
-        else return false;
+            return trovato;
+    }
+
+    public void personeDaPrendere(String dataCorrente){
+        String string = "";
+
     }
 
 

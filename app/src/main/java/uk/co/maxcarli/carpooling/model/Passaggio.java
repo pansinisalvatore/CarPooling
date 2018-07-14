@@ -3,6 +3,8 @@ package uk.co.maxcarli.carpooling.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
 public class Passaggio implements Parcelable{
 
 
@@ -56,6 +58,10 @@ public class Passaggio implements Parcelable{
     private String automobilista;
     private String cellAutomobilista;
 
+    public   final ArrayList<Cittadino> cittadiniRichiedenti;
+    public final ArrayList<String> cittadinoStatus;
+
+
     public Passaggio() {
         idPassaggio = 0;
         data = "";
@@ -69,7 +75,10 @@ public class Passaggio implements Parcelable{
         automobilista="";
         cellAutomobilista="";
         richieste=0;
+        cittadiniRichiedenti=new ArrayList<Cittadino>();
+        cittadinoStatus=new ArrayList<String>();
     }
+
 
     public int getIdPassaggiOfferti() {
         return idPassaggio;
@@ -163,6 +172,10 @@ public class Passaggio implements Parcelable{
         status = in.readString();
         automobilista=in.readString();
         cellAutomobilista=in.readString();
+        cittadiniRichiedenti=new ArrayList<Cittadino>();
+        in.readTypedList(cittadiniRichiedenti, Cittadino.CREATOR);
+        cittadinoStatus=new ArrayList<String>();
+        in.readList(cittadinoStatus, String.class.getClassLoader());
     }
 
     @Override
@@ -184,6 +197,8 @@ public class Passaggio implements Parcelable{
         dest.writeString(status);
         dest.writeString(automobilista);
         dest.writeString(cellAutomobilista);
+        dest.writeTypedList(cittadiniRichiedenti);
+        dest.writeList(cittadinoStatus);
     }
 
 

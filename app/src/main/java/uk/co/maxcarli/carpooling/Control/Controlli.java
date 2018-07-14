@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.StringTokenizer;
@@ -164,6 +165,16 @@ public class Controlli {
         Log.d("mm",sMin);
         int oraCorrente = (ora * 60) + minuti;
         return oraCorrente;
+    }
+
+    public static String getCurrentData(){
+
+        Date today = Calendar.getInstance().getTime();
+
+        String reportDate = DateFormat.getDateInstance().format(today.getTime());
+        Log.d("DataCurrent", reportDate);
+        return reportDate;
+
     }
 
 

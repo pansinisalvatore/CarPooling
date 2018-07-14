@@ -300,6 +300,7 @@ public class Database {
 
                                 for(int i=0; i < jsonarray.length(); i++) {
 
+
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
                                     Passaggio p=new Passaggio();
                                     p.setIdPassaggiOfferti(jsonobject.getInt("IdPassaggio"));
@@ -312,13 +313,32 @@ public class Database {
                                     p.setRichieste(jsonobject.getInt("RichiestePassaggio"));
                                     p.setSettimanale(jsonobject.getInt("SettimanalePassaggio"));
 
-                                    cittadino.addPassaggioOfferto(p);
-                                    //Toast.makeText(context, viaggio+" "+data+" "+ora+" "+status+" "+postiOccupati,Toast.LENGTH_SHORT).show();
+                                    Cittadino cittadinoRichiedente=new Cittadino();
+                                    cittadinoRichiedente.setNome(jsonobject.getString("NomeCittadino"));
+                                    cittadinoRichiedente.setCognome(jsonobject.getString("CognomeCittadino"));
+                                    cittadinoRichiedente.setIdCittadino(jsonobject.getInt("IdCittadino"));
+                                    cittadinoRichiedente.setResidenza(jsonobject.getString("ResidenzaCittadino"));
+                                    cittadinoRichiedente.setNumeroTelefono(jsonobject.getString("TelefonoCittadino"));
 
-                                    Log.i("Dati", p.getData());
+
+                                    if(cittadino.passaggiOfferti.contains(p)){
+                                        cittadino.passaggiOfferti.get(cittadino.passaggiOfferti.indexOf(p)).cittadiniRichiedenti.add(cittadinoRichiedente);
+                                        cittadino.passaggiOfferti.get(cittadino.passaggiOfferti.indexOf(p)).cittadinoStatus.add(jsonobject.getString("Status"));
+                                    }else{
+                                        p.cittadiniRichiedenti.add(cittadinoRichiedente);
+                                        p.cittadinoStatus.add(jsonobject.getString("Status"));
+                                        cittadino.passaggiOfferti.add(p);
+                                    }
+
+
+                                    //prendiRichiedentiPassaggio( p,context);
+                                    Log.i("DatiCittadini", p.cittadiniRichiedenti.get(0).getCognome()+"");
+
 
 
                                 }
+
+
 
 
                             } catch (JSONException e) {
@@ -346,6 +366,66 @@ public class Database {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("idCittadino", cittadino.getIdCittadino()+"");
+
+
+                return params;
+            }
+        };
+
+        MySingleton.getmInstance(context.getApplicationContext()).addTorequestque(stringRequest);
+    }
+
+    static Cittadino cittadinoRichiedente=new Cittadino();
+
+
+    public static void prendiRichiedentiPassaggio(final Passaggio passaggio, final Context context){
+        String url= "http://carpoolingsms.altervista.org/PHP/PrendiRichiedenti.php";
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(context, response,Toast.LENGTH_SHORT).show();
+
+                        if(!response.equals("Something went wrong")){
+                            try {
+
+                                JSONArray jsonarray = new JSONArray(response);
+
+                                for(int i=0; i < jsonarray.length(); i++) {
+
+                                    //Toast.makeText(context, viaggio+" "+data+" "+ora+" "+status+" "+postiOccupati,Toast.LENGTH_SHORT).show();
+
+
+
+                                }
+
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+
+                            }
+
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if(error != null){
+
+                            Toast.makeText(context.getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idPassaggio", passaggio.getIdPassaggiOfferti()+"");
 
 
                 return params;

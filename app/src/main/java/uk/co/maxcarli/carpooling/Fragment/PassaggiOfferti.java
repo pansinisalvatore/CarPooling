@@ -138,4 +138,5 @@ public class PassaggiOfferti extends Fragment {
     }
 
 
+
 }
