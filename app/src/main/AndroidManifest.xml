@@ -17,16 +17,14 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/splash_image"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/FullScreen">
-
-        </activity>
+            android:theme="@style/FullScreen"></activity>
         <activity
             android:name=".Splash_activity"
             android:label="@string/app_name"
@@ -36,15 +34,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".RegistrazioneCittadino" /> <!-- riferimento a una risorsa di tipo style che si chiama FullScreen -->
 
         <activity
             android:name=".OffriPassaggi"
-            android:theme="@style/AppTheme">
-
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".RicercaIndirizzo"
             android:theme="@style/AppTheme" />
@@ -58,9 +53,7 @@
 
         <activity
             android:name=".menu"
-            android:theme="@style/AppTheme">
-
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".SceltaAzienda"
             android:theme="@style/AppTheme" />
@@ -70,32 +63,21 @@
         <activity android:name=".ReimpostaPassword" />
         <activity android:name=".ListaUtenti" />
         <activity android:name=".MappaCercaPassaggi" />
-        <activity android:name=".completaRegistrazione">
-
-        </activity>
-        <activity android:name=".Filtro">
-
-        </activity>
+        <activity android:name=".completaRegistrazione"></activity>
+        <activity android:name=".Filtro"></activity>
         <activity
             android:name=".Bluethoot.avviaTraking"
             android:theme="@style/AppTheme" />
         <activity android:name=".Bluethoot.ClientConnect" />
         <activity android:name=".Bluethoot.Tracking" />
-        <activity android:name=".DettagliUtente">
-
-
-        </activity>
+        <activity android:name=".DettagliUtente"></activity>
         <activity
             android:name=".ModificaResidenzaActivity"
             android:label="@string/title_activity_modifica_residenza"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".cambia_pass">
-
-
-
-
-        </activity>
-        <activity android:name=".MappaOffertePassaggiActivity"></activity>
+        <activity android:name=".cambia_pass"></activity>
+        <activity android:name=".MappaOffertePassaggiActivity" />
+        <activity android:name=".rotate_animation"></activity>
     </application>
 
 </manifest>
