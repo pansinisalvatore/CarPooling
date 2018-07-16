@@ -312,27 +312,30 @@ public class Database {
                                     p.setTipoPassaggio(jsonobject.getString("TipoPassaggio"));
                                     p.setRichieste(jsonobject.getInt("RichiestePassaggio"));
                                     p.setSettimanale(jsonobject.getInt("SettimanalePassaggio"));
-
-                                    Cittadino cittadinoRichiedente=new Cittadino();
-                                    cittadinoRichiedente.setNome(jsonobject.getString("NomeCittadino"));
-                                    cittadinoRichiedente.setCognome(jsonobject.getString("CognomeCittadino"));
-                                    cittadinoRichiedente.setIdCittadino(jsonobject.getInt("IdCittadino"));
-                                    cittadinoRichiedente.setResidenza(jsonobject.getString("ResidenzaCittadino"));
-                                    cittadinoRichiedente.setNumeroTelefono(jsonobject.getString("TelefonoCittadino"));
-
+                                    Cittadino cittadinoRichiedente=null;
+                                    if(!jsonobject.getString("NomeCittadino").equals("null")){
+                                        cittadinoRichiedente=new Cittadino();
+                                        cittadinoRichiedente.setNome(jsonobject.getString("NomeCittadino"));
+                                        cittadinoRichiedente.setCognome(jsonobject.getString("CognomeCittadino"));
+                                        cittadinoRichiedente.setIdCittadino(jsonobject.getInt("IdCittadino"));
+                                        cittadinoRichiedente.setResidenza(jsonobject.getString("ResidenzaCittadino"));
+                                        cittadinoRichiedente.setNumeroTelefono(jsonobject.getString("TelefonoCittadino"));
+                                    }
 
                                     if(cittadino.passaggiOfferti.contains(p)){
                                         cittadino.passaggiOfferti.get(cittadino.passaggiOfferti.indexOf(p)).cittadiniRichiedenti.add(cittadinoRichiedente);
                                         cittadino.passaggiOfferti.get(cittadino.passaggiOfferti.indexOf(p)).cittadinoStatus.add(jsonobject.getString("Status"));
                                     }else{
-                                        p.cittadiniRichiedenti.add(cittadinoRichiedente);
-                                        p.cittadinoStatus.add(jsonobject.getString("Status"));
+                                        if(cittadinoRichiedente!=null){
+                                            p.cittadiniRichiedenti.add(cittadinoRichiedente);
+                                            p.cittadinoStatus.add(jsonobject.getString("Status"));
+                                        }
                                         cittadino.passaggiOfferti.add(p);
                                     }
 
 
                                     //prendiRichiedentiPassaggio( p,context);
-                                    Log.i("DatiCittadini", p.cittadiniRichiedenti.get(0).getCognome()+"");
+                                    //Log.i("DatiCittadini", p.cittadiniRichiedenti.get(0).getCognome()+"");
 
 
 

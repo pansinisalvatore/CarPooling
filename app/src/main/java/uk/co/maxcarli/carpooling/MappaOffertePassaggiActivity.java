@@ -28,6 +28,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,7 +72,7 @@ public class MappaOffertePassaggiActivity extends AppCompatActivity implements O
         double raggio=500;
         indirizzoCasa=MappaCercaPassaggi.getLocationFromAddress(cittadino.getResidenza(),this);
         indirizzoLavoro=MappaCercaPassaggi.getLocationFromAddress(cittadino.getSede().getIndirizzoSede(),this);
-        getIndirizziRichiedenti(this);
+        getIndirizziRichiedenti();
 
 
 
@@ -89,72 +90,26 @@ public class MappaOffertePassaggiActivity extends AppCompatActivity implements O
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(indirizzoCasa.getLatitude(),indirizzoCasa.getLongitude()),18.0f));
     }
 
-    private void getIndirizziRichiedenti(final Context context){
-        String url = "http://carpoolingsms.altervista.org/PHP/PrendiIndirizziDeiRichiedenti.php";
+    private void getIndirizziRichiedenti(){
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(context.getApplicationContext(),response,Toast.LENGTH_LONG).show();
+      ArrayList<Cittadino> richiedenti=passaggio.cittadiniRichiedenti;
 
-                        if(!response.equals("Something went wrong")){
-                            try {
+      for(int i=0;i<richiedenti.size();i++){
+          Cittadino c=richiedenti.get(i);
+          String indirizzo = c.getResidenza();
+          String cognome = c.getCognome();
+          String nome = c.getNome();
+          String cell=c.getNumeroTelefono();
+          infoMarker.setString(nome,cognome,indirizzo,cell);
+          Address pos = MappaCercaPassaggi.getLocationFromAddress(indirizzo, this);
+          mMap.addMarker(new MarkerOptions().
+                  position(new LatLng(pos.getLatitude(), pos.getLongitude())
+                  ).draggable(true).title(cognome + " " + nome).
+                  icon(BitmapDescriptorFactory
+                          .defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+      }
 
-                                JSONArray jsonarray = new JSONArray(response);
-
-                                for (int i = 0; i < jsonarray.length(); i++) {
-
-                                    JSONObject jsonobject = jsonarray.getJSONObject(i);
-
-                                    String indirizzo = jsonobject.getString("ResidenzaCittadino");
-                                    String cognome = jsonobject.getString("CognomeCittadino");
-                                    String nome = jsonobject.getString("NomeCittadino");
-                                    String cell=jsonobject.getString("TelefonoCittadino");
-                                    infoMarker.setString(nome,cognome,indirizzo,cell);
-
-                                    int j = 0;
-
-                                    Address pos = MappaCercaPassaggi.getLocationFromAddress(indirizzo, context);
-                                    mMap.addMarker(new MarkerOptions().
-                                            position(new LatLng(pos.getLatitude(), pos.getLongitude())
-                                            ).title(cognome + " " + nome).
-                                            icon(BitmapDescriptorFactory
-                                                    .defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-
-                            }
-                        }else{
-                            //Toast.makeText(context.getApplicationContext(),getString(R.string.RichiesteNonPresenti),Toast.LENGTH_LONG).show();
-                        }
-
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        if (error != null) {
-
-                            Toast.makeText(context.getApplicationContext(), "Something went wrong.", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("data", passaggio.getData());
-                params.put("ora", passaggio.getOra());
-                params.put("idCittadino",cittadino.getIdCittadino()+"");
-                return params;
-            }
-        };
-
-        MySingleton.getmInstance(context.getApplicationContext()).addTorequestque(stringRequest);
     }
 
 
@@ -172,6 +127,8 @@ public class MappaOffertePassaggiActivity extends AppCompatActivity implements O
         TextView celltext;
         Button accetta;
         Button rifiuta;
+
+
 
         public CustomInfoWindow(Context context){
             this.context=context;
@@ -214,12 +171,22 @@ public class MappaOffertePassaggiActivity extends AppCompatActivity implements O
 
         @Override
         public View getInfoContents(Marker marker) {
-            TextView driver=view.findViewById(R.id.textDriver);
-            driver.setText(driver.toString());
-            TextView residence=view.findViewById(R.id.textResidence);
-            residence.setText(residence.toString());
-            TextView cell=view.findViewById(R.id.textCell);
-            cell.setText(cell.toString());
+            drivertext=view.findViewById(R.id.textDriver);
+            drivertext.setText(this.cognomeDriver+" "+this.nomeDriver);
+            residencetext=view.findViewById(R.id.textResidence);
+            residencetext.setText(this.residence);
+            celltext=view.findViewById(R.id.textCell);
+            celltext.setText(this.cell);
+
+            accetta=view.findViewById(R.id.accetta);
+            rifiuta=view.findViewById(R.id.rifiuta);
+
+            accetta.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    modificaStatus("accettato");
+                }
+            });
 
 
             return view;
@@ -273,14 +240,6 @@ public class MappaOffertePassaggiActivity extends AppCompatActivity implements O
 
         }
 
-
-
-
-
-
-
     }
-
-
 
 }

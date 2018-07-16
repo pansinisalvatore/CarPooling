@@ -24,6 +24,7 @@ package uk.co.maxcarli.carpooling;
         import uk.co.maxcarli.carpooling.Fragment.ImieipassaggiFragment;
         import uk.co.maxcarli.carpooling.Fragment.ProfiloFragment;
         import uk.co.maxcarli.carpooling.model.Cittadino;
+        import uk.co.maxcarli.carpooling.model.Passaggio;
         import uk.co.maxcarli.carpooling.model.Sede;
 
 
@@ -147,10 +148,15 @@ public class menu extends AppCompatActivity {
         return cittadino;
     }
 
+    public void setCittadino(Cittadino c){
+        cittadino=c;
+    }
 
     @Override
     public void onBackPressed() {
 
     }
+
+
 
 }

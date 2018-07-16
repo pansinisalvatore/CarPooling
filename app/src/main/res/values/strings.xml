@@ -92,7 +92,7 @@ Enter your information to proceed with registration.</string>
     <string name="TestoAggiornamentoConfermato">Your profile is updated</string>
     <string name="PassaggioOffertoConfermatoTitolo">Passage confirmed</string>
     <string name="PassaggioOffertoConfermatoTesto">Your passage has been successfully offered </string>
-    <string name="ErrorePassaggioOffertoPresenteTesto">You have already offered a ride to this date and time</string>
+    <string name="ErrorePassaggioOffertoPresenteTesto">you have already offered or requested a ride on this date and within the next three hours or so. </string>
 
 
     <string name="casa_lavoro">Home-Work</string>
@@ -102,7 +102,7 @@ Enter your information to proceed with registration.</string>
     <string name="lavoro">Work</string>
 
     <string name="ErrorePassaggioRichiestoPresenteTitolo">Error insert</string>
-    <string name="ErrorePassaggioRichiestoPresenteTesto">You already have a request on this date and at this time</string>
+    <string name="ErrorePassaggioRichiestoPresenteTesto">you have already offered or requested a ride on this date and within the next three hours or so.</string>
 
     <string name="Prenotazione_passaggio">Click to occupy</string>
     <string name="OfferteNonPresenti">There are no offers</string>

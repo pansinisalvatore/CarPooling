@@ -5,6 +5,7 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -131,10 +132,13 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
                     p.setSettimanale(settimanale);
                     p.setTipoPassaggio(tipoPassaggio);
 
-                    if(cittadino.passaggiOfferti.contains(p)){
+                    if(cittadino.passaggiOfferti.contains(p) || cittadino.passaggiRichiesti.contains(p)){
                         Controlli.mostraMessaggioErrore(getString(R.string.ErrorePassaggioRichiestoPresenteTitolo),getString(R.string.ErrorePassaggioOffertoPresenteTesto),OffriPassaggi.this);
                     }else{
                         cittadino.addPassaggioOfferto(p);
+                        final Intent returnIntent = new Intent();
+                        returnIntent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
+                        setResult(1,returnIntent);
                         Database.OffriPassaggi(p, cittadino,OffriPassaggi.this);
                     }
 
