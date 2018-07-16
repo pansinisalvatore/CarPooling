@@ -119,4 +119,9 @@ Enter your information to proceed with registration.</string>
     <string name="accetta">Accept</string>
     <string name="rifiuta">Refuse</string>
     <string name="Tracking">Tracking</string>
+
+    <string name="Accetato">Accepted</string>
+    <string name="Rifiutato">Refused</string>
+    <string name="Sospeso">Suspended</string>
+
 </resources>

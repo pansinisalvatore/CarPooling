@@ -48,10 +48,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
     private Passaggio passaggio;
 
     private String indirizzoCittadino;
-    private final String data="21/3/2013" ;
-    private final String ora="21.10";
-    private static final ArrayList<String> indirizzi=new ArrayList<String>();
-    private static final ArrayList<String> automobilisti=new ArrayList<String>();
+
     private Address home;
     private Address work;
 
@@ -261,7 +258,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                     public void onResponse(String response) {
 
                         Toast.makeText(context,response,Toast.LENGTH_LONG).show();
-                        if(!response.equals("Something went wrong") || !response.equals("Error query")){
+                        if(!response.equals("Something went wrong") && !response.equals("Error query")){
 
                             try {
 

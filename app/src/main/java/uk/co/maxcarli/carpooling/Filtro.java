@@ -140,10 +140,8 @@ public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClic
                     }else{
                         p.setTipoPassaggio("Lavoro-Casa");
                     }
-                    if (cittadino.passaggiRichiesti.contains(p)){
+                    if (cittadino.passaggiRichiesti.contains(p) || cittadino.passaggiOfferti.contains(p)){
                         Controlli.mostraMessaggioErrore(getString(R.string.ErrorePassaggioRichiestoPresenteTitolo),getString(R.string.ErrorePassaggioRichiestoPresenteTesto),Filtro.this);
-                    }else if(cittadino.passaggiOfferti.contains(p)){
-                        Controlli.mostraMessaggioErrore(getString(R.string.ErrorePassaggioRichiestoPresenteTitolo),getString(R.string.ErrorePassaggioOffertoPresenteTesto), Filtro.this);
                     }
                     else{
 
@@ -276,6 +274,9 @@ public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClic
 
         if(passaggioPrenotato!=null){
             cittadino.addPassaggioRichiesto(passaggioPrenotato);
+            final Intent returnIntent = new Intent();
+            returnIntent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
+            setResult(2,returnIntent);
         }
     }
 }

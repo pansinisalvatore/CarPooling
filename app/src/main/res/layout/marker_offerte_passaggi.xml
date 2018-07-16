@@ -62,28 +62,36 @@
             android:text="" />
     </LinearLayout>
 
+
+    <LinearLayout
+        android:id="@+id/StatusText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="129dp"
+            android:layout_height="wrap_content"
+            android:text="@string/Stato" />
+
+        <TextView
+            android:id="@+id/textStatus"
+            android:layout_width="285dp"
+            android:layout_height="wrap_content"
+            android:text="" />
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:layout_weight="1">
 
-        <Button
-            android:id="@+id/accetta"
-            android:layout_width="188dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_shape_normal"
-            android:text="@string/accetta" />
-
-        <Button
-            android:id="@+id/rifiuta"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/rifiuta"
-            android:background="@drawable/button_shape_normal"/>
     </LinearLayout>
 
-   <LinearLayout
+
+    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:layout_weight="1"></LinearLayout>
