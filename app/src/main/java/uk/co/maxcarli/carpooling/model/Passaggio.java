@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 
+import uk.co.maxcarli.carpooling.Control.Controlli;
+
 public class Passaggio implements Parcelable{
 
 
@@ -155,7 +157,16 @@ public class Passaggio implements Parcelable{
 
     public boolean equals(Object o){
         Passaggio p=(Passaggio)o;
-        return this.data.equals(p.data) && this.ora.equals(p.ora);
+        if(this.data.equals(p.data)){
+            if(Math.abs(Controlli.oreInMinuti(p.ora)- Controlli.oreInMinuti(this.ora))>=180){
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return false;
+        }
+
     }
 
 

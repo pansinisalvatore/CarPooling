@@ -53,7 +53,7 @@ public class HomeFragment extends Fragment {
 
                 Intent intent=new Intent(getActivity(), OffriPassaggi.class);
                 intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
-                startActivity(intent);
+                startActivityForResult(intent,1);
 
             }
         });
@@ -63,13 +63,23 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(), Filtro.class);
                 intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
-                startActivity(intent);
+                startActivityForResult(intent,2);
             }
         });
 
 
         return root;
     }
+    public void onActivityResult(int requestCode, int resultCode, Intent databack){
+        if(databack!=null){
+            Cittadino c=(Cittadino) databack.getParcelableExtra(Cittadino.Keys.IDCITTADINO);
 
+            if(c!=null){
+                cittadino=c;
+                menuActivity.setCittadino(c);
+            }
+        }
+
+    }
 
 }
