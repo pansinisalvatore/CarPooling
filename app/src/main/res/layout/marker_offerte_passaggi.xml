@@ -73,6 +73,7 @@
             android:layout_width="188dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_shape_normal"
+            android:backgroundTint="@color/tint_botton"
             android:text="@string/accetta" />
 
         <Button
@@ -80,7 +81,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/rifiuta"
-            android:background="@drawable/button_shape_normal"/>
+            android:background="@drawable/button_shape_normal"
+            android:backgroundTint="@color/tint_botton"/>
     </LinearLayout>
 
    <LinearLayout

@@ -49,7 +49,9 @@
         android:layout_alignParentLeft="true"
         android:hint="@string/Conferma"
         android:onClick="clickButton"
-        android:gravity="left"
+        android:layout_gravity="center"
+        android:background="@drawable/button_shape_normal"
+        android:backgroundTint="@color/tint_botton"
         />
 
 
