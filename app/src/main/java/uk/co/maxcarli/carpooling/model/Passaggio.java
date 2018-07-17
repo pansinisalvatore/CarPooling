@@ -10,29 +10,8 @@ import uk.co.maxcarli.carpooling.Control.Controlli;
 public class Passaggio implements Parcelable{
 
 
-    public String getAutomobilista() {
-        return automobilista;
-    }
 
-    public void setAutomobilista(String automobilista) {
-        this.automobilista = automobilista;
-    }
 
-    public String getCellAutomobilista() {
-        return cellAutomobilista;
-    }
-
-    public void setCellAutomobilista(String cellAutomobilista) {
-        this.cellAutomobilista = cellAutomobilista;
-    }
-
-    public int getRichieste() {
-        return richieste;
-    }
-
-    public void setRichieste(int richieste) {
-        this.richieste = richieste;
-    }
 
     public interface Keys{
         String IDPASSAGGIO = "idPassaggio";
@@ -57,11 +36,17 @@ public class Passaggio implements Parcelable{
     private int postiDisponibili;
     private int postiOccupati;
     private String status;
-    private String automobilista;
-    private String cellAutomobilista;
+
+
+
+    private static final byte PRESENT=1;
+    private static final byte NOT_PRESENT=0;
+
 
     public   final ArrayList<Cittadino> cittadiniRichiedenti;
     public final ArrayList<String> cittadinoStatus;
+
+    private Cittadino cittadinoOfferente;
 
 
     public Passaggio() {
@@ -74,11 +59,10 @@ public class Passaggio implements Parcelable{
         postiDisponibili = 0;
         postiOccupati = 0;
         status = "";
-        automobilista="";
-        cellAutomobilista="";
         richieste=0;
         cittadiniRichiedenti=new ArrayList<Cittadino>();
         cittadinoStatus=new ArrayList<String>();
+
     }
 
 
@@ -154,6 +138,22 @@ public class Passaggio implements Parcelable{
         this.status = status;
     }
 
+    public int getRichieste() {
+        return richieste;
+    }
+
+    public void setRichieste(int richieste) {
+        this.richieste = richieste;
+    }
+
+    public Cittadino getCittadinoOfferente() {
+        return cittadinoOfferente;
+    }
+
+    public void setCittadinoOfferente(Cittadino cittadinoOfferente) {
+        this.cittadinoOfferente = cittadinoOfferente;
+    }
+
 
     public boolean equals(Object o){
         Passaggio p=(Passaggio)o;
@@ -181,12 +181,17 @@ public class Passaggio implements Parcelable{
         postiDisponibili = in.readInt();
         postiOccupati = in.readInt();
         status = in.readString();
-        automobilista=in.readString();
-        cellAutomobilista=in.readString();
         cittadiniRichiedenti=new ArrayList<Cittadino>();
         in.readTypedList(cittadiniRichiedenti, Cittadino.CREATOR);
         cittadinoStatus=new ArrayList<String>();
         in.readList(cittadinoStatus, String.class.getClassLoader());
+
+        if(in.readByte()==PRESENT){
+            cittadinoOfferente=in.readParcelable(Cittadino.class.getClassLoader());
+        }else{
+            cittadinoOfferente=null;
+        }
+
     }
 
     @Override
@@ -206,10 +211,15 @@ public class Passaggio implements Parcelable{
         dest.writeInt(postiDisponibili);
         dest.writeInt(postiOccupati);
         dest.writeString(status);
-        dest.writeString(automobilista);
-        dest.writeString(cellAutomobilista);
         dest.writeTypedList(cittadiniRichiedenti);
         dest.writeList(cittadinoStatus);
+
+        if(cittadinoOfferente==null){
+            dest.writeByte(NOT_PRESENT);
+        }else{
+            dest.writeByte(PRESENT);
+            dest.writeParcelable(cittadinoOfferente,0);
+        }
     }
 
 

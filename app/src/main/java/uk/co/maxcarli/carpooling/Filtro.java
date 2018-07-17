@@ -133,7 +133,17 @@ public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClic
                     ora=sel_ora.getText().toString();
                     p.setData(data);
                     p.setOra(ora);
-                    p.setAutomobilista(automobilista);
+                    String nomeOfferente="";
+                    String cognomeOfferente="";
+                    if(!automobilista.equals("")){
+                        nomeOfferente=automobilista.substring(automobilista.indexOf(" "));
+                        cognomeOfferente=automobilista.substring(0,automobilista.indexOf(" "));
+                        nomeOfferente=nomeOfferente.trim();
+                        cognomeOfferente=cognomeOfferente.trim();
+                    }
+                    p.setCittadinoOfferente(new Cittadino());
+                    p.getCittadinoOfferente().setNome(nomeOfferente);
+                    p.getCittadinoOfferente().setCognome(cognomeOfferente);
 
                     if(groupTypeTrip.getCheckedRadioButtonId()==home_work.getId()){
                         p.setTipoPassaggio("Casa-Lavoro");

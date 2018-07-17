@@ -227,7 +227,10 @@ public class Database {
                                 for(int i=0; i < jsonarray.length(); i++) {
 
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
+
                                     Passaggio p=new Passaggio();
+                                    Cittadino cittadinoOfferente=new Cittadino();
+
                                     p.setIdPassaggiOfferti(jsonobject.getInt("IdPassaggio"));
                                     p.setData(jsonobject.getString("DataPassaggio"));
                                     p.setOra(jsonobject.getString("OraPassaggio"));
@@ -236,14 +239,22 @@ public class Database {
                                     p.setPostiOccupati(jsonobject.getInt("PostiOccupatiPassaggio"));
                                     p.setStatus(jsonobject.getString("Status"));
                                     p.setTipoPassaggio(jsonobject.getString("TipoPassaggio"));
+
+
+                                    p.setSettimanale(jsonobject.getInt("SettimanalePassaggio"));
+
                                     String nomeAutomobilista=jsonobject.getString("NomeCittadino");
                                     String cognomeAutomobilista=jsonobject.getString("CognomeCittadino");
-                                    p.setAutomobilista(cognomeAutomobilista+" "+nomeAutomobilista);
-                                    p.setCellAutomobilista(jsonobject.getString("TelefonoCittadino"));
-                                    p.setSettimanale(jsonobject.getInt("SettimanalePassaggio"));
+                                    cittadinoOfferente.setNome(nomeAutomobilista);
+                                    cittadinoOfferente.setCognome(cognomeAutomobilista);
+                                    cittadinoOfferente.setResidenza(jsonobject.getString("ResidenzaCittadino"));
+                                    cittadinoOfferente.setNumeroTelefono(jsonobject.getString("TelefonoCittadino"));
+
+                                    p.setCittadinoOfferente(cittadinoOfferente);
 
                                     cittadino.setMacAddress(jsonobject.getString("MacAddress"));
                                     cittadino.addPassaggioRichiesto(p);
+
 
                                 }
 
@@ -545,6 +556,54 @@ public class Database {
         MySingleton.getmInstance(context).addTorequestque(stringRequest);
 
 
+
+    }
+
+
+
+    public  static void modificaStatus(final String status, final String cell, final Context c,final Passaggio passaggio){
+        String url = "http://carpoolingsms.altervista.org/PHP/AggiornaStatoPassaggioRichiesto.php";
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(c,response,Toast.LENGTH_LONG).show();
+
+                        if(response.equals("Success")){
+
+
+
+
+                        }else{
+                            //Toast.makeText(context.getApplicationContext(),getString(R.string.RichiesteNonPresenti),Toast.LENGTH_LONG).show();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (error != null) {
+
+                            Toast.makeText(c, "Something went wrong.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idPassaggio", passaggio.getIdPassaggiOfferti()+"");
+                params.put("cellRichiedente",cell);
+                params.put("status",status);
+                return params;
+            }
+        };
+
+        MySingleton.getmInstance(c).addTorequestque(stringRequest);
 
     }
 

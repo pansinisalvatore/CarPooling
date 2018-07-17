@@ -124,4 +124,10 @@ Enter your information to proceed with registration.</string>
     <string name="Rifiutato">Refused</string>
     <string name="Sospeso">Suspended</string>
 
+    <string name="PostiOccupatiTitolo">Places occupied</string>
+    <string name="PostiOccupatiTesto">All  places are occupied</string>
+    <string name="PassaggioRifiutatoTitolo">Request rejected</string>
+    <string name="PassaggioRifiutatoTesto">Your request has been rejected. Are you sure you want to delete this step from your list?</string>
+    <string name="si">Yes</string>
+    <string name="no">No</string>
 </resources>

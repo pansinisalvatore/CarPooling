@@ -127,8 +127,6 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
                     p.setOra(ora);
                     p.setAuto(auto);
                     p.setPostiDisponibili(posti);
-                    p.setAutomobilista(cittadino.getCognome()+" "+cittadino.getNome());
-                    p.setCellAutomobilista(cittadino.getNumeroTelefono());
                     p.setSettimanale(settimanale);
                     p.setTipoPassaggio(tipoPassaggio);
 
