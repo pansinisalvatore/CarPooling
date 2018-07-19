@@ -15,7 +15,12 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import uk.co.maxcarli.carpooling.R;
+
 public class Controlli {
+
+
+
 
     public static void mostraMessaggioSuccesso(String title, String msg, Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -152,6 +157,18 @@ public class Controlli {
         int minInt = Integer.parseInt(stringMinutes);
         int orarioConvertito = (oraInt * 60) + minInt;
         return orarioConvertito;
+    }
+
+
+    public static String controllaStringaStatus(String status, Context c){
+        switch(status){
+            case "accettato":
+                return c.getString(R.string.Accetato);
+            case "rifiutato":
+                return c.getString(R.string.Rifiutato);
+            default:
+                return c.getString(R.string.Sospeso);
+        }
     }
 
     public static int getOraCorrente(){

@@ -95,7 +95,7 @@ public class PassaggiOfferti extends Fragment {
 
                 intent.putExtra(Passaggio.Keys.IDPASSAGGIO, cittadino.passaggiOfferti.get(rowIndex));
 
-                startActivity(intent);
+                startActivityForResult(intent,rowIndex);
             }
         });
 
@@ -137,6 +137,21 @@ public class PassaggiOfferti extends Fragment {
         menuActivity=(menu)activity;
     }
 
+
+    public void onActivityResult(int requestCode, int resultCode, Intent databack){
+        Passaggio passaggioSelezionato=null;
+        if(databack!=null){
+            passaggioSelezionato=(Passaggio)databack.getParcelableExtra(Passaggio.Keys.IDPASSAGGIO);
+        }
+
+
+        if(passaggioSelezionato!=null){
+            cittadino.passaggiOfferti.remove(requestCode);
+            cittadino.passaggiOfferti.add(requestCode,passaggioSelezionato);
+
+            menuActivity.setCittadino(cittadino);
+        }
+    }
 
 
 }

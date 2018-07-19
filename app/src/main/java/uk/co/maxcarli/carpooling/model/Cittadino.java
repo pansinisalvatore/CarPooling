@@ -284,6 +284,9 @@ public class Cittadino implements Parcelable{
         }
     };
 
+    public String toString(){
+        return cognome+" "+nome;
+    }
 
 
 

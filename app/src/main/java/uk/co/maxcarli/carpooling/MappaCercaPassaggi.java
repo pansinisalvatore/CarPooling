@@ -48,10 +48,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
     private Passaggio passaggio;
 
     private String indirizzoCittadino;
-    private final String data="21/3/2013" ;
-    private final String ora="21.10";
-    private static final ArrayList<String> indirizzi=new ArrayList<String>();
-    private static final ArrayList<String> automobilisti=new ArrayList<String>();
+
     private Address home;
     private Address work;
 
@@ -221,20 +218,13 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
-                String nomeOfferente="";
-                String cognomeOfferente="";
-                if(!passaggio.getAutomobilista().equals("")){
-                    nomeOfferente=passaggio.getAutomobilista().substring(passaggio.getAutomobilista().indexOf(" "));
-                    cognomeOfferente=passaggio.getAutomobilista().substring(0,passaggio.getAutomobilista().indexOf(" "));
-                    nomeOfferente=nomeOfferente.trim();
-                    cognomeOfferente=cognomeOfferente.trim();
-                }
+
+
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("data", passaggio.getData());
-                params.put("ora", passaggio.getOra());
                 params.put("tipo",passaggio.getTipoPassaggio());
-                params.put("nome",nomeOfferente);
-                params.put("cognome",cognomeOfferente);
+                params.put("nome",passaggio.getCittadinoOfferente().getNome());
+                params.put("cognome",passaggio.getCittadinoOfferente().getCognome());
                 params.put("sede",cittadino.getSede().getIdSede()+"");
                 return params;
             }
@@ -261,7 +251,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                     public void onResponse(String response) {
 
                         Toast.makeText(context,response,Toast.LENGTH_LONG).show();
-                        if(!response.equals("Something went wrong") || !response.equals("Error query")){
+                        if(!response.equals("Something went wrong") && !response.equals("Error query")){
 
                             try {
 
@@ -275,8 +265,13 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                                     String cognome = jsonobject.getString("CognomeCittadino");
                                     String cell = jsonobject.getString("TelefonoCittadino");
                                     String nome = jsonobject.getString("NomeCittadino");
-                                    passaggio.setAutomobilista(cognome+" "+nome);
-                                    passaggio.setCellAutomobilista(cell);
+                                    String residenza=jsonobject.getString("ResidenzaCittadino");
+                                    Cittadino offerente=new Cittadino();
+                                    offerente.setNome(nome);
+                                    offerente.setCognome(cognome);
+                                    offerente.setNumeroTelefono(cell);
+                                    offerente.setResidenza(residenza);
+                                    passaggio.setCittadinoOfferente(offerente);
                                     passaggio.setIdPassaggiOfferti(idPassaggio);
                                     passaggio.setStatus("Sospeso");
 
