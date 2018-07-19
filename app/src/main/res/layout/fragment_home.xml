@@ -59,7 +59,7 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_shape_normal"
-            android:backgroundTint="@color/tint_color"
+            android:backgroundTint="@color/tint_botton"
             android:text="Offri Passaggio"
 
             />
@@ -75,7 +75,7 @@
 
             android:layout_above="@+id/button2"
             android:background="@drawable/button_shape_normal"
-            android:backgroundTint="@color/tint_color"
+            android:backgroundTint="@color/tint_botton"
             android:text="Trova Passaggio"
             />
 
