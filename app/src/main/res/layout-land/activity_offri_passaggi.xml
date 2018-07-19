@@ -47,20 +47,20 @@
             >
 
 
-                <RadioButton
-                    android:id="@+id/Home-Work"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/casa_lavoro"
-                    android:theme="@style/MyEditText"
-                    />
+            <RadioButton
+                android:id="@+id/Home-Work"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/casa_lavoro"
+                android:theme="@style/MyEditText"
+                />
 
-                <RadioButton
-                    android:id="@+id/Work-Home"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/lavoro_casa"
-                    android:theme="@style/MyEditText"/>
+            <RadioButton
+                android:id="@+id/Work-Home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lavoro_casa"
+                android:theme="@style/MyEditText"/>
 
         </RadioGroup>
 
@@ -133,7 +133,7 @@
             android:inputType="textPersonName"
             android:theme="@style/MyEditText"/>
 
-  </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -141,16 +141,16 @@
         android:orientation="horizontal"
         android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/txtPostiDisponibili"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:text="@string/PostiDisponibili"
-        android:textSize="18sp"
-        android:visibility="visible"
-        android:theme="@style/MyEditText"
-        />
+        <TextView
+            android:id="@+id/txtPostiDisponibili"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/PostiDisponibili"
+            android:textSize="18sp"
+            android:visibility="visible"
+            android:theme="@style/MyEditText"
+            />
 
         <Spinner
             android:id="@+id/spnPosti"

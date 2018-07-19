@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:color="@color/colore_testo"
-        android:text="Passiamo un terzo della nostra vita nel traffico e un terzo a cercare parcheggio!"
+        android:text="@string/Citazione"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -60,7 +60,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_shape_normal"
             android:backgroundTint="@color/tint_botton"
-            android:text="Offri Passaggio"
+            android:text="@string/OffriPassaggio"
+            android:textColor="@color/etichettabottoni"
 
             />
 
@@ -72,11 +73,11 @@
             android:id="@+id/TrovaPassaggio"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-
+            android:textColor="@color/etichettabottoni"
             android:layout_above="@+id/button2"
             android:background="@drawable/button_shape_normal"
             android:backgroundTint="@color/tint_botton"
-            android:text="Trova Passaggio"
+            android:text="@string/TrovaPassaggio"
             />
 
 

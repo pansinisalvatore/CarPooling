@@ -88,13 +88,13 @@
         android:layout_weight="1">
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:layout_gravity="top|center"
             android:text="@string/Conferma"
-            android:textSize="20dp"
             android:onClick="Login"
+            android:textColor="@color/etichettabottoni"
             android:background="@drawable/button_shape_normal"
             android:backgroundTint="@color/tint_botton"/>
         <TextView

@@ -233,7 +233,8 @@
             android:layout_height="wrap_content"
             android:text="@string/AccettaUtente"
             android:background="@drawable/button_shape_normal"
-            android:backgroundTint="@color/tint_botton"/>
+            android:backgroundTint="@color/tint_botton"
+            android:textColor="@color/etichettabottoni"/>
 
 
         <Button
@@ -242,7 +243,9 @@
             android:layout_height="wrap_content"
             android:text="@string/RifiutaUtente"
             android:background="@drawable/button_shape_normal"
-            android:backgroundTint="@color/tint_botton"/>
+            android:backgroundTint="@color/tint_botton"
+            android:textColor="@color/etichettabottoni"
+            />
     </LinearLayout>
 
 

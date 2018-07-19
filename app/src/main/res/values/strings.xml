@@ -6,15 +6,13 @@
     <string name="NonHaiUnAccount">Do not have an account? Sign in</string>
     <string name="Registrazione">Register</string>
     <string name="passwordCorta">The password must contain between 5 and 16 characters</string>
-    <string name="formatoEmailNonValido">invalid email format</string>
+    <string name="formatoEmailNonValido">Invalid email format</string>
     <string name="NomeCittadino">Name</string>
     <string name="CognomeCittadino">Surname</string>
     <string name="CodiceFiscaleCittadino">Fiscal Code</string>
     <string name="completaRegistrazioneText">Enter email and password to complete registration</string>
-    <string name="passwordErrata">wrong password</string>
+    <string name="passwordErrata">Wrong password</string>
     <string name="passwordErrataText">Passwords do not match</string>
-    <!--<string name="EmailCittadino">Email</string>
-    <string name="PasswordCittadino">Password</string> -->
     <string name="Avanti">Next</string>
     <string name="ListaUtenti">Utent List</string>
     <string name="Email"> E-MAIL</string>
@@ -77,10 +75,8 @@ Enter your information to proceed with registration.</string>
         <item>6</item>
         <item>Altro</item>
     </string-array>
-    <string name="dettagliutente">DETAILS USER PROFILE</string>
-    <string name="title_activity_modifica_residenza">ModificaResidenzaActivity</string>
-    <string name="nome">NAME</string>
-    <string name="cognome">SURNAME</string>
+    <string name="dettagliutente">Detail user profile</string>
+    <string name="title_activity_modifica_residenza">Change residence</string>
     <string name="codicefiscale">FISCAL CODE</string>
     <string name="residenza">RESIDENCE</string>
     <string name="viaggio">Trip</string>
@@ -102,7 +98,7 @@ Enter your information to proceed with registration.</string>
     <string name="lavoro">Work</string>
 
     <string name="ErrorePassaggioRichiestoPresenteTitolo">Error insert</string>
-    <string name="ErrorePassaggioRichiestoPresenteTesto">you have already offered or requested a ride on this date and within the next three hours or so.</string>
+    <string name="ErrorePassaggioRichiestoPresenteTesto">You have already offered or requested a ride on this date and within the next three hours or so.</string>
 
     <string name="Prenotazione_passaggio">Click to occupy</string>
     <string name="OfferteNonPresenti">There are no offers</string>
@@ -130,4 +126,7 @@ Enter your information to proceed with registration.</string>
     <string name="PassaggioRifiutatoTesto">Your request has been rejected. Are you sure you want to delete this step from your list?</string>
     <string name="si">Yes</string>
     <string name="no">No</string>
+    <string name="TrovaPassaggio">Find passage</string>
+    <string name="OffriPassaggio">Offer passage</string>
+    <string name="Citazione">"We spend a third of our life in traffic and a third to look for parking!"</string>
 </resources>

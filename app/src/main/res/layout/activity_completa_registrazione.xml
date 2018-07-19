@@ -117,7 +117,8 @@
             android:onClick="clickButton"
             android:text="@string/Conferma"
             android:background="@drawable/button_shape_normal"
-            android:backgroundTint="@color/tint_botton"/>
+            android:backgroundTint="@color/tint_botton"
+            android:textColor="@color/etichettabottoni"/>
     </LinearLayout>
 
 

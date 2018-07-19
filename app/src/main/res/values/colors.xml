@@ -12,6 +12,7 @@
     <color name="button_ot_pressed_color">#006000</color>
     <color name="blank">#001000</color>
     <color name="colore_testo">#000000</color>
+    <color name="etichettabottoni">#ffffff</color>
 
 
 </resources>
