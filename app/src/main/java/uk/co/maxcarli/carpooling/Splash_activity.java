@@ -15,8 +15,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
-public class Splash_activity extends Activity {
+public class Splash_activity extends Activity  implements Animation.AnimationListener{
     private static final String TAG_LOG = Splash_activity.class.getName();
     private static final long MIN_WAIT_INTERVAL= 1500L;
     private static final long MAX_WAIT_INTERVAL= 3000L;
@@ -45,6 +48,10 @@ public class Splash_activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_activity);
         View decorView = getWindow().getDecorView();
+        ImageView splash=findViewById(R.id.splash_image);
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.rotate);
+        splash.startAnimation(animation);
         int uiOptions= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         decorView.setSystemUiVisibility(uiOptions);
     }
@@ -106,7 +113,18 @@ public class Splash_activity extends Activity {
         }
 
 
+    @Override
+    public void onAnimationStart(Animation animation) {
 
+    }
 
+    @Override
+    public void onAnimationEnd(Animation animation) {
 
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) {
+
+    }
 }
