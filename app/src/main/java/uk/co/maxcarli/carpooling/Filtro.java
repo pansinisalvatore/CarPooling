@@ -279,14 +279,19 @@ public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClic
 
 
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent databack){
-        Passaggio passaggioPrenotato=(Passaggio)databack.getParcelableExtra(Passaggio.Keys.IDPASSAGGIO);
+    protected void onActivityResult(int requestCode, int resultCode, Intent databack) {
 
-        if(passaggioPrenotato!=null){
-            cittadino.addPassaggioRichiesto(passaggioPrenotato);
-            final Intent returnIntent = new Intent();
-            returnIntent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
-            setResult(2,returnIntent);
+        if (databack != null) {
+            Passaggio passaggioPrenotato = (Passaggio) databack.getParcelableExtra(Passaggio.Keys.IDPASSAGGIO);
+
+            if (passaggioPrenotato != null) {
+                cittadino.addPassaggioRichiesto(passaggioPrenotato);
+                final Intent returnIntent = new Intent();
+                returnIntent.putExtra(Cittadino.Keys.IDCITTADINO, cittadino);
+                setResult(2, returnIntent);
+            }
         }
+
     }
+
 }

@@ -13,6 +13,8 @@
     <string name="completaRegistrazioneText">Enter email and password to complete registration</string>
     <string name="passwordErrata">Wrong password</string>
     <string name="passwordErrataText">Passwords do not match</string>
+    <!--<string name="EmailCittadino">Email</string>
+    <string name="PasswordCittadino">Password</string> -->
     <string name="Avanti">Next</string>
     <string name="ListaUtenti">Utent List</string>
     <string name="Email"> E-MAIL</string>
@@ -129,4 +131,10 @@ Enter your information to proceed with registration.</string>
     <string name="TrovaPassaggio">Find passage</string>
     <string name="OffriPassaggio">Offer passage</string>
     <string name="Citazione">"We spend a third of our life in traffic and a third to look for parking!"</string>
+
+    <string name="TestoConfermaPasswordErrore">Mismatched passwords</string>
+    <string name="erroreVecchiaPAssword">Wrong password</string>
+    <string name="listaUtenti">User List</string>
+    <string name="LogoutTitolo">Logout</string>
+    <string name="LogoutTesto">Do you want to exit?</string>
 </resources>

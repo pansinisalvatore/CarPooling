@@ -334,8 +334,10 @@ public class Database {
                                     }
 
                                     if(cittadino.passaggiOfferti.contains(p)){
-                                        cittadino.passaggiOfferti.get(cittadino.passaggiOfferti.indexOf(p)).cittadiniRichiedenti.add(cittadinoRichiedente);
-                                        cittadino.passaggiOfferti.get(cittadino.passaggiOfferti.indexOf(p)).cittadinoStatus.add(jsonobject.getString("Status"));
+                                        if(cittadinoRichiedente!=null){
+                                            cittadino.passaggiOfferti.get(cittadino.passaggiOfferti.indexOf(p)).cittadiniRichiedenti.add(cittadinoRichiedente);
+                                            cittadino.passaggiOfferti.get(cittadino.passaggiOfferti.indexOf(p)).cittadinoStatus.add(jsonobject.getString("Status"));
+                                        }
                                     }else{
                                         if(cittadinoRichiedente!=null){
                                             p.cittadiniRichiedenti.add(cittadinoRichiedente);

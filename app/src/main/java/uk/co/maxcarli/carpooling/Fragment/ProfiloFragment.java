@@ -105,6 +105,16 @@ public class ProfiloFragment extends Fragment {
             }
         });
 
+        ImageView modPassword=(ImageView)root.findViewById(R.id.modpassword);
+        modPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(), uk.co.maxcarli.carpooling.cambia_pass.class);
+                intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino.getPassword());
+                startActivityForResult(intent,1);
+            }
+        });
+
 
         Button conferma=root.findViewById(R.id.confermaModifiche);
         conferma.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +129,7 @@ public class ProfiloFragment extends Fragment {
 
 
                 Database.updateCittadino(cittadino,getContext());
+                menuActivity.setCittadino(cittadino);
 
             }
         });
@@ -128,8 +139,18 @@ public class ProfiloFragment extends Fragment {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
-        String indirizzo=(String)data.getStringExtra(Cittadino.Keys.RESIDENZA);
-        residenza.setText(indirizzo);
+        if(data!=null){
+            if(resultCode==0){
+                String indirizzo=(String)data.getStringExtra(Cittadino.Keys.RESIDENZA);
+                residenza.setText(indirizzo);
+            }else{
+                String pass=(String)data.getStringExtra(Cittadino.Keys.IDCITTADINO);
+                password.setText(pass);
+            }
+        }
+
+
+
     }
 
 

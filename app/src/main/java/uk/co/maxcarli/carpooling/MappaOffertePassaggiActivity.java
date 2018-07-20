@@ -150,25 +150,25 @@ public class MappaOffertePassaggiActivity extends AppCompatActivity implements O
                         for(int i=0;i<passaggio.cittadiniRichiedenti.size();i++){
                             if(cell.equals(passaggio.cittadiniRichiedenti.get(i).getNumeroTelefono())){
                                 passaggio.setPostiOccupati(passaggio.getPostiOccupati()+1);
-
+                                passaggio.setRichieste(passaggio.getRichieste()-1);
+                                passaggio.cittadinoStatus.remove(i);
+                                passaggio.cittadinoStatus.add(i,"accettato");
                                 if(passaggio.getPostiDisponibili()==passaggio.getPostiOccupati()){
                                     Controlli.mostraMessaggioSuccesso(getString(R.string.PostiOccupatiTitolo),getString(R.string.PostiOccupatiTesto),MappaOffertePassaggiActivity.this);
                                     for(int j=0;j<passaggio.cittadiniRichiedenti.size();j++){
 
 
-                                        if(passaggio.cittadinoStatus.get(i).equals("sospeso")){
-                                            String cellRichiedenteSospeso=passaggio.cittadiniRichiedenti.get(i).getNumeroTelefono();
+                                        if(passaggio.cittadinoStatus.get(j).equals("sospeso")){
+                                            String cellRichiedenteSospeso=passaggio.cittadiniRichiedenti.get(j).getNumeroTelefono();
                                             Database.modificaStatus("rifiutato",cellRichiedenteSospeso,MappaOffertePassaggiActivity.this,passaggio );
-                                            passaggio.cittadinoStatus.remove(i);
-                                            passaggio.cittadiniRichiedenti.remove(i);
+                                            passaggio.cittadinoStatus.remove(j);
+                                            passaggio.cittadiniRichiedenti.remove(j);
                                         }
                                     }
 
                                 }
 
-                                passaggio.setRichieste(passaggio.getRichieste()-1);
-                                passaggio.cittadinoStatus.remove(i);
-                                passaggio.cittadinoStatus.add(i,"accettato");
+
                                 marker.setSnippet(Controlli.controllaStringaStatus("accettato",MappaOffertePassaggiActivity.this));
                                 mMap.setInfoWindowAdapter(new CustomInfoWindow(MappaOffertePassaggiActivity.this));
                                 break;

@@ -2,6 +2,8 @@ package uk.co.maxcarli.carpooling;
 
 
         import android.annotation.SuppressLint;
+        import android.app.AlertDialog;
+        import android.content.DialogInterface;
         import android.content.Intent;
         import android.os.Bundle;
         import android.support.annotation.NonNull;
@@ -14,11 +16,13 @@ package uk.co.maxcarli.carpooling;
         import android.support.v7.app.ActionBar;
         import android.support.v7.app.AppCompatActivity;
         import android.util.Log;
+        import android.view.Menu;
         import android.view.MenuItem;
         import android.widget.Toast;
 
         import java.lang.reflect.Field;
 
+        import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
         import uk.co.maxcarli.carpooling.Fragment.ClassificaFragment;
         import uk.co.maxcarli.carpooling.Fragment.HomeFragment;
         import uk.co.maxcarli.carpooling.Fragment.ImieipassaggiFragment;
@@ -138,6 +142,32 @@ public class menu extends AppCompatActivity {
 
     }
 
+
+    public boolean onCreateOptionsMenu(Menu menu){
+
+        getMenuInflater().inflate(R.menu.menu_action_bar,menu);
+        if(cittadino.getTipoCittadino().equals("cittadino")){
+            menu.getItem(0).setVisible(false);
+        }
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        switch(item.getItemId()){
+            case R.id.MENU_1:
+                logout();
+                return false;
+            case R.id.MENU_2:
+                Intent intent=new Intent(menu.this, ListaUtenti.class);
+                intent.putExtra(Sede.Keys.IDSEDE,cittadino.getSede().getIdSede());
+                startActivity(intent);
+                return false;
+
+        }
+        return true;
+
+    }
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -152,10 +182,33 @@ public class menu extends AppCompatActivity {
         cittadino=c;
     }
 
+    public void logout(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.LogoutTitolo));
+        builder.setMessage(getString(R.string.LogoutTesto));
+        builder.setPositiveButton(getString(R.string.si), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+               finish();
+
+
+            }
+        });
+        builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog alertDialog= builder.create();
+        alertDialog.show();
+    }
     @Override
     public void onBackPressed() {
 
     }
+
+
 
 
 

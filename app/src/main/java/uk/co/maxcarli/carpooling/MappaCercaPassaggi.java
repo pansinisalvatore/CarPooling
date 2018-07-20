@@ -10,6 +10,9 @@ import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -47,7 +50,6 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
     private Cittadino cittadino;
     private Passaggio passaggio;
 
-    private String indirizzoCittadino;
 
     private Address home;
     private Address work;
@@ -99,7 +101,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                 .radius(raggio)
         );
 
-
+        mMap.setInfoWindowAdapter(new CustomMarkerOfferenti(this));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(home.getLatitude(),home.getLongitude()),18.0f));
 
@@ -110,13 +112,22 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
 
                     String indirizzo=getAddressFromLatLng(marker.getPosition());
                     //Toast.makeText(this, indirizzo, Toast.LENGTH_LONG).show();
-                    prenotaPassaggio(MappaCercaPassaggi.this, indirizzo);
+
+                    prenotaPassaggio(MappaCercaPassaggi.this, Integer.parseInt((String)marker.getTag()));
 
                 }
 
             }
         });
 
+    }
+
+    public boolean controlloArcoOrario(String orarioRicercato, String orarioPresente){
+        if(Math.abs(Controlli.oreInMinuti(orarioRicercato)-Controlli.oreInMinuti(orarioPresente))<=15){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 
@@ -175,24 +186,26 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
 
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
 
-                                    String indirizzo = jsonobject.getString("ResidenzaCittadino");
-                                    String cognome=jsonobject.getString("CognomeCittadino");
-                                    String cell=jsonobject.getString("TelefonoCittadino");
+                                    int idPassaggio=jsonobject.getInt("IdPassaggio");
                                     String nome=jsonobject.getString("NomeCittadino");
+                                    String cognome=jsonobject.getString("CognomeCittadino");
+                                    String indirizzo = jsonobject.getString("ResidenzaCittadino");
+                                    String cell=jsonobject.getString("TelefonoCittadino");
+                                    String ora=jsonobject.getString("OraPassaggio");
                                     int j=0;
 
                                     Address pos=getLocationFromAddress(indirizzo,context);
 
-                                    if(controllo(home, pos, 500)){
+                                    if(controllo(home, pos, 500) && controlloArcoOrario(passaggio.getOra(),ora)){
                                         j++;
                                         mMap.addMarker(new MarkerOptions().
                                                 position(new LatLng(pos.getLatitude(),pos.getLongitude())
-                                                ).title(getString(R.string.automobilista)+": "+ cognome+" "+nome).snippet(getString(R.string.Prenotazione_passaggio)).
+                                                ).title(cognome+" "+nome).snippet(cell+"-"+idPassaggio).
                                                 icon(BitmapDescriptorFactory
                                                         .defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
                                     }
                                     if(j==0){
-                                        Toast.makeText(context.getApplicationContext(),getString(R.string.OfferteNonPresenti),Toast.LENGTH_LONG).show();
+                                        //Toast.makeText(context.getApplicationContext(),getString(R.string.OfferteNonPresenti),Toast.LENGTH_LONG).show();
                                     }
                                 }
                             } catch (JSONException e) {
@@ -239,7 +252,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
 
 
 
-    public void prenotaPassaggio(final Context context, final String indirizzo){
+    public void prenotaPassaggio(final Context context, final int idPassaggio){
         String url = "http://carpoolingsms.altervista.org/PHP/ScriviPassaggioRichiesto.php";
 
 
@@ -296,11 +309,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                             AlertDialog alertDialog= builder.create();
                             alertDialog.show();
 
-
-
                         }
-
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -316,11 +325,8 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put("address", indirizzo);
                 params.put("idCittadino",cittadino.getIdCittadino()+"");
-                params.put("data",passaggio.getData());
-                params.put("ora",passaggio.getOra());
-                params.put("tipo",passaggio.getTipoPassaggio());
+                params.put("idPassaggio",idPassaggio+"");
                 return params;
             }
         };
@@ -347,4 +353,72 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
 
     }
 
+
+    private class CustomMarkerOfferenti implements GoogleMap.InfoWindowAdapter{
+
+        Context c;
+        View view;
+
+        TextView driver;
+        TextView residence;
+        TextView cell;
+
+
+        public CustomMarkerOfferenti(Context c){
+            this.c=c;
+        }
+        @Override
+        public View getInfoWindow(Marker marker) {
+            if(marker.getTitle().equals(c.getString(R.string.la_tua_casa)) || marker.getTitle().equals(c.getString(R.string.lavoro))){
+                return null;
+            }
+            view=LayoutInflater.from(c).inflate(R.layout.marker_cerca_passaggi,null);
+            driver=view.findViewById(R.id.textDriver);
+            residence=view.findViewById(R.id.textResidence);
+            cell=view.findViewById(R.id.textCell);
+
+            String autista=marker.getTitle();
+
+            driver.setText(autista);
+
+            String indirizzo=getAddressFromLatLng(marker.getPosition());
+            residence.setText(indirizzo);
+
+            String telefono=marker.getSnippet().substring(0,marker.getSnippet().indexOf("-"));
+            cell.setText(telefono);
+
+            String idPassaggio=marker.getSnippet().substring(marker.getSnippet().indexOf("-"));
+            idPassaggio=idPassaggio.substring(1);
+            marker.setTag(idPassaggio);
+
+            return view;
+        }
+
+        @Override
+        public View getInfoContents(Marker marker) {
+            if(marker.getTitle().equals(c.getString(R.string.la_tua_casa)) || marker.getTitle().equals(c.getString(R.string.lavoro))){
+                return null;
+            }
+            view=LayoutInflater.from(c).inflate(R.layout.marker_cerca_passaggi,null);
+            driver=view.findViewById(R.id.textDriver);
+            residence=view.findViewById(R.id.textResidence);
+            cell=view.findViewById(R.id.textCell);
+
+            String autista=marker.getTitle();
+
+            driver.setText(autista);
+
+            String indirizzo=getAddressFromLatLng(marker.getPosition());
+            residence.setText(indirizzo);
+
+            String telefono=marker.getSnippet().substring(0,marker.getSnippet().indexOf("-"));
+            cell.setText(telefono);
+
+            String idPassaggio=marker.getSnippet().substring(marker.getSnippet().indexOf("-"));
+            idPassaggio=idPassaggio.substring(1);
+            marker.setTag(idPassaggio);
+
+            return view;
+        }
+    }
 }
