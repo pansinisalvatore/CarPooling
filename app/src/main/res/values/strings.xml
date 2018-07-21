@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">CarPooling</string>
+    <string name="startTracking">Start tracking</string>
     <string name="personeDaPrendereText">People you must pass to take</string>
-    <string name="avviaTrackingText">You can start Tracking 10 minutes before the indicated time, up to a maximum of 30 minutes. it is necessary to activate the bluetooth in order to start it.</string>
+    <string name="riceviTrackingText">When you enter the car, press START TRACKING to synchronize your device with that of the bidder. It is
+           necessary to authorize the bluetooth connection!</string>
+    <string name="datiRiepilogo">Bidder data summary</string>
+    <string name="avviaTrackingText">You can START TRACKING 10 minutes before the indicated time, up to a maximum of 30 minutes. It is necessary to activate the bluetooth in order to start it.</string>
     <string name="loginString">Sign in or sign up</string>
     <string name="NonHaiUnAccount">Do not have an account? Sign in</string>
     <string name="Registrazione">Register</string>

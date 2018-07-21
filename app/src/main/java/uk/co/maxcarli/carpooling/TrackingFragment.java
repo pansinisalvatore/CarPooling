@@ -34,7 +34,14 @@ import static uk.co.maxcarli.carpooling.Control.Controlli.*;
 public class TrackingFragment extends Fragment {
 
     private Cittadino cittadino;
+
     private menu menuActivity;
+
+    private String[] PassaggiOffertiHeaders={"Nome","Cognome","Indirizzo","Telefono"};
+    String[][] passaggi;
+
+    View view;
+    TableView<String[]> tb;
 
     public TrackingFragment() {
         // Required empty public constructor
@@ -46,6 +53,7 @@ public class TrackingFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         cittadino=menuActivity.getCittadino();
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -55,9 +63,49 @@ public class TrackingFragment extends Fragment {
         // Inflate the layout for this fragment
         String dataCorrente = getCurrentData();
         int vista = 0;
-        View rootServer = inflater.inflate(R.layout.fragment_tracking, container, false);
+        View rootServer = null;
 
-        vista = controlOfferer(cittadino.passaggiOfferti, dataCorrente);
+        Passaggio p = controlOfferer(cittadino.passaggiOfferti, dataCorrente);
+
+
+
+
+
+        if(p!=null) {
+           rootServer = inflater.inflate(R.layout.fragment_tracking, container, false);
+            tb=(TableView<String[]>) rootServer.findViewById(R.id.Tabellatracking);
+            populateData(p.cittadiniRichiedenti);
+
+            tb.setVisibility(View.VISIBLE);
+
+            tb.setColumnCount(4);
+            tb.setColumnWeight(0,10);
+            tb.setColumnWeight(1,13);
+            tb.setColumnWeight(2,7);
+            tb.setColumnWeight(3,10);
+
+            tb.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
+
+            SimpleTableHeaderAdapter headerAdapter=new SimpleTableHeaderAdapter(getActivity(),PassaggiOffertiHeaders);
+
+            headerAdapter.setTextSize(15);
+
+            tb.setHeaderAdapter(headerAdapter);
+            SimpleTableDataAdapter dataAdapter=new SimpleTableDataAdapter(getActivity(),passaggi);
+
+
+            dataAdapter.setTextSize(10);
+
+
+            tb.setDataAdapter(dataAdapter);
+
+            tb.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+        } else {
+            rootServer = inflater.inflate(R.layout.fragment_tracking_richiesta, container, false);
+           // cittadinoPassaggiRichiesti(cittadino.passaggiRichiesti,dataCorrente);
+
+        }
 
 
 
@@ -69,7 +117,7 @@ public class TrackingFragment extends Fragment {
 
 
 
-    public int controlOfferer(List<Passaggio> passaggiOfferti, String dataCorrente){
+    public Passaggio controlOfferer(List<Passaggio> passaggiOfferti, String dataCorrente){
 
         String stringaOrario = ""; //serve solo per il log
         String stringaOrarioC = ""; //serve solo per il log
@@ -89,18 +137,31 @@ public class TrackingFragment extends Fragment {
                     trovato = 1;
                     sTrovato = Integer.toString(trovato);
                     Log.d("trovato",sTrovato);
+                    return p;
                 }
 
 
 
             }
         }
-            return trovato;
+            return null;
     }
 
-    public void personeDaPrendere(String dataCorrente){
-        String string = "";
+    public void populateData(List<Cittadino> cittadiniRichiedenti){
 
+        this.passaggi=new String[cittadiniRichiedenti.size()][4];
+
+
+        for(int i=0;i<cittadiniRichiedenti.size();i++){
+
+            Cittadino c = cittadiniRichiedenti.get(i);
+
+            this.passaggi[i][0]=c.getNome();
+            this.passaggi[i][1]=c.getCognome();
+            this.passaggi[i][2]=c.getResidenza();
+            this.passaggi[i][3]=c.getNumeroTelefono();
+
+        }
     }
 
 
@@ -110,6 +171,37 @@ public class TrackingFragment extends Fragment {
         menuActivity=(menu)activity;
     }
 
+    public int cittadinoPassaggiRichiesti(List<Passaggio> passaggiRichiesti,String dataCorrente){
+
+
+        String stringaOrario = ""; //serve solo per il log
+        String stringaOrarioC = ""; //serve solo per il log
+        String sTrovato = ""; // serve solo per il log
+        int trovato = 0;
+        int orarioConvertito;
+        for(int i=0;i<passaggiRichiesti.size();i++){
+
+            Passaggio p= passaggiRichiesti.get(i);
+            if(p.getData().equals(dataCorrente)) {
+                orarioConvertito = oreInMinuti(p.getOra());
+                stringaOrario = Integer.toString(orarioConvertito);
+                Log.d("oreInMinuti",stringaOrario);
+                stringaOrarioC = Integer.toString(getOraCorrente());
+                Log.d("OraCorrente",stringaOrarioC);
+                if(orarioConvertito > getOraCorrente() - 10 && orarioConvertito < getOraCorrente() + 30 ){
+                    trovato = 1;
+                    sTrovato = Integer.toString(trovato);
+                    Log.d("trovato",sTrovato);
+                    return trovato;
+                }
+
+
+
+            }
+        }
+        return trovato;
+
+    }
 
 
 }
