@@ -85,7 +85,7 @@
             android:ems="10"
             android:focusable="false"
             android:inputType="date"
-            android:text="@string/ImpostaData"
+            android:hint="@string/ImpostaData"
             android:textAlignment="center"
             android:theme="@style/MyEditText"/>
     </LinearLayout>
@@ -102,7 +102,7 @@
             android:ems="10"
             android:focusable="false"
             android:inputType="time"
-            android:text="@string/ImpostaOra"
+            android:hint="@string/ImpostaOra"
             android:textAlignment="center"
             android:theme="@style/MyEditText"/>
 
