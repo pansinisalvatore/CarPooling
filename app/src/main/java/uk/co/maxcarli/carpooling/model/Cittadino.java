@@ -45,6 +45,14 @@ public class Cittadino implements Parcelable{
         this.password = password;
     }
 
+    public int getConvalidato() {
+        return convalidato;
+    }
+
+    public void setConvalidato(int convalidato) {
+        this.convalidato = convalidato;
+    }
+
     public interface Keys {
         String IDCITTADINO = "idCittadino";
         String NOME = "nome";
@@ -75,6 +83,7 @@ public class Cittadino implements Parcelable{
     private String email;
     private String password;
     private Sede sede;
+    private  int convalidato;
 
     public final ArrayList<Passaggio> passaggiOfferti;
     public final ArrayList<Passaggio> passaggiRichiesti;
@@ -95,6 +104,7 @@ public class Cittadino implements Parcelable{
         macAddress = "";
         email="";
         password="";
+        convalidato=0;
     }
 
     public Cittadino(ArrayList<Passaggio> passaggiOfferti, ArrayList<Passaggio> passaggiRichiesti){
@@ -111,6 +121,7 @@ public class Cittadino implements Parcelable{
         macAddress = "";
         email="";
         password="";
+        convalidato=0;
     }
 
 
@@ -209,6 +220,7 @@ public class Cittadino implements Parcelable{
         password=in.readString();
         punteggio=in.readInt();
         macAddress=in.readString();
+        convalidato=in.readInt();
         if(in.readByte()==PRESENT){
             sede = (Sede) in.readParcelable(Sede.class.getClassLoader());
         }else{
@@ -248,6 +260,7 @@ public class Cittadino implements Parcelable{
         dest.writeString(password);
         dest.writeInt(punteggio);
         dest.writeString(macAddress);
+        dest.writeInt(convalidato);
         if(sede==null){
             dest.writeByte(NOT_PRESENT);
         }else {

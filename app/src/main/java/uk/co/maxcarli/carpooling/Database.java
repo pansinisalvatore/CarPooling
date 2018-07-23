@@ -302,7 +302,7 @@ public class Database {
                     @Override
                     public void onResponse(String response) {
 
-                        Toast.makeText(context, response,Toast.LENGTH_SHORT).show();
+
 
                         if(!response.equals("Something went wrong")){
                             try {

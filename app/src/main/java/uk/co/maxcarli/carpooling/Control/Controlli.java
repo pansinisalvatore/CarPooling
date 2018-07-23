@@ -1,5 +1,6 @@
 package uk.co.maxcarli.carpooling.Control;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -30,6 +31,21 @@ public class Controlli {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+            }
+        });
+        AlertDialog alertDialog= builder.create();
+        alertDialog.show();
+    }
+
+    public static void mostraMessaggioConChiusura(String title, String msg, final Context context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(title);
+        builder.setMessage(msg);
+        builder.setCancelable(false);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ((Activity)context).finish();
             }
         });
         AlertDialog alertDialog= builder.create();

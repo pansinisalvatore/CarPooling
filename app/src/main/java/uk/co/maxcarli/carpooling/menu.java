@@ -146,7 +146,7 @@ public class menu extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu){
 
         getMenuInflater().inflate(R.menu.menu_action_bar,menu);
-        if(cittadino.getTipoCittadino().equals("cittadino")){
+        if(cittadino.getTipoCittadino().equals("normale")){
             menu.getItem(0).setVisible(false);
         }
         return true;

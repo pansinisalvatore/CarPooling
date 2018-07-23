@@ -295,7 +295,6 @@ public class MappaOffertePassaggiActivity extends AppCompatActivity implements O
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
         final Intent returnIntent = new Intent();
         returnIntent.putExtra(Passaggio.Keys.IDPASSAGGIO,passaggio);
         setResult(cittadino.passaggiOfferti.indexOf(passaggio),returnIntent);

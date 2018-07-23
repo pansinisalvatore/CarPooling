@@ -141,4 +141,11 @@ Enter your information to proceed with registration.</string>
     <string name="listaUtenti">User List</string>
     <string name="LogoutTitolo">Logout</string>
     <string name="LogoutTesto">Do you want to exit?</string>
+
+    <string name="AttesaConvalidazione">Waiting for authorizathion</string>
+    <string name="Autorizzato">Authorized</string>
+    <string name="utenteAccettatoTitolo">User accepted</string>
+    <string name="utenteAccettatoTesto">User successfully accepted</string>
+    <string name="utenteRifiutatoTitolo">User rejected</string>
+    <string name="utenteRifiutatoTesto">User successfully rejected</string>
 </resources>
