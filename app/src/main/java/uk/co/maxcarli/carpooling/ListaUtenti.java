@@ -44,7 +44,12 @@ public class ListaUtenti extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_utenti);
-        idSede=getIntent().getIntExtra(Sede.Keys.IDSEDE,0);
+        if(savedInstanceState!=null){
+         idSede=savedInstanceState.getInt(Sede.Keys.IDSEDE);
+        }else{
+            idSede=getIntent().getIntExtra(Sede.Keys.IDSEDE,0);
+        }
+
         tab=(TableView<String[]>)findViewById(R.id.TabellaUtenti);
         tab.setColumnCount(3);
         tab.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
@@ -112,14 +117,9 @@ public class ListaUtenti extends AppCompatActivity {
                                 c.setNumeroTelefono(cell);
                                 c.setConvalidato(convalidato);
                                 utenti.add(c);
-
-
                             }
                             populateData(utenti);
-
                             tab.setDataAdapter(new SimpleTableDataAdapter(getApplication(),r_utente));
-
-
                         } catch (JSONException e) {
                             e.printStackTrace();
 
@@ -187,7 +187,6 @@ public class ListaUtenti extends AppCompatActivity {
                                 c.setEmail(email);
                                 c.setConvalidato(convalidato);
                                 Log.i("Dati", nome+" "+cognome+" "+ codice_fiscale );
-                                ;
                             }
 
                             Intent intent=new Intent(ListaUtenti.this,DettagliUtente.class);
@@ -233,6 +232,10 @@ public class ListaUtenti extends AppCompatActivity {
             this.recreate();
         }
 
+    }
+
+    public void onRestoreInstanceState(Bundle bundle){
+        bundle.putInt(Sede.Keys.IDSEDE,idSede);
     }
 
 }

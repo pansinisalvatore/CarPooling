@@ -111,9 +111,22 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                 if(!marker.getTitle().equals(getString(R.string.la_tua_casa)) || !marker.getTitle().equals(getString(R.string.lavoro))){
 
                     String indirizzo=getAddressFromLatLng(marker.getPosition());
+                    String totOfferente=marker.getTitle();
+                    String nome=totOfferente.substring(totOfferente.indexOf(" "));
+                    String cognome=totOfferente.substring(0, totOfferente.indexOf(" "));
+                    nome=nome.trim();
+                    cognome=cognome.trim();
+                    String telefono= marker.getSnippet().substring(0,marker.getSnippet().indexOf("-"));
+
+
+                    Cittadino offerente=new Cittadino();
+                    offerente.setNome(nome);
+                    offerente.setCognome(cognome);
+                    offerente.setResidenza(indirizzo);
+                    offerente.setNumeroTelefono(telefono);
                     //Toast.makeText(this, indirizzo, Toast.LENGTH_LONG).show();
 
-                    prenotaPassaggio(MappaCercaPassaggi.this, Integer.parseInt((String)marker.getTag()));
+                    prenotaPassaggio(MappaCercaPassaggi.this, Integer.parseInt((String)marker.getTag()), offerente);
 
                 }
 
@@ -252,7 +265,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
 
 
 
-    public void prenotaPassaggio(final Context context, final int idPassaggio){
+    public void prenotaPassaggio(final Context context, final int idPassaggio, final Cittadino offerente){
         String url = "http://carpoolingsms.altervista.org/PHP/ScriviPassaggioRichiesto.php";
 
 
@@ -274,20 +287,13 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
 
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
 
-                                    int  idPassaggio = jsonobject.getInt("IdPassaggio");
-                                    String cognome = jsonobject.getString("CognomeCittadino");
-                                    String cell = jsonobject.getString("TelefonoCittadino");
-                                    String nome = jsonobject.getString("NomeCittadino");
-                                    String residenza=jsonobject.getString("ResidenzaCittadino");
-                                    Cittadino offerente=new Cittadino();
-                                    offerente.setNome(nome);
-                                    offerente.setCognome(cognome);
-                                    offerente.setNumeroTelefono(cell);
-                                    offerente.setResidenza(residenza);
+                                    String dataPassaggio=jsonobject.getString("DataPassaggio");
+                                    String oraPassaggio=jsonobject.getString("OraPassaggio");
+                                    passaggio.setData(dataPassaggio);
+                                    passaggio.setOra(oraPassaggio);
                                     passaggio.setCittadinoOfferente(offerente);
                                     passaggio.setIdPassaggiOfferti(idPassaggio);
                                     passaggio.setStatus("Sospeso");
-
                                 }
                             }catch(JSONException e){
                                 e.printStackTrace();

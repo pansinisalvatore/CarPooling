@@ -50,15 +50,25 @@ public class DettagliUtente extends AppCompatActivity {
         setContentView(R.layout.activity_dettagli_utente);
 
         nam=findViewById(R.id.edtselezionanome);
+        nam.setKeyListener(null);
         surnam=findViewById(R.id.edtselezionacognome);
+        surnam.setKeyListener(null);
         mail=findViewById(R.id.edtselezionaemail);
+        mail.setKeyListener(null);
         fiscal_cod=findViewById(R.id.edtselezionaCF);
+        fiscal_cod.setKeyListener(null);
         residenc=findViewById(R.id.edtselezionaresidenza);
+        residenc.setKeyListener(null);
         phone_number=findViewById(R.id.edtselezionatelefono);
+        phone_number.setKeyListener(null);
 
 
 
-        c=getIntent().getParcelableExtra(Cittadino.Keys.IDCITTADINO);
+        if(savedInstanceState!=null){
+            c=savedInstanceState.getParcelable(Cittadino.Keys.IDCITTADINO);
+        }else{
+            c=getIntent().getParcelableExtra(Cittadino.Keys.IDCITTADINO);
+        }
 
         nam.setText(c.getNome());
         surnam.setText(c.getCognome());
@@ -145,5 +155,10 @@ public class DettagliUtente extends AppCompatActivity {
         };
 
         MySingleton.getmInstance(getApplicationContext()).addTorequestque(stringRequest);
+    }
+
+
+    public void onRestoreInstanceState(Bundle bundle){
+        bundle.putParcelable(Cittadino.Keys.IDCITTADINO,c);
     }
 }

@@ -31,7 +31,7 @@ public class RegistrazioneCittadino extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrazione_cittadino);
 
-       riceviCittadino();
+        riceviCittadino();
 
         findViewById(R.id.buttonAvanti).setOnClickListener(new View.OnClickListener() {
             @Override

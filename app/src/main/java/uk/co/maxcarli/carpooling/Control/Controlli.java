@@ -165,9 +165,11 @@ public class Controlli {
         stringaOrario = stringaOrario.replace(" ", "");
         stringaOrario = stringaOrario.trim();
         Log.d("StringaOrario",stringaOrario);
-        String stringHours = stringaOrario.substring(0,2);
+        int indice=stringaOrario.indexOf(":");
+
+        String stringHours = stringaOrario.substring(0,indice);
         Log.d("stringHours", stringHours);
-        String stringMinutes = stringaOrario.substring(3,5);
+        String stringMinutes = stringaOrario.substring(indice+1);
         Log.d("stringMin",stringMinutes);
         int oraInt = Integer.parseInt(stringHours);
         int minInt = Integer.parseInt(stringMinutes);
