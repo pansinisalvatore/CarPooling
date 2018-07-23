@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -47,8 +48,8 @@ import uk.co.maxcarli.carpooling.model.Passaggio;
 
 public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener,DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
     AutoCompleteTextView driver;
-    TextInputEditText sel_data;
-    TextInputEditText sel_ora;
+    EditText sel_data;
+    EditText sel_ora;
     RadioGroup groupTypeTrip;
     RadioButton home_work;
     RadioButton work_home;

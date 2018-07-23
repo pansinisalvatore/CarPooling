@@ -77,7 +77,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".cambia_pass" />
         <activity android:name=".MappaOffertePassaggiActivity" />
-        <activity android:name=".rotate_animation" />
         <activity android:name=".MappaPassaggiRichiesti"></activity>
     </application>
 
