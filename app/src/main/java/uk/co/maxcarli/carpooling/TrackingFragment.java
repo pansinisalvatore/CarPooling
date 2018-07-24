@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +35,7 @@ import static uk.co.maxcarli.carpooling.Control.Controlli.*;
 public class TrackingFragment extends Fragment {
 
     private Cittadino cittadino;
+    private Passaggio p;
 
     private menu menuActivity;
 
@@ -103,7 +105,11 @@ public class TrackingFragment extends Fragment {
 
         } else {
             rootServer = inflater.inflate(R.layout.fragment_tracking_richiesta, container, false);
-           // cittadinoPassaggiRichiesti(cittadino.passaggiRichiesti,dataCorrente);
+            int trovato = cittadinoPassaggiRichiesti(cittadino.passaggiRichiesti,dataCorrente, rootServer);
+
+            if (trovato == 0){
+                rootServer = inflater.inflate(R.layout.fragment_tracking_vuoto, container, false);
+            }
 
         }
 
@@ -111,10 +117,6 @@ public class TrackingFragment extends Fragment {
 
         return rootServer;
     }
-
-
-
-
 
 
     public Passaggio controlOfferer(List<Passaggio> passaggiOfferti, String dataCorrente){
@@ -133,7 +135,7 @@ public class TrackingFragment extends Fragment {
                 Log.d("oreInMinuti",stringaOrario);
                 stringaOrarioC = Integer.toString(getOraCorrente());
                 Log.d("OraCorrente",stringaOrarioC);
-                if(orarioConvertito > getOraCorrente() - 10 && orarioConvertito < getOraCorrente() + 30 ){
+                if(getOraCorrente() >= orarioConvertito - 10 && orarioConvertito + 30 >= getOraCorrente() ){
                     trovato = 1;
                     sTrovato = Integer.toString(trovato);
                     Log.d("trovato",sTrovato);
@@ -171,30 +173,36 @@ public class TrackingFragment extends Fragment {
         menuActivity=(menu)activity;
     }
 
-    public int cittadinoPassaggiRichiesti(List<Passaggio> passaggiRichiesti,String dataCorrente){
+    public int cittadinoPassaggiRichiesti(List<Passaggio> passaggiRichiesti,String dataCorrente, View root) {
 
 
         String stringaOrario = ""; //serve solo per il log
         String stringaOrarioC = ""; //serve solo per il log
-        String sTrovato = ""; // serve solo per il log
         int trovato = 0;
         int orarioConvertito;
-        for(int i=0;i<passaggiRichiesti.size();i++){
+        for (int i = 0; i < passaggiRichiesti.size(); i++) {
 
-            Passaggio p= passaggiRichiesti.get(i);
-            if(p.getData().equals(dataCorrente)) {
+            Passaggio p = passaggiRichiesti.get(i);
+            Log.d("CittadinoOfferente", p.getCittadinoOfferente().getCognome().toString());
+
+            if (p.getData().equals(dataCorrente)) {
                 orarioConvertito = oreInMinuti(p.getOra());
                 stringaOrario = Integer.toString(orarioConvertito);
-                Log.d("oreInMinuti",stringaOrario);
+                Log.d("oraRichiesta", stringaOrario);
                 stringaOrarioC = Integer.toString(getOraCorrente());
-                Log.d("OraCorrente",stringaOrarioC);
-                if(orarioConvertito > getOraCorrente() - 10 && orarioConvertito < getOraCorrente() + 30 ){
+                Log.d("OraCorrente", stringaOrarioC);
+                if (getOraCorrente() >= orarioConvertito - 10 && orarioConvertito + 30 >= getOraCorrente()) {
                     trovato = 1;
-                    sTrovato = Integer.toString(trovato);
-                    Log.d("trovato",sTrovato);
-                    return trovato;
+                    Log.d("CittadinoOfferente", p.getCittadinoOfferente().getCognome().toString());
+                    TextInputEditText textCognome = (TextInputEditText) root.findViewById(R.id.cognomeOfferente);
+                    TextInputEditText textNome = (TextInputEditText) root.findViewById(R.id.nomeOfferente);
+                    TextInputEditText textCellulare = (TextInputEditText) root.findViewById(R.id.telefonoOfferente);
+                    TextInputEditText textAuto = (TextInputEditText) root.findViewById(R.id.autoOfferente);
+                    textCognome.setText(p.getCittadinoOfferente().getCognome().toString());
+                    textNome.setText(p.getCittadinoOfferente().getNome().toString());
+                    textCellulare.setText(p.getCittadinoOfferente().getNumeroTelefono().toString());
+                    textAuto.setText(p.getAuto().toString());
                 }
-
 
 
             }
