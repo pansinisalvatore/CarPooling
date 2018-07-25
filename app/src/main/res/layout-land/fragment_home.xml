@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/principale"
-    tools:context=".Principale">
+    tools:context=".Fragment.HomeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="193dp"
         android:layout_weight="1"
         android:background="@drawable/immagine"></LinearLayout>
 
@@ -34,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:color="@color/colore_testo"
-            android:text="Passiamo un terzo della nostra vita nel traffico e un terzo a cercare parcheggio!"
+            android:text="@string/Citazione"
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -59,8 +63,9 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_shape_normal"
-            android:backgroundTint="@color/tint_color"
-            android:text="Offri Passaggio"
+            android:backgroundTint="@color/tint_botton"
+            android:text="@string/OffriPassaggio"
+            android:textColor="@color/etichettabottoni"
 
             />
 
@@ -72,11 +77,11 @@
             android:id="@+id/TrovaPassaggio"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-
+            android:textColor="@color/etichettabottoni"
             android:layout_above="@+id/button2"
             android:background="@drawable/button_shape_normal"
-            android:backgroundTint="@color/tint_color"
-            android:text="Trova Passaggio"
+            android:backgroundTint="@color/tint_botton"
+            android:text="@string/TrovaPassaggio"
             />
 
 
@@ -89,4 +94,6 @@
         android:layout_weight="4"></LinearLayout>
 
 
-</LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
