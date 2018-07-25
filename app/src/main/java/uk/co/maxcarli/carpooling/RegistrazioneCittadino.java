@@ -58,13 +58,15 @@ public class RegistrazioneCittadino extends AppCompatActivity {
             String cognome = mCognome;
             String codiceFiscale = mCodiceFiscale;
             String residenza = mResidenza;
+            Cittadino cittadino=new Cittadino();
+            cittadino.setNome(nome);
+            cittadino.setCognome(cognome);
+            cittadino.setCodiceFiscale(codiceFiscale);
+            cittadino.setResidenza(residenza);
 
             final Intent intent = new Intent(this, SceltaAzienda.class);
 
-            intent.putExtra("nome", nome);
-            intent.putExtra("cognome", cognome);
-            intent.putExtra("codiceFiscale", codiceFiscale);
-            intent.putExtra("residenza",residenza);
+            intent.putExtra(Cittadino.Keys.IDCITTADINO, cittadino);
             startActivity(intent);
         }
 

@@ -166,6 +166,8 @@ public class MappaOffertePassaggiActivity extends AppCompatActivity implements O
                                         }
                                     }
 
+                                }else{
+                                    Controlli.mostraMessaggioSuccesso(getString(R.string.PassaggioAccettatoSuccessoTitolo),getString(R.string.PassaggioAccettatoSuccessoTesto),MappaOffertePassaggiActivity.this);
                                 }
 
 
@@ -203,6 +205,7 @@ public class MappaOffertePassaggiActivity extends AppCompatActivity implements O
                             break;
                         }
                     }
+                    Controlli.mostraMessaggioSuccesso(getString(R.string.PassaggioRifiutatoSuccessoTitolo),getString(R.string.PassaggioRifiutatoSuccessoTesto),MappaOffertePassaggiActivity.this);
                     Database.modificaStatus("rifiutato",cell,MappaOffertePassaggiActivity.this,passaggio);
                     accetta.setVisibility(View.INVISIBLE);
                     rifiuta.setVisibility(View.INVISIBLE);

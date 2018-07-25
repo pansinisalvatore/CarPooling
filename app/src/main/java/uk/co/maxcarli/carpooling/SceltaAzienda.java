@@ -32,6 +32,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import uk.co.maxcarli.carpooling.model.Cittadino;
+
 import static uk.co.maxcarli.carpooling.Control.Controlli.*;
 
 public class SceltaAzienda extends Activity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
@@ -43,6 +45,8 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
     private ArrayAdapter<String> adapter;
     private boolean verificaAzienda;
     String PartitaIvaAzienda = " ";
+
+    private Cittadino cittadino;
 
     private String mNome = " ";
     private String mCognome = " ";
@@ -287,6 +291,7 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
         final Intent intent = getIntent();
 
         if(intent != null){
+
 
             mNome = intent.getStringExtra("nome");
             mCognome = intent.getStringExtra("cognome");

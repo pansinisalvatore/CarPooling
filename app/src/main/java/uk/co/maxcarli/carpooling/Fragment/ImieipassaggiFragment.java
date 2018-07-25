@@ -2,6 +2,8 @@ package uk.co.maxcarli.carpooling.Fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -32,43 +34,39 @@ public class ImieipassaggiFragment extends Fragment implements TabLayout.OnTabSe
     private ViewPager mViewPager;
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
+
     public ImieipassaggiFragment() {
         // Required empty public constructor
     }
 
     public static ImieipassaggiFragment newInstance(String param1, String param2) {
         ImieipassaggiFragment fragment = new ImieipassaggiFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
         return fragment;
     }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //
+
+
     }
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-
+    public View onCreateView( LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
+        View viewRoot= inflater.inflate(R.layout.fragment_imieipassaggi, container,false);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getActivity().getSupportFragmentManager());
 
-        View RootView = inflater.inflate(R.layout.fragment_imieipassaggi, container, false);
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) RootView.findViewById(R.id.viewPager);
+        mViewPager = (ViewPager) viewRoot.findViewById(R.id.viewPager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) RootView.findViewById(R.id.tab);
+        TabLayout tabLayout = (TabLayout) viewRoot.findViewById(R.id.tab);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-        //tabLayout.setupWithViewPager(mViewPager);
-
-        return RootView;
-
-
+        return viewRoot;
     }
 
     @Override
@@ -85,10 +83,6 @@ public class ImieipassaggiFragment extends Fragment implements TabLayout.OnTabSe
     public void onTabReselected(TabLayout.Tab tab) {
 
     }
-
-
-
-
 
 
     public  class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -108,6 +102,7 @@ public class ImieipassaggiFragment extends Fragment implements TabLayout.OnTabSe
 
                     fragment= new PassaggiRichiesti();
 
+
                     break;
 
                 case 1:
@@ -120,19 +115,18 @@ public class ImieipassaggiFragment extends Fragment implements TabLayout.OnTabSe
             return fragment;
         }
 
-        public void loadFragment (Fragment fragment){
-            // load fragment
-            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.viewPager, fragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-        }
+
+
 
         @Override
         public int getCount() {
             // Show 3 total pages.
             return 2;
-        }
+
+         }
     }
+
+
+
 
 }

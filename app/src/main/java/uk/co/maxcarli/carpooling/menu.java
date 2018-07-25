@@ -12,6 +12,7 @@ package uk.co.maxcarli.carpooling;
         import android.support.design.widget.BottomNavigationView;
         import android.support.design.widget.CoordinatorLayout;
         import android.support.v4.app.Fragment;
+        import android.support.v4.app.FragmentActivity;
         import android.support.v4.app.FragmentTransaction;
         import android.support.v7.app.ActionBar;
         import android.support.v7.app.AppCompatActivity;
@@ -37,20 +38,27 @@ public class menu extends AppCompatActivity {
     private ActionBar toolbar;
     private Cittadino cittadino;
     FragmentTransaction transaction;
+    BottomNavigationView navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
 
-        cittadino=(Cittadino)getIntent().getParcelableExtra(Cittadino.Keys.IDCITTADINO);
+
+
+
+            cittadino=(Cittadino)getIntent().getParcelableExtra(Cittadino.Keys.IDCITTADINO);
+
+
         //Sede sede=(Sede)getIntent().getParcelableExtra(Sede.Keys.IDSEDE);
         //cittadino.setSede(sede);
 
 
         toolbar = getSupportActionBar();
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
         // attaching bottom sheet behaviour - hide / show on scroll
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
         layoutParams.setBehavior(new BottomNavigationBehavior());
@@ -98,7 +106,7 @@ public class menu extends AppCompatActivity {
 
                 case R.id.imieipassaggi:
                     toolbar.setTitle("I miei passaggi");
-                    fragment = new ImieipassaggiFragment();
+                    fragment=new ImieipassaggiFragment();
                     break;
 
                 case R.id.Classifica:
@@ -172,6 +180,7 @@ public class menu extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(Cittadino.Keys.IDCITTADINO,cittadino);
+        outState.putInt("SelectedItemId",navigation.getSelectedItemId());
     }
 
     public Cittadino getCittadino() {
@@ -209,7 +218,12 @@ public class menu extends AppCompatActivity {
     }
 
 
-
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        int selectedItemId = savedInstanceState.getInt("SelectedItemId");
+        navigation.setSelectedItemId(selectedItemId);
+        cittadino=savedInstanceState.getParcelable(Cittadino.Keys.IDCITTADINO);
+    }
 
 
 }

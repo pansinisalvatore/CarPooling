@@ -39,7 +39,7 @@ public class RicercaIndirizzo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ricerca_indirizzo);
         final Intent intent = getIntent();
-        cittadino=(Cittadino) intent.getSerializableExtra("cittadino");
+        cittadino=(Cittadino) intent.getParcelableExtra("cittadino");
 
         dammiPosto(cittadino.getNome(),cittadino.getCognome(),cittadino.getCodiceFiscale());
 

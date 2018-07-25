@@ -143,4 +143,5 @@
     <string name="utenteAccettatoTesto">Utente accettato con successo</string>
     <string name="utenteRifiutatoTitolo">Utente rifiutato</string>
     <string name="utenteRifiutatoTesto">Utente respinto con successo</string>
+    <string name="sede">Sede di lavoro</string>
 </resources>

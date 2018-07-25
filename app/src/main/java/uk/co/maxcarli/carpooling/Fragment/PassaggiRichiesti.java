@@ -68,7 +68,7 @@ public class PassaggiRichiesti extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_passaggi_richiesti,null);
+        view=inflater.inflate(R.layout.fragment_passaggi_richiesti,container,false);
 
         tb=(TableView<String[]>) view.findViewById(R.id.TabellaPassaggiRichiesti);
 

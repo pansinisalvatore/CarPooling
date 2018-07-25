@@ -25,34 +25,52 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/labelId"/>
 
+
+    <TextView
+        android:id="@+id/sedeLabelID"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="85dp"
+        android:paddingTop="10dp"
+        android:text="@string/sede" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autocompletesedeId"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sedeLabelID"
+        />
+
+
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/NumeroTelefofonoCittadinoText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/NumeroTelefofonoCittadinoText"
-        android:hint="@string/NumeroTelefonico"
-        android:layout_below="@id/autocompleteId">
+
+        android:layout_marginTop="179dp"
+        android:hint="@string/NumeroTelefonico">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/numeroTelefonicoCittadino"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/numeroTelefonicoCittadino"
             android:inputType="number"
             android:maxLines="1" />
     </android.support.design.widget.TextInputLayout>
 
 
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/NumeroTelefofonoCittadinoText"
-        android:layout_alignParentLeft="true"
-        android:hint="@string/Conferma"
-        android:onClick="clickButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
+        android:layout_marginBottom="190dp"
         android:background="@drawable/button_shape_normal"
         android:backgroundTint="@color/tint_botton"
-        />
+        android:hint="@string/Conferma"
+        android:onClick="clickButton" />
 
 
 

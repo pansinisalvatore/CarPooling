@@ -39,6 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import uk.co.maxcarli.carpooling.Control.ControlBluetooth;
 import uk.co.maxcarli.carpooling.Control.Controlli;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 import uk.co.maxcarli.carpooling.model.Passaggio;
@@ -124,7 +125,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                     offerente.setCognome(cognome);
                     offerente.setResidenza(indirizzo);
                     offerente.setNumeroTelefono(telefono);
-                    //Toast.makeText(this, indirizzo, Toast.LENGTH_LONG).show();
+
 
                     prenotaPassaggio(MappaCercaPassaggi.this, Integer.parseInt((String)marker.getTag()), offerente);
 
@@ -149,7 +150,6 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
 
         float[] results=new float[1];
         Location.distanceBetween(centro.getLatitude(),centro.getLongitude(),pos.getLatitude(),pos.getLongitude(),results);
-        Toast.makeText(this,"Distanza "+results[0],Toast.LENGTH_SHORT).show();
         if((double)results[0]<=raggio){
             return true;
         }else{
@@ -188,7 +188,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(context.getApplicationContext(),response,Toast.LENGTH_LONG).show();
+
 
                         if(!response.equals("Something went wrong")){
                             try {
@@ -218,7 +218,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                                                         .defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
                                     }
                                     if(j==0){
-                                        //Toast.makeText(context.getApplicationContext(),getString(R.string.OfferteNonPresenti),Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context.getApplicationContext(),getString(R.string.OfferteNonPresenti),Toast.LENGTH_LONG).show();
                                     }
                                 }
                             } catch (JSONException e) {
@@ -226,7 +226,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
 
                             }
                         }else{
-                            //Toast.makeText(context.getApplicationContext(),getString(R.string.OfferteNonPresenti),Toast.LENGTH_LONG).show();
+                            Toast.makeText(context.getApplicationContext(),getString(R.string.OfferteNonPresenti),Toast.LENGTH_LONG).show();
                         }
 
 
@@ -333,6 +333,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
 
                 params.put("idCittadino",cittadino.getIdCittadino()+"");
                 params.put("idPassaggio",idPassaggio+"");
+                params.put("macAddress", ControlBluetooth.getBluetoothMacAddress());
                 return params;
             }
         };
@@ -348,7 +349,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
 
                String address=addr.get(0).getAddressLine(0);
 
-               Toast.makeText(this, address, Toast.LENGTH_LONG).show();
+               // Toast.makeText(this, address, Toast.LENGTH_LONG).show();
                return address;
            }
            return null;
