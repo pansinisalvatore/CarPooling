@@ -27,6 +27,8 @@ public class ImieipassaggiFragment extends Fragment implements TabLayout.OnTabSe
     private menu menuActivity;
 
 
+
+
     private ViewPager mViewPager;
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
