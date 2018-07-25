@@ -361,11 +361,12 @@ public class Database {
                                 e.printStackTrace();
 
                             }
-                            Intent intent= new Intent(context, menu.class);
-                            intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
-                            context.startActivity(intent);
-                            ((Activity)context).finish();
+
                         }
+                        Intent intent= new Intent(context, menu.class);
+                        intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
+                        context.startActivity(intent);
+                        ((Activity)context).finish();
 
                     }
                 },
