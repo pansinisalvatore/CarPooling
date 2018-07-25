@@ -15,7 +15,7 @@ import static uk.co.maxcarli.carpooling.Control.ControlBluetooth.*;
 
 public class ClientConnect extends AppCompatActivity {
     public static final int REQUEST_ENABLE_BT = 1;
-
+//mm
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
