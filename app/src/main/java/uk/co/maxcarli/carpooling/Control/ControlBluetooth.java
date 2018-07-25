@@ -1,9 +1,12 @@
 package uk.co.maxcarli.carpooling.Control;
 
 import android.bluetooth.BluetoothAdapter;
+import android.content.Intent;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+
+import static uk.co.maxcarli.carpooling.Bluethoot.avviaTraking.REQUEST_ENABLE_BT;
 
 public class ControlBluetooth {
 
@@ -55,6 +58,9 @@ In questo metodo verifico che il dispositivo supporti il bluethoot
         }
         return bluetoothMacAddress;
     }
+
+
+
 
 
 

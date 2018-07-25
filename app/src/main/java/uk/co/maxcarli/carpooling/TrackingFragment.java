@@ -1,7 +1,9 @@
 package uk.co.maxcarli.carpooling;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -13,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -29,13 +32,16 @@ import uk.co.maxcarli.carpooling.menu;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 import uk.co.maxcarli.carpooling.model.Passaggio;
 
+import static uk.co.maxcarli.carpooling.Control.ControlBluetooth.bluetoothIsActive;
+import static uk.co.maxcarli.carpooling.Control.ControlBluetooth.verificaSupportoB;
 import static uk.co.maxcarli.carpooling.Fragment.PassaggiOfferti.controlloTipoPassagio;
 import static uk.co.maxcarli.carpooling.Control.Controlli.*;
 
 public class TrackingFragment extends Fragment {
 
     private Cittadino cittadino;
-    private Passaggio p;
+
+    public static final int REQUEST_ENABLE_BT = 1;
 
     private menu menuActivity;
 
@@ -67,7 +73,7 @@ public class TrackingFragment extends Fragment {
         int vista = 0;
         View rootServer = null;
 
-        Passaggio p = controlOfferer(cittadino.passaggiOfferti, dataCorrente);
+        final Passaggio p = controlOfferer(cittadino.passaggiOfferti, dataCorrente);
 
 
 
@@ -102,6 +108,19 @@ public class TrackingFragment extends Fragment {
             tb.setDataAdapter(dataAdapter);
 
             tb.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            Button button=(Button)rootServer.findViewById(R.id.buttonTracking);
+
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    avviaBluetooth();
+                    Intent intent=new Intent(getActivity(), TrackingOfferente.class);
+                    intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
+                    intent.putExtra(Passaggio.Keys.IDPASSAGGIO,p);
+                    startActivityForResult(intent,1);
+
+                }
+            });
 
         } else {
             rootServer = inflater.inflate(R.layout.fragment_tracking_richiesta, container, false);
@@ -210,6 +229,20 @@ public class TrackingFragment extends Fragment {
         return trovato;
 
     }
+
+
+    public  boolean avviaBluetooth(){
+        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if(verificaSupportoB(mBluetoothAdapter)== true){
+            if(bluetoothIsActive(mBluetoothAdapter) == false){
+                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+            }
+        }
+        if(bluetoothIsActive(mBluetoothAdapter) == true) return true;
+        else return false;
+    }
+
 
 
 }

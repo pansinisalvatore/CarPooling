@@ -10,7 +10,7 @@ import uk.co.maxcarli.carpooling.R;
 import static uk.co.maxcarli.carpooling.Control.ControlBluetooth.*;
 
 public class avviaTraking extends AppCompatActivity {
-    public static final int REQUEST_ENABLE_BT = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,26 +23,11 @@ public class avviaTraking extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void avviaServer(View view){
-        if(avviaBluetooth() == true) {
 
-            final Intent intent = new Intent(this, Tracking.class);
-            startActivity(intent);
-        }
-    }
-
-    public boolean avviaBluetooth(){
-        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if(verificaSupportoB(mBluetoothAdapter)== true){
-            if(bluetoothIsActive(mBluetoothAdapter) == false){
-                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-            }
-        }
-        if(bluetoothIsActive(mBluetoothAdapter) == true) return true;
-        else return false;
     }
 
 
 
-}
+
+
+
