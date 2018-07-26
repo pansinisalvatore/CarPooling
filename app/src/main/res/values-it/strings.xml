@@ -19,7 +19,7 @@
     <string name="passwordErrataText">Le passwords non corrispondono</string>
     <string name="Avanti">Avanti</string>
     <string name="ListaUtenti">Lista utenti</string>
-    <string name="Email"> E-MAIL</string>
+    <string name="Email"> E-mail</string>
     <string name="Password">Password</string>
     <string name="SignIn">Login</string>
     <string name="SignUp">Registrati</string>
@@ -144,4 +144,7 @@
     <string name="utenteRifiutatoTitolo">Utente rifiutato</string>
     <string name="utenteRifiutatoTesto">Utente respinto con successo</string>
     <string name="sede">Sede di lavoro</string>
+    <string name="Contatti">Contatti</string>
+    <string name="Informazioni">Informazioni</string>
+    <string name="Impostazioni">Impostazioni</string>
 </resources>

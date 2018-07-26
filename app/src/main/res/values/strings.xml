@@ -23,7 +23,7 @@
     <string name="PasswordCittadino">Password</string> -->
     <string name="Avanti">Next</string>
     <string name="ListaUtenti">Utent List</string>
-    <string name="Email"> E-MAIL</string>
+    <string name="Email"> E-mail</string>
     <string name="Password">Password</string>
     <string name="SignIn">Sign in</string>
     <string name="SignUp">Sign up</string>
@@ -156,4 +156,7 @@ Enter your information to proceed with registration.</string>
     <string name="PassaggioRifiutatoSuccessoTitolo">Request rejected</string>
     <string name="PassaggioRifiutatoSuccessoTesto">You have successfully rejected the request.</string>
     <string name="sede">Place of work</string>
+    <string name="Contatti">Contacts</string>
+    <string name="Informazioni">Information</string>
+    <string name="Impostazioni">Setting</string>
 </resources>
