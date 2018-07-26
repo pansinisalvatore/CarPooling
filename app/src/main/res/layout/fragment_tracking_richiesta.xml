@@ -166,6 +166,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/buttonTrackingRichiesta"
                 android:hint="@string/startTracking" />
 
         </LinearLayout>

@@ -40,6 +40,7 @@ import static uk.co.maxcarli.carpooling.Control.Controlli.*;
 public class TrackingFragment extends Fragment {
 
     private Cittadino cittadino;
+    private Passaggio passaggio;
 
     public static final int REQUEST_ENABLE_BT = 1;
 
@@ -108,16 +109,19 @@ public class TrackingFragment extends Fragment {
             tb.setDataAdapter(dataAdapter);
 
             tb.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            passaggio = p;
             Button button=(Button)rootServer.findViewById(R.id.buttonTracking);
 
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    avviaBluetooth();
-                    Intent intent=new Intent(getActivity(), TrackingOfferente.class);
-                    intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
-                    intent.putExtra(Passaggio.Keys.IDPASSAGGIO,p);
-                    startActivityForResult(intent,1);
+                    BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                   if(avviaBluetooth(mBluetoothAdapter) == true) {
+                       Intent intent = new Intent(getActivity(), TrackingOfferente.class);
+                       intent.putExtra(Cittadino.Keys.IDCITTADINO, cittadino);
+                       intent.putExtra(Passaggio.Keys.IDPASSAGGIO, passaggio);
+                       startActivityForResult(intent, 1);
+                   }
 
                 }
             });
@@ -128,6 +132,24 @@ public class TrackingFragment extends Fragment {
 
             if (trovato == 0){
                 rootServer = inflater.inflate(R.layout.fragment_tracking_vuoto, container, false);
+            } else{
+
+                Button button=(Button)rootServer.findViewById(R.id.buttonTrackingRichiesta);
+
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                       if(avviaBluetooth(mBluetoothAdapter) == true) {
+                           Intent intent = new Intent(getActivity(), TrackingRichiedente.class);
+                           intent.putExtra(Cittadino.Keys.IDCITTADINO, cittadino);
+                           intent.putExtra(Passaggio.Keys.IDPASSAGGIO, passaggio);
+                           startActivityForResult(intent, 1);
+                       }
+
+                    }
+                });
+
             }
 
         }
@@ -212,6 +234,7 @@ public class TrackingFragment extends Fragment {
                 Log.d("OraCorrente", stringaOrarioC);
                 if (getOraCorrente() >= orarioConvertito - 10 && orarioConvertito + 30 >= getOraCorrente()) {
                     trovato = 1;
+                    passaggio = p;
                     Log.d("CittadinoOfferente", p.getCittadinoOfferente().getCognome().toString());
                     TextInputEditText textCognome = (TextInputEditText) root.findViewById(R.id.cognomeOfferente);
                     TextInputEditText textNome = (TextInputEditText) root.findViewById(R.id.nomeOfferente);
@@ -231,8 +254,8 @@ public class TrackingFragment extends Fragment {
     }
 
 
-    public  boolean avviaBluetooth(){
-        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    public  boolean avviaBluetooth(BluetoothAdapter mBluetoothAdapter){
+        Log.d("sono entrato","avviaBluetooth()");
         if(verificaSupportoB(mBluetoothAdapter)== true){
             if(bluetoothIsActive(mBluetoothAdapter) == false){
                 Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);

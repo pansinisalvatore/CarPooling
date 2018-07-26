@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import uk.co.maxcarli.carpooling.model.Cittadino;
 import uk.co.maxcarli.carpooling.model.Passaggio;
+import static uk.co.maxcarli.carpooling.Control.ControlBluetooth.*;
 
 public class TrackingOfferente extends AppCompatActivity {
     private Passaggio passaggio;
@@ -19,6 +20,7 @@ public class TrackingOfferente extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking_offerente);
+        visibilita(this);
         passaggio = getIntent().getParcelableExtra(Passaggio.Keys.IDPASSAGGIO);
         cittadino = getIntent().getParcelableExtra(Cittadino.Keys.IDCITTADINO);
         Log.d("TrackingOfferente", cittadino.getCognome().toString());

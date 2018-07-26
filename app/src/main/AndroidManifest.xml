@@ -78,7 +78,8 @@
         <activity android:name=".cambia_pass" />
         <activity android:name=".MappaOffertePassaggiActivity" />
         <activity android:name=".MappaPassaggiRichiesti" />
-        <activity android:name=".TrackingOfferente"></activity>
+        <activity android:name=".TrackingOfferente" />
+        <activity android:name=".TrackingRichiedente"></activity>
     </application>
 
 </manifest>

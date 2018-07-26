@@ -1,11 +1,13 @@
 package uk.co.maxcarli.carpooling.Control;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.Context;
 import android.content.Intent;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-
+import java.util.Set;
 
 
 public class ControlBluetooth {
@@ -57,6 +59,25 @@ In questo metodo verifico che il dispositivo supporti il bluethoot
             bluetoothMacAddress = bluetoothAdapter.getAddress();
         }
         return bluetoothMacAddress;
+    }
+
+    public static void dispositiviAccoppiati(BluetoothAdapter mBluetoothAdapter){
+        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+
+        if (pairedDevices.size() > 0) {
+            // There are paired devices. Get the name and address of each paired device.
+            for (BluetoothDevice device : pairedDevices) {
+                String deviceName = device.getName();
+                String deviceHardwareAddress = device.getAddress(); // MAC address
+            }
+        }
+    }
+
+    public static void visibilita(Context context){
+        Intent discoverableIntent =
+                new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+        discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 7200);
+        context.startActivity(discoverableIntent);
     }
 
 
