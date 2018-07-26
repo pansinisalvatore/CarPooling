@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Filtro"
+    android:id="@+id/filtro"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0">
+
+        <AutoCompleteTextView
+            android:id="@+id/driverSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/automobilista"
+            android:theme="@style/MyEditText"
+
+
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:id="@+id/groupTypeRequest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/casaLavoroRicerca"
+                android:layout_width="141dp"
+                android:layout_height="69dp"
+
+                android:layout_weight="1"
+                android:text="@string/casa_lavoro"
+                android:theme="@style/MyEditText"
+                />
+
+            <RadioButton
+                android:id="@+id/LavoroCasaRicerca"
+                android:layout_width="141dp"
+                android:layout_height="69dp"
+                android:theme="@style/MyEditText"
+
+
+                android:layout_weight="1"
+                android:text="@string/lavoro_casa"
+                />
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="0">
+
+        <EditText
+            android:id="@+id/edtselezionadata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:ems="10"
+            android:focusable="false"
+            android:inputType="date"
+            android:hint="@string/SelezionaData"
+            android:theme="@style/MyEditText"/>
+
+
+
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="0">
+
+        <EditText
+            android:id="@+id/edtselezionaora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:ems="10"
+            android:focusable="false"
+            android:inputType="time"
+            android:hint="@string/SelezionaOra"
+            android:theme="@style/MyEditText"/>
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/btnricerca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/etichettabottoni"
+            android:text="@string/Ricerca"
+            android:background="@drawable/button_shape_normal"
+            android:backgroundTint="@color/tint_botton"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -39,12 +39,12 @@
         android:layout_height="wrap_content"
         android:hint="@string/NumeroTelefonico"/>
 
-        <AutoCompleteTextView
-            android:id="@+id/numeroTelefonicoCittadino"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:maxLines="1" />
+    <AutoCompleteTextView
+        android:id="@+id/numeroTelefonicoCittadino"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:maxLines="1" />
 
 
 
