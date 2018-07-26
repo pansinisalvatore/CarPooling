@@ -76,7 +76,7 @@ In questo metodo verifico che il dispositivo supporti il bluethoot
     public static void visibilita(Context context){
         Intent discoverableIntent =
                 new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-        discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 7200);
+        discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 0);
         context.startActivity(discoverableIntent);
     }
 
