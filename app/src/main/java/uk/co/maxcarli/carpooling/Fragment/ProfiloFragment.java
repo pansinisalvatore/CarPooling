@@ -87,7 +87,8 @@ public class ProfiloFragment extends Fragment {
         residenza= (TextInputEditText)root.findViewById(R.id.edtselezionaresidenza);
         residenza.setText(cittadino.getResidenza());
 
-        password=(TextInputEditText)root.findViewById(R.id.edtModificaPass);
+        /*password=(TextInputEditText)root.findViewById(R.id.edtModificaPass);
+
         password.setText(cittadino.getPassword());
         password.setKeyListener(null);
         azienda=(TextInputEditText)root.findViewById(R.id.edtselezionaAzienda);
@@ -113,7 +114,7 @@ public class ProfiloFragment extends Fragment {
                 intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino.getPassword());
                 startActivityForResult(intent,1);
             }
-        });
+        });*/
 
 
         Button conferma=root.findViewById(R.id.confermaModifiche);

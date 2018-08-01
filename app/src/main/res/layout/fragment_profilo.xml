@@ -104,94 +104,104 @@
         android:layout_width="match_parent"
         android:layout_height="15dp"></LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Contatti"
-            android:textSize="20sp"
-            android:layout_gravity="start"
-            android:textStyle="italic"
-            android:textColor="@color/colore_testo"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="15dp"></LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Email"
-            android:textStyle="italic"/>
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/Contatti"
+                android:textColor="@color/colore_testo"
+                android:textSize="20sp"
+                android:textStyle="italic" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="15dp"></LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Email"
+                android:textStyle="italic" />
 
 
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Prendere email da db" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/NumeroTelefonico"
-            android:textStyle="italic"/>
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Prendere dal db il numero di telefono"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="15dp"></LinearLayout>
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Prendere email da db" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Informazioni"
-            android:textSize="20sp"
-            android:layout_gravity="start"
-            android:textStyle="italic"
-            android:textColor="@color/colore_testo"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="15dp"></LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/NumeroTelefonico"
+                android:textStyle="italic" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Residenza"
-            android:textStyle="italic"/>
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Prendere l'indirizzo dal database"/>
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Prendere dal db il numero di telefono" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="15dp"></LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Impostazioni"
-            android:textSize="20sp"
-            android:layout_gravity="start"
-            android:textStyle="italic"
-            android:textColor="@color/colore_testo"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="15dp"></LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="15dp"></LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Password"
-            android:textStyle="italic"/>
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Prendere la pass dal db">
-        </android.support.design.widget.TextInputEditText>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/Informazioni"
+                android:textColor="@color/colore_testo"
+                android:textSize="20sp"
+                android:textStyle="italic" />
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="15dp"></LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Residenza"
+                android:textStyle="italic" />
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Prendere l'indirizzo dal database" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="15dp"></LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/Impostazioni"
+                android:textColor="@color/colore_testo"
+                android:textSize="20sp"
+                android:textStyle="italic" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="15dp"></LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Password"
+                android:textStyle="italic" />
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Prendere la pass dal db"></android.support.design.widget.TextInputEditText>
+
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

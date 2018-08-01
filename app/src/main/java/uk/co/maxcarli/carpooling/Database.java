@@ -30,27 +30,23 @@ import uk.co.maxcarli.carpooling.model.Sede;
 public class Database {
 
     static String urlLogin = "http://carpoolingsms.altervista.org/PHP/Login.php";
-    static String urlRegister = "http://carpoolingsms.altervista.org/PHP/query.php";
+    static String urlRegister = "http://carpoolingsms.altervista.org/PHP/registrazione.php";
     static AlertDialog.Builder builder;
 
-    public static void registraCittadino(final String nome, final String cognome, final Context context) {
+    public static void registraCittadino(final Cittadino cittadino, final String sede, final String partitaIva,final Context context) {
         builder = new AlertDialog.Builder(context);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, urlRegister,
 
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Toast.makeText(context,response,Toast.LENGTH_LONG).show();
+                        if(response.equals("success")){
+                            Controlli.mostraMessaggioConChiusura(context.getString(R.string.registrazioneCompletaTitolo),context.getString(R.string.registrazioneCompletaTesto),context);
+                        }else if(response.equals("Email o telefono esistente")){
+                            Controlli.mostraMessaggioErrore(context.getString(R.string.erroreEmailEsistenteTitolo),context.getString(R.string.erroreEmailEsistente),context);
+                        }
 
-                        builder.setTitle("Server Response");
-                        builder.setMessage("Response" + response);
-                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                        AlertDialog alertDialog = builder.create();
-                        alertDialog.show();
                     }
                 }
 
@@ -67,8 +63,15 @@ public class Database {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("nome", nome);
-                params.put("cognome", cognome);
+                params.put("nome", cittadino.getNome());
+                params.put("cognome",cittadino.getCognome());
+                params.put("email",cittadino.getEmail());
+                params.put("password",cittadino.getPassword());
+                params.put("residenza",cittadino.getResidenza());
+                params.put("telefono",cittadino.getNumeroTelefono());
+                params.put("sede",sede);
+                params.put("pIva",partitaIva);
+
                 return params;
             }
         };

@@ -26,87 +26,34 @@ import static uk.co.maxcarli.carpooling.Control.Controlli.mostraMessaggioErrore;
 
 public class completaRegistrazione extends AppCompatActivity {
 
-    private String idAzienda = "";
+    private String partitaIva = "";
+    private Cittadino cittadino;
+    private String sede;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_completa_registrazione);
-        String partitaIva = fromIntent();
-        partitaIva = partitaIva.trim();
+        fromIntent();
+
         Log.d("PartitaIva", partitaIva);
-        recuperaId(partitaIva);
-
-
 
     }
 
-    private String fromIntent(){
+    private void fromIntent(){
 
         final Intent intent = getIntent();
-        String mAzienda = "";
-        Cittadino cittadino = new Cittadino();
+
 
         if(intent != null){
+            Cittadino cittadino = intent.getParcelableExtra(Cittadino.Keys.IDCITTADINO);
+            partitaIva=intent.getStringExtra("partitaIva");
+            sede=intent.getStringExtra("sede");
 
-           final String mNome = intent.getStringExtra("nome");
-           final String mCognome = intent.getStringExtra("cognome");
-           final String mCodiceFiscale = intent.getStringExtra("codiceFiscale");
-           final String mResidenza = intent.getStringExtra("residenza");
-           mAzienda = intent.getStringExtra("azienda");
-           final String mNumeroTelefono = intent.getStringExtra("numeroTelefono");
-
-           cittadino.setNome(mNome);
-           cittadino.setCognome(mCognome);
-           cittadino.setCodiceFiscale(mCodiceFiscale);
-           cittadino.setResidenza(mResidenza);
-           cittadino.setNumeroTelefono(mNumeroTelefono);
         }
-        return mAzienda;
+
     }
 
-    private void recuperaId(final String partitaIva){
-
-        Log.d("finalStringPartitaIva", partitaIva);
-        String url ="http://carpoolingsms.altervista.org/PHP/getIdAzienda.php";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                     // Cittadino cittadino = new Cittadino(nome, cognome);
-                      response = response.trim();
-                      //cittadino.setIdAzienda(response);
-
-                      //idAzienda = cittadino.getIdSede(); //id Azienda si può cancellare
-
-                        Log.d("azienda", idAzienda);
-                      Log.d("response", response);
-
-                    }
-                }
-
-                , new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                error.printStackTrace();
-
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("partitaIva", partitaIva);
-                return params;
-            }
-        };
-
-
-        MySingleton.getmInstance(this).addTorequestque(stringRequest);
-    }
 
     public void clickButton(View view){
         Boolean lenghtPasw = true;
@@ -117,19 +64,24 @@ public class completaRegistrazione extends AppCompatActivity {
 
             if (campiVuoti(emailEdit,passwordEdit,confermaPasswordEdit) == false){
                 verEmail = verificaEmail(emailEdit);
-                String text = getText(R.string.passwordCorta).toString();
+                String text = getString(R.string.passwordCorta);
                 Log.d("text", text);
                 lenghtPasw = lunghezzaPassword(passwordEdit,text);
+                return;
             }
 
             if(verEmail == false ) {
                 Log.d("verEmail","true");
 
                 if (confrontaPassword(passwordEdit, confermaPasswordEdit)) {
-                    String text = getText(R.string.passwordErrataText).toString();
-                    String title = getText(R.string.passwordErrata).toString();
+                    String text = getString(R.string.passwordErrataText);
+                    String title = getString(R.string.passwordErrata);
                     mostraMessaggioErrore(title, text, completaRegistrazione.this);
+                    return;
                 }
+                cittadino.setEmail(emailEdit.getText().toString());
+                cittadino.setPassword(passwordEdit.getText().toString());
+                Database.registraCittadino(cittadino,sede,partitaIva,this);
             }
 
 
@@ -149,7 +101,7 @@ public class completaRegistrazione extends AppCompatActivity {
         String email = emailEdit.getText().toString();
        if( mailSyntaxCheck(email) == true) return false; //nell'email non sono presenti errori
         else {
-                String text = getText(R.string.formatoEmailNonValido).toString();
+                String text = getString(R.string.formatoEmailNonValido);
                 emailEdit.setError(text);
             return true;
        }

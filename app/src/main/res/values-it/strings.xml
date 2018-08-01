@@ -147,4 +147,11 @@
     <string name="Contatti">Contatti</string>
     <string name="Informazioni">Informazioni</string>
     <string name="Impostazioni">Impostazioni</string>
+    <string name="sedeNonValida"> Sede non valida </string>
+    <string name="sedeNonValidaText">La sede che hai inserito non esiste</string>
+    <string name="registrazioneCompletaTitolo">Registrazione completata</string>
+    <string name="registrazioneCompletaTesto">Registrazione avvenuta con successo. Attendi di essere convalidato dal mobility manager.</string>
+    <string name="erroreEmailEsistente">Email o telefono esistenti.</string>
+    <string name="erroreEmailEsistenteTitolo">Errore inserimento</string>
+
 </resources>

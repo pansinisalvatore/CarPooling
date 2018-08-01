@@ -98,12 +98,7 @@ public class RegistrazioneCittadino extends AppCompatActivity {
                 , new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(RegistrazioneCittadino.this, "Error...", Toast.LENGTH_SHORT).show();
-                error.printStackTrace();
-
-            }
-        }) {
+{
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -113,6 +108,11 @@ public class RegistrazioneCittadino extends AppCompatActivity {
                 return params;
             }
         };
+                Toast.makeText(RegistrazioneCittadino.this, "Error...", Toast.LENGTH_SHORT).show();
+                error.printStackTrace();
+
+            }
+        })
 
 
         MySingleton.getmInstance(RegistrazioneCittadino.this).addTorequestque(stringRequest);

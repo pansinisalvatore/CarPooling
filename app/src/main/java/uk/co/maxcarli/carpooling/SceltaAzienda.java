@@ -8,8 +8,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.CompletionInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -42,8 +45,10 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
     // Initialize variables
 
     AutoCompleteTextView textView=null;
+   AutoCompleteTextView textSedi;
     private ArrayAdapter<String> adapter;
     private boolean verificaAzienda;
+    private boolean verificaSede;
     String PartitaIvaAzienda = " ";
 
     private Cittadino cittadino;
@@ -54,6 +59,7 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
     private String mResidenza = " ";
 
     List<String> responseList = new ArrayList<String>();
+    List<String> responseListSedi=new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedIstanceState) {
@@ -128,6 +134,112 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
         textView.setOnItemSelectedListener(this);
         textView.setOnItemClickListener(this);
 
+        textSedi=findViewById(R.id.autocompletesedeId);
+        textSedi.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                setTextViewSede();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+
+    }
+
+    public void setTextViewSede(){
+
+
+        String completoAzienda=textView.getText().toString();
+        if(completoAzienda.equals("")){
+            return;
+        }
+
+        String partitaIva=completoAzienda.substring(completoAzienda.indexOf(",")+1);
+        partitaIva=partitaIva.trim();
+        String url= "http://carpoolingsms.altervista.org/PHP/prendiSediAzienda.php";
+
+        final String finalPartitaIva = partitaIva;
+        Toast.makeText(SceltaAzienda.this, finalPartitaIva, Toast.LENGTH_SHORT).show();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        if(!response.equals("Something went wrong")){
+                            try {
+
+                                JSONArray jsonarray = new JSONArray(response);
+
+                                // vettore = new String[jsonarray.length()];
+
+                                for(int i=0; i < jsonarray.length(); i++) {
+
+                                    final JSONObject jsonobject = jsonarray.getJSONObject(i);
+
+
+                                    String indirizzoSede= jsonobject.getString("IndirizzoSede");
+                                    if(!responseListSedi.contains(indirizzoSede)){
+                                        responseListSedi.add(indirizzoSede);
+
+                                    }
+
+                                }
+
+
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+
+                            }
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if(error != null){
+
+                            Toast.makeText(getApplicationContext(), "Something went wrong.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+
+        ){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map <String,String> params = new HashMap<String, String>();
+                params.put("PartitaIva", finalPartitaIva);
+                return params;
+            }
+        };
+
+        MySingleton.getmInstance(getApplicationContext()).addTorequestque(stringRequest);
+
+
+        //Create adapter
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, responseListSedi);
+        textSedi.setThreshold(1);
+
+        //Set adapter to AutoCompleteTextView
+        textSedi.setAdapter(adapter);
+        textSedi.setOnItemSelectedListener(this);
+        textSedi.setOnItemClickListener(this);
     }
 
 
@@ -174,19 +286,20 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
 
     public void clickButton(View view){
 
-        TextInputEditText textInputEditText = (TextInputEditText) this.findViewById(R.id.numeroTelefonicoCittadino);
+       TextInputEditText textInputEditText =  this.findViewById(R.id.numeroTelefonicoCittadino);
         AutoCompleteTextView aux2 = (AutoCompleteTextView) this.findViewById(R.id.autocompleteId);
-        String azienda = " ";
         String numeroTelefono = " ";
 
-        if (errorControl(textInputEditText, aux2) == false){
+        if (errorControl(textInputEditText, aux2) == false && errorControlSede(textSedi)){
 
             fromIntent();
             Log.d("Sono entrato nell'if","ciao");
             Log.d("stringhe", mNome+mCognome+mResidenza);
-            azienda = aux2.getText().toString();
+
             numeroTelefono = textInputEditText.getText().toString();
-            toIntent(numeroTelefono);
+            cittadino.setNumeroTelefono(numeroTelefono);
+
+            toIntent();
 
 
         }
@@ -234,8 +347,15 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
 
         if (success == true) {
 
-
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+            if(responseList.contains(aux2.getText().toString())){
+                control=false;
+            }else{
+                control=true;
+                String title = getText(R.string.aziendaNonValida).toString();
+                String text = getText(R.string.aziendaNonValidaText).toString();
+                mostraMessaggioErrore(title, text, SceltaAzienda.this);
+            }
+           /*StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
 
                     new Response.Listener<String>() {
                         @Override
@@ -278,12 +398,27 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
 
 
             MySingleton.getmInstance(this).addTorequestque(stringRequest);
-            control = verificaAzienda;
+            control = verificaAzienda;*/
         }
             //se tutto è andato bene
             if ((controlNumero == false) && (control == false) && (success == true)) return false;
             else return true;
 
+    }
+
+    public boolean errorControlSede(final AutoCompleteTextView view){
+        boolean controlEditText = controlloEditTextVuoto(view);
+        boolean control=false;
+
+
+        if(responseListSedi.contains(view.getText().toString())) {
+            return true;
+        }else{
+            String title = getText(R.string.sedeNonValida).toString();
+            String text = getText(R.string.sedeNonValidaText).toString();
+            mostraMessaggioErrore(title, text, SceltaAzienda.this);
+            return false;
+        }
     }
 
     private void fromIntent(){
@@ -292,25 +427,19 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
 
         if(intent != null){
 
+            cittadino=intent.getParcelableExtra(Cittadino.Keys.IDCITTADINO);
 
-            mNome = intent.getStringExtra("nome");
-            mCognome = intent.getStringExtra("cognome");
-            mCodiceFiscale = intent.getStringExtra("codiceFiscale");
-            mResidenza = intent.getStringExtra("residenza");
         }
     }
 
-    private void toIntent(String numeroTelefono){
+    private void toIntent(){
 
         final Intent intent = new Intent(this, completaRegistrazione.class);
-        intent.putExtra("nome",mNome);
-        intent.putExtra("cognome", mCognome);
-        intent.putExtra("codiceFiscale", mCodiceFiscale);
-        intent.putExtra("residenza", mResidenza);
-        intent.putExtra("azienda",PartitaIvaAzienda);
-        intent.putExtra("numeroTelefono",numeroTelefono);
+        intent.putExtra("partitaIva",PartitaIvaAzienda);
+        intent.putExtra("sede",textSedi.getText().toString());
+        intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
         startActivity(intent);
-
+        finish();
     }
 
 
