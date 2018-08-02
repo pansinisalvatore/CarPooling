@@ -17,7 +17,10 @@ public class RegistrazioneCittadino extends AppCompatActivity {
 
     String url ="http://carpoolingsms.altervista.org/PHP/query.php";
     AlertDialog.Builder builder;
-    TextInputEditText aux;
+    TextInputEditText nomeText;
+    TextInputEditText cognomeText;
+    TextInputEditText CFText;
+    EditText residenzaText;
     EditText aux2;
 
     private String mNome;
@@ -30,8 +33,12 @@ public class RegistrazioneCittadino extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrazione_cittadino);
+        nomeText=findViewById(R.id.nomeCittadino);
+        cognomeText=findViewById(R.id.cognomeCittadino);
+        residenzaText=findViewById(R.id.residenzaCittadino);
+        CFText=findViewById(R.id.codiceFiscale);
 
-        riceviCittadino();
+        //riceviCittadino();
 
         findViewById(R.id.buttonAvanti).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,10 +61,10 @@ public class RegistrazioneCittadino extends AppCompatActivity {
 
         if(controlliCampi()== false) {
 
-            String nome = mNome;
-            String cognome = mCognome;
-            String codiceFiscale = mCodiceFiscale;
-            String residenza = mResidenza;
+            String nome = nomeText.getText().toString();
+            String cognome = cognomeText.getText().toString();
+            String codiceFiscale = CFText.getText().toString();
+            String residenza = residenzaText.getText().toString();
             Cittadino cittadino=new Cittadino();
             cittadino.setNome(nome);
             cittadino.setCognome(cognome);
@@ -125,23 +132,12 @@ public class RegistrazioneCittadino extends AppCompatActivity {
 
     public void scegliIndirizzo(View view){
 
-        Cittadino cittadino = new Cittadino();
-        aux = (TextInputEditText) this.findViewById(R.id.nomeCittadino);
-        cittadino.setNome(aux.getText().toString());
-        aux = (TextInputEditText) this.findViewById(R.id.cognomeCittadino);
-        String cognome = aux.getText().toString();
-        aux = (TextInputEditText) this.findViewById(R.id.codiceFiscale);
-        final String codiceFiscale = aux.getText().toString();
+        Intent intent=new Intent(this,RicercaIndirizzo.class);
+        startActivityForResult(intent,0);
 
-        final Intent intent = new Intent(this,RicercaIndirizzo.class);
-
-       intent.putExtra("cittadino", cittadino);
-
-        startActivity(intent);
-        finish();
     }
 
-    public void riceviCittadino(){
+    /*public void riceviCittadino(){
         final Intent intent = getIntent();
         final String nome = intent.getStringExtra("nome");
         final String cognome = intent.getStringExtra("cognome");
@@ -162,22 +158,22 @@ public class RegistrazioneCittadino extends AppCompatActivity {
         aux.setText(codiceFiscale);
         aux2 = (EditText) this.findViewById(R.id.residenzaCittadino);
         aux2.setText(residenza);
-    }
+    }*/
 
     private boolean controlliCampi(){
         boolean bool = false;
-        aux = (TextInputEditText) this.findViewById(R.id.nomeCittadino);
-        if (controlloEditTextVuoto(aux) == true){
+
+        if (controlloEditTextVuoto(nomeText) == true){
             mostraMessaggioErrore("Campo obbligatorio", "Inserisci il tuo nome", RegistrazioneCittadino.this);
             bool = true;
         }
-        aux = (TextInputEditText) this.findViewById(R.id.cognomeCittadino);
-        if(controlloEditTextVuoto(aux) == true) {
+
+        if(controlloEditTextVuoto(cognomeText) == true) {
             mostraMessaggioErrore("Campo obbligatorio", "Inserisci il tuo cognome", RegistrazioneCittadino.this);
             bool = true;
         }
-            aux = (TextInputEditText) this.findViewById(R.id.codiceFiscale);
-        if (controlloEditTextVuoto(aux) == true) {
+
+        if (controlloEditTextVuoto(CFText) == true) {
             mostraMessaggioErrore("Campo obbligatorio", "Inserisci il codice fiscale", RegistrazioneCittadino.this);
             bool = true;
         }
@@ -187,11 +183,24 @@ public class RegistrazioneCittadino extends AppCompatActivity {
             mostraMessaggioErrore("Codice fiscale non valido","Il codice fiscale deve essere da 16 caratteri", RegistrazioneCittadino.this);
 */
         aux2 = (EditText) this.findViewById(R.id.residenzaCittadino);
-        if(controlloEditTextVuoto(aux) == true) {
+        if(controlloEditTextVuoto(residenzaText) == true) {
             mostraMessaggioErrore("Campo obbligatorio", "Inserisci la tua residenza", RegistrazioneCittadino.this);
             bool = true;
         }
         return bool;
+    }
+
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(data!=null){
+
+            String indirizzo=(String)data.getStringExtra(Cittadino.Keys.RESIDENZA);
+            residenzaText.setText(indirizzo);
+
+        }
+
+
+
     }
 
 }

@@ -41,7 +41,7 @@ public class Database {
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(context,response,Toast.LENGTH_LONG).show();
-                        if(response.equals("success")){
+                        if(response.equals("User Registration Successfully")){
                             Controlli.mostraMessaggioConChiusura(context.getString(R.string.registrazioneCompletaTitolo),context.getString(R.string.registrazioneCompletaTesto),context);
                         }else if(response.equals("Email o telefono esistente")){
                             Controlli.mostraMessaggioErrore(context.getString(R.string.erroreEmailEsistenteTitolo),context.getString(R.string.erroreEmailEsistente),context);
@@ -66,6 +66,7 @@ public class Database {
                 params.put("nome", cittadino.getNome());
                 params.put("cognome",cittadino.getCognome());
                 params.put("email",cittadino.getEmail());
+                params.put("codicefiscale",cittadino.getCodiceFiscale());
                 params.put("password",cittadino.getPassword());
                 params.put("residenza",cittadino.getResidenza());
                 params.put("telefono",cittadino.getNumeroTelefono());

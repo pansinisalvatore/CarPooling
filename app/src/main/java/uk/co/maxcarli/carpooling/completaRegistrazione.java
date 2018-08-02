@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -35,6 +36,7 @@ public class completaRegistrazione extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_completa_registrazione);
         fromIntent();
+        Toast.makeText(this,sede,Toast.LENGTH_LONG).show();
 
         Log.d("PartitaIva", partitaIva);
 
@@ -46,7 +48,7 @@ public class completaRegistrazione extends AppCompatActivity {
 
 
         if(intent != null){
-            Cittadino cittadino = intent.getParcelableExtra(Cittadino.Keys.IDCITTADINO);
+            cittadino = intent.getParcelableExtra(Cittadino.Keys.IDCITTADINO);
             partitaIva=intent.getStringExtra("partitaIva");
             sede=intent.getStringExtra("sede");
 
@@ -67,7 +69,10 @@ public class completaRegistrazione extends AppCompatActivity {
                 String text = getString(R.string.passwordCorta);
                 Log.d("text", text);
                 lenghtPasw = lunghezzaPassword(passwordEdit,text);
-                return;
+                if(lenghtPasw){
+                    return;
+                }
+
             }
 
             if(verEmail == false ) {

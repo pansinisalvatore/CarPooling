@@ -32,20 +32,17 @@ public class RicercaIndirizzo extends AppCompatActivity {
 
 
     static final private String TAG = "ERRORE";
-    private Cittadino cittadino;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ricerca_indirizzo);
-        final Intent intent = getIntent();
-        cittadino=(Cittadino) intent.getParcelableExtra("cittadino");
 
-        dammiPosto(cittadino.getNome(),cittadino.getCognome(),cittadino.getCodiceFiscale());
+        dammiPosto();
 
     }
 
-    public void dammiPosto (final String nome, final String cognome, final String codiceFiscale){
+    public void dammiPosto (){
 
         final PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
@@ -66,7 +63,7 @@ public class RicercaIndirizzo extends AppCompatActivity {
                 findViewById(R.id.buttonConferma).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        inviaIndirizzo(nome,cognome, codiceFiscale, residenza);
+                        inviaIndirizzo(residenza);
                         finish();
 
 
@@ -97,13 +94,11 @@ public class RicercaIndirizzo extends AppCompatActivity {
 
     }
 
-    public void inviaIndirizzo(String nome,String cognome, String codiceFiscale, String residenza){
-        final Intent intent = new Intent(this, RegistrazioneCittadino.class);
-        intent.putExtra("nome",nome);
-        intent.putExtra("cognome",cognome);
-        intent.putExtra("codiceFiscale",codiceFiscale);
-        intent.putExtra("residenza",residenza);
-        startActivity(intent);
+    public void inviaIndirizzo(String residenza){
+        final Intent returnIntent = new Intent();
+        returnIntent.putExtra(Cittadino.Keys.RESIDENZA,residenza);
+        setResult(0,returnIntent);
+        finish();
     }
 
 }
