@@ -99,8 +99,10 @@ public class Database {
 
                         } else if (response.equals("not autorized")) {
                             Controlli.mostraMessaggioErrore(context.getString(R.string.AccessoNonAutorizzatoTitolo), context.getString(R.string.AccessoNonAutorizzatoTesto), context);
-                        } else {
-                            Toast.makeText(context, "Connection failed", Toast.LENGTH_SHORT).show();
+                        } else if(response.equals("Something went wrong")){
+                            Controlli.mostraMessaggioErrore(context.getString(R.string.loginErratoTitolo),context.getString(R.string.loginErratoTesto),context);
+                        }else{
+                            Controlli.mostraMessaggioErrore(context.getString(R.string.AccessoRifiutatoTitolo),context.getString(R.string.AccessorifiutatoTesto),context);
                         }
 
                     }

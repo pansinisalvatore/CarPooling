@@ -68,7 +68,7 @@ public class menu extends AppCompatActivity {
         loadFragment(new HomeFragment());
 
         // load the store fragment by default
-        toolbar.setTitle("Home");
+        toolbar.setTitle(getString(R.string.Home));
     }
 
     @SuppressLint("RestrictedApi")
@@ -100,32 +100,31 @@ public class menu extends AppCompatActivity {
             Fragment fragment=null;
             switch (item.getItemId()) {
                 case R.id.Home:
-                    toolbar.setTitle("Home");
+                    toolbar.setTitle(getString(R.string.Home));
                     fragment = new HomeFragment();
                     break;
 
                 case R.id.imieipassaggi:
-                    toolbar.setTitle("I miei passaggi");
+                    toolbar.setTitle(getString(R.string.ImieiPassaggi));
                     fragment=new ImieipassaggiFragment();
                     break;
 
                 case R.id.Classifica:
-                    toolbar.setTitle("Classifica");
+                    toolbar.setTitle(getString(R.string.VisualizzaClassifica));
                     fragment = new ClassificaFragment();
                     break;
 
                 case R.id.IlMioProfilo:
-                    toolbar.setTitle("Il mio profilo");
+                    toolbar.setTitle(getString(R.string.IlMioProfilo));
                     fragment = new ProfiloFragment();
                     break;
                 case R.id.Tracking:
-                    toolbar.setTitle("Il mio profilo");
+                    toolbar.setTitle("Tracking");
                     fragment = new TrackingFragment();
                     break;
 
 
             }
-
 
             return loadFragment(fragment);
 

@@ -154,4 +154,10 @@
     <string name="erroreEmailEsistente">Email o telefono esistenti.</string>
     <string name="erroreEmailEsistenteTitolo">Errore inserimento</string>
 
+    <string name="loginErratoTitolo">Errore accesso</string>
+    <string name="loginErratoTesto">Email o password errata.</string>
+
+    <string name="AccessoRifiutatoTitolo">Accesso rifiutato</string>
+    <string name="AccessorifiutatoTesto">Sei stato rifiutato dall\'azienda.</string>
+
 </resources>

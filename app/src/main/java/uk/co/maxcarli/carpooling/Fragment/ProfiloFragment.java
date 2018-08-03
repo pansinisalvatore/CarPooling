@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DateFormat;
@@ -37,15 +38,14 @@ public class ProfiloFragment extends Fragment {
     private  menu menuActivity;
     private Cittadino cittadino;
 
-    private TextInputEditText cognome;
-    private TextInputEditText nome;
+    private TextView cognomeNome;
     private TextInputEditText telefono;
-    private TextInputEditText CF;
+    private TextView CF;
     private TextInputEditText email;
 
     private TextInputEditText residenza;
     private TextInputEditText password;
-    private TextInputEditText azienda;
+    private TextView azienda;
 
 
 
@@ -70,54 +70,52 @@ public class ProfiloFragment extends Fragment {
         // Inflate the layout for this fragment
         View root= inflater.inflate(R.layout.fragment_profilo, container, false);
 
-        cognome=(TextInputEditText)root.findViewById(R.id.edtselezionacognome);
-        cognome.setText(cittadino.getCognome());
-        cognome.setKeyListener(null);
-        nome=(TextInputEditText)root.findViewById(R.id.edtselezionanome);
-        nome.setText(cittadino.getNome());
-        nome.setKeyListener(null);
-        telefono=(TextInputEditText)root.findViewById(R.id.edtselezionatelefono);
-        telefono.setText(cittadino.getNumeroTelefono());
-        CF=(TextInputEditText)root.findViewById(R.id.edtselezionaCF);
+        cognomeNome=(TextView)root.findViewById(R.id.nomeCognomeProfilo);
+        cognomeNome.setText(cittadino.getCognome()+" "+cittadino.getNome());
+        cognomeNome.setKeyListener(null);
+
+        CF=(TextView) root.findViewById(R.id.CFProfilo);
         CF.setText(cittadino.getCodiceFiscale());
         CF.setKeyListener(null);
-        email= (TextInputEditText)root.findViewById(R.id.edtselezionaemail);
+
+        azienda=(TextView)root.findViewById(R.id.AziendaProfilo);
+        azienda.setText(cittadino.getSede().getAzienda().getNome());
+        azienda.setKeyListener(null);
+
+        telefono=(TextInputEditText)root.findViewById(R.id.telefonoProfilo);
+        telefono.setText(cittadino.getNumeroTelefono());
+
+        email= (TextInputEditText)root.findViewById(R.id.emailProfilo);
         email.setText(cittadino.getEmail());
         email.setKeyListener(null);
-        residenza= (TextInputEditText)root.findViewById(R.id.edtselezionaresidenza);
+        residenza= (TextInputEditText)root.findViewById(R.id.residenzaProfilo);
         residenza.setText(cittadino.getResidenza());
+        residenza.setKeyListener(null);
 
-        /*password=(TextInputEditText)root.findViewById(R.id.edtModificaPass);
-
-        password.setText(cittadino.getPassword());
-        password.setKeyListener(null);
-        azienda=(TextInputEditText)root.findViewById(R.id.edtselezionaAzienda);
-        azienda.setText(cittadino.getSede().getAzienda().getNome());
-
-        ImageView modResidenza=(ImageView)root.findViewById(R.id.modResidenza);
-
-        modResidenza.setOnClickListener(new View.OnClickListener() {
+        residenza.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(), ModificaResidenzaActivity.class);
                 intent.putExtra(Cittadino.Keys.RESIDENZA,residenza.getText());
                 startActivityForResult(intent,0);
-
             }
         });
 
-        ImageView modPassword=(ImageView)root.findViewById(R.id.modpassword);
-        modPassword.setOnClickListener(new View.OnClickListener() {
+        password=(TextInputEditText)root.findViewById(R.id.passwordProfilo);
+
+        password.setText(cittadino.getPassword());
+        password.setKeyListener(null);
+        password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(), uk.co.maxcarli.carpooling.cambia_pass.class);
                 intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino.getPassword());
                 startActivityForResult(intent,1);
             }
-        });*/
+        });
 
 
-        Button conferma=root.findViewById(R.id.confermaModifiche);
+        /*Button conferma=root.findViewById(R.id.confermaModifiche);
         conferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,7 +131,7 @@ public class ProfiloFragment extends Fragment {
                 menuActivity.setCittadino(cittadino);
 
             }
-        });
+        });*/
 
         return root;
 
