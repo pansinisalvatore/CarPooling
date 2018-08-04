@@ -9,8 +9,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,7 +87,7 @@ public class ImieipassaggiFragment extends Fragment implements TabLayout.OnTabSe
     }
 
 
-    public  class SectionsPagerAdapter extends FragmentPagerAdapter {
+    public  class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -99,7 +101,7 @@ public class ImieipassaggiFragment extends Fragment implements TabLayout.OnTabSe
 
             switch(position){
                 case 0:
-
+                    Toast.makeText(getContext(),"CREATA",Toast.LENGTH_LONG).show();
                     fragment= new PassaggiRichiesti();
 
 
