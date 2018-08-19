@@ -159,6 +159,12 @@ public class TrackingFragment extends Fragment {
         return rootServer;
     }
 
+    /**
+     * se il cittadino è un offerente ritorna il passaggio, altrimenti null
+     * @param passaggiOfferti
+     * @param dataCorrente
+     * @return p
+     */
 
     public Passaggio controlOfferer(List<Passaggio> passaggiOfferti, String dataCorrente){
 
