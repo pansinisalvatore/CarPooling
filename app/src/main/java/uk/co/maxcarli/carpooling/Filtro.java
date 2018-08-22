@@ -128,7 +128,7 @@ public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClic
 
 
 
-                if(!Controlli.controlloEditTextVuoto(sel_data)&& !Controlli.controlloEditTextVuoto(sel_ora)){
+                if(!Controlli.controlloEditTextVuoto(sel_data,Filtro.this) && !Controlli.controlloEditTextVuoto(sel_ora,Filtro.this)){
                     data=sel_data.getText().toString();
                     ora=sel_ora.getText().toString();
                     p.setData(data);
@@ -253,8 +253,8 @@ public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClic
 
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putParcelable(Cittadino.Keys.IDCITTADINO,cittadino);
     }
 

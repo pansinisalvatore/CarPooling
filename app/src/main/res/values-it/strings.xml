@@ -119,7 +119,7 @@
 
     <string name="Accetato">Accettato</string>
     <string name="Rifiutato">Rifiutato</string>
-    <string name="Sospeso">Sspeso</string>
+    <string name="Sospeso">Sospeso</string>
 
     <string name="PostiOccupatiTitolo">Posti occupati</string>
     <string name="PostiOccupatiTesto">Tutti i posti sono occupati</string>
@@ -159,5 +159,5 @@
 
     <string name="AccessoRifiutatoTitolo">Accesso rifiutato</string>
     <string name="AccessorifiutatoTesto">Sei stato rifiutato dall\'azienda.</string>
-
+    <string name="CampoObbligatorio">Campo obbligatorio</string>
 </resources>

@@ -30,11 +30,25 @@ public class completaRegistrazione extends AppCompatActivity {
     private String partitaIva = "";
     private Cittadino cittadino;
     private String sede;
+    TextInputEditText emailEdit;
+    TextInputEditText passwordEdit;
+    TextInputEditText confermaPasswordEdit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_completa_registrazione);
+        if(savedInstanceState!=null){
+            emailEdit = (TextInputEditText) this.findViewById(R.id.emailCompletaRegistrazione);
+            passwordEdit = (TextInputEditText) this.findViewById(R.id.passwordCompletaRegistrazione);
+            confermaPasswordEdit = (TextInputEditText) this.findViewById(R.id.confermaPasswordCompletaRegistrazione);
+            emailEdit.setText(savedInstanceState.getString("email"));
+            passwordEdit.setText(savedInstanceState.getString("password"));
+            confermaPasswordEdit.setText(savedInstanceState.getString("confermaPassword"));
+            partitaIva=savedInstanceState.getString("partitaIva");
+            sede=savedInstanceState.getString("sede");
+        }
         fromIntent();
         Toast.makeText(this,sede,Toast.LENGTH_LONG).show();
 
@@ -60,9 +74,9 @@ public class completaRegistrazione extends AppCompatActivity {
     public void clickButton(View view){
         Boolean lenghtPasw = true;
         Boolean verEmail = true;
-        TextInputEditText emailEdit = (TextInputEditText) this.findViewById(R.id.emailCompletaRegistrazione);
-        TextInputEditText passwordEdit = (TextInputEditText) this.findViewById(R.id.passwordCompletaRegistrazione);
-        TextInputEditText confermaPasswordEdit = (TextInputEditText) this.findViewById(R.id.confermaPasswordCompletaRegistrazione);
+        emailEdit = (TextInputEditText) this.findViewById(R.id.emailCompletaRegistrazione);
+        passwordEdit = (TextInputEditText) this.findViewById(R.id.passwordCompletaRegistrazione);
+        confermaPasswordEdit = (TextInputEditText) this.findViewById(R.id.confermaPasswordCompletaRegistrazione);
 
             if (campiVuoti(emailEdit,passwordEdit,confermaPasswordEdit) == false){
                 verEmail = verificaEmail(emailEdit);
@@ -94,9 +108,9 @@ public class completaRegistrazione extends AppCompatActivity {
 
     private Boolean campiVuoti(TextInputEditText emailEdit,TextInputEditText passwordEdit,TextInputEditText confermaPasswordEdit){
 
-        Boolean errorEmail =  controlloEditTextVuoto(emailEdit);
-        Boolean errorPassword = controlloEditTextVuoto(passwordEdit);
-        Boolean errorConfermaPassword = controlloEditTextVuoto(confermaPasswordEdit);
+        Boolean errorEmail =  controlloEditTextVuoto(emailEdit,this);
+        Boolean errorPassword = controlloEditTextVuoto(passwordEdit,this);
+        Boolean errorConfermaPassword = controlloEditTextVuoto(confermaPasswordEdit,this);
 
         if(errorEmail == false && errorPassword == false && errorConfermaPassword == false) return false;
         else return true;
@@ -110,6 +124,15 @@ public class completaRegistrazione extends AppCompatActivity {
                 emailEdit.setError(text);
             return true;
        }
+    }
+
+    public void onSaveInstanceState(Bundle bundle){
+        super.onSaveInstanceState(bundle);
+        bundle.putString("email",emailEdit.getText().toString());
+        bundle.putString("password",passwordEdit.getText().toString());
+        bundle.putString("confermaPassword",confermaPasswordEdit.getText().toString());
+        bundle.putString("partitaIva",partitaIva);
+        bundle.putString("sede",sede);
     }
 
 }

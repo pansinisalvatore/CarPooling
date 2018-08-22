@@ -5,6 +5,7 @@ package uk.co.maxcarli.carpooling;
         import android.app.AlertDialog;
         import android.content.DialogInterface;
         import android.content.Intent;
+        import android.graphics.Typeface;
         import android.os.Bundle;
         import android.support.annotation.NonNull;
         import android.support.design.internal.BottomNavigationItemView;
@@ -14,11 +15,15 @@ package uk.co.maxcarli.carpooling;
         import android.support.v4.app.Fragment;
         import android.support.v4.app.FragmentActivity;
         import android.support.v4.app.FragmentTransaction;
+        import android.support.v4.view.MenuItemCompat;
         import android.support.v7.app.ActionBar;
         import android.support.v7.app.AppCompatActivity;
         import android.util.Log;
+        import android.view.Gravity;
         import android.view.Menu;
         import android.view.MenuItem;
+        import android.view.View;
+        import android.widget.TextView;
         import android.widget.Toast;
 
         import java.lang.reflect.Field;
@@ -47,8 +52,7 @@ public class menu extends AppCompatActivity {
 
 
 
-
-            cittadino=(Cittadino)getIntent().getParcelableExtra(Cittadino.Keys.IDCITTADINO);
+        cittadino=(Cittadino)getIntent().getParcelableExtra(Cittadino.Keys.IDCITTADINO);
 
 
         //Sede sede=(Sede)getIntent().getParcelableExtra(Sede.Keys.IDSEDE);
@@ -63,8 +67,15 @@ public class menu extends AppCompatActivity {
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
         layoutParams.setBehavior(new BottomNavigationBehavior());
 
-
         removeShiftMode(navigation);
+        TextView iMieiPassaggi=(TextView) MenuItemCompat.getActionView(navigation.getMenu().findItem(R.id.imieipassaggi));
+
+        iMieiPassaggi.setVisibility(View.VISIBLE);
+        int v= iMieiPassaggi.getVisibility();
+        iMieiPassaggi.setGravity(Gravity.CENTER_VERTICAL);
+        iMieiPassaggi.setTypeface(null, Typeface.BOLD);
+        iMieiPassaggi.setTextColor(getResources().getColor(R.color.etichettabottoni));
+        iMieiPassaggi.setText("3");
         loadFragment(new HomeFragment());
 
         // load the store fragment by default
@@ -98,6 +109,7 @@ public class menu extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment=null;
+
             switch (item.getItemId()) {
                 case R.id.Home:
                     toolbar.setTitle(getString(R.string.Home));

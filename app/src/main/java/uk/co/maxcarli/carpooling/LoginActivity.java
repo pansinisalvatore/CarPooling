@@ -26,8 +26,13 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         loginEmail= (TextInputEditText)findViewById(R.id.emailLogin);
         loginPassword= (TextInputEditText)findViewById(R.id.passwordLogin);
+        if(savedInstanceState!=null){
+            loginEmail.setText(savedInstanceState.getString("email"));
+            loginPassword.setText(savedInstanceState.getString("password"));
+        }
 
 
     }
@@ -39,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     public void Login(View view) {
         String email=loginEmail.getText().toString();
         String password=loginPassword.getText().toString();
-        if(!controlloEditTextVuoto(loginEmail) && !controlloEditTextVuoto(loginPassword)){
+        if(!controlloEditTextVuoto(loginEmail,this) && !controlloEditTextVuoto(loginPassword,this)){
             Cittadino cittadino=new Cittadino();
             Azienda cAzienda=new Azienda();
             Sede cSede=new Sede();
@@ -62,5 +67,13 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    public void onSaveInstanceState(Bundle bundle){
+        super.onSaveInstanceState(bundle);
+        String email=loginEmail.getText().toString();
+        String password=loginPassword.getText().toString();
+        bundle.putString("email",email);
+        bundle.putString("password",password);
+    }
 
 }

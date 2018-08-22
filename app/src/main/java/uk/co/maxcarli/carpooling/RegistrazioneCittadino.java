@@ -37,6 +37,12 @@ public class RegistrazioneCittadino extends AppCompatActivity {
         cognomeText=findViewById(R.id.cognomeCittadino);
         residenzaText=findViewById(R.id.residenzaCittadino);
         CFText=findViewById(R.id.codiceFiscale);
+        if(savedInstanceState!=null){
+            nomeText.setText(savedInstanceState.getString("nome"));
+            cognomeText.setText(savedInstanceState.getString("cognome"));
+            residenzaText.setText(savedInstanceState.getString("residenza"));
+            CFText.setText(savedInstanceState.getString("CF"));
+        }
 
         //riceviCittadino();
 
@@ -163,28 +169,27 @@ public class RegistrazioneCittadino extends AppCompatActivity {
     private boolean controlliCampi(){
         boolean bool = false;
 
-        if (controlloEditTextVuoto(nomeText) == true){
-            mostraMessaggioErrore("Campo obbligatorio", "Inserisci il tuo nome", RegistrazioneCittadino.this);
+        if (controlloEditTextVuoto(nomeText,this) == true){
+
             bool = true;
         }
 
-        if(controlloEditTextVuoto(cognomeText) == true) {
-            mostraMessaggioErrore("Campo obbligatorio", "Inserisci il tuo cognome", RegistrazioneCittadino.this);
+        if(controlloEditTextVuoto(cognomeText,this) == true) {
+
             bool = true;
         }
 
-        if (controlloEditTextVuoto(CFText) == true) {
-            mostraMessaggioErrore("Campo obbligatorio", "Inserisci il codice fiscale", RegistrazioneCittadino.this);
+        if (controlloEditTextVuoto(CFText,this) == true) {
+
             bool = true;
         }
             /*
        PRIMA DI CANCELLARE CHIEDERE A RINO! CAPITO BASTARDI?
-        else if (verificaCodiceFiscale(aux) == true)
+       if (verificaCodiceFiscale(aux) == true)
             mostraMessaggioErrore("Codice fiscale non valido","Il codice fiscale deve essere da 16 caratteri", RegistrazioneCittadino.this);
 */
         aux2 = (EditText) this.findViewById(R.id.residenzaCittadino);
-        if(controlloEditTextVuoto(residenzaText) == true) {
-            mostraMessaggioErrore("Campo obbligatorio", "Inserisci la tua residenza", RegistrazioneCittadino.this);
+        if(controlloEditTextVuoto(residenzaText,this) == true) {
             bool = true;
         }
         return bool;
@@ -199,8 +204,15 @@ public class RegistrazioneCittadino extends AppCompatActivity {
 
         }
 
-
-
     }
+
+    public void onSaveInstanceState(Bundle bundle){
+        super.onSaveInstanceState(bundle);
+        bundle.putString("nome",nomeText.getText().toString());
+        bundle.putString("cognome",cognomeText.getText().toString());
+        bundle.putString("CF",CFText.getText().toString());
+        bundle.putString("residenza",residenzaText.getText().toString());
+    }
+
 
 }

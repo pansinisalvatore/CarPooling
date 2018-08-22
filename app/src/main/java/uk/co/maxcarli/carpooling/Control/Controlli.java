@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.design.widget.TextInputEditText;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
@@ -52,10 +53,10 @@ public class Controlli {
         alertDialog.show();
     }
 
-    public static boolean controlloEditTextVuoto(EditText campo){
+    public static boolean controlloEditTextVuoto(EditText campo, Context c){
         String text = campo.getText().toString();
         if(text.length()==0){
-            campo.setError("Campo obbligatorio");
+            campo.setError(c.getString(R.string.CampoObbligatorio));
             return true; //ritorna vero se è presente l'errore
         }
         return false;
@@ -78,20 +79,20 @@ public class Controlli {
         builder.show();
     }
 
-    public static boolean controlloEditTextVuoto(TextInputEditText campo){
+    public static boolean controlloEditTextVuoto(TextInputEditText campo, Context c){
         String text = campo.getText().toString();
         if(text.length()==0){
-            campo.setError("Campo obbligatorio");
+            campo.setError(c.getString(R.string.CampoObbligatorio));
             return true; //ritorna vero se è presente l'errore
         }
         return false;
     }
 
 
-    public static boolean controlloEditTextVuoto(AutoCompleteTextView campo){
+    public static boolean controlloEditTextVuoto(AutoCompleteTextView campo, Context c){
         String text = campo.getText().toString();
         if(text.length()==0){
-            campo.setError("Campo obbligatorio");
+            campo.setError(c.getString(R.string.CampoObbligatorio));
             return true; //ritorna vero se è presente l'errore
         }
         return false;
