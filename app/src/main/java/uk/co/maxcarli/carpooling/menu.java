@@ -3,6 +3,7 @@ package uk.co.maxcarli.carpooling;
 
         import android.annotation.SuppressLint;
         import android.app.AlertDialog;
+        import android.content.Context;
         import android.content.DialogInterface;
         import android.content.Intent;
         import android.graphics.Typeface;
@@ -20,6 +21,7 @@ package uk.co.maxcarli.carpooling;
         import android.support.v7.app.AppCompatActivity;
         import android.util.Log;
         import android.view.Gravity;
+        import android.view.LayoutInflater;
         import android.view.Menu;
         import android.view.MenuItem;
         import android.view.View;
@@ -44,7 +46,7 @@ public class menu extends AppCompatActivity {
     private Cittadino cittadino;
     FragmentTransaction transaction;
     BottomNavigationView navigation;
-
+    private View notificationBadge;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,14 +70,14 @@ public class menu extends AppCompatActivity {
         layoutParams.setBehavior(new BottomNavigationBehavior());
 
         removeShiftMode(navigation);
-        TextView iMieiPassaggi=(TextView) MenuItemCompat.getActionView(navigation.getMenu().findItem(R.id.imieipassaggi));
+        if(cittadino.getNotificaPassaggio()!=0){
+            BottomNavigationMenuView bottomNavigationMenuView =
+                    (BottomNavigationMenuView) navigation.getChildAt(0);
+            BottomNavigationItemView iMieiPassaggi=(BottomNavigationItemView)bottomNavigationMenuView.getChildAt(3);
+            notificationBadge = LayoutInflater.from(this).inflate(R.layout.view_notification_badge, iMieiPassaggi, false);
+            iMieiPassaggi.addView(notificationBadge);
+        }
 
-        iMieiPassaggi.setVisibility(View.VISIBLE);
-        int v= iMieiPassaggi.getVisibility();
-        iMieiPassaggi.setGravity(Gravity.CENTER_VERTICAL);
-        iMieiPassaggi.setTypeface(null, Typeface.BOLD);
-        iMieiPassaggi.setTextColor(getResources().getColor(R.color.etichettabottoni));
-        iMieiPassaggi.setText("3");
         loadFragment(new HomeFragment());
 
         // load the store fragment by default
@@ -118,6 +120,14 @@ public class menu extends AppCompatActivity {
 
                 case R.id.imieipassaggi:
                     toolbar.setTitle(getString(R.string.ImieiPassaggi));
+                    if(cittadino.getNotificaPassaggio()!=0){
+                        BottomNavigationMenuView bottomNavigationMenuView =
+                                (BottomNavigationMenuView) navigation.getChildAt(0);
+                        BottomNavigationItemView iMieiPassaggi=(BottomNavigationItemView)bottomNavigationMenuView.getChildAt(3);
+                        iMieiPassaggi.removeView(notificationBadge);
+                        cittadino.setNotificaPassaggio(0);
+                        Database.azzeraNotifichePassaggi( cittadino.getIdCittadino(),menu.this);
+                    }
                     fragment=new ImieipassaggiFragment();
                     break;
 
@@ -134,7 +144,6 @@ public class menu extends AppCompatActivity {
                     toolbar.setTitle("Tracking");
                     fragment = new TrackingFragment();
                     break;
-
 
             }
 
