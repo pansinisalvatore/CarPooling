@@ -13,6 +13,7 @@
     <color name="blank">#001000</color>
     <color name="colore_testo">#000000</color>
     <color name="etichettabottoni">#ffffff</color>
+    <color name="redAccent">#f20000</color>
 
 
 </resources>

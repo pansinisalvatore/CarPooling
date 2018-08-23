@@ -234,7 +234,8 @@ public class ListaUtenti extends AppCompatActivity {
 
     }
 
-    public void onRestoreInstanceState(Bundle bundle){
+    public void onSaveInstanceState(Bundle bundle){
+        super.onSaveInstanceState(bundle);
         bundle.putInt(Sede.Keys.IDSEDE,idSede);
     }
 

@@ -36,7 +36,7 @@ public class cambia_pass extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(!Controlli.controlloEditTextVuoto(textVecchiaPassword) && !Controlli.controlloEditTextVuoto(textNuovaPassword) && !Controlli.controlloEditTextVuoto(textConfermaPassword)) {
+                if(!Controlli.controlloEditTextVuoto(textVecchiaPassword, cambia_pass.this) && !Controlli.controlloEditTextVuoto(textNuovaPassword,cambia_pass.this) && !Controlli.controlloEditTextVuoto(textConfermaPassword,cambia_pass.this)) {
                     String vecchiaPass = textVecchiaPassword.getText().toString();
                     String nuovaPass = textNuovaPassword.getText().toString();
                     String confPass = textConfermaPassword.getText().toString();

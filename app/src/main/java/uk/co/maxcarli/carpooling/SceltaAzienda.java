@@ -44,8 +44,9 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
 
     // Initialize variables
 
+    TextInputEditText telefonoText;
     AutoCompleteTextView textView=null;
-   AutoCompleteTextView textSedi;
+    AutoCompleteTextView textSedi;
     private ArrayAdapter<String> adapter;
     private boolean verificaAzienda;
     private boolean verificaSede;
@@ -66,6 +67,15 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
         super.onCreate(savedIstanceState);
         setContentView(R.layout.activity_scelta_azienda);
 
+        if(savedIstanceState!=null){
+            textView=(AutoCompleteTextView) findViewById(R.id.autocompleteId);
+            textSedi=(AutoCompleteTextView)findViewById(R.id.autocompletesedeId);
+            telefonoText=(TextInputEditText)findViewById(R.id.numeroTelefonicoCittadino);
+            textView.setText(savedIstanceState.getString("azienda"));
+            textSedi.setText(savedIstanceState.getString("sede"));
+            telefonoText.setText(savedIstanceState.getString("telefono"));
+            cittadino=savedIstanceState.getParcelable(Cittadino.Keys.IDCITTADINO);
+        }
 
         // Get AutoCompleteTextView reference from xml
         textView = (AutoCompleteTextView) findViewById(R.id.autocompleteId);
@@ -286,17 +296,17 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
 
     public void clickButton(View view){
 
-       TextInputEditText textInputEditText =  this.findViewById(R.id.numeroTelefonicoCittadino);
+        telefonoText =  this.findViewById(R.id.numeroTelefonicoCittadino);
         AutoCompleteTextView aux2 = (AutoCompleteTextView) this.findViewById(R.id.autocompleteId);
         String numeroTelefono = " ";
 
-        if (errorControl(textInputEditText, aux2) == false && errorControlSede(textSedi)){
+        if (errorControl(telefonoText, aux2) == false && errorControlSede(textSedi)){
 
             fromIntent();
             Log.d("Sono entrato nell'if","ciao");
             Log.d("stringhe", mNome+mCognome+mResidenza);
 
-            numeroTelefono = textInputEditText.getText().toString();
+            numeroTelefono = telefonoText.getText().toString();
             cittadino.setNumeroTelefono(numeroTelefono);
 
             toIntent();
@@ -311,7 +321,7 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
         boolean controlNumero = false;
         boolean controlEditText = false;
 
-        control = controlloEditTextVuoto(textInputEditText);
+        control = controlloEditTextVuoto(textInputEditText,this);
         if (verificaNumeroTelefonico(textInputEditText) == true)
         {
             String title = getText(R.string.numeroTelefonoNonValido).toString();
@@ -319,7 +329,7 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
             mostraMessaggioErrore(title, text, SceltaAzienda.this);
             controlNumero = true;
         }
-        controlEditText = controlloEditTextVuoto(aux2);
+        controlEditText = controlloEditTextVuoto(aux2,this);
 
         PartitaIvaAzienda = " ";
         Boolean success = false;
@@ -407,7 +417,7 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
     }
 
     public boolean errorControlSede(final AutoCompleteTextView view){
-        boolean controlEditText = controlloEditTextVuoto(view);
+        boolean controlEditText = controlloEditTextVuoto(view,this);
         boolean control=false;
 
 
@@ -442,6 +452,13 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
         finish();
     }
 
+    public void onSaveInstanceSTate(Bundle bundle){
+        super.onSaveInstanceState(bundle);
+        bundle.putString("telefono",telefonoText.getText().toString());
+        bundle.putString("azienda",textView.getText().toString());
+        bundle.putString("sede",textSedi.getText().toString());
+        bundle.putParcelable(Cittadino.Keys.IDCITTADINO,cittadino);
+    }
 
 
 }
