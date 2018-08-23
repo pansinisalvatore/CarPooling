@@ -177,7 +177,7 @@ public class TrackingFragment extends Fragment {
         int trovato = 0;
         int orarioConvertito;
         for(int i=0;i<passaggiOfferti.size();i++){
-
+//
             Passaggio p= passaggiOfferti.get(i);
             Log.d("passaggioOfferto",p.getData());
             dataPassaggio = p.getData();
