@@ -1,11 +1,11 @@
 package uk.co.maxcarli.carpooling;
 
-import android.Manifest;
-import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.support.v4.app.ActivityCompat;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,23 +13,19 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 
-import uk.co.maxcarli.carpooling.Bluethoot.Tracking;
+import uk.co.maxcarli.carpooling.Control.ControlBluetooth;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 import uk.co.maxcarli.carpooling.model.Passaggio;
-
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static uk.co.maxcarli.carpooling.Control.ControlBluetooth.*;
 
 public class TrackingOfferente extends AppCompatActivity {
-    private Passaggio passaggio;
-    private Cittadino cittadino;
-    private FusedLocationProviderClient client;
-    public String posizione;
+
+    public static final int REQUEST_ENABLE_BT = 1;
+
+    private BluetoothAdapter mBluetoothAdapter;
 
 
 
@@ -37,40 +33,85 @@ public class TrackingOfferente extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking_offerente);
-        String pos;
-        requestPermission();
-        visibilita(this);
-        passaggio = getIntent().getParcelableExtra(Passaggio.Keys.IDPASSAGGIO);
-        cittadino = getIntent().getParcelableExtra(Cittadino.Keys.IDCITTADINO);
-        Log.d("TrackingOfferente", cittadino.getCognome().toString());
         rotate(true);
-        client = LocationServices.getFusedLocationProviderClient(this);
+        mBluetoothAdapter	= BluetoothAdapter.getDefaultAdapter();
 
-        if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
+        if (accendiBluetooth(mBluetoothAdapter)) {
+
+
+            if (mBluetoothAdapter.isDiscovering()) {
+                mBluetoothAdapter.cancelDiscovery();
+            }
+            mBluetoothAdapter.startDiscovery();
+
+            IntentFilter filter = new IntentFilter();
+
+            filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+            filter.addAction(BluetoothDevice.ACTION_FOUND);
+            filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+            filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+
+            registerReceiver(mReceiver, filter);
+
+        }
+    }
+
+    @Override
+    public void onPause() {
+        if (mBluetoothAdapter != null) {
+            if (mBluetoothAdapter.isDiscovering()) {
+                mBluetoothAdapter.cancelDiscovery();
+            }
         }
 
-        client.getLastLocation().addOnSuccessListener(TrackingOfferente.this, new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                Log.d("Successo","si");
-                if(location != null){
-                    Log.d("posizioneIF",location.toString());
-                    posizione = location.toString();
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        unregisterReceiver(mReceiver);
+
+        super.onDestroy();
+    }
+
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+
+            if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
+                final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+
+                if (state == BluetoothAdapter.STATE_ON) {
+                    showToast("Enabled");
 
                 }
 
-            }
-        });
+            } else if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
+                showToast("ACTION_DISCOVERY_STARTED");
+                showLog("ACTION_DISCOVERY_STARTED", action);
 
+            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+                showToast("ACTION_DISCOVERY_FINISHED");
+                showLog("ACTION_DISCOVERY_FINISHED", action);
+            } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+
+                showToast("Found device " + device.getName());
+                showLog("ACTION_FOUND", action);
+                showLog("dispositivo",device.getName());
+
+            }
+        }
+    };
+
+    private void showToast(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
+
+    private void showLog(String messaggio1, String messaggio2){
+        Log.d(messaggio1,messaggio2);
+    }
+
 
     public void rotate(boolean start) {
         if (start == true) {
@@ -85,8 +126,24 @@ public class TrackingOfferente extends AppCompatActivity {
         }
     }
 
+    public boolean accendiBluetooth( BluetoothAdapter mBluetoothAdapter) {
 
-    private void requestPermission(){
-        ActivityCompat.requestPermissions(this,new String[]{ACCESS_FINE_LOCATION},1);
+        boolean acceso = false;
+
+        if (ControlBluetooth.verificaSupportoB(mBluetoothAdapter)) {
+
+
+            if (!(mBluetoothAdapter.isEnabled())) {
+                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+            } else acceso = true;
+        } else acceso = false;
+
+        if (mBluetoothAdapter.isEnabled()) acceso = true;
+
+        return acceso;
     }
+
+
+
 }

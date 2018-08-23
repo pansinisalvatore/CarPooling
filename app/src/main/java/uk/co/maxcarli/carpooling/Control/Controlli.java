@@ -205,19 +205,29 @@ public class Controlli {
     public static String getCurrentData(){
 
         Date today = Calendar.getInstance().getTime();
+        String data = "";
 
         String reportDate = DateFormat.getDateInstance().format(today.getTime());
         Log.d("DataCurrent", reportDate);
+        reportDate = removeChar(reportDate,2);
+        reportDate = removeChar(reportDate, 5);
         return reportDate;
 
     }
 
-
-
-
-
-
-
-
-
+    public static String removeChar (String s , int index) {
+        if ((index > s.length()-1) || (index < 0)) return null;
+        String c = s.substring(0,index) + s.substring(index+1 , s.length());
+        return c;
+    }
 }
+
+
+
+
+
+
+
+
+
+

@@ -28,11 +28,12 @@ import java.util.List;
 import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
+import uk.co.maxcarli.carpooling.Control.Controlli;
 import uk.co.maxcarli.carpooling.menu;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 import uk.co.maxcarli.carpooling.model.Passaggio;
 
-import static uk.co.maxcarli.carpooling.Control.ControlBluetooth.bluetoothIsActive;
+
 import static uk.co.maxcarli.carpooling.Control.ControlBluetooth.verificaSupportoB;
 import static uk.co.maxcarli.carpooling.Fragment.PassaggiOfferti.controlloTipoPassagio;
 import static uk.co.maxcarli.carpooling.Control.Controlli.*;
@@ -71,6 +72,7 @@ public class TrackingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         String dataCorrente = getCurrentData();
+        Log.d("dataCorrente", dataCorrente);
         int vista = 0;
         View rootServer = null;
 
@@ -169,6 +171,7 @@ public class TrackingFragment extends Fragment {
     public Passaggio controlOfferer(List<Passaggio> passaggiOfferti, String dataCorrente){
 
         String stringaOrario = ""; //serve solo per il log
+        String dataPassaggio = "";
         String stringaOrarioC = ""; //serve solo per il log
         String sTrovato = ""; // serve solo per il log
         int trovato = 0;
@@ -176,7 +179,11 @@ public class TrackingFragment extends Fragment {
         for(int i=0;i<passaggiOfferti.size();i++){
 
             Passaggio p= passaggiOfferti.get(i);
-            if(p.getData().equals(dataCorrente)) {
+            Log.d("passaggioOfferto",p.getData());
+            dataPassaggio = p.getData();
+            dataPassaggio = Controlli.removeChar(dataPassaggio, 2);
+            dataPassaggio = Controlli.removeChar(dataPassaggio, 5);
+            if(dataPassaggio.equals(dataCorrente)) {
                 orarioConvertito = oreInMinuti(p.getOra());
                 stringaOrario = Integer.toString(orarioConvertito);
                 Log.d("oreInMinuti",stringaOrario);
@@ -263,12 +270,12 @@ public class TrackingFragment extends Fragment {
     public  boolean avviaBluetooth(BluetoothAdapter mBluetoothAdapter){
         Log.d("sono entrato","avviaBluetooth()");
         if(verificaSupportoB(mBluetoothAdapter)== true){
-            if(bluetoothIsActive(mBluetoothAdapter) == false){
+            if(!(mBluetoothAdapter.isEnabled()) ){
                 Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
             }
         }
-        if(bluetoothIsActive(mBluetoothAdapter) == true) return true;
+        if(mBluetoothAdapter.isEnabled()) return true;
         else return false;
     }
 

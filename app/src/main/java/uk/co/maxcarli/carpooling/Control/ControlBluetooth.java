@@ -9,10 +9,12 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
+import static android.support.v4.app.ActivityCompat.startActivityForResult;
+
 
 public class ControlBluetooth {
 
-
+    public static final int REQUEST_ENABLE_BT = 1;
     /*
 In questo metodo verifico che il dispositivo supporti il bluethoot
  */
@@ -26,11 +28,7 @@ In questo metodo verifico che il dispositivo supporti il bluethoot
     /*
     verifico che il blue. sia acceso
      */
-    public static boolean bluetoothIsActive(BluetoothAdapter mBluetoothAdapter) {
-        if (!mBluetoothAdapter.isEnabled()) {
-            return false; // ritorna falso se il dispositivo è spento
-        } else return true;
-    }
+
 
 
     public static String getBluetoothMacAddress() {
@@ -79,7 +77,6 @@ In questo metodo verifico che il dispositivo supporti il bluethoot
         discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 0);
         context.startActivity(discoverableIntent);
     }
-
 
 
 
