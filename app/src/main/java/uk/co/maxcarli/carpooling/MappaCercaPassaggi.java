@@ -331,6 +331,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 String macAddress = ControlBluetooth.getBluetoothMacAddress();
+                //
                 Log.d("MappaCercaPassaggi",macAddress);
                 params.put("idCittadino",cittadino.getIdCittadino()+"");
                 params.put("idPassaggio",idPassaggio+"");
