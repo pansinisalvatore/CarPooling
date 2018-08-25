@@ -26,7 +26,9 @@ public class TrackingOfferente extends AppCompatActivity {
     public static final int REQUEST_ENABLE_BT = 1;
 
     private BluetoothAdapter mBluetoothAdapter;
-
+    private Cittadino cittadino;
+    private Passaggio passaggio;
+    private int finito;
 
 
     @Override
@@ -34,7 +36,15 @@ public class TrackingOfferente extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking_offerente);
         rotate(true);
+        final Intent srcIntent = getIntent();
+        cittadino = (Cittadino) srcIntent.getParcelableExtra(Cittadino.Keys.IDCITTADINO);
+        passaggio = (Passaggio) srcIntent.getParcelableExtra(Passaggio.Keys.IDPASSAGGIO);
+        visualizza();
         mBluetoothAdapter	= BluetoothAdapter.getDefaultAdapter();
+        finito = 0;
+        int aux = 0;
+        do {
+
 
         if (accendiBluetooth(mBluetoothAdapter)) {
 
@@ -52,8 +62,10 @@ public class TrackingOfferente extends AppCompatActivity {
             filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
 
             registerReceiver(mReceiver, filter);
-
         }
+            aux++;
+        Log.d("aux", Integer.toString(aux));
+        }while (finito == 1);
     }
 
     @Override
@@ -77,6 +89,7 @@ public class TrackingOfferente extends AppCompatActivity {
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
+
 
             if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
                 final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
@@ -144,6 +157,21 @@ public class TrackingOfferente extends AppCompatActivity {
         return acceso;
     }
 
+
+    public void visualizza(){
+        Cittadino c;
+        String string = getBluetoothMacAddress();
+        for (int i = 0; i < passaggio.cittadiniRichiedenti.size(); i++){
+            c =  passaggio.cittadiniRichiedenti.get(i);
+            Log.d("CittadinoRichiedente",c.getCognome() + c.getNome());
+        }
+
+        Log.d("mioMacAdress",string);
+    }
+
+    public void finito(View view){
+        finito = 1;
+    }
 
 
 }
