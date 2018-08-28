@@ -61,8 +61,11 @@ public class PassaggiRichiesti extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        cittadino=menuActivity.getCittadino();
-        String v = "";
+        if(savedInstanceState!=null){
+            cittadino=savedInstanceState.getParcelable(Cittadino.Keys.IDCITTADINO);
+        }else{
+            cittadino=menuActivity.getCittadino();
+        }
     }
 
     @Override
@@ -175,7 +178,10 @@ public class PassaggiRichiesti extends Fragment {
       super.onAttach(activity);
       menuActivity=(menu)activity;
   }
-
+    public void onSaveInstanceState(Bundle bundle){
+        super.onSaveInstanceState(bundle);
+        bundle.putParcelable(Cittadino.Keys.IDCITTADINO,cittadino);
+    }
 
 
 }

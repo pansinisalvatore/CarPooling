@@ -268,15 +268,15 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
     public void prenotaPassaggio(final Context context, final int idPassaggio, final Cittadino offerente){
         String url = "http://carpoolingsms.altervista.org/PHP/ScriviPassaggioRichiesto.php";
 
-
-
+        final String macAddress=  ControlBluetooth.getBluetoothMacAddress();
+        Toast.makeText(this,macAddress,Toast.LENGTH_LONG).show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-                        Toast.makeText(context,response,Toast.LENGTH_LONG).show();
+                        //Toast.makeText(context,response,Toast.LENGTH_LONG).show();
                         if(!response.equals("Something went wrong") && !response.equals("Error query")){
 
                             try {
@@ -335,7 +335,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                 Log.d("MappaCercaPassaggi",macAddress);
                 params.put("idCittadino",cittadino.getIdCittadino()+"");
                 params.put("idPassaggio",idPassaggio+"");
-                params.put("macAddress", ControlBluetooth.getBluetoothMacAddress());
+                params.put("macAddress", macAddress);
                 return params;
             }
         };

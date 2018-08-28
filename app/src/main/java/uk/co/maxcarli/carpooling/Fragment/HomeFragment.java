@@ -29,7 +29,15 @@ public class HomeFragment extends Fragment {
     public HomeFragment() {
         // Required empty public constructor
     }
+    public void onCreate(Bundle savedInstanceState) {
 
+        super.onCreate(savedInstanceState);
+        if(savedInstanceState!=null){
+            cittadino=savedInstanceState.getParcelable(Cittadino.Keys.IDCITTADINO);
+        }else{
+            cittadino=menuActivity.getCittadino();
+        }
+    }
 
 
     public void onAttach(Activity activity){
@@ -45,7 +53,6 @@ public class HomeFragment extends Fragment {
         View root=inflater.inflate(R.layout.fragment_home, container, false);
         final Button offriPassaggio=(Button)root.findViewById(R.id.offriPassaggio);
         Button cercaPassaggio=(Button)root.findViewById(R.id.TrovaPassaggio);
-        cittadino=menuActivity.getCittadino();
 
         offriPassaggio.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +87,11 @@ public class HomeFragment extends Fragment {
             }
         }
 
+    }
+
+    public void onSaveInstanceState(Bundle bundle){
+        super.onSaveInstanceState(bundle);
+        bundle.putParcelable(Cittadino.Keys.IDCITTADINO,cittadino);
     }
 
 }

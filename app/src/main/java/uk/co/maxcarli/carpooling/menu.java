@@ -54,22 +54,28 @@ public class menu extends AppCompatActivity {
 
 
 
+        if(savedInstanceState!=null){
+            cittadino=savedInstanceState.getParcelable(Cittadino.Keys.IDCITTADINO);
+        }else {
         cittadino=(Cittadino)getIntent().getParcelableExtra(Cittadino.Keys.IDCITTADINO);
-
-
-        //Sede sede=(Sede)getIntent().getParcelableExtra(Sede.Keys.IDSEDE);
-        //cittadino.setSede(sede);
+        }
 
 
         toolbar = getSupportActionBar();
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+
         // attaching bottom sheet behaviour - hide / show on scroll
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
         layoutParams.setBehavior(new BottomNavigationBehavior());
 
         removeShiftMode(navigation);
+        if(savedInstanceState!=null){
+            navigation.setSelectedItemId( savedInstanceState.getInt("SelectedItemId"));
+        }else{
+            loadFragment(new HomeFragment());
+        }
         if(cittadino.getNotificaPassaggio()!=0){
             BottomNavigationMenuView bottomNavigationMenuView =
                     (BottomNavigationMenuView) navigation.getChildAt(0);
@@ -78,7 +84,7 @@ public class menu extends AppCompatActivity {
             iMieiPassaggi.addView(notificationBadge);
         }
 
-        loadFragment(new HomeFragment());
+
 
         // load the store fragment by default
         toolbar.setTitle(getString(R.string.Home));
@@ -238,12 +244,6 @@ public class menu extends AppCompatActivity {
     }
 
 
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        int selectedItemId = savedInstanceState.getInt("SelectedItemId");
-        navigation.setSelectedItemId(selectedItemId);
-        cittadino=savedInstanceState.getParcelable(Cittadino.Keys.IDCITTADINO);
-    }
 
 
 }

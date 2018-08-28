@@ -63,8 +63,7 @@ public class ClassificaAziendale extends Fragment {
        tabella=(TableView<String[]>)class_aziendale.findViewById(R.id.TabellaClassificaAziendale);
        tabella.setColumnCount(3);
        tabella.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
-        tabella.setHeaderAdapter(new SimpleTableHeaderAdapter(getActivity(),ClassificaAziendaleHeaders));
-
+       tabella.setHeaderAdapter(new SimpleTableHeaderAdapter(getActivity(),ClassificaAziendaleHeaders));
         String url= "http://carpoolingsms.altervista.org/PHP/LeggiClassificaAziendale.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,

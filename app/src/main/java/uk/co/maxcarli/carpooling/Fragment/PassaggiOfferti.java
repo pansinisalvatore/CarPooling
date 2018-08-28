@@ -47,7 +47,12 @@ public class PassaggiOfferti extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        cittadino=menuActivity.getCittadino();
+        if(savedInstanceState!=null){
+            cittadino=savedInstanceState.getParcelable(Cittadino.Keys.IDCITTADINO);
+        }else{
+            cittadino=menuActivity.getCittadino();
+        }
+
     }
 
 
@@ -151,6 +156,11 @@ public class PassaggiOfferti extends Fragment {
 
             menuActivity.setCittadino(cittadino);
         }
+    }
+
+    public void onSaveInstanceState(Bundle bundle){
+        super.onSaveInstanceState(bundle);
+        bundle.putParcelable(Cittadino.Keys.IDCITTADINO,cittadino);
     }
 
 

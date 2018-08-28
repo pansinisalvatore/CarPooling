@@ -53,7 +53,6 @@ public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClic
     RadioButton home_work;
     RadioButton work_home;
     Button ricerca;
-    Spinner spnposti;
     Cittadino cittadino;
 
     private ArrayAdapter<String> adapter;
@@ -72,6 +71,9 @@ public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClic
 
         driver=findViewById(R.id.driverSearch);
 
+        if(savedInstanceState!=null){
+            driver.setText(savedInstanceState.getString("driver"));
+        }
 
 
         setAutoCompleteViewDriver();
@@ -94,15 +96,27 @@ public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClic
         sel_data=  findViewById(R.id.edtselezionadata);
         sel_ora=  findViewById(R.id.edtselezionaora);
 
+        if(savedInstanceState!=null){
+            sel_data.setText(savedInstanceState.getString("data"));
+            sel_ora.setText(savedInstanceState.getString("ora"));
+        }
         groupTypeTrip=(RadioGroup)findViewById(R.id.groupTypeRequest);
 
         home_work=(RadioButton)findViewById(R.id.casaLavoroRicerca);
-        home_work.setChecked(true);
+
         work_home=(RadioButton)findViewById(R.id.LavoroCasaRicerca);
+
+        if(savedInstanceState!=null){
+            if(home_work.getId()==savedInstanceState.getInt("radioGroup")){
+                home_work.setChecked(true);
+            }else{
+                work_home.setChecked(true );
+            }
+        }
 
         ricerca=findViewById(R.id.btnricerca);
         ArrayAdapter<String> posti= new ArrayAdapter<String>(Filtro.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.names));
-        posti.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         sel_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -256,6 +270,10 @@ public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClic
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putParcelable(Cittadino.Keys.IDCITTADINO,cittadino);
+        savedInstanceState.putString("data",sel_data.getText().toString());
+        savedInstanceState.putString("ora",sel_ora.getText().toString());
+        savedInstanceState.putString("driver",driver.getText().toString());
+        savedInstanceState.putInt("radioGroup",groupTypeTrip.getCheckedRadioButtonId());
     }
 
     @Override
