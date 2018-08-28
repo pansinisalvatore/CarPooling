@@ -112,6 +112,8 @@ public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClic
             }else{
                 work_home.setChecked(true );
             }
+        }else{
+            home_work.setChecked(true);
         }
 
         ricerca=findViewById(R.id.btnricerca);
