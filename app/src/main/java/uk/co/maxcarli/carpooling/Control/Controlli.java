@@ -221,6 +221,16 @@ public class Controlli {
         String c = s.substring(0,index) + s.substring(index+1 , s.length());
         return c;
     }
+
+    public static String impostaFormatoData(String data){
+        if(data.length()==10){
+            data="0"+data;
+        }
+        data=removeChar(data,2);
+        data=removeChar(data,5);
+        data=data.toLowerCase();
+        return data;
+    }
 }
 
 

@@ -146,6 +146,7 @@ public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClic
 
                 if(!Controlli.controlloEditTextVuoto(sel_data,Filtro.this) && !Controlli.controlloEditTextVuoto(sel_ora,Filtro.this)){
                     data=sel_data.getText().toString();
+                    data=Controlli.impostaFormatoData(data);
                     ora=sel_ora.getText().toString();
                     p.setData(data);
                     p.setOra(ora);

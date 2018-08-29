@@ -103,6 +103,7 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
 
                     String data=imp_data.getText().toString();
                     String ora=imp_ora.getText().toString();
+                    data=Controlli.impostaFormatoData(data);
                     String auto= set_auto.getText().toString();
                     int posti= Integer.parseInt((String)set_posti.getSelectedItem());
 
