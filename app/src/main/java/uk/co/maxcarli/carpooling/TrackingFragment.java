@@ -183,6 +183,8 @@ public class TrackingFragment extends Fragment {
             dataPassaggio = p.getData();
             dataPassaggio = Controlli.removeChar(dataPassaggio, 2);
             dataPassaggio = Controlli.removeChar(dataPassaggio, 5);
+            Log.d("dataPassaggio", dataPassaggio);
+            Log.d("dataCorrente",dataCorrente);
 
             if(dataPassaggio.equalsIgnoreCase(dataCorrente)) {
                 orarioConvertito = oreInMinuti(p.getOra());

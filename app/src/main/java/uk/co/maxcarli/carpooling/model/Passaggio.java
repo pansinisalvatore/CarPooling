@@ -66,6 +66,8 @@ public class Passaggio implements Parcelable{
     }
 
 
+
+
     public int getIdPassaggiOfferti() {
         return idPassaggio;
     }
@@ -75,6 +77,7 @@ public class Passaggio implements Parcelable{
     }
 
     public String getData() {
+
         return data;
     }
 

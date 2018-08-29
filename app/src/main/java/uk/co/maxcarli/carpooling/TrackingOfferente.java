@@ -16,10 +16,16 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import uk.co.maxcarli.carpooling.Control.ControlBluetooth;
+import uk.co.maxcarli.carpooling.Control.Controlli;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 import uk.co.maxcarli.carpooling.model.Passaggio;
 import static uk.co.maxcarli.carpooling.Control.ControlBluetooth.*;
+import static uk.co.maxcarli.carpooling.Control.Controlli.getOraCorrente;
+import static uk.co.maxcarli.carpooling.Control.Controlli.oreInMinuti;
 
 public class TrackingOfferente extends AppCompatActivity {
 
@@ -28,7 +34,9 @@ public class TrackingOfferente extends AppCompatActivity {
     private BluetoothAdapter mBluetoothAdapter;
     private Cittadino cittadino;
     private Passaggio passaggio;
+    private ArrayList <String> macAddressTrovati;
     private int finito;
+    private ArrayList <Cittadino> trovati;
 
 
     @Override
@@ -36,36 +44,19 @@ public class TrackingOfferente extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking_offerente);
         rotate(true);
+        macAddressTrovati = new ArrayList<String>();
         final Intent srcIntent = getIntent();
         cittadino = (Cittadino) srcIntent.getParcelableExtra(Cittadino.Keys.IDCITTADINO);
         passaggio = (Passaggio) srcIntent.getParcelableExtra(Passaggio.Keys.IDPASSAGGIO);
-        visualizza();
+
         mBluetoothAdapter	= BluetoothAdapter.getDefaultAdapter();
         finito = 0;
         int aux = 0;
-        do {
+        avviaRicerca();
+        Log.d("stoNel", "onCreate");
 
 
-        if (accendiBluetooth(mBluetoothAdapter)) {
 
-
-            if (mBluetoothAdapter.isDiscovering()) {
-                mBluetoothAdapter.cancelDiscovery();
-            }
-            mBluetoothAdapter.startDiscovery();
-
-            IntentFilter filter = new IntentFilter();
-
-            filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
-            filter.addAction(BluetoothDevice.ACTION_FOUND);
-            filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
-            filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-
-            registerReceiver(mReceiver, filter);
-        }
-            aux++;
-        Log.d("aux", Integer.toString(aux));
-        }while (finito == 1);
     }
 
     @Override
@@ -75,14 +66,14 @@ public class TrackingOfferente extends AppCompatActivity {
                 mBluetoothAdapter.cancelDiscovery();
             }
         }
-
+        Log.d("StoNel","onPause");
         super.onPause();
     }
 
     @Override
     public void onDestroy() {
         unregisterReceiver(mReceiver);
-
+        Log.d("StoNel","onDestroy");
         super.onDestroy();
     }
 
@@ -103,15 +94,19 @@ public class TrackingOfferente extends AppCompatActivity {
                 showToast("ACTION_DISCOVERY_STARTED");
                 showLog("ACTION_DISCOVERY_STARTED", action);
 
+
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
                 showToast("ACTION_DISCOVERY_FINISHED");
                 showLog("ACTION_DISCOVERY_FINISHED", action);
+                visualizza();
             } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-
+                macAddressTrovati.add(device.getAddress());
                 showToast("Found device " + device.getName());
                 showLog("ACTION_FOUND", action);
-                showLog("dispositivo",device.getName());
+                showLog("dispositivo",device.getAddress());
+                showLog("stoNel", "actionFound");
+
 
             }
         }
@@ -142,35 +137,78 @@ public class TrackingOfferente extends AppCompatActivity {
     public boolean accendiBluetooth( BluetoothAdapter mBluetoothAdapter) {
 
         boolean acceso = false;
+        do {
 
-        if (ControlBluetooth.verificaSupportoB(mBluetoothAdapter)) {
+
+            if (ControlBluetooth.verificaSupportoB(mBluetoothAdapter)) {
 
 
-            if (!(mBluetoothAdapter.isEnabled())) {
-                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-            } else acceso = true;
-        } else acceso = false;
+                if (!(mBluetoothAdapter.isEnabled())) {
+                    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+                } else acceso = true;
+            } else acceso = false;
 
-        if (mBluetoothAdapter.isEnabled()) acceso = true;
-
+            if (mBluetoothAdapter.isEnabled()) acceso = true;
+        }while (acceso == false);
         return acceso;
     }
 
 
     public void visualizza(){
+        showLog("stoNel","Visualizza");
         Cittadino c;
+        trovati = new ArrayList<Cittadino>();
+        int index = 0;
+        Passaggio p;
+        int numeroCittadiniRichiedenti = passaggio.cittadiniRichiedenti.size();
+
+
         String string = getBluetoothMacAddress();
         for (int i = 0; i < passaggio.cittadiniRichiedenti.size(); i++){
             c =  passaggio.cittadiniRichiedenti.get(i);
-            Log.d("CittadinoRichiedente",c.getCognome() + c.getNome());
-        }
+            for (int j = 0; j < macAddressTrovati.size(); j++){
+                if (c.getMacAddress().equalsIgnoreCase(macAddressTrovati.get(j))){
+                    trovati.add(c);
+                    index++;
+                }
+            }
 
-        Log.d("mioMacAdress",string);
+        }
+        visualizzaMacAddressTrovati();
+
+    }
+
+    public void visualizzaMacAddressTrovati(){
+
+        for (int i = 0; i < macAddressTrovati.size(); i++) showLog("macAddressTrov",macAddressTrovati.get(i));
+        for (int i = 0; i < trovati.size(); i++) showLog("Trovati", trovati.get(i).getMacAddress());
     }
 
     public void finito(View view){
         finito = 1;
+    }
+
+    public void avviaRicerca(){
+
+
+        if (accendiBluetooth(mBluetoothAdapter)) {
+
+
+            if (mBluetoothAdapter.isDiscovering()) {
+                mBluetoothAdapter.cancelDiscovery();
+            }
+            mBluetoothAdapter.startDiscovery();
+
+            IntentFilter filter = new IntentFilter();
+
+            filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+            filter.addAction(BluetoothDevice.ACTION_FOUND);
+            filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+            filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+
+            registerReceiver(mReceiver, filter);
+        }
     }
 
 

@@ -1,6 +1,7 @@
 package uk.co.maxcarli.carpooling;
 
 import android.app.AlertDialog;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -46,7 +47,7 @@ import uk.co.maxcarli.carpooling.model.Passaggio;
 
 public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReadyCallback {
 
-
+    public static final int REQUEST_ENABLE_BT = 1;
     private GoogleMap mMap;
     private Cittadino cittadino;
     private Passaggio passaggio;
@@ -267,80 +268,86 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
 
     public void prenotaPassaggio(final Context context, final int idPassaggio, final Cittadino offerente){
         String url = "http://carpoolingsms.altervista.org/PHP/ScriviPassaggioRichiesto.php";
+        BluetoothAdapter mBluetoothAdapter	= BluetoothAdapter.getDefaultAdapter();
+        boolean error = false;
+            if (accendiBluetooth(mBluetoothAdapter) == false){
+            error = true;
+            } else {
 
-        final String macAddress=  ControlBluetooth.getBluetoothMacAddress();
-        Toast.makeText(this,macAddress,Toast.LENGTH_LONG).show();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
+                final String macAddress = ControlBluetooth.getBluetoothMacAddress();
+                Toast.makeText(this, macAddress, Toast.LENGTH_LONG).show();
+                StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                        url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
 
-                        //Toast.makeText(context,response,Toast.LENGTH_LONG).show();
-                        if(!response.equals("Something went wrong") && !response.equals("Error query")){
+                                //Toast.makeText(context,response,Toast.LENGTH_LONG).show();
+                                if (!response.equals("Something went wrong") && !response.equals("Error query")) {
 
-                            try {
+                                    try {
 
-                                JSONArray jsonarray = new JSONArray(response);
+                                        JSONArray jsonarray = new JSONArray(response);
 
-                                for (int i = 0; i < jsonarray.length(); i++) {
+                                        for (int i = 0; i < jsonarray.length(); i++) {
 
-                                    JSONObject jsonobject = jsonarray.getJSONObject(i);
+                                            JSONObject jsonobject = jsonarray.getJSONObject(i);
 
-                                    String dataPassaggio=jsonobject.getString("DataPassaggio");
-                                    String oraPassaggio=jsonobject.getString("OraPassaggio");
-                                    passaggio.setData(dataPassaggio);
-                                    passaggio.setOra(oraPassaggio);
-                                    passaggio.setCittadinoOfferente(offerente);
-                                    passaggio.setIdPassaggiOfferti(idPassaggio);
-                                    passaggio.setStatus("Sospeso");
+                                            String dataPassaggio = jsonobject.getString("DataPassaggio");
+                                            String oraPassaggio = jsonobject.getString("OraPassaggio");
+                                            passaggio.setData(dataPassaggio);
+                                            passaggio.setOra(oraPassaggio);
+                                            passaggio.setCittadinoOfferente(offerente);
+                                            passaggio.setIdPassaggiOfferti(idPassaggio);
+                                            passaggio.setStatus("Sospeso");
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                    builder.setTitle(R.string.PassaggioPrenotatoTitolo);
+                                    builder.setMessage(R.string.PassaggioPrenotatoTesto);
+                                    builder.setCancelable(false);
+                                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            final Intent returnIntent = new Intent();
+                                            returnIntent.putExtra(Passaggio.Keys.IDPASSAGGIO, passaggio);
+                                            setResult(0, returnIntent);
+                                            finish();
+                                        }
+                                    });
+                                    AlertDialog alertDialog = builder.create();
+                                    alertDialog.show();
+
                                 }
-                            }catch(JSONException e){
-                                e.printStackTrace();
                             }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                if (error != null) {
 
-                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                            builder.setTitle(R.string.PassaggioPrenotatoTitolo);
-                            builder.setMessage(R.string.PassaggioPrenotatoTesto);
-                            builder.setCancelable(false);
-                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    final Intent returnIntent = new Intent();
-                                    returnIntent.putExtra(Passaggio.Keys.IDPASSAGGIO,passaggio);
-                                    setResult(0,returnIntent);
-                                    finish();
+                                    Toast.makeText(context.getApplicationContext(), "Something went wrong.", Toast.LENGTH_LONG).show();
                                 }
-                            });
-                            AlertDialog alertDialog= builder.create();
-                            alertDialog.show();
-
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
+                            }
+                        }) {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
-                        if (error != null) {
-
-                            Toast.makeText(context.getApplicationContext(), "Something went wrong.", Toast.LENGTH_LONG).show();
-                        }
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        String macAddress = ControlBluetooth.getBluetoothMacAddress();
+                        //
+                        Log.d("MappaCercaPassaggi", macAddress);
+                        params.put("idCittadino", cittadino.getIdCittadino() + "");
+                        params.put("idPassaggio", idPassaggio + "");
+                        params.put("macAddress", macAddress);
+                        return params;
                     }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                String macAddress = ControlBluetooth.getBluetoothMacAddress();
-                //
-                Log.d("MappaCercaPassaggi",macAddress);
-                params.put("idCittadino",cittadino.getIdCittadino()+"");
-                params.put("idPassaggio",idPassaggio+"");
-                params.put("macAddress", macAddress);
-                return params;
-            }
-        };
+                };
 
-        MySingleton.getmInstance(context.getApplicationContext()).addTorequestque(stringRequest);
+                MySingleton.getmInstance(context.getApplicationContext()).addTorequestque(stringRequest);
+            }
     }
 
     public String getAddressFromLatLng(LatLng pos){
@@ -430,4 +437,24 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
             return view;
         }
     }
+
+    public boolean accendiBluetooth( BluetoothAdapter mBluetoothAdapter) {
+
+        boolean acceso = false;
+
+
+            if (ControlBluetooth.verificaSupportoB(mBluetoothAdapter)) {
+
+
+                if (!(mBluetoothAdapter.isEnabled())) {
+                    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+                } else acceso = true;
+            } else acceso = false;
+
+            if (mBluetoothAdapter.isEnabled()) acceso = true;
+
+        return acceso;
+    }
+
 }
