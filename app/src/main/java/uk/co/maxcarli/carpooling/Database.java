@@ -337,6 +337,7 @@ public class Database {
                                         cittadinoRichiedente.setIdCittadino(jsonobject.getInt("IdCittadino"));
                                         cittadinoRichiedente.setResidenza(jsonobject.getString("ResidenzaCittadino"));
                                         cittadinoRichiedente.setNumeroTelefono(jsonobject.getString("TelefonoCittadino"));
+                                        cittadinoRichiedente.setMacAddress(jsonobject.getString("MacAddress"));
                                     }
 
                                     if(cittadino.passaggiOfferti.contains(p)){

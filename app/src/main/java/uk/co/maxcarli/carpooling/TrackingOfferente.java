@@ -181,8 +181,8 @@ public class TrackingOfferente extends AppCompatActivity {
 
     public void visualizzaMacAddressTrovati(){
 
-        for (int i = 0; i < macAddressTrovati.size(); i++) showLog("macAddressTrov",macAddressTrovati.get(i));
-        for (int i = 0; i < trovati.size(); i++) showLog("Trovati", trovati.get(i).getMacAddress());
+        for (int i = 0; i < macAddressTrovati.size(); i++) showToast("macAddressTrov " +macAddressTrovati.get(i));//showLog("macAddressTrov",macAddressTrovati.get(i));
+        for (int i = 0; i < trovati.size(); i++) showToast("Trovati "+ trovati.get(i).getMacAddress());
     }
 
     public void finito(View view){

@@ -72,6 +72,7 @@ public class TrackingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         String dataCorrente = getCurrentData();
+        dataCorrente=Controlli.impostaFormatoData(dataCorrente);
         Log.d("dataCorrente", dataCorrente);
         int vista = 0;
         View rootServer = null;
