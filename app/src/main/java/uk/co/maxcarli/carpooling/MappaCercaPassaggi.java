@@ -146,7 +146,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
     }
 
 
-    public boolean controllo(Address centro, Address pos, double raggio){
+    public static boolean controlloRaggio(Address centro, Address pos, double raggio){
 
 
         float[] results=new float[1];
@@ -210,7 +210,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
 
                                     Address pos=getLocationFromAddress(indirizzo,context);
 
-                                    if(controllo(home, pos, 500) && controlloArcoOrario(passaggio.getOra(),ora)){
+                                    if(controlloRaggio(home, pos, 500) && controlloArcoOrario(passaggio.getOra(),ora)){
                                         j++;
                                         mMap.addMarker(new MarkerOptions().
                                                 position(new LatLng(pos.getLatitude(),pos.getLongitude())
