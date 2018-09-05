@@ -25,6 +25,7 @@ package uk.co.maxcarli.carpooling;
         import android.view.Menu;
         import android.view.MenuItem;
         import android.view.View;
+        import android.widget.ImageView;
         import android.widget.TextView;
         import android.widget.Toast;
 
@@ -182,6 +183,20 @@ public class menu extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_action_bar,menu);
         if(cittadino.getTipoCittadino().equals("normale")){
             menu.getItem(0).setVisible(false);
+        }else{
+            final MenuItem item=menu.findItem(R.id.userRequest);
+            View actionView = MenuItemCompat.getActionView(item);
+            if(cittadino.getNotificaAutorizzazione()==0){
+
+                ImageView notifica=actionView.findViewById(R.id.badge);
+                notifica.setVisibility(View.GONE);
+            }
+            actionView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onOptionsItemSelected(item);
+                }
+            });
         }
         return true;
     }
@@ -189,10 +204,18 @@ public class menu extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
 
         switch(item.getItemId()){
-            case R.id.MENU_1:
+            case R.id.logout:
                 logout();
                 return false;
-            case R.id.MENU_2:
+            case R.id.userRequest:
+                if(cittadino.getNotificaAutorizzazione()==1){
+                    View actionView = MenuItemCompat.getActionView(item);
+                    ImageView notifica=actionView.findViewById(R.id.badge);
+                    notifica.setVisibility(View.GONE);
+                    cittadino.setNotificaAutorizzazione(0);
+                    Database.azzeraNotificheAutorizzazioni(cittadino.getIdCittadino(),this);
+                }
+
                 Intent intent=new Intent(menu.this, ListaUtenti.class);
                 intent.putExtra(Sede.Keys.IDSEDE,cittadino.getSede().getIdSede());
                 startActivity(intent);

@@ -61,6 +61,14 @@ public class Cittadino implements Parcelable{
         this.notificaPassaggio = notificaPassaggio;
     }
 
+    public int getNotificaAutorizzazione() {
+        return notificaAutorizzazione;
+    }
+
+    public void setNotificaAutorizzazione(int notificaAutorizzazione) {
+        this.notificaAutorizzazione = notificaAutorizzazione;
+    }
+
     public interface Keys {
         String IDCITTADINO = "idCittadino";
         String NOME = "nome";
@@ -95,6 +103,9 @@ public class Cittadino implements Parcelable{
 
     private int notificaPassaggio;
 
+    private int notificaAutorizzazione;
+
+
     public final ArrayList<Passaggio> passaggiOfferti;
     public final ArrayList<Passaggio> passaggiRichiesti;
 
@@ -116,6 +127,7 @@ public class Cittadino implements Parcelable{
         password="";
         convalidato=0;
         notificaPassaggio=0;
+        notificaAutorizzazione=0;
     }
 
     public Cittadino(ArrayList<Passaggio> passaggiOfferti, ArrayList<Passaggio> passaggiRichiesti){
@@ -134,6 +146,7 @@ public class Cittadino implements Parcelable{
         password="";
         convalidato=0;
         notificaPassaggio=0;
+        notificaAutorizzazione=0;
     }
 
 
@@ -234,6 +247,7 @@ public class Cittadino implements Parcelable{
         macAddress=in.readString();
         convalidato=in.readInt();
         notificaPassaggio=in.readInt();
+        notificaAutorizzazione=in.readInt();
         if(in.readByte()==PRESENT){
             sede = (Sede) in.readParcelable(Sede.class.getClassLoader());
         }else{
@@ -275,6 +289,7 @@ public class Cittadino implements Parcelable{
         dest.writeString(macAddress);
         dest.writeInt(convalidato);
         dest.writeInt(notificaPassaggio);
+        dest.writeInt(notificaAutorizzazione);
         if(sede==null){
             dest.writeByte(NOT_PRESENT);
         }else {

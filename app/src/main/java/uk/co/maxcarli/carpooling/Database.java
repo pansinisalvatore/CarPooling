@@ -164,6 +164,7 @@ public class Database {
                                 cittadino.setEmail(jsonobject.getString("EmailCittadino"));
                                 cittadino.setPassword(jsonobject.getString("PasswordCittadino"));
                                 cittadino.setNotificaPassaggio(jsonobject.getInt("NotificaPassaggioCittadino"));
+                                cittadino.setNotificaAutorizzazione(jsonobject.getInt("NotificaAutorizzazioneCittadino"));
                                 cittadino.getSede().getAzienda().setNome(jsonobject.getString("NomeAzienda"));
                                 cittadino.getSede().getAzienda().setPartitaIva(jsonobject.getString("PartitaIvaAzienda"));
                                 cittadino.getSede().getAzienda().setIdAzienda(jsonobject.getInt("IdAzienda"));
@@ -615,6 +616,43 @@ public class Database {
 
         MySingleton.getmInstance(c).addTorequestque(stringRequest);
 
+    }
+
+    public static void azzeraNotificheAutorizzazioni(final int idCittadino,final Context c){
+        String urlOffriPassaggio ="http://carpoolingsms.altervista.org/PHP/SettaNotificaAutorizzazione.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, urlOffriPassaggio,
+
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Toast.makeText(c,response,Toast.LENGTH_LONG).show();
+
+                    }
+                }
+
+                , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(c, "Error...", Toast.LENGTH_SHORT).show();
+                error.printStackTrace();
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map <String,String> params = new HashMap<String, String>();
+                params.put("idCittadino",idCittadino+"");
+
+
+                return params;
+            }
+        };
+
+
+        MySingleton.getmInstance(c).addTorequestque(stringRequest);
     }
 
     public static void azzeraNotifichePassaggi(final int idCittadino,final Context c){
