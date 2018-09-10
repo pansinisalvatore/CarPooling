@@ -75,10 +75,14 @@ In questo metodo verifico che il dispositivo supporti il bluethoot
         }
     }
 
+    /**
+     * Rende il bluetooth del dispositivo visibile per un'ora
+     * @param context
+     */
     public static void visibilita(Context context){
         Intent discoverableIntent =
                 new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-        discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 0);
+        discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 3600);
         context.startActivity(discoverableIntent);
     }
 

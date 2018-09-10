@@ -5,30 +5,32 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cerca dispositivi"
-        android:onClick="scan"/>
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/btn_pair"
-        android:layout_alignTop="@+id/btn_pair"
-        android:layout_alignParentLeft="true"
-        android:textSize="16sp"
-        android:textColor="#000000"
-        android:text="Galaxy Nexus" />
-
-    <TextView
-        android:id="@+id/tv_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/btn_pair"
-        android:layout_alignParentLeft="true"
-        android:layout_alignBottom="@+id/btn_pair"
-        android:text="000000000" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/textLayout"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/textVacand"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/trackingRichiedenteText"
+            android:text="@string/trackingRichiedenteText"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:layout_below="@+id/textVacand">
+        </TextView>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/trackingRichiedenteText"
+            android:id="@+id/buttonTrackingRichiedente"
+            android:onClick="finitoRichiedente"/>
+    </RelativeLayout>
 
 
 </LinearLayout>

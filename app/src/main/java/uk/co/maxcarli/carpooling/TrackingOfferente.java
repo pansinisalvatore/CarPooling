@@ -36,7 +36,7 @@ public class TrackingOfferente extends AppCompatActivity {
     private Passaggio passaggio;
     private ArrayList <String> macAddressTrovati;
     private int finito;
-    private ArrayList <Cittadino> trovati;
+    private ArrayList <Cittadino> cittadiniTrovati;
 
 
     @Override
@@ -45,6 +45,7 @@ public class TrackingOfferente extends AppCompatActivity {
         setContentView(R.layout.activity_tracking_offerente);
         rotate(true);
         macAddressTrovati = new ArrayList<String>();
+        cittadiniTrovati = new ArrayList<Cittadino>();
         final Intent srcIntent = getIntent();
         cittadino = (Cittadino) srcIntent.getParcelableExtra(Cittadino.Keys.IDCITTADINO);
         passaggio = (Passaggio) srcIntent.getParcelableExtra(Passaggio.Keys.IDPASSAGGIO);
@@ -98,7 +99,7 @@ public class TrackingOfferente extends AppCompatActivity {
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
                 showToast("ACTION_DISCOVERY_FINISHED");
                 showLog("ACTION_DISCOVERY_FINISHED", action);
-                visualizza();
+                addCittadiniTrovati();
             } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 macAddressTrovati.add(device.getAddress());
@@ -154,39 +155,59 @@ public class TrackingOfferente extends AppCompatActivity {
         return acceso;
     }
 
-
-    public void visualizza(){
+    /**
+     * Confronta i mac address dei cittadini richiedenti con quelli che il bluetooth ha rilevato.
+     Quelli uguali li aggiunge nell'arrayList cittadiniTrovati
+     */
+    public void addCittadiniTrovati(){
         showLog("stoNel","Visualizza");
         Cittadino c;
-        trovati = new ArrayList<Cittadino>();
-        int index = 0;
-        Passaggio p;
-        int numeroCittadiniRichiedenti = passaggio.cittadiniRichiedenti.size();
-
-
-        String string = getBluetoothMacAddress();
-        for (int i = 0; i < passaggio.cittadiniRichiedenti.size(); i++){
-            c =  passaggio.cittadiniRichiedenti.get(i);
-            for (int j = 0; j < macAddressTrovati.size(); j++){
-                if (c.getMacAddress().equalsIgnoreCase(macAddressTrovati.get(j))){
-                    trovati.add(c);
-                    index++;
+        for (int i = 0; i < passaggio.cittadiniRichiedenti.size(); i++) {
+            showLog("Status", passaggio.cittadinoStatus.get(i));
+            if (passaggio.cittadinoStatus.get(i).equals("accettato")) {
+                c = passaggio.cittadiniRichiedenti.get(i);
+                for (int j = 0; j < macAddressTrovati.size(); j++) {
+                    if (c.getMacAddress().equalsIgnoreCase(macAddressTrovati.get(j))) {
+                        String mac = c.getMacAddress();
+                        if (!macExists(mac))
+                            cittadiniTrovati.add(c);
+                    }
                 }
+
             }
-
         }
-        visualizzaMacAddressTrovati();
+        for (int i = 0; i < macAddressTrovati.size(); i++) showLog("macAddressTrov", macAddressTrovati.get(i));//showLog("macAddressTrov",macAddressTrovati.get(i));
+        for (int i = 0; i < cittadiniTrovati.size(); i++) showLog("Trovati", cittadiniTrovati.get(i).getMacAddress() + " " + cittadiniTrovati.size());
 
+        avviaRicerca();
+
+    }
+
+    public boolean macExists(String string){
+
+        for (int i = 0; i < cittadiniTrovati.size(); i++) {
+            if (cittadiniTrovati.get(i).getMacAddress().equalsIgnoreCase(string)) return true;
+        }
+        return false;
     }
 
     public void visualizzaMacAddressTrovati(){
 
-        for (int i = 0; i < macAddressTrovati.size(); i++) showToast("macAddressTrov " +macAddressTrovati.get(i));//showLog("macAddressTrov",macAddressTrovati.get(i));
-        for (int i = 0; i < trovati.size(); i++) showToast("Trovati "+ trovati.get(i).getMacAddress());
+        for (int i = 0; i < macAddressTrovati.size(); i++) showLog("macAddressTrov", macAddressTrovati.get(i));//showLog("macAddressTrov",macAddressTrovati.get(i));
+        for (int i = 0; i < cittadiniTrovati.size(); i++) showLog("Trovati", cittadiniTrovati.get(i).getMacAddress());
     }
 
     public void finito(View view){
-        finito = 1;
+
+        cittadino.setPunteggio(cittadiniTrovati.size());
+        for (int i = 0; i < cittadiniTrovati.size(); i++)
+            cittadiniTrovati.get(i).setPunteggio();
+        if (mBluetoothAdapter.isDiscovering()) {
+            mBluetoothAdapter.cancelDiscovery();
+        }
+        int idPassaggio = passaggio.getIdPassaggiOfferti();
+        Database.trackingEffettuato(1,idPassaggio,this);
+        Controlli.mostraMessaggioConChiusura("Successo","avvenuto con successo", this);
     }
 
     public void avviaRicerca(){

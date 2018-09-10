@@ -22,18 +22,55 @@ import java.util.HashMap;
 import java.util.Map;
 
 import uk.co.maxcarli.carpooling.Control.Controlli;
-import uk.co.maxcarli.carpooling.model.Azienda;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 import uk.co.maxcarli.carpooling.model.Passaggio;
-import uk.co.maxcarli.carpooling.model.Sede;
 
 public class Database {
 
     static String urlLogin = "http://carpoolingsms.altervista.org/PHP/Login.php";
     static String urlRegister = "http://carpoolingsms.altervista.org/PHP/registrazione.php";
+    private final static String urlTracking ="http://carpoolingsms.altervista.org/PHP/trackingEffettuato.php";
     static AlertDialog.Builder builder;
 
-    public static void registraCittadino(final Cittadino cittadino, final String sede, final String partitaIva,final Context context) {
+    public static void trackingEffettuato(final int trackingEffettuato,final int idPassaggio, Context context){
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, urlTracking,
+
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                        Log.d("response",response);
+                        }
+                    }
+
+                    , new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                   Log.d("error","erroreLettura");
+                    error.printStackTrace();
+
+                }
+            }) {
+
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("tracking", Integer.toString(trackingEffettuato));
+                    params.put("IdPassaggio", Integer.toString(idPassaggio));
+
+
+                    return params;
+                }
+            };
+
+
+            MySingleton.getmInstance(context).addTorequestque(stringRequest);
+
+
+        }
+
+        public static void registraCittadino (final Cittadino cittadino, final String sede, final String partitaIva,final Context context) {
         builder = new AlertDialog.Builder(context);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, urlRegister,
 

@@ -17,8 +17,14 @@ public class Cittadino implements Parcelable{
         return punteggio;
     }
 
-    public void setPunteggio(int punteggio) {
-        this.punteggio = punteggio;
+    public void setPunteggio(int numeroPasseggeri) {
+
+        if (numeroPasseggeri > 0)
+            punteggio = punteggio + (10 + (numeroPasseggeri * 5));
+    }
+
+    public void setPunteggio(){
+        punteggio = punteggio + 5;
     }
 
     public String getMacAddress() {
@@ -67,6 +73,14 @@ public class Cittadino implements Parcelable{
 
     public void setNotificaAutorizzazione(int notificaAutorizzazione) {
         this.notificaAutorizzazione = notificaAutorizzazione;
+    }
+
+    public boolean equals(Object object){
+        if (object instanceof Cittadino) {
+            Cittadino c = (Cittadino) object;
+            return c.getMacAddress().equals(this.macAddress);
+        }
+        return false;
     }
 
     public interface Keys {
@@ -214,6 +228,8 @@ public class Cittadino implements Parcelable{
     public void setSede(Sede sede) {
         this.sede = sede;
     }
+
+
 
 
     public void addPassaggioRichiesto(final Passaggio p){

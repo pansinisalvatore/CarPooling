@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">CarPooling</string>
+    <string name="trackingRichiedenteText">You can close this screen when you have arrived at your destination. After which the points will be validated.</string>
     <string name="trackingInCorso">Tracking in progress</string>
     <string name="startTracking">Start tracking</string>
     <string name="trackingVuoto">Tracking can not be started. If you have OFFERED THE PASSAGE, you can start it 10 minutes before the scheduled time and after 30 minutes. If you have REQUIRED THE PASSAGE you have to wait for the bidder to have the tracking.</string>

@@ -72,7 +72,7 @@ public class TrackingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         String dataCorrente = getCurrentData();
-        dataCorrente=Controlli.impostaFormatoData(dataCorrente);
+        //dataCorrente=Controlli.impostaFormatoData(dataCorrente);
         Log.d("dataCorrente", dataCorrente);
         int vista = 0;
         View rootServer = null;
@@ -182,8 +182,7 @@ public class TrackingFragment extends Fragment {
             Passaggio p= passaggiOfferti.get(i);
             Log.d("passaggioOfferto",p.getData());
             dataPassaggio = p.getData();
-            dataPassaggio = Controlli.removeChar(dataPassaggio, 2);
-            dataPassaggio = Controlli.removeChar(dataPassaggio, 5);
+
             Log.d("dataPassaggio", dataPassaggio);
             Log.d("dataCorrente",dataCorrente);
 
@@ -241,9 +240,10 @@ public class TrackingFragment extends Fragment {
         for (int i = 0; i < passaggiRichiesti.size(); i++) {
 
             Passaggio p = passaggiRichiesti.get(i);
-            Log.d("CittadinoOfferente", p.getCittadinoOfferente().getCognome().toString());
+            Log.d("Data", p.getData());
+            Log.d("DataCorrente", dataCorrente);
 
-            if (p.getData().equals(dataCorrente)) {
+            if (p.getData().equalsIgnoreCase(dataCorrente)) {
                 orarioConvertito = oreInMinuti(p.getOra());
                 stringaOrario = Integer.toString(orarioConvertito);
                 Log.d("oraRichiesta", stringaOrario);

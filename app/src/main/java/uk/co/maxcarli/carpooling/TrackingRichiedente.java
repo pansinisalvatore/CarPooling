@@ -20,86 +20,67 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Set;
 
+import uk.co.maxcarli.carpooling.Control.ControlBluetooth;
+
 import static uk.co.maxcarli.carpooling.Control.ControlBluetooth.*;
 
-
+/**
+ *Questa classe non fa altro che mantenere il bluetooth attivo e stabilisce una connessione con il database per
+ verificare se il tracking è avvennuto con successo
+ */
 public class TrackingRichiedente extends Activity {
 
-    private ArrayList<BluetoothDevice> mDeviceList = new ArrayList<BluetoothDevice>();
-
-    private ProgressDialog mProgressDlg;
 
     private BluetoothAdapter mBluetoothAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking_richiedente);
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (accendiBluetooth(mBluetoothAdapter)) {
 
-        mBluetoothAdapter	= BluetoothAdapter.getDefaultAdapter();
-        mBluetoothAdapter.startDiscovery();
-        Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-
-        startActivityForResult(intent, 1000);
-        IntentFilter filter = new IntentFilter();
-
-        filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
-        filter.addAction(BluetoothDevice.ACTION_FOUND);
-        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
-        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-
-        registerReceiver(mReceiver, filter);
-
-    }
-
-    @Override
-    public void onPause() {
-        if (mBluetoothAdapter != null) {
             if (mBluetoothAdapter.isDiscovering()) {
                 mBluetoothAdapter.cancelDiscovery();
             }
+
+            ControlBluetooth.visibilita(TrackingRichiedente.this);
+
         }
 
-        super.onPause();
+
     }
 
-    @Override
-    public void onDestroy() {
-        unregisterReceiver(mReceiver);
+    /**
+     * Verifica che il bluetooth sia acceso, se non lo è chiede all'utente di accenderlo
+     * @param mBluetoothAdapter
+     * @return
+     */
+    public boolean accendiBluetooth( BluetoothAdapter mBluetoothAdapter) {
 
-        super.onDestroy();
+        boolean acceso = false;
+        do {
+
+
+            if (ControlBluetooth.verificaSupportoB(mBluetoothAdapter)) {
+
+
+                if (!(mBluetoothAdapter.isEnabled())) {
+                    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+                } else acceso = true;
+            } else acceso = false;
+
+            if (mBluetoothAdapter.isEnabled()) acceso = true;
+        }while (acceso == false);
+        return acceso;
     }
 
-    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
+    public void finitoRichiedente(View view){
 
-            if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
-                final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
-
-                if (state == BluetoothAdapter.STATE_ON) {
-                    Log.d("State","enable");
-                }
-            } else if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
-                mDeviceList = new ArrayList<BluetoothDevice>();
-                mProgressDlg.show();
+    }
 
 
-            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
-                mProgressDlg.dismiss();
 
-                for (int i = 0; i < mDeviceList.size(); i++){
-                    BluetoothDevice dispositivo = mDeviceList.get(i);
-                    Log.d("Dispositivo", dispositivo.toString());
-                }
-            } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-                BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-
-                mDeviceList.add(device);
-
-                Log.d("Found device ", device.getName());
-            }
-        }
-    };
 
 
 
