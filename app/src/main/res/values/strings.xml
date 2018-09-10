@@ -178,5 +178,9 @@ Enter your information to proceed with registration.</string>
     <string name="completato">Completed</string>
     <string name="finito">Finish</string>
 
+    <string name="posizioneClassifica">Position</string>
+    <string name="Dipendente">Worker</string>
+    <string name="punteggio">Score</string>
+    <string name="azienda">Company</string>
 
 </resources>

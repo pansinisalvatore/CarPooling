@@ -79,7 +79,22 @@ public class Database {
                     public void onResponse(String response) {
                         Toast.makeText(context,response,Toast.LENGTH_LONG).show();
                         if(response.equals("User Registration Successfully")){
-                            Controlli.mostraMessaggioConChiusura(context.getString(R.string.registrazioneCompletaTitolo),context.getString(R.string.registrazioneCompletaTesto),context);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setTitle(context.getString(R.string.registrazioneCompletaTitolo));
+                            builder.setMessage(context.getString(R.string.registrazioneCompletaTesto));
+                            builder.setCancelable(false);
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent i=new Intent(context,LoginActivity.class);
+                                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    context.startActivity(i);
+
+                                }
+                            });
+                            AlertDialog alertDialog= builder.create();
+                            alertDialog.show();
+                            //Controlli.mostraMessaggioConChiusura(context.getString(R.string.registrazioneCompletaTitolo),context.getString(R.string.registrazioneCompletaTesto),context);
                         }else if(response.equals("Email o telefono esistente")){
                             Controlli.mostraMessaggioErrore(context.getString(R.string.erroreEmailEsistenteTitolo),context.getString(R.string.erroreEmailEsistente),context);
                         }
@@ -411,7 +426,7 @@ public class Database {
                         Intent intent= new Intent(context, menu.class);
                         intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
                         context.startActivity(intent);
-                        ((Activity)context).finish();
+
 
                     }
                 },

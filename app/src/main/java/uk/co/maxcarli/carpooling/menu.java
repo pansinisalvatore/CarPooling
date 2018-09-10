@@ -263,7 +263,7 @@ public class menu extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-
+        logout();
     }
 
 

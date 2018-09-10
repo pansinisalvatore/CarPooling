@@ -162,6 +162,11 @@
     <string name="CampoObbligatorio">Campo obbligatorio</string>
 
     <string name="occupati">Occupati</string>
+
+    <string name="posizioneClassifica">Posizione</string>
+    <string name="Dipendente">Dipendente</string>
+    <string name="punteggio">Punteggio</string>
+    <string name="azienda">Azienda</string>
     <string name="completato">Completato</string>
     <string name="finito">Finito</string>
 </resources>

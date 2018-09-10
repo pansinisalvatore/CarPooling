@@ -62,6 +62,14 @@ public class ClassificaAziendale extends Fragment {
        class_aziendale= inflater.inflate(R.layout.fragment_classifica_aziendale,null);
        tabella=(TableView<String[]>)class_aziendale.findViewById(R.id.TabellaClassificaAziendale);
        tabella.setColumnCount(3);
+       ClassificaAziendaleHeaders=new String[3];
+       ClassificaAziendaleHeaders[0]=getString(R.string.posizioneClassifica);
+       ClassificaAziendaleHeaders[1]=getString(R.string.Dipendente);
+       ClassificaAziendaleHeaders[2]=getString(R.string.punteggio);
+        tabella.setColumnWeight(0,10);
+        tabella.setColumnWeight(1,13);
+        tabella.setColumnWeight(2,7);
+
        tabella.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
        tabella.setHeaderAdapter(new SimpleTableHeaderAdapter(getActivity(),ClassificaAziendaleHeaders));
         String url= "http://carpoolingsms.altervista.org/PHP/LeggiClassificaAziendale.php";

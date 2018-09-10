@@ -42,7 +42,7 @@ public class ClassificaNazionale extends Fragment {
 
 
     menu menuActivity;
-    String[] ClassificaNazionaleHeaders={"Posizione","Dipendente","Azienda","Punti"};
+    String[] ClassificaNazionaleHeaders;
     String[][] cl_nazione;
 
     TableView<String[]> tabel;
@@ -55,10 +55,18 @@ public class ClassificaNazionale extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View class_nazionale= inflater.inflate(R.layout.fragment_classifica_nazionale,null);
         tabel=(TableView<String[]>) class_nazionale.findViewById(R.id.TabellaClassificaNazionale);
+        ClassificaNazionaleHeaders=new String[4];
+        ClassificaNazionaleHeaders[0]=getString(R.string.posizioneClassifica);
+        ClassificaNazionaleHeaders[1]=getString(R.string.Dipendente);
+        ClassificaNazionaleHeaders[2]=getString(R.string.azienda);
+        ClassificaNazionaleHeaders[3]=getString(R.string.punteggio);
         tabel.setColumnCount(4);
         tabel.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
         tabel.setHeaderAdapter(new SimpleTableHeaderAdapter(getActivity(),ClassificaNazionaleHeaders));
-
+        tabel.setColumnWeight(0,10);
+        tabel.setColumnWeight(1,13);
+        tabel.setColumnWeight(2,7);
+        tabel.setColumnWeight(3,10);
         String url= "http://carpoolingsms.altervista.org/PHP/LeggiClassificaNazionale.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,

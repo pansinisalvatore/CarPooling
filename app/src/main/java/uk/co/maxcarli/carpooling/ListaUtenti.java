@@ -50,6 +50,10 @@ public class ListaUtenti extends AppCompatActivity {
             idSede=getIntent().getIntExtra(Sede.Keys.IDSEDE,0);
         }
 
+        DatiUtente=new String[3];
+        DatiUtente[0]=getString(R.string.Dipendente);
+        DatiUtente[1]=getString(R.string.Telefono);
+        DatiUtente[2]=getString(R.string.Autorizzato);
         tab=(TableView<String[]>)findViewById(R.id.TabellaUtenti);
         tab.setColumnCount(3);
         tab.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
