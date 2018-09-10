@@ -94,7 +94,7 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
 
                 if(!Controlli.controlloEditTextVuoto(imp_data,OffriPassaggi.this) && !Controlli.controlloEditTextVuoto(imp_ora,OffriPassaggi.this) &&  !Controlli.controlloEditTextVuoto(set_auto,OffriPassaggi.this)
                          ){
-                    group=findViewById(R.id.radioGroup);
+
                     groupType=findViewById(R.id.groupTypePassage);
 
 

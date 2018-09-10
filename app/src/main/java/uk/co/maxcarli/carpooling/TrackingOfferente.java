@@ -126,7 +126,7 @@ public class TrackingOfferente extends AppCompatActivity {
         if (start == true) {
 
             View decorView = getWindow().getDecorView();
-            ImageView splash = findViewById(R.id.splash_imageT);
+            ImageView splash = findViewById(R.id.splash_image);
             Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),
                     R.anim.rotate);
             splash.startAnimation(animation);
