@@ -202,6 +202,7 @@
         android:layout_weight="3"
         android:orientation="horizontal"
         android:layout_gravity="center">
+
         <Button
             android:id="@+id/AccettaUtente"
             android:layout_width="wrap_content"
@@ -221,6 +222,7 @@
             android:backgroundTint="@color/tint_botton"
             android:textColor="@color/etichettabottoni"
             />
+
     </LinearLayout>
 
 

@@ -82,9 +82,6 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
         posti.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         set_posti.setAdapter(posti);
 
-        buttonYes=findViewById(R.id.YesButton);
-        buttonNo=findViewById(R.id.NoButton);
-        buttonNo.setChecked(true);
 
         casaLavoro=findViewById(R.id.Home_Work);
         lavoroCasa=findViewById(R.id.Work_Home);
@@ -108,15 +105,11 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
                     int posti= Integer.parseInt((String)set_posti.getSelectedItem());
 
 
-                    int idRisultatoSettimanale= group.getCheckedRadioButtonId();
+
                     int idRisultatoTipoViaggio=groupType.getCheckedRadioButtonId();
-                    int settimanale;
+
                     String tipoPassaggio;
-                    if(idRisultatoSettimanale==buttonNo.getId()){
-                        settimanale=0;
-                    }else{
-                        settimanale=1;
-                    }
+
 
                     if(idRisultatoTipoViaggio==casaLavoro.getId()){
                         tipoPassaggio="Casa-Lavoro";
@@ -128,7 +121,7 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
                     p.setOra(ora);
                     p.setAuto(auto);
                     p.setPostiDisponibili(posti);
-                    p.setSettimanale(settimanale);
+
                     p.setTipoPassaggio(tipoPassaggio);
 
                     if(cittadino.passaggiOfferti.contains(p) || cittadino.passaggiRichiesti.contains(p)){

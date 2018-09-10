@@ -13,7 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -46,7 +49,10 @@ public class TrackingRichiedente extends Activity {
             ControlBluetooth.visibilita(TrackingRichiedente.this);
 
         }
-
+        ImageView splash=findViewById(R.id.splash_image);
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.rotate);
+        splash.startAnimation(animation);
 
     }
 

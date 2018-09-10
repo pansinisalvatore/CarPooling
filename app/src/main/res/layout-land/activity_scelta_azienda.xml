@@ -56,6 +56,7 @@
         android:layout_gravity="center"
         android:background="@drawable/button_shape_normal"
         android:backgroundTint="@color/tint_botton"
+        android:textColor="@color/etichettabottoni"
         android:hint="@string/Conferma"
         android:onClick="clickButton" />
 

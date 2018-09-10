@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1">
         <fragment
-             android:id="@+id/mapOfferte"
+            android:id="@+id/mapOfferte"
             class="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -30,15 +30,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
         </LinearLayout>
-         <Button
-             android:id="@+id/accetta"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:background="@drawable/button_shape_normal"
-             android:text="@string/accetta"
-             android:textColor="@color/etichettabottoni"
-             android:backgroundTint="@color/tint_botton"
-             android:layout_gravity="center"/>
+        <Button
+            android:id="@+id/accetta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_shape_normal"
+            android:text="@string/accetta"
+            android:textColor="@color/etichettabottoni"
+            android:backgroundTint="@color/tint_botton"
+            android:layout_gravity="center"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
             android:textColor="@color/etichettabottoni"
             android:backgroundTint="@color/tint_botton"
             android:layout_gravity="center"
-         />
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

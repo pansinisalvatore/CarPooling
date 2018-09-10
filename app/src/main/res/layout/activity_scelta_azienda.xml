@@ -57,6 +57,7 @@
         android:background="@drawable/button_shape_normal"
         android:backgroundTint="@color/tint_botton"
         android:hint="@string/Conferma"
+        android:textColor="@color/etichettabottoni"
         android:onClick="clickButton" />
 
 

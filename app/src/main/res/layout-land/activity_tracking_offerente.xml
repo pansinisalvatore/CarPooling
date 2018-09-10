@@ -66,5 +66,5 @@
             android:backgroundTint="@color/tint_botton"/>
     </LinearLayout>
 
-    </LinearLayout>
+</LinearLayout>
 

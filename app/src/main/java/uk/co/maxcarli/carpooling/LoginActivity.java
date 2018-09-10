@@ -5,6 +5,9 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import uk.co.maxcarli.carpooling.model.Azienda;
@@ -33,7 +36,8 @@ public class LoginActivity extends AppCompatActivity {
             loginEmail.setText(savedInstanceState.getString("email"));
             loginPassword.setText(savedInstanceState.getString("password"));
         }
-
+        ImageView loading=findViewById(R.id.loading);
+        loading.setVisibility(View.GONE);
 
     }
 
@@ -51,8 +55,14 @@ public class LoginActivity extends AppCompatActivity {
             cSede.setAzienda(cAzienda);
             cittadino.setSede(cSede);
             accedi(email,password,cittadino,this);
+            ImageView loading=findViewById(R.id.loading);
+            loading.setVisibility(View.VISIBLE);
+            Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),
+                    R.anim.rotate);
+            loading.startAnimation(animation);
 
         }
+
 
     }
 

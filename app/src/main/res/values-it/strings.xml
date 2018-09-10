@@ -162,4 +162,6 @@
     <string name="CampoObbligatorio">Campo obbligatorio</string>
 
     <string name="occupati">Occupati</string>
+    <string name="completato">Completato</string>
+    <string name="finito">Finito</string>
 </resources>

@@ -115,7 +115,7 @@ public class ProfiloFragment extends Fragment {
         });
 
 
-        /*Button conferma=root.findViewById(R.id.confermaModifiche);
+        Button conferma=root.findViewById(R.id.confermaModifiche);
         conferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,7 +131,7 @@ public class ProfiloFragment extends Fragment {
                 menuActivity.setCittadino(cittadino);
 
             }
-        });*/
+        });
 
         return root;
 

@@ -175,6 +175,8 @@ Enter your information to proceed with registration.</string>
     <string name="CampoObbligatorio">Required field</string>
 
     <string name="occupati">Occupied</string>
+    <string name="completato">Completed</string>
+    <string name="finito">Finish</string>
 
 
 </resources>

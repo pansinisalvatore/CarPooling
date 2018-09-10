@@ -45,7 +45,11 @@
             android:orientation="horizontal"
             android:theme="@style/MyEditText"
             >
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+            </LinearLayout>
 
                 <RadioButton
                     android:id="@+id/Home-Work"
@@ -54,13 +58,22 @@
                     android:text="@string/casa_lavoro"
                     android:theme="@style/MyEditText"
                     />
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+            </LinearLayout>
                 <RadioButton
                     android:id="@+id/Work-Home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/lavoro_casa"
                     android:theme="@style/MyEditText"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+            </LinearLayout>
 
         </RadioGroup>
 
@@ -161,53 +174,8 @@
 
     </LinearLayout>
 
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1">
-
-        <TextView
-            android:id="@+id/txtDomanda"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Domanda"
-            android:textSize="18sp"
-            android:theme="@style/MyEditText"/>
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="1">
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:theme="@style/MyEditText">
-
-            <RadioButton
-                android:id="@+id/YesButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Si"
-                android:theme="@style/MyEditText"/>
-
-            <RadioButton
-                android:id="@+id/NoButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/No"
-                android:theme="@style/MyEditText"/>
-
-        </RadioGroup>
-
-    </LinearLayout>
-
-    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -222,7 +190,7 @@
             android:backgroundTint="@color/tint_botton"
             android:textColor="@color/etichettabottoni"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 
