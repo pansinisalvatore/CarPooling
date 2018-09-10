@@ -151,8 +151,8 @@ public class MappaOffertePassaggiActivity extends AppCompatActivity implements O
                             if(cell.equals(passaggio.cittadiniRichiedenti.get(i).getNumeroTelefono())){
                                 passaggio.setPostiOccupati(passaggio.getPostiOccupati()+1);
                                 passaggio.setRichieste(passaggio.getRichieste()-1);
-                                passaggio.cittadinoStatus.remove(i);
-                                passaggio.cittadinoStatus.add(i,"accettato");
+
+                                passaggio.cittadinoStatus.set(i,"accettato");
                                 if(passaggio.getPostiDisponibili()==passaggio.getPostiOccupati()){
                                     Controlli.mostraMessaggioSuccesso(getString(R.string.PostiOccupatiTitolo),getString(R.string.PostiOccupatiTesto),MappaOffertePassaggiActivity.this);
                                     for(int j=0;j<passaggio.cittadiniRichiedenti.size();j++){

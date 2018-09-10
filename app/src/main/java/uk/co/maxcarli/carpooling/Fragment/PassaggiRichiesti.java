@@ -48,7 +48,7 @@ public class PassaggiRichiesti extends Fragment {
     private final String AUTISTA= menuActivity.getString(R.string.automobilista);
     private final String AUTO=menuActivity.getString(R.string.Auto);*/
 
-    private String[] PassaggiRichiestiHeaders={"Trip","Date&Hour","Status","Driver"};
+    private String[] PassaggiRichiestiHeaders;
     String[][] passaggi;
 
     View view;
@@ -83,7 +83,11 @@ public class PassaggiRichiesti extends Fragment {
         tb.setColumnWeight(2,7);
         tb.setColumnWeight(3,10);
         tb.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
-
+        PassaggiRichiestiHeaders=new String[4];
+        PassaggiRichiestiHeaders[0]=getString(R.string.viaggio);
+        PassaggiRichiestiHeaders[1]=getString(R.string.data_e_ora);
+        PassaggiRichiestiHeaders[2]=getString(R.string.Stato);
+        PassaggiRichiestiHeaders[3]=getString(R.string.automobilista);
         SimpleTableHeaderAdapter headerAdapter=new SimpleTableHeaderAdapter(getActivity(),PassaggiRichiestiHeaders);
 
         headerAdapter.setTextSize(15);

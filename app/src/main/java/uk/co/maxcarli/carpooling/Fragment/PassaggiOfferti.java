@@ -32,7 +32,7 @@ public class PassaggiOfferti extends Fragment {
     private Cittadino cittadino;
     private menu menuActivity;
 
-    private String[] PassaggiOffertiHeaders={"Trip","Date&Hour","Status","Occupied"};
+    private String[] PassaggiOffertiHeaders;//{"Trip","Date&Hour","Status","Occupied"};
     String[][] passaggi;
 
     View view;
@@ -72,6 +72,12 @@ public class PassaggiOfferti extends Fragment {
         tb.setColumnWeight(3,10);
 
         tb.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
+
+        PassaggiOffertiHeaders=new String[4];
+        PassaggiOffertiHeaders[0]=getString(R.string.viaggio);
+        PassaggiOffertiHeaders[1]=getString(R.string.data_e_ora);
+        PassaggiOffertiHeaders[2]=getString(R.string.Stato);
+        PassaggiOffertiHeaders[3]=getString(R.string.occupati);
 
         SimpleTableHeaderAdapter headerAdapter=new SimpleTableHeaderAdapter(getActivity(),PassaggiOffertiHeaders);
 

@@ -160,4 +160,6 @@
     <string name="AccessoRifiutatoTitolo">Accesso rifiutato</string>
     <string name="AccessorifiutatoTesto">Sei stato rifiutato dall\'azienda.</string>
     <string name="CampoObbligatorio">Campo obbligatorio</string>
+
+    <string name="occupati">Occupati</string>
 </resources>
