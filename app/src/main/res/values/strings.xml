@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">CarPooling</string>
+    <string name="trackingNonCompletato">Tracking not completed!</string>
+    <string name="trackingNonCompletatoText">Tracking not yet completed. The bidder must have completed the tracking.</string>
     <string name="trackingRichiedenteText">You can close this screen when you have arrived at your destination. After which the points will be validated.</string>
     <string name="trackingInCorso">Tracking in progress</string>
     <string name="startTracking">Start tracking</string>

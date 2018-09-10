@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import uk.co.maxcarli.carpooling.Control.ControlBluetooth;
+import uk.co.maxcarli.carpooling.model.Passaggio;
 
 import static uk.co.maxcarli.carpooling.Control.ControlBluetooth.*;
 
@@ -33,13 +34,15 @@ import static uk.co.maxcarli.carpooling.Control.ControlBluetooth.*;
  */
 public class TrackingRichiedente extends Activity {
 
-
+    private Passaggio passaggio;
     private BluetoothAdapter mBluetoothAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking_richiedente);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        final Intent srcIntent = getIntent();
+        passaggio = (Passaggio) srcIntent.getParcelableExtra(Passaggio.Keys.IDPASSAGGIO);
         if (accendiBluetooth(mBluetoothAdapter)) {
 
             if (mBluetoothAdapter.isDiscovering()) {
@@ -83,6 +86,8 @@ public class TrackingRichiedente extends Activity {
 
     public void finitoRichiedente(View view){
 
+        int id = passaggio.getIdPassaggiOfferti();
+        Database.getTrackingConvalidato(id,this);
     }
 
 

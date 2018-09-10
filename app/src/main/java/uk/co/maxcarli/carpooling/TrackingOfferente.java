@@ -207,6 +207,14 @@ public class TrackingOfferente extends AppCompatActivity {
         }
         int idPassaggio = passaggio.getIdPassaggiOfferti();
         Database.trackingEffettuato(1,idPassaggio,this);
+        for(int i = 0; i < cittadiniTrovati.size(); i++){
+            int idCittadino = cittadiniTrovati.get(i).getIdCittadino();
+            int punteggio = cittadiniTrovati.get(i).getPunteggio();
+            Database.scriviPunteggio(idCittadino,punteggio,this);
+            Database.modificaStatus("completato",cittadiniTrovati.get(i).getNumeroTelefono(), this,passaggio);
+        }
+        Database.scriviPunteggio(cittadino.getIdCittadino(),cittadino.getPunteggio(),this);
+
         Controlli.mostraMessaggioConChiusura("Successo","avvenuto con successo", this);
     }
 

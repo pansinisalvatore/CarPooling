@@ -30,8 +30,109 @@ public class Database {
     static String urlLogin = "http://carpoolingsms.altervista.org/PHP/Login.php";
     static String urlRegister = "http://carpoolingsms.altervista.org/PHP/registrazione.php";
     private final static String urlTracking ="http://carpoolingsms.altervista.org/PHP/trackingEffettuato.php";
+    private final static String urlTrackingRichiedente ="http://carpoolingsms.altervista.org/PHP/getTrackingEffettuato.php";
+    private final static String urlPunteggio ="http://carpoolingsms.altervista.org/PHP/scriviPunteggio.php";
+
     static AlertDialog.Builder builder;
 
+    /**
+     * Scrive il punteggio del cittadino passato come parametro sul database
+     * @param idCittadino
+     * @param punteggio
+     * @param context
+     */
+
+    public static void scriviPunteggio(final int idCittadino, final int punteggio, final Context context) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, urlTrackingRichiedente,
+
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+
+                       Log.d("responsePunteggio", response);
+
+                    }
+                }
+
+                , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(context, "Connection failed", Toast.LENGTH_SHORT).show();
+                error.printStackTrace();
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("IdCittadino", Integer.toString(idCittadino));
+                params.put("punteggio", Integer.toString(punteggio));
+                return params;
+            }
+        };
+
+
+        MySingleton.getmInstance(context).addTorequestque(stringRequest);
+
+
+    }
+
+    /**
+     * Questo metodo notifica al richiedente che il tracking è avvenuto con successo
+     * @param idPassaggio
+     * @param context
+     */
+    public static void getTrackingConvalidato(final int idPassaggio, final Context context) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, urlTrackingRichiedente,
+
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+
+                        if (response.equals("success")) {
+                            Controlli.mostraMessaggioConChiusura("Success", "avvenuto con successo", context);
+
+                        } else if (response.equals("insuccess")) {
+                            Controlli.mostraMessaggioErrore(context.getString(R.string.trackingNonCompletato), context.getString(R.string.trackingNonCompletatoText), context);
+                        } else if(response.equals("Something went wrong")){
+                          Controlli.mostraMessaggioErrore("somethig wrong","somethig wrong",context);
+                        }
+
+                    }
+                }
+
+                , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(context, "Connection failed", Toast.LENGTH_SHORT).show();
+                error.printStackTrace();
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("IdPassaggio", Integer.toString(idPassaggio));
+                return params;
+            }
+        };
+
+
+        MySingleton.getmInstance(context).addTorequestque(stringRequest);
+
+
+    }
+
+
+    //
     public static void trackingEffettuato(final int trackingEffettuato,final int idPassaggio, Context context){
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, urlTracking,
