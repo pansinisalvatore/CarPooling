@@ -92,7 +92,7 @@ public class completaRegistrazione extends AppCompatActivity {
             if(verEmail == false ) {
                 Log.d("verEmail","true");
 
-                if (confrontaPassword(passwordEdit, confermaPasswordEdit)) {
+                if (!confrontaPassword(passwordEdit, confermaPasswordEdit)) {
                     String text = getString(R.string.passwordErrataText);
                     String title = getString(R.string.passwordErrata);
                     mostraMessaggioErrore(title, text, completaRegistrazione.this);
