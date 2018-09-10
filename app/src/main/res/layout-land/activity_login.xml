@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:layout_gravity="top|center"
-            android:text="@string/Conferma"
+            android:text="@string/Accedi"
             android:onClick="Login"
             android:textColor="@color/etichettabottoni"
             android:background="@drawable/button_shape_normal"

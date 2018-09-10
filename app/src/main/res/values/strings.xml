@@ -33,8 +33,8 @@
     <string name="ImieiPassaggi">My ride</string>
     <string name="ClassificaAzienadale">Company Ranking</string>
     <string name="ClassificaNazionale">National Ranking</string>
-    <string name="BottoneOfferti">OFFERED</string>
-    <string name="BottoneRichiesti">REQUIRED</string>
+    <string name="BottoneOfferti">Offered</string>
+    <string name="BottoneRichiesti">Required</string>
     <string name="IlMioProfilo">My profile</string>
     <string name="DettagliUtente">Details User Profile</string>
     <string name="Nome">Name</string>
@@ -88,8 +88,8 @@ Enter your information to proceed with registration.</string>
     </string-array>
     <string name="dettagliutente">Detail user profile</string>
     <string name="title_activity_modifica_residenza">Change residence</string>
-    <string name="codicefiscale">FISCAL CODE</string>
-    <string name="residenza">RESIDENCE</string>
+    <string name="codicefiscale">Fiscal Code</string>
+    <string name="residenza">Residence</string>
     <string name="viaggio">Trip</string>
     <string name="data_e_ora">Date &amp; hour</string>
     <string name="automobilista">Driver</string>
@@ -184,5 +184,6 @@ Enter your information to proceed with registration.</string>
     <string name="Dipendente">Worker</string>
     <string name="punteggio">Score</string>
     <string name="azienda">Company</string>
+    <string name="Accedi">Access</string>
 
 </resources>
