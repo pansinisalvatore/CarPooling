@@ -255,7 +255,7 @@ public class TrackingFragment extends Fragment {
                     Database.getTrackingConvalidato(p.getIdPassaggiOfferti(), getContext(), 1,null);
                     if (Database.getCompletato() != 1) {
 
-
+//
                         trovato = 1;
                         passaggio = p;
                         Log.d("CittadinoOfferente", p.getCittadinoOfferente().getCognome().toString());
