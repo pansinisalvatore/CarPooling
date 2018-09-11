@@ -256,6 +256,7 @@ public class TrackingFragment extends Fragment {
                     if (Database.getCompletato() != 1) {
 
 //
+
                         trovato = 1;
                         passaggio = p;
                         Log.d("CittadinoOfferente", p.getCittadinoOfferente().getCognome().toString());
