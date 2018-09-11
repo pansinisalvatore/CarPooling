@@ -170,6 +170,6 @@
     <string name="completato">Completato</string>
     <string name="finito">Finito</string>
     <string name="assente">Assente</string>
-
+    <string name="avvia">Avvia</string>
     <string name="Accedi">Accedi</string>
 </resources>

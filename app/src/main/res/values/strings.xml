@@ -186,5 +186,6 @@ Enter your information to proceed with registration.</string>
     <string name="azienda">Company</string>
     <string name="Accedi">Access</string>
     <string name="assente">Not present</string>
+    <string name="avvia">Starts</string>
 
 </resources>

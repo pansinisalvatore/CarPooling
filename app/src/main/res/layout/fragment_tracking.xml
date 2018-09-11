@@ -60,9 +60,13 @@
         android:layout_weight="1">
         <Button
             android:id="@+id/buttonTracking"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"/>
+            android:layout_weight="0.5"
+            android:text="@string/avvia"
+            android:background="@drawable/button_shape_normal"
+            android:backgroundTint="@color/tint_botton"
+            android:textColor="@color/etichettabottoni"/>
     </de.codecrafters.tableview.TableView>
 
    <RelativeLayout
