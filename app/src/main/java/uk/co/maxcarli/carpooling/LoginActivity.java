@@ -54,12 +54,13 @@ public class LoginActivity extends AppCompatActivity {
             Sede cSede=new Sede();
             cSede.setAzienda(cAzienda);
             cittadino.setSede(cSede);
-            accedi(email,password,cittadino,this);
             ImageView loading=findViewById(R.id.loading);
             loading.setVisibility(View.VISIBLE);
             Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),
                     R.anim.rotate);
             loading.startAnimation(animation);
+            accedi(email,password,cittadino,this);
+
 
         }
 

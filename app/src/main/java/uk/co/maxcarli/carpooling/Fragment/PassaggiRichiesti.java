@@ -142,6 +142,12 @@ public class PassaggiRichiesti extends Fragment {
                 cittadino.passaggiRichiesti.remove(rowIndex);
                 populateData(cittadino.passaggiRichiesti);
                 SimpleTableDataAdapter dataAdapter=new SimpleTableDataAdapter(getActivity(),passaggi);
+                tb.setColumnCount(4);
+
+                tb.setColumnWeight(0,7);
+                tb.setColumnWeight(1,10);
+                tb.setColumnWeight(2,7);
+                tb.setColumnWeight(3,10);
                 tb.setDataAdapter(dataAdapter);
                 menuActivity.setCittadino(cittadino);
 

@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -27,31 +29,55 @@ import uk.co.maxcarli.carpooling.model.Passaggio;
 
 public class Database {
 
+    private static int completato;
     static String urlLogin = "http://carpoolingsms.altervista.org/PHP/Login.php";
     static String urlRegister = "http://carpoolingsms.altervista.org/PHP/registrazione.php";
     private final static String urlTracking ="http://carpoolingsms.altervista.org/PHP/trackingEffettuato.php";
     private final static String urlTrackingRichiedente ="http://carpoolingsms.altervista.org/PHP/getTrackingEffettuato.php";
     private final static String urlPunteggio ="http://carpoolingsms.altervista.org/PHP/scriviPunteggio.php";
+    static final String urlGetSede = "http://carpoolingsms.altervista.org/PHP/GetIdSede.php";
 
     static AlertDialog.Builder builder;
 
-    /**
-     * Scrive il punteggio del cittadino passato come parametro sul database
-     * @param idCittadino
-     * @param punteggio
-     * @param context
-     */
+    public static int getCompletato(){
+        return completato;
+    }
 
-    public static void scriviPunteggio(final int idCittadino, final int punteggio, final Context context) {
+    public static void setCompletato(int c){
+        completato=c;
+    }
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, urlTrackingRichiedente,
+
+
+    public static void scriviPunteggio(final Cittadino cittadino, final Context context, final int flag) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, urlPunteggio,
 
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-
+                        response = response.trim();
                        Log.d("responsePunteggio", response);
+                       if (response.equals("successo")) {
+                           if (flag == 1) {
+                               AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                               builder.setTitle("successo");
+                               builder.setMessage("avvenuto con successo");
+                               builder.setCancelable(false);
+                               builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                   @Override
+                                   public void onClick(DialogInterface dialog, int which) {
+                                       Intent i = new Intent(context, menu.class);
+                                       i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                       i.putExtra(Cittadino.Keys.IDCITTADINO, cittadino);
+                                       ((Activity) context).startActivity(i);
+                                   }
+                               });
+                               AlertDialog alertDialog = builder.create();
+                               alertDialog.show();
+                           }
+                       }
 
                     }
                 }
@@ -69,8 +95,8 @@ public class Database {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("IdCittadino", Integer.toString(idCittadino));
-                params.put("punteggio", Integer.toString(punteggio));
+                params.put("IdCittadino", Integer.toString(cittadino.getIdCittadino()));
+                params.put("punteggio", Integer.toString(cittadino.getPunteggio()));
                 return params;
             }
         };
@@ -86,7 +112,7 @@ public class Database {
      * @param idPassaggio
      * @param context
      */
-    public static void getTrackingConvalidato(final int idPassaggio, final Context context) {
+    public static void getTrackingConvalidato(final int idPassaggio, final Context context, final int flag, final Cittadino cittadino) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, urlTrackingRichiedente,
 
@@ -94,16 +120,38 @@ public class Database {
                     @Override
                     public void onResponse(String response) {
 
-
+                        response = response.trim();
+                        Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+                        if (flag == 0) {
                         if (response.equals("success")) {
-                            Controlli.mostraMessaggioConChiusura("Success", "avvenuto con successo", context);
 
-                        } else if (response.equals("insuccess")) {
-                            Controlli.mostraMessaggioErrore(context.getString(R.string.trackingNonCompletato), context.getString(R.string.trackingNonCompletatoText), context);
-                        } else if(response.equals("Something went wrong")){
-                          Controlli.mostraMessaggioErrore("somethig wrong","somethig wrong",context);
-                        }
+                                completato=1;
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setTitle("successo");
+                            builder.setMessage("avvenuto con successo");
+                            builder.setCancelable(false);
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent i = new Intent(context, menu.class);
+                                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    i.putExtra(Cittadino.Keys.IDCITTADINO, cittadino);
+                                    ((Activity) context).startActivity(i);
+                                }
+                            });
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
+                                //Controlli.mostraMessaggioConChiusura("Success", "avvenuto con successo", context);
 
+
+                            } else if (response.equals("insuccess")) {
+                                completato=0;
+                                Controlli.mostraMessaggioErrore(context.getString(R.string.trackingNonCompletato), context.getString(R.string.trackingNonCompletatoText), context);
+                            } else if (response.equals("Something went wrong")) {
+                                Controlli.mostraMessaggioErrore("somethig wrong", "somethig wrong", context);
+                            }
+
+                        } else if (response.equals("success")) completato = 1;
                     }
                 }
 
@@ -238,23 +286,33 @@ public class Database {
 
 
     public static void accedi(final String email, final String password, final Cittadino cittadino, final Context context) {
-
+        Toast.makeText(context,email,Toast.LENGTH_LONG).show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, urlLogin,
 
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-
+                    Log.d("response",response);
                         if (response.equals("success")) {
-                            getCittadinoFromDatabase(email, password, cittadino,context);
+                            getSede(email,password,cittadino, context);
+                            //getCittadinoFromDatabase(email, password, cittadino,context);
 
 
                         } else if (response.equals("not autorized")) {
+                            ImageView anim=((Activity) context).findViewById(R.id.loading);
+                            anim.clearAnimation();
+                            anim.setVisibility(View.GONE);
                             Controlli.mostraMessaggioErrore(context.getString(R.string.AccessoNonAutorizzatoTitolo), context.getString(R.string.AccessoNonAutorizzatoTesto), context);
                         } else if(response.equals("Something went wrong")){
+                            ImageView anim=((Activity) context).findViewById(R.id.loading);
+                            anim.setVisibility(View.GONE);
+                            anim.clearAnimation();
                             Controlli.mostraMessaggioErrore(context.getString(R.string.loginErratoTitolo),context.getString(R.string.loginErratoTesto),context);
                         }else{
+                            ImageView anim=((Activity) context).findViewById(R.id.loading);
+                            anim.clearAnimation();
+                            anim.setVisibility(View.GONE);
                             Controlli.mostraMessaggioErrore(context.getString(R.string.AccessoRifiutatoTitolo),context.getString(R.string.AccessorifiutatoTesto),context);
                         }
 
@@ -287,23 +345,23 @@ public class Database {
     }
 
 
-    private static void getCittadinoFromDatabase(final String email, final String password, final Cittadino cittadino, final Context context) {
+    private static void getCittadinoFromDatabase(final String email, final String password, final Cittadino cittadino, final int sede,final Context context) {
         String url = "http://carpoolingsms.altervista.org/PHP/getCittadino.php";
 
-
+        Toast.makeText(context,email,Toast.LENGTH_LONG).show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Toast.makeText(context, sede+"",Toast.LENGTH_SHORT).show();
 
-                        Log.i("Dati",response);
                         try {
 
                             JSONArray jsonarray = new JSONArray(response);
 
-                            int idSede=0;
+
                             for (int i = 0; i < jsonarray.length(); i++) {
 
                                 JSONObject jsonobject = jsonarray.getJSONObject(i);
@@ -316,6 +374,7 @@ public class Database {
                                 cittadino.setTipoCittadino(jsonobject.getString("TipoCittadino"));
                                 cittadino.setEmail(jsonobject.getString("EmailCittadino"));
                                 cittadino.setPassword(jsonobject.getString("PasswordCittadino"));
+                                cittadino.setPunteggioByDatabase(jsonobject.getInt("Punteggio"));
                                 cittadino.setNotificaPassaggio(jsonobject.getInt("NotificaPassaggioCittadino"));
                                 cittadino.setNotificaAutorizzazione(jsonobject.getInt("NotificaAutorizzazioneCittadino"));
                                 cittadino.getSede().getAzienda().setNome(jsonobject.getString("NomeAzienda"));
@@ -330,7 +389,7 @@ public class Database {
 
                             }
 
-                            getPassaggiRichiestiFromCittadino(cittadino,context);
+                            getPassaggiRichiestiFromCittadino(cittadino,context,Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 
 
@@ -356,6 +415,7 @@ public class Database {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("email", email);
                 params.put("password", password);
+                params.put("IdSede",sede+"");
                 return params;
             }
         };
@@ -368,7 +428,7 @@ public class Database {
 
 
 
-    public static void getPassaggiRichiestiFromCittadino(final Cittadino cittadino, final Context context){
+    public static void getPassaggiRichiestiFromCittadino(final Cittadino cittadino, final Context context, final int flag){
         String url= "http://carpoolingsms.altervista.org/PHP/LeggiPassaggiRichiesti.php";
 
 
@@ -425,7 +485,7 @@ public class Database {
 
                             }
                         }
-                        getPassaggiOffertiFromCittadino(cittadino,context);
+                        getPassaggiOffertiFromCittadino(cittadino,context,flag);
 
                     }
                 },
@@ -452,7 +512,7 @@ public class Database {
     }
 
 
-    public static void getPassaggiOffertiFromCittadino(final Cittadino cittadino, final Context context){
+    public static void getPassaggiOffertiFromCittadino(final Cittadino cittadino, final Context context,final int flag){
         String url= "http://carpoolingsms.altervista.org/PHP/LeggiPassaggiOffertiFromCittadino.php";
 
 
@@ -462,8 +522,7 @@ public class Database {
                     @Override
                     public void onResponse(String response) {
 
-
-
+                        Log.d("responseGetPassOff",response);
                         if(!response.equals("Something went wrong")){
                             try {
 
@@ -524,9 +583,13 @@ public class Database {
                             }
 
                         }
-                        Intent intent= new Intent(context, menu.class);
-                        intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
-                        context.startActivity(intent);
+
+                            Intent intent= new Intent(context, menu.class);
+                            intent.setFlags(flag);
+                            intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
+                            context.startActivity(intent);
+
+
 
 
                     }
@@ -844,6 +907,50 @@ public class Database {
 
         MySingleton.getmInstance(c).addTorequestque(stringRequest);
     }
+
+    public static void getSede(final String email, final String password,final Cittadino cittadino,final Context context) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, urlGetSede,
+
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        int sede=Integer.parseInt(response);
+                        getCittadinoFromDatabase(email, password, cittadino, sede,context);
+
+
+                    }
+
+
+
+                }
+
+                , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(context, "Connection failed", Toast.LENGTH_SHORT).show();
+                error.printStackTrace();
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", email);
+                params.put("password", password);
+                return params;
+            }
+        };
+
+
+        MySingleton.getmInstance(context).addTorequestque(stringRequest);
+
+
+    }
+
 
 }
 

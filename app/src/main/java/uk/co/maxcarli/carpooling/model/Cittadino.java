@@ -23,6 +23,10 @@ public class Cittadino implements Parcelable{
             punteggio = punteggio + (10 + (numeroPasseggeri * 5));
     }
 
+    public void setPunteggioByDatabase(int punteggio){
+        this.punteggio = punteggio;
+    }
+
     public void setPunteggio(){
         punteggio = punteggio + 5;
     }

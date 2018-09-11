@@ -147,7 +147,7 @@ public class TrackingFragment extends Fragment {
                            Intent intent = new Intent(getActivity(), TrackingRichiedente.class);
                            intent.putExtra(Cittadino.Keys.IDCITTADINO, cittadino);
                            intent.putExtra(Passaggio.Keys.IDPASSAGGIO, passaggio);
-                           startActivityForResult(intent, 1);
+                           startActivity(intent);
                        }
 
                     }
@@ -196,6 +196,8 @@ public class TrackingFragment extends Fragment {
                     trovato = 1;
                     sTrovato = Integer.toString(trovato);
                     Log.d("trovato",sTrovato);
+                    Database.getTrackingConvalidato(p.getIdPassaggiOfferti(), getContext(),1,null);
+                    if(Database.getCompletato() != 1)
                     return p;
                 }
 
@@ -250,19 +252,27 @@ public class TrackingFragment extends Fragment {
                 stringaOrarioC = Integer.toString(getOraCorrente());
                 Log.d("OraCorrente", stringaOrarioC);
                 if (getOraCorrente() >= orarioConvertito - 10 && orarioConvertito + 30 >= getOraCorrente()) {
-                    trovato = 1;
-                    passaggio = p;
-                    Log.d("CittadinoOfferente", p.getCittadinoOfferente().getCognome().toString());
-                    TextInputEditText textCognome = (TextInputEditText) root.findViewById(R.id.cognomeOfferente);
-                    TextInputEditText textNome = (TextInputEditText) root.findViewById(R.id.nomeOfferente);
-                    TextInputEditText textCellulare = (TextInputEditText) root.findViewById(R.id.telefonoOfferente);
-                    TextInputEditText textAuto = (TextInputEditText) root.findViewById(R.id.autoOfferente);
-                    textCognome.setText(p.getCittadinoOfferente().getCognome().toString());
-                    textNome.setText(p.getCittadinoOfferente().getNome().toString());
-                    textCellulare.setText(p.getCittadinoOfferente().getNumeroTelefono().toString());
-                    textAuto.setText(p.getAuto().toString());
-                }
+                    Database.getTrackingConvalidato(p.getIdPassaggiOfferti(), getContext(), 1,null);
+                    if (Database.getCompletato() != 1) {
 
+
+                        trovato = 1;
+                        passaggio = p;
+                        Log.d("CittadinoOfferente", p.getCittadinoOfferente().getCognome().toString());
+                        TextInputEditText textCognome = (TextInputEditText) root.findViewById(R.id.cognomeOfferente);
+                        textCognome.setKeyListener(null);
+                        TextInputEditText textNome = (TextInputEditText) root.findViewById(R.id.nomeOfferente);
+                        textNome.setKeyListener(null);
+                        TextInputEditText textCellulare = (TextInputEditText) root.findViewById(R.id.telefonoOfferente);
+                        textCellulare.setKeyListener(null);
+                        TextInputEditText textAuto = (TextInputEditText) root.findViewById(R.id.autoOfferente);
+                        textAuto.setKeyListener(null);
+                        textCognome.setText(p.getCittadinoOfferente().getCognome().toString());
+                        textNome.setText(p.getCittadinoOfferente().getNome().toString());
+                        textCellulare.setText(p.getCittadinoOfferente().getNumeroTelefono().toString());
+                        textAuto.setText(p.getAuto().toString());
+                    }
+                }
 
             }
         }

@@ -169,4 +169,6 @@
     <string name="azienda">Azienda</string>
     <string name="completato">Completato</string>
     <string name="finito">Finito</string>
+    <string name="assente">Assente</string>
+
 </resources>

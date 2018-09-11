@@ -150,18 +150,24 @@ public class PassaggiOfferti extends Fragment {
 
 
     public void onActivityResult(int requestCode, int resultCode, Intent databack){
-        Passaggio passaggioSelezionato=null;
+        if(databack!=null){
+
+            cittadino=(Cittadino)databack.getParcelableExtra(Cittadino.Keys.IDCITTADINO);
+            menuActivity.setCittadino(cittadino);
+        }
+
+        /*Passaggio passaggioSelezionato=null;
         if(databack!=null){
             passaggioSelezionato=(Passaggio)databack.getParcelableExtra(Passaggio.Keys.IDPASSAGGIO);
         }
 
 
         if(passaggioSelezionato!=null){
-            cittadino.passaggiOfferti.remove(requestCode);
-            cittadino.passaggiOfferti.add(requestCode,passaggioSelezionato);
+            cittadino.passaggiOfferti.set(requestCode, passaggioSelezionato);
+
 
             menuActivity.setCittadino(cittadino);
-        }
+        }*/
     }
 
     public void onSaveInstanceState(Bundle bundle){

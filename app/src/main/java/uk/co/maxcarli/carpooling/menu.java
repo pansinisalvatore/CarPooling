@@ -181,7 +181,7 @@ public class menu extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu){
 
         getMenuInflater().inflate(R.menu.menu_action_bar,menu);
-        if(cittadino.getTipoCittadino().equals("normale")){
+        if(cittadino.getTipoCittadino().equals("Cittadino")){
             menu.getItem(0).setVisible(false);
         }else{
             final MenuItem item=menu.findItem(R.id.userRequest);
@@ -247,7 +247,9 @@ public class menu extends AppCompatActivity {
         builder.setPositiveButton(getString(R.string.si), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-               finish();
+               Intent i=new Intent(menu.this, LoginActivity.class);
+               i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+               startActivity(i);
 
 
             }

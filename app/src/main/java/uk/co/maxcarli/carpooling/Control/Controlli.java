@@ -110,15 +110,13 @@ public class Controlli {
 
     public static boolean confrontaPassword(TextInputEditText password,TextInputEditText confermaPassword ){
         String sPassword = password.getText().toString();
-        String sConfermaPassword = password.getText().toString();
-        sPassword = sPassword.trim();
-        sConfermaPassword = sConfermaPassword.trim();
-        if (sPassword.equals(sConfermaPassword)) {
+        String sConfermaPassword = confermaPassword.getText().toString();
+
+
             Log.d("sPasswordEguals","false");
-            return false;
+            return sPassword.equals(sConfermaPassword);
         }
-        else return true;
-    }
+
 
     public static boolean mailSyntaxCheck(String email)
     {
@@ -185,6 +183,10 @@ public class Controlli {
                 return c.getString(R.string.Accetato);
             case "rifiutato":
                 return c.getString(R.string.Rifiutato);
+            case "completato":
+                return c.getString(R.string.completato);
+            case "assente":
+                return c.getString(R.string.assente);
             default:
                 return c.getString(R.string.Sospeso);
         }

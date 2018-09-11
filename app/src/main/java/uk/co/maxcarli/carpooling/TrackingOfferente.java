@@ -1,9 +1,12 @@
 package uk.co.maxcarli.carpooling;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
@@ -35,7 +38,6 @@ public class TrackingOfferente extends AppCompatActivity {
     private Cittadino cittadino;
     private Passaggio passaggio;
     private ArrayList <String> macAddressTrovati;
-    private int finito;
     private ArrayList <Cittadino> cittadiniTrovati;
 
 
@@ -51,8 +53,6 @@ public class TrackingOfferente extends AppCompatActivity {
         passaggio = (Passaggio) srcIntent.getParcelableExtra(Passaggio.Keys.IDPASSAGGIO);
 
         mBluetoothAdapter	= BluetoothAdapter.getDefaultAdapter();
-        finito = 0;
-        int aux = 0;
         avviaRicerca();
         Log.d("stoNel", "onCreate");
 
@@ -103,7 +103,7 @@ public class TrackingOfferente extends AppCompatActivity {
             } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 macAddressTrovati.add(device.getAddress());
-                showToast("Found device " + device.getName());
+                //showToast("Found device " + device.getName());
                 showLog("ACTION_FOUND", action);
                 showLog("dispositivo",device.getAddress());
                 showLog("stoNel", "actionFound");
@@ -165,6 +165,7 @@ public class TrackingOfferente extends AppCompatActivity {
         for (int i = 0; i < passaggio.cittadiniRichiedenti.size(); i++) {
             showLog("Status", passaggio.cittadinoStatus.get(i));
             if (passaggio.cittadinoStatus.get(i).equals("accettato")) {
+                Log.d("accettato","accettato");
                 c = passaggio.cittadiniRichiedenti.get(i);
                 for (int j = 0; j < macAddressTrovati.size(); j++) {
                     if (c.getMacAddress().equalsIgnoreCase(macAddressTrovati.get(j))) {
@@ -176,9 +177,10 @@ public class TrackingOfferente extends AppCompatActivity {
 
             }
         }
-        for (int i = 0; i < macAddressTrovati.size(); i++) showLog("macAddressTrov", macAddressTrovati.get(i));//showLog("macAddressTrov",macAddressTrovati.get(i));
-        for (int i = 0; i < cittadiniTrovati.size(); i++) showLog("Trovati", cittadiniTrovati.get(i).getMacAddress() + " " + cittadiniTrovati.size());
+       // for (int i = 0; i < macAddressTrovati.size(); i++) showLog("macAddressTrov", macAddressTrovati.get(i));//showLog("macAddressTrov",macAddressTrovati.get(i));
+        //for (int i = 0; i < cittadiniTrovati.size(); i++) showLog("Trovati", cittadiniTrovati.get(i).getMacAddress() + " " + cittadiniTrovati.size());
 
+      visualizzaMacAddressTrovati();
         avviaRicerca();
 
     }
@@ -193,29 +195,31 @@ public class TrackingOfferente extends AppCompatActivity {
 
     public void visualizzaMacAddressTrovati(){
 
-        for (int i = 0; i < macAddressTrovati.size(); i++) showLog("macAddressTrov", macAddressTrovati.get(i));//showLog("macAddressTrov",macAddressTrovati.get(i));
-        for (int i = 0; i < cittadiniTrovati.size(); i++) showLog("Trovati", cittadiniTrovati.get(i).getMacAddress());
+
+        for (int i = 0; i < cittadiniTrovati.size(); i++) showToast(cittadiniTrovati.get(i).getNome());
     }
 
     public void finito(View view){
 
+        if (mBluetoothAdapter.isDiscovering()) mBluetoothAdapter.cancelDiscovery();
+        mReceiver.abortBroadcast();
+
         cittadino.setPunteggio(cittadiniTrovati.size());
         for (int i = 0; i < cittadiniTrovati.size(); i++)
             cittadiniTrovati.get(i).setPunteggio();
-        if (mBluetoothAdapter.isDiscovering()) {
-            mBluetoothAdapter.cancelDiscovery();
-        }
+
         int idPassaggio = passaggio.getIdPassaggiOfferti();
         Database.trackingEffettuato(1,idPassaggio,this);
         for(int i = 0; i < cittadiniTrovati.size(); i++){
-            int idCittadino = cittadiniTrovati.get(i).getIdCittadino();
-            int punteggio = cittadiniTrovati.get(i).getPunteggio();
-            Database.scriviPunteggio(idCittadino,punteggio,this);
+            Database.scriviPunteggio(cittadiniTrovati.get(i),this,0);
+
             Database.modificaStatus("completato",cittadiniTrovati.get(i).getNumeroTelefono(), this,passaggio);
         }
-        Database.scriviPunteggio(cittadino.getIdCittadino(),cittadino.getPunteggio(),this);
 
-        Controlli.mostraMessaggioConChiusura("Successo","avvenuto con successo", this);
+        Database.scriviPunteggio(cittadino,this,1);
+        Database.setCompletato(1);
+
+
     }
 
     public void avviaRicerca(){

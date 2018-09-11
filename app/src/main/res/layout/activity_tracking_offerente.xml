@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/finito"
-
+            android:onClick="finito"
             android:layout_below="@id/trackingRichiedenteText"
             android:id="@+id/buttonTrackingRichiedente"
             android:textColor="@color/etichettabottoni"

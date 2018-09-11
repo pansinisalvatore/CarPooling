@@ -149,8 +149,8 @@ public class MappaOffertePassaggiActivity extends AppCompatActivity implements O
                         String cell=marker.getTitle();
                         for(int i=0;i<passaggio.cittadiniRichiedenti.size();i++){
                             if(cell.equals(passaggio.cittadiniRichiedenti.get(i).getNumeroTelefono())){
-                                passaggio.setPostiOccupati(passaggio.getPostiOccupati()+1);
-                                passaggio.setRichieste(passaggio.getRichieste()-1);
+                                //passaggio.setPostiOccupati(passaggio.getPostiOccupati()+1);
+                                //passaggio.setRichieste(passaggio.getRichieste()-1);
 
                                 passaggio.cittadinoStatus.set(i,"accettato");
                                 if(passaggio.getPostiDisponibili()==passaggio.getPostiOccupati()){
@@ -161,8 +161,8 @@ public class MappaOffertePassaggiActivity extends AppCompatActivity implements O
                                         if(passaggio.cittadinoStatus.get(j).equals("sospeso")){
                                             String cellRichiedenteSospeso=passaggio.cittadiniRichiedenti.get(j).getNumeroTelefono();
                                             Database.modificaStatus("rifiutato",cellRichiedenteSospeso,MappaOffertePassaggiActivity.this,passaggio );
-                                            passaggio.cittadinoStatus.remove(j);
-                                            passaggio.cittadiniRichiedenti.remove(j);
+                                            //passaggio.cittadinoStatus.remove(j);
+                                            //passaggio.cittadiniRichiedenti.remove(j);
                                         }
                                     }
 
@@ -197,8 +197,8 @@ public class MappaOffertePassaggiActivity extends AppCompatActivity implements O
                     String cell=marker.getTitle();
                     for(int i=0;i<passaggio.cittadiniRichiedenti.size();i++){
                         if(cell.equals(passaggio.cittadiniRichiedenti.get(i).getNumeroTelefono())){
-                            passaggio.cittadinoStatus.remove(i);
-                            passaggio.cittadiniRichiedenti.remove(i);
+                            //passaggio.cittadinoStatus.remove(i);
+                            //passaggio.cittadiniRichiedenti.remove(i);
 
                             marker.remove();
 
@@ -244,7 +244,7 @@ public class MappaOffertePassaggiActivity extends AppCompatActivity implements O
         public View getInfoWindow(Marker marker) {
 
 
-            if(marker.getTitle().equals(getString(R.string.la_tua_casa))){
+            if(marker.getTitle().equals(getString(R.string.la_tua_casa)) || marker.getTitle().equals(getString(R.string.lavoro))){
                 return null;
             }
             ArrayList<Cittadino> richiedenti=passaggio.cittadiniRichiedenti;
@@ -297,10 +297,13 @@ public class MappaOffertePassaggiActivity extends AppCompatActivity implements O
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        final Intent returnIntent = new Intent();
-        returnIntent.putExtra(Passaggio.Keys.IDPASSAGGIO,passaggio);
-        setResult(cittadino.passaggiOfferti.indexOf(passaggio),returnIntent);
+        //super.onBackPressed();
+         cittadino.passaggiOfferti.clear();
+         cittadino.passaggiRichiesti.clear();
+
+         Database.getPassaggiRichiestiFromCittadino(cittadino,this,Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //returnIntent.putExtra(Passaggio.Keys.IDPASSAGGIO,passaggio);
+        //setResult(cittadino.passaggiOfferti.indexOf(passaggio),returnIntent);
     }
 
 }

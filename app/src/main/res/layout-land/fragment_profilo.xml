@@ -188,7 +188,8 @@
             <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Prendere la pass dal db">
+                android:text="Prendere la pass dal db"
+                android:inputType="textPassword">
             </android.support.design.widget.TextInputEditText>
 
             <Button
