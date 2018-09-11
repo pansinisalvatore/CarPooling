@@ -34,7 +34,8 @@
         android:textAlignment="center"
         android:selectAllOnFocus="false"
         android:linksClickable="false"
-        android:autoLink="all"/>
+        android:autoLink="all"
+        android:theme="@style/MyEditText"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,14 +53,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/NomeCittadinoLayout"
-            android:hint="@string/NomeCittadino">
+            android:hint="@string/NomeCittadino"
+            android:theme="@style/MyEditText">
 
             <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/nomeCittadino"
                 android:inputType="textPersonName"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:theme="@style/MyEditText"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -67,7 +70,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/CognomeCittadino"
             android:id="@+id/CognomeCittadinoLayout"
-
+            android:theme="@style/MyEditText"
             android:layout_below="@+id/NomeCittadinoLayout">
 
             <android.support.design.widget.TextInputEditText
@@ -76,7 +79,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/cognomeCittadino"
                 android:inputType="textPersonName"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:theme="@style/MyEditText"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -84,7 +88,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/CodiceFiscaleLayout"
             android:hint="@string/CodiceFiscaleCittadino"
-
+            android:theme="@style/MyEditText"
             android:layout_below="@+id/CognomeCittadinoLayout">
 
             <android.support.design.widget.TextInputEditText
@@ -92,7 +96,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/codiceFiscale"
                 android:inputType="textPersonName"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:theme="@style/MyEditText"/>
         </android.support.design.widget.TextInputLayout>
 
         <EditText
@@ -103,7 +108,8 @@
             android:focusableInTouchMode="false"
             android:editable="false"
             android:onClick="scegliIndirizzo"
-            android:layout_below="@+id/CodiceFiscaleLayout">
+            android:layout_below="@+id/CodiceFiscaleLayout"
+            android:theme="@style/MyEditText">
 
         </EditText>
 

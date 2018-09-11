@@ -11,40 +11,45 @@
         android:id="@+id/labelId"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Azienda"/>
+        android:text="@string/Azienda"
+        android:theme="@style/MyEditText"/>
 
     <AutoCompleteTextView
         android:id="@+id/autocompleteId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/labelId"/>
+        android:layout_below="@id/labelId"
+        android:theme="@style/MyEditText"/>
 
 
     <TextView
         android:id="@+id/sedeLabelID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sede" />
+        android:text="@string/sede"
+        android:theme="@style/MyEditText"/>
 
     <AutoCompleteTextView
         android:id="@+id/autocompletesedeId"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        />
+        android:theme="@style/MyEditText"/>
 
 
     <TextView
         android:id="@+id/NumeroTelefofonoCittadinoText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/NumeroTelefonico"/>
+        android:hint="@string/NumeroTelefonico"
+        android:theme="@style/MyEditText"/>
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/numeroTelefonicoCittadino"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:theme="@style/MyEditText"/>
 
 
 
