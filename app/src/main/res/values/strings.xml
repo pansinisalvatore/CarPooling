@@ -18,7 +18,7 @@
     <string name="formatoEmailNonValido">Invalid email format</string>
     <string name="NomeCittadino">Name</string>
     <string name="CognomeCittadino">Surname</string>
-    <string name="CodiceFiscaleCittadino">Fiscal Code</string>
+    <string name="CodiceFiscaleCittadino">CF</string>
     <string name="completaRegistrazioneText">Enter email and password to complete registration</string>
     <string name="passwordErrata">Wrong password</string>
     <string name="passwordErrataText">Passwords do not match</string>
@@ -48,7 +48,7 @@
     <string name="ImpostaOra">Time</string>
     <string name="Azienda">Company</string>
     <string name="Auto">Car</string>
-    <string name="NumeroTelefonico">Phone Number</string>
+    <string name="NumeroTelefonico">Phone</string>
     <string name="numeroTelefonoNonValido">Invalid telephone number</string>
     <string name="numeroTelefonoNonValidoText">The telephone number consists of 10 digits</string>
     <string name="aziendaNonValida"> Invalid company </string>
@@ -88,7 +88,7 @@ Enter your information to proceed with registration.</string>
     </string-array>
     <string name="dettagliutente">Detail user profile</string>
     <string name="title_activity_modifica_residenza">Change residence</string>
-    <string name="codicefiscale">FISCAL CODE</string>
+    <string name="codicefiscale">CF</string>
     <string name="residenza">RESIDENCE</string>
     <string name="viaggio">Trip</string>
     <string name="data_e_ora">Date &amp; hour</string>

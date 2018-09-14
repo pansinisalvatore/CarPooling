@@ -17,7 +17,7 @@
     <string name="formatoEmailNonValido">Formato dell\'email non valido</string>
     <string name="NomeCittadino">Nome</string>
     <string name="CognomeCittadino">Cognome</string>
-    <string name="CodiceFiscaleCittadino">Codice Fiscale</string>
+    <string name="CodiceFiscaleCittadino">CF</string>
     <string name="completaRegistrazioneText">Inserire l\'email e la password per completare la registrazione</string>
     <string name="passwordErrata">Password errata</string>
     <string name="passwordErrataText">Le passwords non corrispondono</string>
@@ -45,7 +45,7 @@
     <string name="ImpostaOra">Ora</string>
     <string name="Azienda">Azienda</string>
     <string name="Auto">Auto</string>
-    <string name="NumeroTelefonico">Numero di telefono</string>
+    <string name="NumeroTelefonico">Telefono</string>
     <string name="numeroTelefonoNonValido">Numero di telefono non valido</string>
     <string name="numeroTelefonoNonValidoText">Il numero di telefono è composto da 10 cifre</string>
     <string name="aziendaNonValida"> Azienda non valida </string>
@@ -82,7 +82,7 @@
     </string-array>
     <string name="dettagliutente">Detail utente</string>
     <string name="title_activity_modifica_residenza">Modifica residenza</string>
-    <string name="codicefiscale">Codice fiscale</string>
+    <string name="codicefiscale">CF</string>
     <string name="residenza">Residenza</string>
     <string name="viaggio">Viaggio</string>
     <string name="data_e_ora">Data e Ora</string>
