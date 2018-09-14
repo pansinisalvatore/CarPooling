@@ -3,10 +3,8 @@ package uk.co.maxcarli.carpooling;
 
         import android.annotation.SuppressLint;
         import android.app.AlertDialog;
-        import android.content.Context;
         import android.content.DialogInterface;
         import android.content.Intent;
-        import android.graphics.Typeface;
         import android.os.Bundle;
         import android.support.annotation.NonNull;
         import android.support.design.internal.BottomNavigationItemView;
@@ -14,30 +12,25 @@ package uk.co.maxcarli.carpooling;
         import android.support.design.widget.BottomNavigationView;
         import android.support.design.widget.CoordinatorLayout;
         import android.support.v4.app.Fragment;
-        import android.support.v4.app.FragmentActivity;
         import android.support.v4.app.FragmentTransaction;
         import android.support.v4.view.MenuItemCompat;
         import android.support.v7.app.ActionBar;
         import android.support.v7.app.AppCompatActivity;
         import android.util.Log;
-        import android.view.Gravity;
         import android.view.LayoutInflater;
         import android.view.Menu;
         import android.view.MenuItem;
         import android.view.View;
         import android.widget.ImageView;
-        import android.widget.TextView;
-        import android.widget.Toast;
 
         import java.lang.reflect.Field;
 
-        import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
         import uk.co.maxcarli.carpooling.Fragment.ClassificaFragment;
         import uk.co.maxcarli.carpooling.Fragment.HomeFragment;
         import uk.co.maxcarli.carpooling.Fragment.ImieipassaggiFragment;
         import uk.co.maxcarli.carpooling.Fragment.ProfiloFragment;
+        import uk.co.maxcarli.carpooling.Fragment.TrackingFragment;
         import uk.co.maxcarli.carpooling.model.Cittadino;
-        import uk.co.maxcarli.carpooling.model.Passaggio;
         import uk.co.maxcarli.carpooling.model.Sede;
 
 
