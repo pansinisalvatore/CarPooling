@@ -167,7 +167,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/buttonTrackingRichiesta"
-                android:hint="@string/startTracking"
+                android:text="@string/startTracking"
                 android:layout_gravity="center"
                 android:textColor="@color/etichettabottoni"
                 android:background="@drawable/button_shape_normal"

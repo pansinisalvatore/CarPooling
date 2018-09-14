@@ -59,10 +59,11 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
+
+        android:text="@string/Conferma"
+        android:textColor="@color/etichettabottoni"
         android:background="@drawable/button_shape_normal"
         android:backgroundTint="@color/tint_botton"
-        android:hint="@string/Conferma"
-        android:textColor="@color/etichettabottoni"
         android:onClick="clickButton" />
 
 
