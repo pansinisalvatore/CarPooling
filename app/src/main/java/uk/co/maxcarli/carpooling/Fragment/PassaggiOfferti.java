@@ -14,11 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
+import java.util.ResourceBundle;
 
 import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.listeners.TableDataClickListener;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
+import uk.co.maxcarli.carpooling.Control.Controlli;
 import uk.co.maxcarli.carpooling.MappaOffertePassaggiActivity;
 import uk.co.maxcarli.carpooling.R;
 import uk.co.maxcarli.carpooling.menu;
@@ -101,12 +103,15 @@ public class PassaggiOfferti extends Fragment {
         tb.addDataClickListener(new TableDataClickListener<String[]>() {
             @Override
             public void onDataClicked(int rowIndex, String[] clickedData) {
-                Intent intent=new Intent(getActivity(), MappaOffertePassaggiActivity.class);
-                intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
+                if(!clickedData[2].equals(getContext().getString(R.string.completato))){
+                    Intent intent=new Intent(getActivity(), MappaOffertePassaggiActivity.class);
+                    intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
 
-                intent.putExtra(Passaggio.Keys.IDPASSAGGIO, cittadino.passaggiOfferti.get(rowIndex));
+                    intent.putExtra(Passaggio.Keys.IDPASSAGGIO, cittadino.passaggiOfferti.get(rowIndex));
 
-                startActivityForResult(intent,rowIndex);
+                    startActivityForResult(intent,rowIndex);
+                }
+
             }
         });
 
@@ -126,11 +131,19 @@ public class PassaggiOfferti extends Fragment {
 
             this.passaggi[i][0]=controlloTipoPassagio(p.getTipoPassaggio(),getContext());
             this.passaggi[i][1]=p.getData()+" "+p.getOra();
-            this.passaggi[i][2]=p.getRichieste()+" msg";
+            if(p.getRichieste()>=0){
+                this.passaggi[i][2]=p.getRichieste()+" msg";
+            }else{
+                this.passaggi[i][2]= Controlli.controllaStringaStatus("completato",getContext());
+            }
+
+
             this.passaggi[i][3]=p.getPostiOccupati()+"";
 
         }
     }
+
+
 
 
     public static String controlloTipoPassagio(String tipo, Context context){

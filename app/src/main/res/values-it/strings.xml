@@ -172,4 +172,10 @@
     <string name="assente">Assente</string>
     <string name="avvia">Avvia</string>
     <string name="Accedi">Accedi</string>
+    <string name="successoTracking">Successo!</string>
+    <string name="successoTrackingTest">Tracking avvenuto con successo</string>
+
+    <string name="cancellaPassaggioCompletatoTitolo">Viaggio effettuato</string>
+    <string name="cancellaPassaggioCompletatoTesto">Questo viaggio è stato effettuato. Lo vuoi cancellare dalla tua lista?</string>
+
 </resources>

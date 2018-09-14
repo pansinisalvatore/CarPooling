@@ -32,7 +32,7 @@
                 android:text="@string/datiRiepilogo"
                 android:id="@+id/dataSummary"
                 android:theme="@style/MyEditText"
-                android:layout_below="@id/textVacand2"/>
+                android:layout_below="@id/textVacand"/>
 
 
 

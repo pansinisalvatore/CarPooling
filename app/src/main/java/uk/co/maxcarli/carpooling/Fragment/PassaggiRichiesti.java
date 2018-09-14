@@ -111,8 +111,13 @@ public class PassaggiRichiesti extends Fragment {
             public void onDataClicked(final int rowIndex, final String[] clickedData) {
                 String status=clickedData[2];
                 if(status.equals(getContext().getString(R.string.Rifiutato))){
-                   finestraEliminazione(rowIndex,getContext().getString(R.string.PassaggioRifiutatoTitolo),getContext().getString(R.string.PassaggioRifiutatoTesto));
-                }else{
+                   finestraEliminazioneRichiesti(rowIndex,getContext().getString(R.string.PassaggioRifiutatoTitolo),getContext().getString(R.string.PassaggioRifiutatoTesto));
+                }else if(status.equals(getContext().getString(R.string.completato))){
+                    finestraEliminazioneRichiesti(rowIndex,getContext().getString(R.string.cancellaPassaggioCompletatoTitolo),getContext().getString(R.string.cancellaPassaggioCompletatoTesto));
+                }
+
+
+                else{
                     Intent intent=new Intent(menuActivity, MappaPassaggiRichiesti.class);
                     intent.putExtra(Passaggio.Keys.IDPASSAGGIO,cittadino.passaggiRichiesti.get(rowIndex));
                     intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino);
@@ -131,7 +136,7 @@ public class PassaggiRichiesti extends Fragment {
     }
 
 
-    public void finestraEliminazione(final int rowIndex,String title, String text){
+    public void finestraEliminazioneRichiesti(final int rowIndex,String title, String text){
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(title);
         builder.setMessage(text);

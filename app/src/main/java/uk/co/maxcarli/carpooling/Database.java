@@ -127,8 +127,8 @@ public class Database {
 
                                 completato=1;
                             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                            builder.setTitle("successo");
-                            builder.setMessage("avvenuto con successo");
+                            builder.setTitle(R.string.successoTracking);
+                            builder.setMessage(R.string.successoTrackingTest);
                             builder.setCancelable(false);
                             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override

@@ -187,5 +187,10 @@ Enter your information to proceed with registration.</string>
     <string name="Accedi">Access</string>
     <string name="assente">Not present</string>
     <string name="avvia">Starts</string>
+    <string name="successoTracking">Success!</string>
+    <string name="successoTrackingTest">Successful tracking</string>
+0
+    <string name="cancellaPassaggioCompletatoTitolo">Ride completed</string>
+    <string name="cancellaPassaggioCompletatoTesto">This ride has been completed. Do you want delete this ride from your list?</string>
 
 </resources>
