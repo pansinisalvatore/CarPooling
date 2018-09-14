@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">CarPooling</string>
+    <string name="trackingNonCompletato">Tracking non completato!</string>
+    <string name="trackingNonCompletatoText">Monitoraggio non ancora completato. L\'offerente deve aver completato il tracciamento.</string>
+    <string name="trackingRichiedenteText">Puoi chiudere questa schermata quando sei arrivato a destinazione. Dopo di che i punti saranno convalidati.</string>
+    <string name="trackingInCorso">Tracking in corso</string>
     <string name="startTracking">Inizia tracking</string>
     <string name="trackingVuoto">Il tracking non può essere avviato. Se hai OFFERTO IL PASSAGGIO, puoi avviarlo 10 minuti prima dell\'orario previsto e dopo 30 minuti. Se hai RICHIESTO IL PASSAGGIO devi aspettare che l'offerente abbia il tracciamento.</string>
     <string name="personeDaPrendereText">Persone che devi passare per prendere</string>
