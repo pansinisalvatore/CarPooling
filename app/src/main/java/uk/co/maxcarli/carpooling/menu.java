@@ -33,7 +33,9 @@ package uk.co.maxcarli.carpooling;
         import uk.co.maxcarli.carpooling.model.Cittadino;
         import uk.co.maxcarli.carpooling.model.Sede;
 
-
+/**
+ * Questa activity gestisce il menu e inizializza i fragment necessari in base alla scelta dell'utente.
+ */
 public class menu extends AppCompatActivity {
 
     private ActionBar toolbar;
@@ -85,6 +87,9 @@ public class menu extends AppCompatActivity {
     }
 
     @SuppressLint("RestrictedApi")
+    /**
+     * Questo metodo rimuove l'animazione dal bottomnavigationmenu, in quanto non consigliato dalle regole di Material Design.
+     */
     static void removeShiftMode(BottomNavigationView view) {
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
         try {
@@ -104,6 +109,7 @@ public class menu extends AppCompatActivity {
             Log.e("ERROR ILLEGAL ALG", "Unable to change value of shift mode");
         }
     }
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -233,6 +239,9 @@ public class menu extends AppCompatActivity {
         cittadino=c;
     }
 
+    /**
+     * Questa funzione visualizza un AlterDialog che permette all'utente di effettuare il logout e tornare alla schermata di login.
+     */
     public void logout(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.LogoutTitolo));

@@ -19,7 +19,7 @@ import uk.co.maxcarli.carpooling.model.Cittadino;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Questo fragment riguarda la home e la sua schermata. Inizializza i componenti grafici e permette di offrire o cercare passaggi.
  */
 public class HomeFragment extends Fragment {
 
@@ -47,6 +47,10 @@ public class HomeFragment extends Fragment {
         }
     }
     @Override
+    /**
+     * Oltre a creare la view del fragment, setta degli oggetti onClickListener ai bottoni, che si occupano
+     * di passare alla schermata successiva.
+     */
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -77,6 +81,7 @@ public class HomeFragment extends Fragment {
 
         return root;
     }
+
     public void onActivityResult(int requestCode, int resultCode, Intent databack){
         if(databack!=null){
             Cittadino c=(Cittadino) databack.getParcelableExtra(Cittadino.Keys.IDCITTADINO);

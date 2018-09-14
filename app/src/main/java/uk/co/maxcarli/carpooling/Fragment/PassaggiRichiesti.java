@@ -30,7 +30,7 @@ import uk.co.maxcarli.carpooling.model.Passaggio;
 import uk.co.maxcarli.carpooling.menu;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Questo fragment visualizza la tabella dei passaggi richiesti dal cittadino.
  */
 public class PassaggiRichiesti extends Fragment {
 
@@ -136,6 +136,13 @@ public class PassaggiRichiesti extends Fragment {
     }
 
 
+    /**
+     *
+     * @param rowIndex
+     * @param title
+     * @param text
+     * Questo metodo visualizza un messaggio che chiede all'utente se eliminare oppure no una riga selezionata.
+     */
     public void finestraEliminazioneRichiesti(final int rowIndex,String title, String text){
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(title);
@@ -168,6 +175,11 @@ public class PassaggiRichiesti extends Fragment {
         alertDialog.show();
     }
 
+    /**
+     *
+     * @param passaggiRichiesti
+     * Questa funzione popola un array di stringhe contenente i dati da inserire tramite un' adapter dalla tabella
+     */
 
    public void populateData(List<Passaggio> passaggiRichiesti){
 

@@ -45,6 +45,11 @@ import uk.co.maxcarli.carpooling.Control.Controlli;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 import uk.co.maxcarli.carpooling.model.Passaggio;
 
+/**
+ * Questa Activity visualizza la mappa con i passaggi disponibili in base alla data e l'ora inserita dall'utente. Vengono visualizzate
+ * le posizioni degli offerenti se si trovano all'interno di un raggio di 500 metri dall'abitazione dell'utente.
+ */
+
 public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReadyCallback {
 
     public static final int REQUEST_ENABLE_BT = 1;
@@ -74,6 +79,13 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
     }
 
 
+    /**
+     *
+     * @param googleMap
+     * Inziializza la mappa inserendo le posizioni delle abitazioni dell'utente, degli offerenti e del luogo di lavoro. Inoltre
+     * implementa il click di un marker, che mostra una finestra con alcuni dati degli utenti offerenti. Cliccando
+     * poi questa finestra è possibile prenotare il passaggio desiderato.
+     */
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -137,6 +149,16 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
 
     }
 
+    /**
+     *
+     * @param orarioRicercato
+     * @param orarioPresente
+     * Controlla se la differenza tra orario ricercato e gli orari dei passaggi disponibili sia minore di 15 minuti.
+     * @return true se la differenza è minore di 15 minuti, altrimenti false.
+     *
+     *
+     */
+
     public boolean controlloArcoOrario(String orarioRicercato, String orarioPresente){
         if(Math.abs(Controlli.oreInMinuti(orarioRicercato)-Controlli.oreInMinuti(orarioPresente))<=15){
             return true;
@@ -146,6 +168,14 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
     }
 
 
+    /**
+     *
+     * @param centro
+     * @param pos
+     * @param raggio
+     * Controlla se una certa posizione si trova ad un raggio di 500 metri dalla posizione centro
+     * @return true se si trova all'interno del raggio, altrimenti false.
+     */
     public static boolean controlloRaggio(Address centro, Address pos, double raggio){
 
 
@@ -158,6 +188,13 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
         }
     }
 
+    /**
+     *
+     * @param strAddress
+     * @param c
+     * Prende la posizione attraverso la stringa di un indirizzo
+     * @return Un oggetto address derivato contenente la posizione.
+     */
 
     public static Address getLocationFromAddress(String strAddress,Context c){
 
@@ -177,6 +214,13 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
             return null ;
         }
     }
+
+    /**
+     *
+     * @param context
+     * Prende gli indirizzi degli offerenti e li posiziona sulla mappa tramite dei marker
+     */
+
 
     private void getIndirizziPassaggiOfferti( final Context context) {
         String url = "http://carpoolingsms.altervista.org/PHP/PrendiIndirizzi.php";
@@ -261,9 +305,14 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
     }
 
 
-
-
-
+    /**
+     *
+     * @param context
+     * @param idPassaggio
+     * @param offerente
+     *
+     * Prenota il passaggio e scrive la richiesta nel database.
+     */
 
 
     public void prenotaPassaggio(final Context context, final int idPassaggio, final Cittadino offerente){
@@ -350,6 +399,13 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
             }
     }
 
+    /**
+     *
+     * @param pos
+     * Ricava l'indirizzo come stringa da una posizione
+     * @return Stringa dell'indirizzo
+     */
+
     public String getAddressFromLatLng(LatLng pos){
         Geocoder coder=new Geocoder(this);
        try{
@@ -369,6 +425,10 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
 
     }
 
+
+    /**
+     * Implementa l'infoWindow che deve essere visualizzata al momento del click di un marker.
+     */
 
     private class CustomMarkerOfferenti implements GoogleMap.InfoWindowAdapter{
 

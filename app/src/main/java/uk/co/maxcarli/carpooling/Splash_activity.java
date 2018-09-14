@@ -1,6 +1,6 @@
 package uk.co.maxcarli.carpooling;
 
-//rino
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +19,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+/**
+ * Questa classe implementa la splash activity, contenente un immagine con un'animazione. Essa controlla se è stabilita una connessione a Internet
+ *
+ *
+ */
+
 public class Splash_activity extends Activity  implements Animation.AnimationListener{
     private static final String TAG_LOG = Splash_activity.class.getName();
     private static final long MIN_WAIT_INTERVAL= 1500L;
@@ -27,7 +33,8 @@ public class Splash_activity extends Activity  implements Animation.AnimationLis
     private long mStartTime;
     private boolean mIsDone;
 
-    private Handler mHandler = new Handler(){ /* metodo per la ricezione e l'invio di messaggi*/
+
+    private Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg){
             switch (msg.what){
@@ -64,6 +71,10 @@ public class Splash_activity extends Activity  implements Animation.AnimationLis
         Log.d(TAG_LOG, "Handler message sent!");
     }
 
+    /**
+     * Se è stabilita una connessione, avvia l'actrivity successiva, altrimenti visualizza un ALertDialog che avvisa
+     * l'utente sulla necessità di una connessione a Internet.
+     */
     private void goAhead(){
         final Intent intent = new Intent(this, LoginActivity.class);
         if(haveInternetConnection(Splash_activity.this)){
@@ -77,25 +88,32 @@ public class Splash_activity extends Activity  implements Animation.AnimationLis
             alert.show();
         }
 
-        /*while(true){
+        while(true){
             if(haveInternetConnection(Splash_activity.this)){
                 startActivity(intent);
                 finish();
             }else{
                 AlertDialog.Builder miaAlert = new AlertDialog.Builder(this);
-                miaAlert.setTitle("Connessione assente");
-                miaAlert.setMessage("Devi attivare la connessione per utilizzare l'applicazione");
+                miaAlert.setTitle(getString(R.string.ConnectionRequired));
+                miaAlert.setMessage(getString(R.string.ConnectionRequiredText));
                 AlertDialog alert = miaAlert.create();
                 alert.show();
             }
-        }*/
+        }
 
     }
 
 
+    /**
+     *
+     * @param contesto
+     * Questa funzione prende come parametro il context in quanto ne ha bisogno per il controllo della connessione.
+     *
+     * @return boolean
+     * Ritorna true se è stabilita una connessione, altrimenti false.
+     */
 
-
-        public static boolean haveInternetConnection(Context contesto) {
+    public static boolean haveInternetConnection(Context contesto) {
             boolean haveConnectedWifi = false;
             boolean haveConnectedMobile = false;
 

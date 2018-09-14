@@ -30,7 +30,7 @@ import uk.co.maxcarli.carpooling.menu;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Questo fragment gestisce i dati personali dell'utente e permette di modificarne alcuni (password, telefono, residenza).
  */
 public class ProfiloFragment extends Fragment {
 

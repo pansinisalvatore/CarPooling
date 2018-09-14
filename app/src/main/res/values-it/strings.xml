@@ -177,5 +177,6 @@
 
     <string name="cancellaPassaggioCompletatoTitolo">Viaggio effettuato</string>
     <string name="cancellaPassaggioCompletatoTesto">Questo viaggio è stato effettuato. Lo vuoi cancellare dalla tua lista?</string>
-
+    <string name="ConnectionRequired">Connessione richiesta</string>
+    <string name="ConnectionRequiredText">Hai bisogno di una connessione a Internet per poter utilizzare l'app.</string>
 </resources>
