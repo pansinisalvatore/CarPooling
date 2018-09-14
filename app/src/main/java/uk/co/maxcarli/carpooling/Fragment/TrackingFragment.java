@@ -56,10 +56,6 @@ public class TrackingFragment extends Fragment {
     private menu menuActivity;
 
 
-
-
-
-
     String[][] passaggi;
 
     View view;
@@ -74,7 +70,12 @@ public class TrackingFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        cittadino=menuActivity.getCittadino();
+        if(savedInstanceState!=null){
+            savedInstanceState.getParcelable(Cittadino.Keys.IDCITTADINO);
+        }else{
+            cittadino=menuActivity.getCittadino();
+        }
+
 
 
     }
@@ -85,8 +86,7 @@ public class TrackingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         String dataCorrente = getCurrentData();
-        //dataCorrente=Controlli.impostaFormatoData(dataCorrente);
-        Log.d("dataCorrente", dataCorrente);
+
         int vista = 0;
         View rootServer = null;
 
@@ -315,6 +315,10 @@ public class TrackingFragment extends Fragment {
         else return false;
     }
 
+
+    public void onSaveInstanceState(Bundle bundle){
+        bundle.putParcelable(Cittadino.Keys.IDCITTADINO,cittadino);
+    }
 
 
 }

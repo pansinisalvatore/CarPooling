@@ -44,8 +44,14 @@ public class TrackingRichiedente extends Activity {
         setContentView(R.layout.activity_tracking_richiedente);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         final Intent srcIntent = getIntent();
-        passaggio = (Passaggio) srcIntent.getParcelableExtra(Passaggio.Keys.IDPASSAGGIO);
-        cittadino = (Cittadino) srcIntent.getParcelableExtra(Cittadino.Keys.IDCITTADINO);
+        if(savedInstanceState!=null){
+            cittadino=savedInstanceState.getParcelable(Cittadino.Keys.IDCITTADINO);
+            passaggio=savedInstanceState.getParcelable(Passaggio.Keys.IDPASSAGGIO);
+        }else{
+            passaggio = (Passaggio) srcIntent.getParcelableExtra(Passaggio.Keys.IDPASSAGGIO);
+            cittadino = (Cittadino) srcIntent.getParcelableExtra(Cittadino.Keys.IDCITTADINO);
+        }
+
         if (accendiBluetooth(mBluetoothAdapter)) {
 
             if (mBluetoothAdapter.isDiscovering()) {
@@ -100,7 +106,10 @@ public class TrackingRichiedente extends Activity {
 
     }
 
-
+    public void onSaveInstanceState(Bundle bundle){
+        bundle.putParcelable(Passaggio.Keys.IDPASSAGGIO,passaggio);
+        bundle.putParcelable(Cittadino.Keys.IDCITTADINO,cittadino);
+    }
 
 
 

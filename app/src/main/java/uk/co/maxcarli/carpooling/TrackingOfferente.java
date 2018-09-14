@@ -52,8 +52,14 @@ public class TrackingOfferente extends AppCompatActivity {
         macAddressTrovati = new ArrayList<String>();
         cittadiniTrovati = new ArrayList<Cittadino>();
         final Intent srcIntent = getIntent();
-        cittadino = (Cittadino) srcIntent.getParcelableExtra(Cittadino.Keys.IDCITTADINO);
-        passaggio = (Passaggio) srcIntent.getParcelableExtra(Passaggio.Keys.IDPASSAGGIO);
+        if(savedInstanceState!=null){
+            cittadino=savedInstanceState.getParcelable(Cittadino.Keys.IDCITTADINO);
+            passaggio=savedInstanceState.getParcelable(Passaggio.Keys.IDPASSAGGIO);
+        }else{
+            cittadino = (Cittadino) srcIntent.getParcelableExtra(Cittadino.Keys.IDCITTADINO);
+            passaggio = (Passaggio) srcIntent.getParcelableExtra(Passaggio.Keys.IDPASSAGGIO);
+        }
+
 
         mBluetoothAdapter	= BluetoothAdapter.getDefaultAdapter();
         avviaRicerca();
@@ -276,5 +282,9 @@ public class TrackingOfferente extends AppCompatActivity {
         }
     }
 
+    public void onSaveInstanceState(Bundle bundle){
+        bundle.putParcelable(Cittadino.Keys.IDCITTADINO,cittadino);
+        bundle.putParcelable(Passaggio.Keys.IDPASSAGGIO,passaggio);
+    }
 
 }
