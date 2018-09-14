@@ -73,10 +73,6 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(Registrazione);
     }
 
-    public void passwordDimenticata(View view){
-        Intent intent = new Intent(this,RecuperaPassword.class);
-        startActivity(intent);
-    }
 
 
     public void onSaveInstanceState(Bundle bundle){

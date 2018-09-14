@@ -56,6 +56,9 @@ public class completaRegistrazione extends AppCompatActivity {
 
     }
 
+    /**
+     * il metodo from intent serve per ricevere il cittadino e la sede
+     */
     private void fromIntent(){
 
         final Intent intent = getIntent();
@@ -70,7 +73,10 @@ public class completaRegistrazione extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Al click del bottone vengono salvate le informazioni sul database
+     * @param view
+     */
     public void clickButton(View view){
         Boolean lenghtPasw = true;
         Boolean verEmail = true;
@@ -106,6 +112,13 @@ public class completaRegistrazione extends AppCompatActivity {
 
     }
 
+    /**
+     * campiVuoti controlla se tutti i campi sono riempiti
+     * @param emailEdit
+     * @param passwordEdit
+     * @param confermaPasswordEdit
+     * @return
+     */
     private Boolean campiVuoti(TextInputEditText emailEdit,TextInputEditText passwordEdit,TextInputEditText confermaPasswordEdit){
 
         Boolean errorEmail =  controlloEditTextVuoto(emailEdit,this);
@@ -116,6 +129,11 @@ public class completaRegistrazione extends AppCompatActivity {
         else return true;
     }
 
+    /**
+     * Controlla se la sintassi dell'email è giusta
+     * @param emailEdit
+     * @return
+     */
     private Boolean verificaEmail( TextInputEditText emailEdit){
         String email = emailEdit.getText().toString();
        if( mailSyntaxCheck(email) == true) return false; //nell'email non sono presenti errori
@@ -126,6 +144,10 @@ public class completaRegistrazione extends AppCompatActivity {
        }
     }
 
+    /**
+     * Serve per salvare lo stato dell'activity in caso di cambio della configurazione.
+     * @param bundle
+     */
     public void onSaveInstanceState(Bundle bundle){
         super.onSaveInstanceState(bundle);
         bundle.putString("email",emailEdit.getText().toString());

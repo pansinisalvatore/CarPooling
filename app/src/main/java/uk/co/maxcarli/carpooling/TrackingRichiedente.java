@@ -87,9 +87,15 @@ public class TrackingRichiedente extends Activity {
         return acceso;
     }
 
+    /**
+     * Al click del bottone finito controlla se il tracking è avvenuto con successo.
+     * @precondition L'offerente deve aver terminato il tracking
+     * @postcondition il tracking viene terminato e si ritorna al menù.
+     * @param view
+     */
     public void finitoRichiedente(View view){
 
-        int id = passaggio.getIdPassaggiOfferti();
+        int id = passaggio.getIdPassaggio();
         Database.getTrackingConvalidato(id,this,0, cittadino);
 
     }

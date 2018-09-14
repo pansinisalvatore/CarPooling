@@ -666,7 +666,7 @@ public class Database {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("idPassaggio", passaggio.getIdPassaggiOfferti()+"");
+                params.put("idPassaggio", passaggio.getIdPassaggio()+"");
 
 
                 return params;
@@ -823,7 +823,7 @@ public class Database {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("idPassaggio", passaggio.getIdPassaggiOfferti()+"");
+                params.put("idPassaggio", passaggio.getIdPassaggio()+"");
                 params.put("cellRichiedente",cell);
                 params.put("status",status);
                 return params;

@@ -28,6 +28,9 @@ import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 import uk.co.maxcarli.carpooling.Control.Controlli;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 
+/**
+ *DettaglioUtente mostra i dettagli di ogni utente registrato al mobility manager
+ */
 public class DettagliUtente extends AppCompatActivity {
     TextInputEditText nam;
     TextInputEditText surnam;
@@ -108,6 +111,10 @@ public class DettagliUtente extends AppCompatActivity {
 
     }
 
+    /**
+     * Inserisce nel database lo stato di accettazione dell'utente da parte del cittadino
+     * @param autorizzazione
+     */
     private void modificaAutorizzazioneUtente(final int autorizzazione) {
         String url= "http://carpoolingsms.altervista.org/PHP/modificaAutorizzazione.php";
 

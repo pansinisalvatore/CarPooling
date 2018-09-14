@@ -42,6 +42,10 @@ import static uk.co.maxcarli.carpooling.Control.ControlBluetooth.verificaSupport
 import static uk.co.maxcarli.carpooling.Fragment.PassaggiOfferti.controlloTipoPassagio;
 import static uk.co.maxcarli.carpooling.Control.Controlli.*;
 
+/**
+ * La classe Tracking fragment serve per controllare se nell'ora corrente è presente un passaggio per il quale è
+ possibile avviare il tracking
+ */
 public class TrackingFragment extends Fragment {
 
     private Cittadino cittadino;
@@ -173,7 +177,7 @@ public class TrackingFragment extends Fragment {
     }
 
     /**
-     * se il cittadino è un offerente ritorna il passaggio, altrimenti null
+     * Controlla se il cittadino è un offerente. Se lo è si visualizzano i dettagli dei richiedenti.
      * @param passaggiOfferti
      * @param dataCorrente
      * @return p
@@ -206,7 +210,7 @@ public class TrackingFragment extends Fragment {
                     trovato = 1;
                     sTrovato = Integer.toString(trovato);
                     Log.d("trovato",sTrovato);
-                    Database.getTrackingConvalidato(p.getIdPassaggiOfferti(), getContext(),1,null);
+                    Database.getTrackingConvalidato(p.getIdPassaggio(), getContext(),1,null);
                     if(Database.getCompletato() != 1)
                     return p;
                 }
@@ -242,6 +246,13 @@ public class TrackingFragment extends Fragment {
         menuActivity=(menu)activity;
     }
 
+    /**
+     * Controlla se il cittadino è un offerente. Se lo è si visualizza le informazioni dell'offerente
+     * @param passaggiRichiesti
+     * @param dataCorrente
+     * @param root
+     * @return
+     */
     public int cittadinoPassaggiRichiesti(List<Passaggio> passaggiRichiesti,String dataCorrente, View root) {
 
 
@@ -262,7 +273,7 @@ public class TrackingFragment extends Fragment {
                 stringaOrarioC = Integer.toString(getOraCorrente());
                 Log.d("OraCorrente", stringaOrarioC);
                 if (getOraCorrente() >= orarioConvertito - 10 && orarioConvertito + 30 >= getOraCorrente()) {
-                    Database.getTrackingConvalidato(p.getIdPassaggiOfferti(), getContext(), 1,null);
+                    Database.getTrackingConvalidato(p.getIdPassaggio(), getContext(), 1,null);
                     if (Database.getCompletato() != 1) {
 
 //

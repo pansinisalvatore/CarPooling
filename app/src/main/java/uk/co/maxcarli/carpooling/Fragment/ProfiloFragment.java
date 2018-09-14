@@ -108,7 +108,7 @@ public class ProfiloFragment extends Fragment {
         password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(), uk.co.maxcarli.carpooling.cambia_pass.class);
+                Intent intent=new Intent(getActivity(), uk.co.maxcarli.carpooling.CambiaPassword.class);
                 intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino.getPassword());
                 startActivityForResult(intent,1);
             }

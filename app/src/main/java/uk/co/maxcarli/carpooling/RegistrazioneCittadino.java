@@ -15,18 +15,12 @@ import static uk.co.maxcarli.carpooling.Control.Controlli.*;
 
 public class RegistrazioneCittadino extends AppCompatActivity {
 
-    String url ="http://carpoolingsms.altervista.org/PHP/query.php";
-    AlertDialog.Builder builder;
+
     TextInputEditText nomeText;
     TextInputEditText cognomeText;
     TextInputEditText CFText;
     EditText residenzaText;
     EditText aux2;
-
-    private String mNome;
-    private String mCognome;
-    private String mCodiceFiscale;
-    private String mResidenza;
 
 
     @Override
@@ -44,7 +38,6 @@ public class RegistrazioneCittadino extends AppCompatActivity {
             CFText.setText(savedInstanceState.getString("CF"));
         }
 
-        //riceviCittadino();
 
         findViewById(R.id.buttonAvanti).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +55,9 @@ public class RegistrazioneCittadino extends AppCompatActivity {
         super.onDestroy();
     }
 
-
+    /**
+     * Prende tutti campi dall'editText e inserisce i dati nella classe cittadino. Dopodichè vengono passati alla classe SceltaAzienda
+     */
     public void editTextRegistrazione() {
 
         if(controlliCampi()== false) {
@@ -85,57 +80,12 @@ public class RegistrazioneCittadino extends AppCompatActivity {
 
 
     }
-   /* public void registraCittadino(final String nome, final String cognome){
-        builder = new AlertDialog.Builder(RegistrazioneCittadino.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        builder.setTitle("Server Response");
-                        builder.setMessage("Response"+ response);
-                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                        AlertDialog alertDialog= builder.create();
-                        alertDialog.show();
 
 
-                    }
-                }
-
-                , new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-{
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map <String,String> params = new HashMap<String, String>();
-                params.put("nome", nome);
-                params.put("cognome", cognome);
-                return params;
-            }
-        };
-                Toast.makeText(RegistrazioneCittadino.this, "Error...", Toast.LENGTH_SHORT).show();
-                error.printStackTrace();
-
-            }
-        })
-
-
-        MySingleton.getmInstance(RegistrazioneCittadino.this).addTorequestque(stringRequest);
-
-
-
-    }*/
-
-
-
+    /**
+     * Al click dell'editText si apre l'activity RicercaIndirizzo.
+     * @param view
+     */
     public void scegliIndirizzo(View view){
 
         Intent intent=new Intent(this,RicercaIndirizzo.class);
@@ -143,29 +93,10 @@ public class RegistrazioneCittadino extends AppCompatActivity {
 
     }
 
-    /*public void riceviCittadino(){
-        final Intent intent = getIntent();
-        final String nome = intent.getStringExtra("nome");
-        final String cognome = intent.getStringExtra("cognome");
-        final String codiceFiscale = intent.getStringExtra("codiceFiscale");
-        final String residenza = intent.getStringExtra("residenza");
-
-        mNome = nome;
-        mCognome = cognome;
-        mCodiceFiscale = codiceFiscale;
-        mResidenza = residenza;
-
-
-        aux = (TextInputEditText) this.findViewById(R.id.nomeCittadino);
-        aux.setText(nome);
-        aux = (TextInputEditText) this.findViewById(R.id.cognomeCittadino);
-        aux.setText(cognome);
-        aux = (TextInputEditText) this.findViewById(R.id.codiceFiscale);
-        aux.setText(codiceFiscale);
-        aux2 = (EditText) this.findViewById(R.id.residenzaCittadino);
-        aux2.setText(residenza);
-    }*/
-
+    /**
+     * Controlla se i campi sono corretti
+     * @return
+     */
     private boolean controlliCampi(){
         boolean bool = false;
 

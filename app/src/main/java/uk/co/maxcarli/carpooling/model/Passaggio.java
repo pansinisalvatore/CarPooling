@@ -68,7 +68,7 @@ public class Passaggio implements Parcelable{
 
 
 
-    public int getIdPassaggiOfferti() {
+    public int getIdPassaggio() {
         return idPassaggio;
     }
 
@@ -157,7 +157,11 @@ public class Passaggio implements Parcelable{
         this.cittadinoOfferente = cittadinoOfferente;
     }
 
-
+    /**
+     * equals controlla se i passaggi sono uguali, ovvero controlla se due passaggi hanno la stessa data, nell'arco di tre ore.
+     * @param o
+     * @return
+     */
     public boolean equals(Object o){
         Passaggio p=(Passaggio)o;
         if(this.data.equals(p.data)){
