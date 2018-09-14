@@ -92,12 +92,14 @@ public class Splash_activity extends Activity  implements Animation.AnimationLis
             if(haveInternetConnection(Splash_activity.this)){
                 startActivity(intent);
                 finish();
+                break;
             }else{
                 AlertDialog.Builder miaAlert = new AlertDialog.Builder(this);
                 miaAlert.setTitle(getString(R.string.ConnectionRequired));
                 miaAlert.setMessage(getString(R.string.ConnectionRequiredText));
                 AlertDialog alert = miaAlert.create();
                 alert.show();
+                break;
             }
         }
 

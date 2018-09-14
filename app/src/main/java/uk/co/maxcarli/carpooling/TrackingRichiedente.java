@@ -107,6 +107,7 @@ public class TrackingRichiedente extends Activity {
     }
 
     public void onSaveInstanceState(Bundle bundle){
+        super.onSaveInstanceState(bundle);
         bundle.putParcelable(Passaggio.Keys.IDPASSAGGIO,passaggio);
         bundle.putParcelable(Cittadino.Keys.IDCITTADINO,cittadino);
     }

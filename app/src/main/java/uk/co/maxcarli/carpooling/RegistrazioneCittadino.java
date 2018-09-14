@@ -114,11 +114,7 @@ public class RegistrazioneCittadino extends AppCompatActivity {
 
             bool = true;
         }
-            /*
-       PRIMA DI CANCELLARE CHIEDERE A RINO! CAPITO BASTARDI?
-       if (verificaCodiceFiscale(aux) == true)
-            mostraMessaggioErrore("Codice fiscale non valido","Il codice fiscale deve essere da 16 caratteri", RegistrazioneCittadino.this);
-*/
+
         aux2 = (EditText) this.findViewById(R.id.residenzaCittadino);
         if(controlloEditTextVuoto(residenzaText,this) == true) {
             bool = true;

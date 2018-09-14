@@ -36,7 +36,9 @@ import uk.co.maxcarli.carpooling.Fragment.TimeFragment;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 import uk.co.maxcarli.carpooling.model.Passaggio;
 
-//ciao
+/**
+ * Questa activity permette di scegliere il giorno, l'ora, il tipo di tratta, l'auto e  posti disponibili di un passaggio e offrirlo.
+ */
 public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
 
     private Cittadino cittadino;
@@ -61,6 +63,10 @@ public class OffriPassaggi extends AppCompatActivity implements DatePickerDialog
     RadioButton casaLavoro;
     RadioButton lavoroCasa;
 
+    /**
+     * Questao metodo crea l'activity e implementa il listener del bottono che prende i dati inseriti dall'utente e invia una richiesta al database per scrivere il nuovo passaggio
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

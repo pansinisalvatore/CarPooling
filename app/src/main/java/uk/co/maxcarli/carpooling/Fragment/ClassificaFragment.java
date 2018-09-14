@@ -16,7 +16,7 @@ import uk.co.maxcarli.carpooling.R;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * ClassificaFragment contiene un tab menù che consente di passare dalla classifica aziendale a quella nazionale e viceversa
  */
 public class ClassificaFragment extends Fragment {
 
@@ -28,6 +28,13 @@ public class ClassificaFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * contiene un tab menù che consente di passare dalla classifica aziendale a quella nazionale e vicevers
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

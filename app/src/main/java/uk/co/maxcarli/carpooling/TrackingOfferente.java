@@ -99,17 +99,16 @@ public class TrackingOfferente extends AppCompatActivity {
                 final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
 
                 if (state == BluetoothAdapter.STATE_ON) {
-                    showToast("Enabled");
+                    ;
 
                 }
 
             } else if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
-                showToast("ACTION_DISCOVERY_STARTED");
                 showLog("ACTION_DISCOVERY_STARTED", action);
 
 
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
-                showToast("ACTION_DISCOVERY_FINISHED");
+
                 showLog("ACTION_DISCOVERY_FINISHED", action);
                 addCittadiniTrovati();
             } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
@@ -226,7 +225,7 @@ public class TrackingOfferente extends AppCompatActivity {
     public void visualizzaMacAddressTrovati(){
 
 
-        for (int i = 0; i < cittadiniTrovati.size(); i++) showToast(cittadiniTrovati.get(i).getNome());
+        for (int i = 0; i < cittadiniTrovati.size(); i++) showToast(cittadiniTrovati.get(i).getNome() +" " + cittadiniTrovati.get(i).getCognome());
     }
 
     /**
@@ -283,6 +282,7 @@ public class TrackingOfferente extends AppCompatActivity {
     }
 
     public void onSaveInstanceState(Bundle bundle){
+        super.onSaveInstanceState(bundle);
         bundle.putParcelable(Cittadino.Keys.IDCITTADINO,cittadino);
         bundle.putParcelable(Passaggio.Keys.IDPASSAGGIO,passaggio);
     }

@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import java.util.Calendar;
 
+/**
+ * DataFragment serve per visualizzare la finestra per selezionare la data
+ */
 public class DataFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

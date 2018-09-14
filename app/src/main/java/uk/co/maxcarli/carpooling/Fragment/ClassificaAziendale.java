@@ -37,7 +37,9 @@ import uk.co.maxcarli.carpooling.R;
 import uk.co.maxcarli.carpooling.menu;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 
-
+/**
+ * ClassificaAziendale è un fragment che visualizza la classifica degli utenti appartenenti alla stessa azienda
+ */
 public class ClassificaAziendale extends Fragment {
 
 
@@ -54,6 +56,13 @@ public class ClassificaAziendale extends Fragment {
 
     }
 
+    /**
+     *mostra una tabella contenenti i punti dei cittadini, in ordine di punteggio
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return view
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

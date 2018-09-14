@@ -54,15 +54,6 @@ public class ProfiloFragment extends Fragment {
     }
 
 
-    public void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-        if(savedInstanceState!=null){
-            cittadino=savedInstanceState.getParcelable(Cittadino.Keys.IDCITTADINO);
-        }else{
-            cittadino=menuActivity.getCittadino();
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,6 +61,7 @@ public class ProfiloFragment extends Fragment {
         // Inflate the layout for this fragment
         View root= inflater.inflate(R.layout.fragment_profilo, container, false);
 
+        cittadino=menuActivity.getCittadino();
         cognomeNome=(TextView)root.findViewById(R.id.nomeCognomeProfilo);
         cognomeNome.setText(cittadino.getCognome()+" "+cittadino.getNome());
         cognomeNome.setKeyListener(null);
@@ -160,10 +152,6 @@ public class ProfiloFragment extends Fragment {
         }
     }
 
-    public void onSaveInstanceState(Bundle bundle){
-        super.onSaveInstanceState(bundle);
-        bundle.putParcelable(Cittadino.Keys.IDCITTADINO,cittadino);
-    }
 
 
 

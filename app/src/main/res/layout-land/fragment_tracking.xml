@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.TrackingFragment"
+    android:id="@+id/TrackingFragment">
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!-- TODO: Update blank fragment layout -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/textLayout"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewVuota"
+                android:text=""/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/avviaTrackingText"
+                android:layout_below="@+id/textViewVuota"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:id="@+id/avviaTrackingText"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewVuota2"
+                android:layout_below="@+id/avviaTrackingText"
+                android:text=""/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewVuota2"
+                android:text="@string/personeDaPrendereText"
+                android:id="@+id/daPrendereText"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/daPrendereText"
+                />
+
+        </RelativeLayout>
+
+        <de.codecrafters.tableview.TableView
+
+            android:id="@+id/Tabellatracking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textLayout"
+            android:layout_weight="1">
+            <Button
+                android:id="@+id/buttonTracking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/avvia"
+                android:layout_gravity="center"
+                android:background="@drawable/button_shape_normal"
+                android:backgroundTint="@color/tint_botton"
+                android:textColor="@color/etichettabottoni"/>
+        </de.codecrafters.tableview.TableView>
+
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dinamic"
+
+            android:orientation="vertical">
+
+        </RelativeLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+</FrameLayout>

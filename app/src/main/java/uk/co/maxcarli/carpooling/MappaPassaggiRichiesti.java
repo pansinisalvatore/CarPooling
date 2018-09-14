@@ -20,6 +20,9 @@ import uk.co.maxcarli.carpooling.Control.Controlli;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 import uk.co.maxcarli.carpooling.model.Passaggio;
 
+/**
+ * Questa activity mostra una mappa contentente informazioni sullo stato di un passaggio richiesto
+ */
 public class MappaPassaggiRichiesti extends AppCompatActivity  implements OnMapReadyCallback,GoogleMap.InfoWindowAdapter {
 
     private GoogleMap mMap;

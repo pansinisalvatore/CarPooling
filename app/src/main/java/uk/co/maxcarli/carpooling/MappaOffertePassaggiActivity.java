@@ -37,7 +37,9 @@ import uk.co.maxcarli.carpooling.Control.Controlli;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 import uk.co.maxcarli.carpooling.model.Passaggio;
 
-
+/**
+ * Questa activity visualizza la mappa con tutte le richieste ricevute da altri utenti, permettendo di accettare o rfiutare una richiesta.
+ */
 public class MappaOffertePassaggiActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnInfoWindowClickListener {
 
     private GoogleMap mMap;
@@ -76,6 +78,11 @@ public class MappaOffertePassaggiActivity extends AppCompatActivity implements O
         return false;
     }
 
+
+    /**
+     * Viene creata la mappa con i marcatori che identificano la posizione dei richiedenti, quella dell'offerente e quella del luogo di lavoro
+     * @param googleMap
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -110,6 +117,9 @@ public class MappaOffertePassaggiActivity extends AppCompatActivity implements O
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(indirizzoCasa.getLatitude(),indirizzoCasa.getLongitude()),18.0f));
     }
 
+    /**
+     * Vengono presi gli indirizzi dei richiedenti utilizzando i dati gia presi precedentemente dal database
+     */
     private void getIndirizziRichiedenti(){
 
 
@@ -133,7 +143,11 @@ public class MappaOffertePassaggiActivity extends AppCompatActivity implements O
     }
 
 
-
+    /**
+     * La funzione implementa il click della finestra del marcatore.Se lo stato è "sospeso" vengono poi visualizzati due bottoni
+     * "accetta" e "rifiuta" che, se cliccati, cambiano lo stato del richiedente.
+     * @param marker
+     */
 
     @Override
     public void onInfoWindowClick(final Marker marker) {
@@ -214,7 +228,9 @@ public class MappaOffertePassaggiActivity extends AppCompatActivity implements O
         }
     }
 
-
+    /**
+     * Questa classe implementa la finestra che viene visualizzata al click di ogni marcatore
+     */
     public  class CustomInfoWindow implements GoogleMap.InfoWindowAdapter{
 
         private final View view;

@@ -37,7 +37,9 @@ import uk.co.maxcarli.carpooling.R;
 import uk.co.maxcarli.carpooling.menu;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 
-
+/**
+ * ClassificaNazionale è un fragment che visualizza la classifica di tutti gli utenti dell'app con l'azienda di appartenenza
+ */
 public class ClassificaNazionale extends Fragment {
 
 
@@ -51,6 +53,13 @@ public class ClassificaNazionale extends Fragment {
 
     }
 
+    /**
+     * mostra una tabella contenenti i punti dei cittadini, in ordine di punteggio
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return view
+     */
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View class_nazionale= inflater.inflate(R.layout.fragment_classifica_nazionale,null);

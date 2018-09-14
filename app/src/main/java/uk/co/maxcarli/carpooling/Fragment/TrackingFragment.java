@@ -67,18 +67,7 @@ public class TrackingFragment extends Fragment {
 
 //
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if(savedInstanceState!=null){
-            savedInstanceState.getParcelable(Cittadino.Keys.IDCITTADINO);
-        }else{
-            cittadino=menuActivity.getCittadino();
-        }
 
-
-
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
@@ -86,6 +75,9 @@ public class TrackingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         String dataCorrente = getCurrentData();
+
+
+        cittadino=menuActivity.getCittadino();
 
         int vista = 0;
         View rootServer = null;
@@ -316,9 +308,7 @@ public class TrackingFragment extends Fragment {
     }
 
 
-    public void onSaveInstanceState(Bundle bundle){
-        bundle.putParcelable(Cittadino.Keys.IDCITTADINO,cittadino);
-    }
+
 
 
 }

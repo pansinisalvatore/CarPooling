@@ -45,6 +45,10 @@ import uk.co.maxcarli.carpooling.Fragment.TimeFragment;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 import uk.co.maxcarli.carpooling.model.Passaggio;
 
+/**
+ * Questa activity serve a inserire i dati per cercare un passaggio.
+ *
+ */
 public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener,DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
     AutoCompleteTextView driver;
     EditText sel_data;
@@ -58,6 +62,12 @@ public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClic
     private ArrayAdapter<String> adapter;
     private List<String> responseList = new ArrayList<String>();
 
+    /**
+     *
+     * @param savedInstanceState
+     * Questa funzione crea l'activity e implementa il listener del bottone che prende i dati inseriti e effettua il passaggio alla prossima
+     * activity contenente una mappa.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -208,6 +218,10 @@ public class Filtro extends AppCompatActivity implements  AdapterView.OnItemClic
     }
 
 
+    /**
+     * Questo metodo invia una richiesta al database per leggere gli automobilisti appartenenti all'azienda dell'utente.
+     * Viene poi effettuato l'autocompletamento della View man mano che l'utente inserisce un nome.
+     */
     public void setAutoCompleteViewDriver(){
         String url= "http://carpoolingsms.altervista.org/PHP/getAutomobilisti.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
