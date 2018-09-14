@@ -6,14 +6,18 @@
     android:layout_height="match_parent">
 
     <!-- TODO: Update blank fragment layout -->
-
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:orientation="horizontal">
 
-        <TextView
+             <TextView
             android:id="@+id/txtCognome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,7 +26,7 @@
             android:textSize="18sp"
             android:visibility="visible" />
 
-        <android.support.design.widget.TextInputEditText
+            <android.support.design.widget.TextInputEditText
             android:id="@+id/edtselezionacognome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,19 +35,15 @@
             android:editable="false"
             android:ems="13"
             android:theme="@style/MyEditText"/>
-    </LinearLayout>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"></LinearLayout>
 
-    <LinearLayout
+        <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:orientation="horizontal">
-        <TextView
+            <TextView
             android:id="@+id/txtNome"
             android:layout_weight="1"
             android:textSize="18sp"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:text="@string/NomeCittadino"/>
 
-        <android.support.design.widget.TextInputEditText
+            <android.support.design.widget.TextInputEditText
             android:id="@+id/edtselezionanome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,19 +61,16 @@
             android:editable="false"
             android:ems="14"
             android:theme="@style/MyEditText"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"></LinearLayout>
+        </LinearLayout>
 
-    <LinearLayout
+
+        <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:orientation="horizontal">
 
-        <TextView
+            <TextView
             android:id="@+id/txtCF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,7 +79,7 @@
             android:textSize="18sp"
             android:visibility="visible" />
 
-        <android.support.design.widget.TextInputEditText
+            <android.support.design.widget.TextInputEditText
             android:id="@+id/edtselezionaCF"
             android:layout_width="254dp"
             android:layout_height="wrap_content"
@@ -91,21 +88,18 @@
             android:inputType="text"
             android:maxLines="1"
             android:theme="@style/MyEditText"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"></LinearLayout>
+        </LinearLayout>
 
 
-    <LinearLayout
+
+
+        <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:orientation="horizontal">
 
-        <TextView
+            <TextView
             android:id="@+id/txtEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -114,7 +108,7 @@
             android:textSize="18sp"
             android:visibility="visible" />
 
-        <android.support.design.widget.TextInputEditText
+            <android.support.design.widget.TextInputEditText
             android:id="@+id/edtselezionaemail"
             android:layout_width="296dp"
             android:layout_height="wrap_content"
@@ -123,20 +117,17 @@
             android:inputType="text"
             android:maxLines="1"
             android:theme="@style/MyEditText"/>
-    </LinearLayout>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"></LinearLayout>
 
-    <LinearLayout
+
+        <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:orientation="horizontal">
 
-        <TextView
+            <TextView
             android:id="@+id/txtTelefono"
             android:layout_width="86dp"
             android:layout_height="wrap_content"
@@ -145,7 +136,7 @@
             android:textSize="18sp"
             android:visibility="visible" />
 
-        <android.support.design.widget.TextInputEditText
+            <android.support.design.widget.TextInputEditText
             android:id="@+id/edtselezionatelefono"
             android:layout_width="262dp"
             android:layout_height="wrap_content"
@@ -154,24 +145,16 @@
             android:maxLines="1"
             android:theme="@style/MyEditText"/>
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"></LinearLayout>
+        </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"></LinearLayout>
 
-    <LinearLayout
+         <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:orientation="horizontal">
-        <TextView
+            <TextView
             android:id="@+id/txtIndirizzo"
             android:layout_weight="1"
             android:textSize="18sp"
@@ -180,7 +163,7 @@
             android:layout_height="wrap_content"
             android:text="@string/Residenza"/>
 
-        <android.support.design.widget.TextInputEditText
+            <android.support.design.widget.TextInputEditText
             android:id="@+id/edtselezionaresidenza"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -190,46 +173,57 @@
             android:ems="11"
             android:theme="@style/MyEditText"/>
 
+        </LinearLayout>
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="353dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"></LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
 
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+        </LinearLayout>
         <Button
             android:id="@+id/AccettaUtente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/AccettaUtente"
+            android:layout_gravity="center"
             android:background="@drawable/button_shape_normal"
             android:backgroundTint="@color/tint_botton"
             android:textColor="@color/etichettabottoni"/>
 
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+        </LinearLayout>
         <Button
             android:id="@+id/RifiutaUtente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/RifiutaUtente"
+            android:layout_gravity="center"
             android:background="@drawable/button_shape_normal"
             android:backgroundTint="@color/tint_botton"
             android:textColor="@color/etichettabottoni"
             />
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+        </LinearLayout>
     </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="5"></LinearLayout>
 
 
 </LinearLayout>
