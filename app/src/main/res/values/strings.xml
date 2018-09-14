@@ -193,4 +193,6 @@ Enter your information to proceed with registration.</string>
     <string name="cancellaPassaggioCompletatoTitolo">Ride completed</string>
     <string name="cancellaPassaggioCompletatoTesto">This ride has been completed. Do you want delete this ride from your list?</string>
 
+    <string name="ConnectionRequired">Connection required</string>
+    <string name="ConnectionRequiredText">You need an Internet connection to use the app</string>
 </resources>

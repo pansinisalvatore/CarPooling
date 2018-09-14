@@ -29,12 +29,15 @@ import uk.co.maxcarli.carpooling.model.Passaggio;
 import uk.co.maxcarli.carpooling.model.Sede;
 
 
+/**
+ * Questo fragment visualizza la tabella dei passaggi offerti dal cittadino.
+ */
 public class PassaggiOfferti extends Fragment {
 
     private Cittadino cittadino;
     private menu menuActivity;
 
-    private String[] PassaggiOffertiHeaders;//{"Trip","Date&Hour","Status","Occupied"};
+    private String[] PassaggiOffertiHeaders;
     String[][] passaggi;
 
     View view;
@@ -120,6 +123,11 @@ public class PassaggiOfferti extends Fragment {
     }
 
 
+    /**
+     *
+     * @param passaggiRichiesti
+     * Popola un array si stringhe che servirà all'adapter per popolare la tabella.
+     */
     public void populateData(List<Passaggio> passaggiRichiesti){
 
         this.passaggi=new String[passaggiRichiesti.size()][4];
@@ -144,7 +152,13 @@ public class PassaggiOfferti extends Fragment {
     }
 
 
-
+    /**
+     *
+     * @param tipo
+     * @param context
+     * Controlla il tipo di passaggio e restituisce la stringa corrispondente contenuta nelle risorse string.xml.
+     * @return
+     */
 
     public static String controlloTipoPassagio(String tipo, Context context){
         if(tipo.equals("Casa-Lavoro")){

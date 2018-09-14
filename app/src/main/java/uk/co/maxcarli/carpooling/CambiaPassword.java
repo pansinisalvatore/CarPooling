@@ -11,7 +11,10 @@ import android.widget.TextView;
 import uk.co.maxcarli.carpooling.Control.Controlli;
 import uk.co.maxcarli.carpooling.model.Cittadino;
 
-public class cambia_pass extends AppCompatActivity {
+/**
+ * CambiaPassword serve per modificare la password
+ */
+public class CambiaPassword extends AppCompatActivity {
 
     private String srcPassword;
 
@@ -33,10 +36,15 @@ public class cambia_pass extends AppCompatActivity {
         conferma=findViewById(R.id.confermaModifiche);
 
         conferma.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Al click del bottone si controlla se la password vecchia è uguale a quella inserita nella textView e controlla
+             se le nuove password inserite sono uguali
+             * @param v
+             */
             @Override
             public void onClick(View v) {
 
-                if(!Controlli.controlloEditTextVuoto(textVecchiaPassword, cambia_pass.this) && !Controlli.controlloEditTextVuoto(textNuovaPassword,cambia_pass.this) && !Controlli.controlloEditTextVuoto(textConfermaPassword,cambia_pass.this)) {
+                if(!Controlli.controlloEditTextVuoto(textVecchiaPassword, CambiaPassword.this) && !Controlli.controlloEditTextVuoto(textNuovaPassword,CambiaPassword.this) && !Controlli.controlloEditTextVuoto(textConfermaPassword,CambiaPassword.this)) {
                     String vecchiaPass = textVecchiaPassword.getText().toString();
                     String nuovaPass = textNuovaPassword.getText().toString();
                     String confPass = textConfermaPassword.getText().toString();

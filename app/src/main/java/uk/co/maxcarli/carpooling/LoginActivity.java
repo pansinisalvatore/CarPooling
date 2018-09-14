@@ -17,6 +17,9 @@ import uk.co.maxcarli.carpooling.model.Sede;
 import static uk.co.maxcarli.carpooling.Database.accedi;
 import static uk.co.maxcarli.carpooling.Control.Controlli.*;
 
+/**
+ * Questa activity viene mostrata dopo la SplashActivity e gestisce le operazioni di accesso e di registrazione
+ */
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -45,6 +48,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
     }
 
+    /**
+     *
+     * @param view
+     * Al click del bottone, viene raccolta l'email e la password inserita dall'utente e inizia le procedure di accesso. Viene chiamato
+     * il metodo statico accedi(String email, String password, Cittadino cittadino, Context c) della classe Database.
+     */
     public void Login(View view) {
         String email=loginEmail.getText().toString();
         String password=loginPassword.getText().toString();
@@ -73,10 +82,6 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(Registrazione);
     }
 
-    public void passwordDimenticata(View view){
-        Intent intent = new Intent(this,RecuperaPassword.class);
-        startActivity(intent);
-    }
 
 
     public void onSaveInstanceState(Bundle bundle){

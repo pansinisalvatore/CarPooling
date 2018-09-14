@@ -24,7 +24,7 @@ import uk.co.maxcarli.carpooling.menu;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Questo fragment contiene un tabmenu che permette di visualizzare i passaggi offerti e richiesti dell'utente loggato.
  */
 public class ImieipassaggiFragment extends Fragment implements TabLayout.OnTabSelectedListener{
 

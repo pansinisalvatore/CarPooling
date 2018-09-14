@@ -30,7 +30,7 @@ import uk.co.maxcarli.carpooling.menu;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Questo fragment gestisce i dati personali dell'utente e permette di modificarne alcuni (password, telefono, residenza).
  */
 public class ProfiloFragment extends Fragment {
 
@@ -108,7 +108,7 @@ public class ProfiloFragment extends Fragment {
         password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(), uk.co.maxcarli.carpooling.cambia_pass.class);
+                Intent intent=new Intent(getActivity(), uk.co.maxcarli.carpooling.CambiaPassword.class);
                 intent.putExtra(Cittadino.Keys.IDCITTADINO,cittadino.getPassword());
                 startActivityForResult(intent,1);
             }

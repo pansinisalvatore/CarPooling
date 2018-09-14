@@ -28,6 +28,9 @@ import com.google.android.gms.tasks.Task;
 
 import uk.co.maxcarli.carpooling.model.Cittadino;
 
+/**
+ * Questa classe serve per trovare una qualsiasi via italiana.
+ */
 public class RicercaIndirizzo extends AppCompatActivity {
 
 
@@ -42,6 +45,9 @@ public class RicercaIndirizzo extends AppCompatActivity {
 
     }
 
+    /**
+     * Questa api di google serve per autocompletare una editText con le vie italiane
+     */
     public void dammiPosto (){
 
         final PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
@@ -82,18 +88,12 @@ public class RicercaIndirizzo extends AppCompatActivity {
             }
         });
 
-/*
-
-        AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
-                .setTypeFilter(AutocompleteFilter.TYPE_FILTER_NONE)
-                .build();
-
-        autocompleteFragment.setFilter(typeFilter);
-        */
-
-
     }
 
+    /**
+     * Invia l'intent all'activity precedente
+     * @param residenza
+     */
     public void inviaIndirizzo(String residenza){
         final Intent returnIntent = new Intent();
         returnIntent.putExtra(Cittadino.Keys.RESIDENZA,residenza);

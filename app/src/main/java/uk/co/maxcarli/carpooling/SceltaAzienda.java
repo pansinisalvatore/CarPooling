@@ -39,6 +39,9 @@ import uk.co.maxcarli.carpooling.model.Cittadino;
 
 import static uk.co.maxcarli.carpooling.Control.Controlli.*;
 
+/**
+ * La classe sceltaAzienda permette all'utente di scegliere l'azienda di appartenenza
+ */
 public class SceltaAzienda extends Activity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
 
 
@@ -167,6 +170,9 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
 
     }
 
+    /**
+     * setTextViewSede setta le textView in base ai valori presi dal database.
+     */
     public void setTextViewSede(){
 
 
@@ -365,50 +371,6 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
                 String text = getText(R.string.aziendaNonValidaText).toString();
                 mostraMessaggioErrore(title, text, SceltaAzienda.this);
             }
-           /*StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-
-                            if (response.equals("1")) {
-                                verificaAzienda = false;
-                                Log.d("Response:", response);
-                                Log.d("verificaAzienda", "false");
-                            } else {
-                                String title = getText(R.string.aziendaNonValida).toString();
-                                String text = getText(R.string.aziendaNonValidaText).toString();
-                                mostraMessaggioErrore(title, text, SceltaAzienda.this);
-                                Log.d("Response:", response);
-                                Log.d("verificaAzienda", "true");
-                                verificaAzienda = true;
-
-
-                            }
-
-                        }
-                    }
-
-                    , new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                    error.printStackTrace();
-
-                }
-            }) {
-
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("PartitaIvaAzienda", PartitaIvaAzienda);
-                    return params;
-                }
-            };
-
-
-            MySingleton.getmInstance(this).addTorequestque(stringRequest);
-            control = verificaAzienda;*/
         }
             //se tutto è andato bene
             if ((controlNumero == false) && (control == false) && (success == true)) return false;
@@ -416,6 +378,11 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
 
     }
 
+    /**
+     * Controlla se la sede inserita è valida.
+     * @param view
+     * @return
+     */
     public boolean errorControlSede(final AutoCompleteTextView view){
         boolean controlEditText = controlloEditTextVuoto(view,this);
         boolean control=false;
@@ -431,6 +398,9 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
         }
     }
 
+    /**
+     * Riceve il cittadino dall'activity precedente
+     */
     private void fromIntent(){
 
         final Intent intent = getIntent();
@@ -442,6 +412,9 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
         }
     }
 
+    /**
+     * Avvia l'intent per passare all'activity successiva
+     */
     private void toIntent(){
 
         final Intent intent = new Intent(this, completaRegistrazione.class);

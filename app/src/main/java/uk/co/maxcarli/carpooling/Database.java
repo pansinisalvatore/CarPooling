@@ -48,6 +48,15 @@ public class Database {
     }
 
 
+    /**
+     *
+     * @param cittadino
+     * @param context
+     * @param flag
+     * Questa funzione scrive il punteggio di un cittadino nel database. Il context viene utilizzato per la visualizzazione
+     * degli AlertDialog. Se il flag è impostato a uno, viene visualizzato il messaggio di successo, altrimenti viene solo effettuata la richiesta.
+     * Questo serve a distinguere la scrittura dei punti degli offerenti da quella dei richiedenti
+     */
 
     public static void scriviPunteggio(final Cittadino cittadino, final Context context, final int flag) {
 
@@ -62,8 +71,8 @@ public class Database {
                        if (response.equals("successo")) {
                            if (flag == 1) {
                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                               builder.setTitle("successo");
-                               builder.setMessage("avvenuto con successo");
+                               builder.setTitle(context.getString(R.string.successoTracking));
+                               builder.setMessage(context.getString(R.string.successoTrackingTest));
                                builder.setCancelable(false);
                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                    @Override
@@ -108,7 +117,7 @@ public class Database {
     }
 
     /**
-     * Questo metodo notifica al richiedente che il tracking è avvenuto con successo
+     * Questo metodo notifica al richiedente che il tracking è avvenuto con successo.
      * @param idPassaggio
      * @param context
      */
@@ -180,7 +189,14 @@ public class Database {
     }
 
 
-    //
+    /**
+     *
+     * @param trackingEffettuato
+     * @param idPassaggio
+     * @param context
+     *
+     * Questo metodo scrive sul database un flag che serve a identificare i passaggi effettuati.
+     */
     public static void trackingEffettuato(final int trackingEffettuato,final int idPassaggio, Context context){
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, urlTracking,
@@ -219,6 +235,15 @@ public class Database {
 
         }
 
+    /**
+     *
+     * @param cittadino
+     * @param sede
+     * @param partitaIva
+     * @param context
+     * Questo metodo scrive sul database i cittadini che si registrano all'app.
+     */
+
         public static void registraCittadino (final Cittadino cittadino, final String sede, final String partitaIva,final Context context) {
         builder = new AlertDialog.Builder(context);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, urlRegister,
@@ -243,7 +268,7 @@ public class Database {
                             });
                             AlertDialog alertDialog= builder.create();
                             alertDialog.show();
-                            //Controlli.mostraMessaggioConChiusura(context.getString(R.string.registrazioneCompletaTitolo),context.getString(R.string.registrazioneCompletaTesto),context);
+
                         }else if(response.equals("Email o telefono esistente")){
                             Controlli.mostraMessaggioErrore(context.getString(R.string.erroreEmailEsistenteTitolo),context.getString(R.string.erroreEmailEsistente),context);
                         }
@@ -285,6 +310,16 @@ public class Database {
     }
 
 
+    /**
+     *
+     * @param email
+     * @param password
+     * @param cittadino
+     * @param context
+     *
+     * Questo metodo serve a controllare che le email e password inserite dall'utente coincidano con quelle rpesenti sul database. Se
+     * coincidono, viene chiamato il metodo getSede.
+     */
     public static void accedi(final String email, final String password, final Cittadino cittadino, final Context context) {
         Toast.makeText(context,email,Toast.LENGTH_LONG).show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, urlLogin,
@@ -296,7 +331,7 @@ public class Database {
                     Log.d("response",response);
                         if (response.equals("success")) {
                             getSede(email,password,cittadino, context);
-                            //getCittadinoFromDatabase(email, password, cittadino,context);
+
 
 
                         } else if (response.equals("not autorized")) {
@@ -344,6 +379,18 @@ public class Database {
 
     }
 
+
+    /**
+     *
+     * @param email
+     * @param password
+     * @param cittadino
+     * @param sede
+     * @param context
+     *
+     * Questo metodo raccoglie e inizializza i dati del cittadino dal database per il loro utilizzo nell'app. Viene chiamato il metodo
+     * getPassaggiRichiestiFromCittadino
+     */
 
     private static void getCittadinoFromDatabase(final String email, final String password, final Cittadino cittadino, final int sede,final Context context) {
         String url = "http://carpoolingsms.altervista.org/PHP/getCittadino.php";
@@ -425,9 +472,16 @@ public class Database {
     }
 
 
-
-
-
+    /**
+     *
+     *
+     * @param cittadino
+     * @param context
+     * @param flag
+     *
+     * Questo metodo raccoglie i passaggi richiesti dal cittadino dal database e li inserisce nell'oggetto Cittadino
+     * per il loro utilizzo nell'app. Chiama la funzione getPassaggiOffertiFromCittadino.
+     */
     public static void getPassaggiRichiestiFromCittadino(final Cittadino cittadino, final Context context, final int flag){
         String url= "http://carpoolingsms.altervista.org/PHP/LeggiPassaggiRichiesti.php";
 
@@ -512,6 +566,15 @@ public class Database {
     }
 
 
+    /**
+     *
+     * @param cittadino
+     * @param context
+     * @param flag
+     *
+     * Questo metodo raccoglie i passaggi offert dal cittadino dal database e li inserisce nell'oggetto Cittadino
+     * per il loro utilizzo nell'app. Essa chiama l'activity menu e setta il flag dell'intent utilizzato il parametro flag passato.
+     */
     public static void getPassaggiOffertiFromCittadino(final Cittadino cittadino, final Context context,final int flag){
         String url= "http://carpoolingsms.altervista.org/PHP/LeggiPassaggiOffertiFromCittadino.php";
 
@@ -616,67 +679,13 @@ public class Database {
         MySingleton.getmInstance(context.getApplicationContext()).addTorequestque(stringRequest);
     }
 
-    static Cittadino cittadinoRichiedente=new Cittadino();
 
-
-    public static void prendiRichiedentiPassaggio(final Passaggio passaggio, final Context context){
-        String url= "http://carpoolingsms.altervista.org/PHP/PrendiRichiedenti.php";
-
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(context, response,Toast.LENGTH_SHORT).show();
-
-                        if(!response.equals("Something went wrong")){
-                            try {
-
-                                JSONArray jsonarray = new JSONArray(response);
-
-                                for(int i=0; i < jsonarray.length(); i++) {
-
-                                    //Toast.makeText(context, viaggio+" "+data+" "+ora+" "+status+" "+postiOccupati,Toast.LENGTH_SHORT).show();
-
-
-
-                                }
-
-
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-
-                            }
-
-                        }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        if(error != null){
-
-                            Toast.makeText(context.getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("idPassaggio", passaggio.getIdPassaggiOfferti()+"");
-
-
-                return params;
-            }
-        };
-
-        MySingleton.getmInstance(context.getApplicationContext()).addTorequestque(stringRequest);
-    }
-
-
+    /**
+     *
+     * @param cittadino
+     * @param context
+     * Questa funzione invia una richiesta al database per la modifica dei campi del Cittadino
+     */
     public static void updateCittadino(final Cittadino cittadino,final Context context){
 
         String url="http://carpoolingsms.altervista.org/PHP/modificaCittadino.php";
@@ -724,6 +733,13 @@ public class Database {
     }
 
 
+    /**
+     *
+     * @param passaggio
+     * @param cittadino
+     * @param context
+     * Questa funzione scrive un nuovo passaggio sul database.
+     */
 
     public static void OffriPassaggi(final Passaggio passaggio,final Cittadino cittadino, final Context context){
 
@@ -787,6 +803,15 @@ public class Database {
     }
 
 
+    /**
+     *
+     * @param status
+     * @param cell
+     * @param c
+     * @param passaggio
+     *
+     * Questa funzione aggiorna lo stato di una richiesta di passaggio nel database.
+     */
 
     public  static void modificaStatus(final String status, final String cell, final Context c,final Passaggio passaggio){
         String url = "http://carpoolingsms.altervista.org/PHP/AggiornaStatoPassaggioRichiesto.php";
@@ -823,7 +848,7 @@ public class Database {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("idPassaggio", passaggio.getIdPassaggiOfferti()+"");
+                params.put("idPassaggio", passaggio.getIdPassaggio()+"");
                 params.put("cellRichiedente",cell);
                 params.put("status",status);
                 return params;
@@ -833,6 +858,14 @@ public class Database {
         MySingleton.getmInstance(c).addTorequestque(stringRequest);
 
     }
+
+    /**
+     *
+     * @param idCittadino
+     * @param c
+     * Questa funzione azzera il flag delle notifiche nel database riguardante la presenza di richieste da parte di utenti appena registrati
+     * per l'utilizzo dell'app.
+     */
 
     public static void azzeraNotificheAutorizzazioni(final int idCittadino,final Context c){
         String urlOffriPassaggio ="http://carpoolingsms.altervista.org/PHP/SettaNotificaAutorizzazione.php";
@@ -871,6 +904,13 @@ public class Database {
         MySingleton.getmInstance(c).addTorequestque(stringRequest);
     }
 
+    /**
+     *
+     * @param idCittadino
+     * @param c
+     *
+     * Questa funzione azzera il flag delle notifiche nel database riguardante tutto ciò che può influenzare la vita di un passaggio.
+     */
     public static void azzeraNotifichePassaggi(final int idCittadino,final Context c){
         String urlOffriPassaggio ="http://carpoolingsms.altervista.org/PHP/SettaNotificaAZero.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, urlOffriPassaggio,
@@ -908,6 +948,15 @@ public class Database {
         MySingleton.getmInstance(c).addTorequestque(stringRequest);
     }
 
+    /**
+     *
+     * @param email
+     * @param password
+     * @param cittadino
+     * @param context
+     *
+     * Questa funzione raccoglie l'id della sede di un cittadino dal database, dopodicchè chiama la funzione getCIttadinoFromDatabase
+     */
     public static void getSede(final String email, final String password,final Cittadino cittadino,final Context context) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, urlGetSede,

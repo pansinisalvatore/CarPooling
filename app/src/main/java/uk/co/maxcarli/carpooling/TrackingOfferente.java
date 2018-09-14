@@ -30,6 +30,9 @@ import static uk.co.maxcarli.carpooling.Control.ControlBluetooth.*;
 import static uk.co.maxcarli.carpooling.Control.Controlli.getOraCorrente;
 import static uk.co.maxcarli.carpooling.Control.Controlli.oreInMinuti;
 
+/**
+ *La classe TrackingOfferente permette all'offerente di cercare i dispositivi del richiedente
+ */
 public class TrackingOfferente extends AppCompatActivity {
 
     public static final int REQUEST_ENABLE_BT = 1;
@@ -78,6 +81,9 @@ public class TrackingOfferente extends AppCompatActivity {
         super.onDestroy();
     }
 
+    /**
+     * Cerca i dispositivi bluetooth e controlla se la ricerca è partita, sta cercando o ha finito.
+     */
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
@@ -121,7 +127,10 @@ public class TrackingOfferente extends AppCompatActivity {
         Log.d(messaggio1,messaggio2);
     }
 
-
+    /**
+     * Il metodo rotate serve per far ruotare il logo
+     * @param start
+     */
     public void rotate(boolean start) {
         if (start == true) {
 
@@ -135,6 +144,11 @@ public class TrackingOfferente extends AppCompatActivity {
         }
     }
 
+    /**
+     * il metodo accendiBluetooth controlla se il bluetooth è acceso, se non lo è lo accende.
+     * @param mBluetoothAdapter
+     * @return
+     */
     public boolean accendiBluetooth( BluetoothAdapter mBluetoothAdapter) {
 
         boolean acceso = false;
@@ -156,8 +170,8 @@ public class TrackingOfferente extends AppCompatActivity {
     }
 
     /**
-     * Confronta i mac address dei cittadini richiedenti con quelli che il bluetooth ha rilevato.
-     Quelli uguali li aggiunge nell'arrayList cittadiniTrovati
+     * Aggiunge nell'arrayList cittadiniTrovati tutti i richiedenti del passaggio presenti in auto. Dopodichè si avvia una
+     nuova ricerca.
      */
     public void addCittadiniTrovati(){
         showLog("stoNel","Visualizza");
@@ -185,6 +199,13 @@ public class TrackingOfferente extends AppCompatActivity {
 
     }
 
+    /**
+     * Confronta i mac address dei cittadini richiedenti con quelli che il bluetooth ha rilevato.
+     * Ritorna vero se il dispositivo trovato corrisponde a quello del richiedente.
+     * @param string
+     * @return
+     */
+
     public boolean macExists(String string){
 
         for (int i = 0; i < cittadiniTrovati.size(); i++) {
@@ -193,12 +214,20 @@ public class TrackingOfferente extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * Visualizza i dispositivi trovati corrispondenti al richiedente.
+     */
     public void visualizzaMacAddressTrovati(){
 
 
         for (int i = 0; i < cittadiniTrovati.size(); i++) showToast(cittadiniTrovati.get(i).getNome());
     }
 
+    /**
+     * Nel momento in cui si clicca sul bottone finito, viene interrotta la ricerca, vengono aggiornati i punteggi
+     e vengono inseriti nel database.
+     * @param view
+     */
     public void finito(View view){
 
         if (mBluetoothAdapter.isDiscovering()) mBluetoothAdapter.cancelDiscovery();
@@ -208,7 +237,7 @@ public class TrackingOfferente extends AppCompatActivity {
         for (int i = 0; i < cittadiniTrovati.size(); i++)
             cittadiniTrovati.get(i).setPunteggio();
 
-        int idPassaggio = passaggio.getIdPassaggiOfferti();
+        int idPassaggio = passaggio.getIdPassaggio();
         Database.trackingEffettuato(1,idPassaggio,this);
         for(int i = 0; i < cittadiniTrovati.size(); i++){
             Database.scriviPunteggio(cittadiniTrovati.get(i),this,0);
@@ -222,6 +251,9 @@ public class TrackingOfferente extends AppCompatActivity {
 
     }
 
+    /**
+     * Se è in corso una ricerca, viene interrotta e si avvia una nuova ricerca.
+     */
     public void avviaRicerca(){
 
 
