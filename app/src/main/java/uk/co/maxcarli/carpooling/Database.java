@@ -401,7 +401,7 @@ public class Database {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(context, sede+"",Toast.LENGTH_SHORT).show();
+
 
                         try {
 
