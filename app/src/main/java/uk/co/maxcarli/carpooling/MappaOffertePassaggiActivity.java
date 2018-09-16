@@ -322,4 +322,5 @@ public class MappaOffertePassaggiActivity extends AppCompatActivity implements O
         //setResult(cittadino.passaggiOfferti.indexOf(passaggio),returnIntent);
     }
 
+
 }
