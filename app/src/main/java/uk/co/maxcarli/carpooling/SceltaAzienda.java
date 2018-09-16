@@ -186,7 +186,7 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
         String url= "http://carpoolingsms.altervista.org/PHP/prendiSediAzienda.php";
 
         final String finalPartitaIva = partitaIva;
-        Toast.makeText(SceltaAzienda.this, finalPartitaIva, Toast.LENGTH_SHORT).show();
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 url,
                 new Response.Listener<String>() {
@@ -282,8 +282,6 @@ public class SceltaAzienda extends Activity implements AdapterView.OnItemClickLi
         // TODO Auto-generated method stub
 
         // Show Alert
-        Toast.makeText(getBaseContext(), "Position:"+arg2+" Month:"+arg0.getItemAtPosition(arg2),
-                Toast.LENGTH_LONG).show();
 
         Log.d("AutocompleteContacts", "Position:"+arg2+" Month:"+arg0.getItemAtPosition(arg2));
 

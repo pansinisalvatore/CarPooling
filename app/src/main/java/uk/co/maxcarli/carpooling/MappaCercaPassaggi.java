@@ -330,7 +330,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                             @Override
                             public void onResponse(String response) {
 
-                                //Toast.makeText(context,response,Toast.LENGTH_LONG).show();
+
                                 if (!response.equals("Something went wrong") && !response.equals("Error query")) {
 
                                     try {
