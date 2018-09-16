@@ -33,7 +33,7 @@ import uk.co.maxcarli.carpooling.model.Sede;
 public class ListaUtenti extends AppCompatActivity {
 
 
-    String[] DatiUtente={"Dipendente","Cell", "Autorizzato"};
+    String[] DatiUtente;
     String[][] r_utente ;
     List<Cittadino> utenti=new ArrayList<>();
     TableView<String[]> tab;

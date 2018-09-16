@@ -130,7 +130,7 @@ public class Database {
                     public void onResponse(String response) {
 
                         response = response.trim();
-                        Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+
                         if (flag == 0) {
                         if (response.equals("success")) {
 
@@ -251,7 +251,7 @@ public class Database {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(context,response,Toast.LENGTH_LONG).show();
+
                         if(response.equals("User Registration Successfully")){
                             AlertDialog.Builder builder = new AlertDialog.Builder(context);
                             builder.setTitle(context.getString(R.string.registrazioneCompletaTitolo));
@@ -321,7 +321,7 @@ public class Database {
      * coincidono, viene chiamato il metodo getSede.
      */
     public static void accedi(final String email, final String password, final Cittadino cittadino, final Context context) {
-        Toast.makeText(context,email,Toast.LENGTH_LONG).show();
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST, urlLogin,
 
                 new Response.Listener<String>() {
@@ -395,7 +395,6 @@ public class Database {
     private static void getCittadinoFromDatabase(final String email, final String password, final Cittadino cittadino, final int sede,final Context context) {
         String url = "http://carpoolingsms.altervista.org/PHP/getCittadino.php";
 
-        Toast.makeText(context,email,Toast.LENGTH_LONG).show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 url,
@@ -491,7 +490,7 @@ public class Database {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+
 
                         if(!response.equals("Something went wrong")){
                             try {
@@ -630,8 +629,7 @@ public class Database {
                                     }
 
 
-                                    //prendiRichiedentiPassaggio( p,context);
-                                    //Log.i("DatiCittadini", p.cittadiniRichiedenti.get(0).getCognome()+"");
+
 
 
 
@@ -822,7 +820,6 @@ public class Database {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(c,response,Toast.LENGTH_LONG).show();
 
                         if(response.equals("Success")){
 
@@ -875,7 +872,7 @@ public class Database {
                     @Override
                     public void onResponse(String response) {
 
-                        Toast.makeText(c,response,Toast.LENGTH_LONG).show();
+
 
                     }
                 }

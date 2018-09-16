@@ -324,7 +324,6 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
             } else {
 
                 final String macAddress = ControlBluetooth.getBluetoothMacAddress();
-                Toast.makeText(this, macAddress, Toast.LENGTH_LONG).show();
                 StringRequest stringRequest = new StringRequest(Request.Method.POST,
                         url,
                         new Response.Listener<String>() {
@@ -386,7 +385,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<String, String>();
                         String macAddress = ControlBluetooth.getBluetoothMacAddress();
-                        //
+
                         Log.d("MappaCercaPassaggi", macAddress);
                         params.put("idCittadino", cittadino.getIdCittadino() + "");
                         params.put("idPassaggio", idPassaggio + "");
@@ -414,7 +413,7 @@ public class MappaCercaPassaggi extends AppCompatActivity  implements OnMapReady
 
                String address=addr.get(0).getAddressLine(0);
 
-               // Toast.makeText(this, address, Toast.LENGTH_LONG).show();
+
                return address;
            }
            return null;
