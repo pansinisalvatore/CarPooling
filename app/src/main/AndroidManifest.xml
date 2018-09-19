@@ -58,25 +58,20 @@
         <activity
             android:name=".SceltaAzienda"
             android:theme="@style/AppTheme" />
-        <activity
-            android:name=".RecuperaPassword"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".ReimpostaPassword" />
+
+
         <activity android:name=".ListaUtenti" />
         <activity android:name=".MappaCercaPassaggi" />
         <activity android:name=".completaRegistrazione" />
         <activity android:name=".Filtro" />
-        <activity
-            android:name=".Bluethoot.avviaTraking"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".Bluethoot.ClientConnect" />
-        <activity android:name=".Bluethoot.Tracking" />
+
+
         <activity android:name=".DettagliUtente" />
         <activity
             android:name=".ModificaResidenzaActivity"
             android:label="@string/title_activity_modifica_residenza"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".cambia_pass" />
+        <activity android:name=".CambiaPassword"/>
         <activity android:name=".MappaOffertePassaggiActivity" />
         <activity android:name=".MappaPassaggiRichiesti" />
         <activity android:name=".TrackingOfferente" />

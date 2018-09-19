@@ -78,7 +78,6 @@
         <item>4</item>
         <item>5</item>
         <item>6</item>
-        <item>Altro</item>
     </string-array>
     <string name="dettagliutente">Detail utente</string>
     <string name="title_activity_modifica_residenza">Modifica residenza</string>

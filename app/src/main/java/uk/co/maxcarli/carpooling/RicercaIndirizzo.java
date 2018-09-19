@@ -41,7 +41,7 @@ public class RicercaIndirizzo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ricerca_indirizzo);
 
-        dammiPosto();
+        dammiPosto(); //api di google che man mano che scrivi si autocompleta
 
     }
 
@@ -54,7 +54,7 @@ public class RicercaIndirizzo extends AppCompatActivity {
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
         AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
-                .setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS)
+                .setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS) //decidi come filtrate in questo caso filtra per indirizzo
                 .setCountry("IT")
                 .build();
 
@@ -94,7 +94,7 @@ public class RicercaIndirizzo extends AppCompatActivity {
      * Invia l'intent all'activity precedente
      * @param residenza
      */
-    public void inviaIndirizzo(String residenza){
+    public void inviaIndirizzo(String residenza){ //prende la stringa e con l'intent la restituisce all'activity precedente
         final Intent returnIntent = new Intent();
         returnIntent.putExtra(Cittadino.Keys.RESIDENZA,residenza);
         setResult(0,returnIntent);
